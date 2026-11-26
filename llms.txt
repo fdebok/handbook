@@ -1,0 +1,40 @@
+# FDEBOK
+
+> A free, bilingual body-of-knowledge handbook for Forward Deployed Engineers (FDEs), focused on turning enterprise AI capabilities into measurable, reliable business outcomes.
+
+> 面向前线部署工程师（FDE）的免费中英双语知识体系手册，聚焦如何将企业 AI 能力转化为可衡量、可靠的业务成果。
+
+The canonical handbook is the complete HTML page at https://www.fdebok.com/. Chinese is the default language; use the language selector on the page to read the English version. This file is a discovery summary, not a replacement for the handbook.
+
+规范手册以 https://www.fdebok.com/ 为准，页面默认中文，可使用语言切换阅读英文。本文件仅为便于检索的内容摘要，不替代完整手册。
+
+## Handbook
+
+- [Full handbook (Chinese and English)](https://www.fdebok.com/): 22 chapters covering FDE foundations, role boundaries, value, competencies, delivery, operations, organizational models, common enterprise AI challenges, field tools, and appendices.
+- [Part I: FDE foundations](https://www.fdebok.com/#p1): role definition, boundaries, value, and organizational context.
+- [Part II: Competency framework](https://www.fdebok.com/#p2): capabilities, levels, and skills.
+- [Part III: Ten knowledge domains](https://www.fdebok.com/#p3): discovery, environment assessment, data, security, solution design, engineering, evaluation, launch, operations, and product feedback.
+- [Part IV: Delivery lifecycle](https://www.fdebok.com/#p4): six delivery stages and decision gates.
+- [Part V: Organization and commercial models](https://www.fdebok.com/#p5): team design, collaboration, and scaling.
+- [Part VI: Enterprise pain-point diagnosis](https://www.fdebok.com/#p6): symptoms, causes, remedies, and risk controls.
+- [Part VII: Advanced topics](https://www.fdebok.com/#p7): agent engineering, context and retrieval, private deployment, governance, and cost and performance.
+- [Part VIII: Field toolkit](https://www.fdebok.com/#c20): practical templates and checklists.
+- [Part IX: Learning and assessment](https://www.fdebok.com/#p9): learning paths, competency assessment, and growth.
+
+## 中文内容提要
+
+- [完整手册（中英文）](https://www.fdebok.com/)：22 章，系统介绍 FDE 的角色认知、能力模型、业务价值、交付工程、运行运维、组织模式、企业 AI 常见痛点、现场工具和附录。
+- [认知基础](https://www.fdebok.com/#p1)：FDE 定义、职责边界、价值来源与组织归属。
+- [能力模型](https://www.fdebok.com/#p2)：能力基座、L1–L5 职级标尺和技术／非技术技能。
+- [十大知识域](https://www.fdebok.com/#p3)：场景发现、现场勘察、数据治理、安全合规、方案验证、模型工程、评测、上线、运维和产品反哺。
+- [交付生命周期](https://www.fdebok.com/#p4)：六阶段交付流程、阶段产物与决策门。
+- [组织与商业模式](https://www.fdebok.com/#p5)：团队编制、协作机制、计价方式与规模化。
+- [企业痛点诊断](https://www.fdebok.com/#p6)：高频问题的症状、根因、处方和风险止损。
+- [前沿专题](https://www.fdebok.com/#p7)：智能体工程、上下文与检索、私有化部署、组织治理、成本与性能。
+- [现场工具箱](https://www.fdebok.com/#c20)：可直接使用的交付模板和检查清单。
+- [学习与成长评估](https://www.fdebok.com/#p9)：个人学习路径、能力自查与成长规划。
+
+## Project and license
+
+- [Source repository](https://github.com/fdebok/handbook)
+- [MIT License](https://www.fdebok.com/LICENSE): reuse and redistribution are permitted subject to the license notice requirements. The license does not grant FDEBOK trademark rights.

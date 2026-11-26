@@ -1,0 +1,33 @@
+# Public handbook pages are crawlable. The wildcard also covers search and AI
+# crawlers whose user-agent names are not listed or are not publicly documented.
+User-agent: Googlebot
+Allow: /
+
+User-agent: bingbot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: 360Spider
+Allow: /
+
+User-agent: Sogou
+Allow: /
+
+User-agent: YisouSpider
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: *
+Allow: /
+
+Sitemap: https://www.fdebok.com/sitemap.xml
