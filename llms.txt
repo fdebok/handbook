@@ -4,22 +4,23 @@
 
 > 面向前线部署工程师（FDE）的免费中英双语知识体系手册，聚焦如何将企业 AI 能力转化为可衡量、可靠的业务成果。
 
-The canonical handbook is the complete HTML page at https://www.fdebok.com/. Chinese is the default language; use the language selector on the page to read the English version. This file is a discovery summary, not a replacement for the handbook.
+The Chinese handbook is available at https://www.fdebok.com/. The English handbook is a separate, crawlable static page at https://www.fdebok.com/en/. This file is a discovery summary, not a replacement for either handbook.
 
-规范手册以 https://www.fdebok.com/ 为准，页面默认中文，可使用语言切换阅读英文。本文件仅为便于检索的内容摘要，不替代完整手册。
+中文手册位于 https://www.fdebok.com/，英文手册位于 https://www.fdebok.com/en/，两者均为独立静态页面。本文件仅为便于检索的内容摘要，不替代完整手册。
 
 ## Handbook
 
-- [Full handbook (Chinese and English)](https://www.fdebok.com/): 22 chapters covering FDE foundations, role boundaries, value, competencies, delivery, operations, organizational models, common enterprise AI challenges, field tools, and appendices.
-- [Part I: FDE foundations](https://www.fdebok.com/#p1): role definition, boundaries, value, and organizational context.
-- [Part II: Competency framework](https://www.fdebok.com/#p2): capabilities, levels, and skills.
-- [Part III: Ten knowledge domains](https://www.fdebok.com/#p3): discovery, environment assessment, data, security, solution design, engineering, evaluation, launch, operations, and product feedback.
-- [Part IV: Delivery lifecycle](https://www.fdebok.com/#p4): six delivery stages and decision gates.
-- [Part V: Organization and commercial models](https://www.fdebok.com/#p5): team design, collaboration, and scaling.
-- [Part VI: Enterprise pain-point diagnosis](https://www.fdebok.com/#p6): symptoms, causes, remedies, and risk controls.
-- [Part VII: Advanced topics](https://www.fdebok.com/#p7): agent engineering, context and retrieval, private deployment, governance, and cost and performance.
-- [Part VIII: Field toolkit](https://www.fdebok.com/#c20): practical templates and checklists.
-- [Part IX: Learning and assessment](https://www.fdebok.com/#p9): learning paths, competency assessment, and growth.
+- [Full handbook (English)](https://www.fdebok.com/en/): 22 chapters covering FDE foundations, role boundaries, value, competencies, delivery, operations, organizational models, common enterprise AI challenges, field tools, and appendices.
+- [完整手册（中文）](https://www.fdebok.com/)：22 章，系统介绍 FDE 的角色认知、能力模型、业务价值、交付工程、运行运维、组织模式、企业 AI 常见痛点、现场工具和附录。
+- [Part I: FDE foundations](https://www.fdebok.com/en/#p1): role definition, boundaries, value, and organizational context.
+- [Part II: Competency framework](https://www.fdebok.com/en/#p2): capabilities, levels, and skills.
+- [Part III: Ten knowledge domains](https://www.fdebok.com/en/#p3): discovery, environment assessment, data, security, solution design, engineering, evaluation, launch, operations, and product feedback.
+- [Part IV: Delivery lifecycle](https://www.fdebok.com/en/#p4): six delivery stages and decision gates.
+- [Part V: Organization and commercial models](https://www.fdebok.com/en/#p5): team design, collaboration, and scaling.
+- [Part VI: Enterprise pain-point diagnosis](https://www.fdebok.com/en/#p6): symptoms, causes, remedies, and risk controls.
+- [Part VII: Advanced topics](https://www.fdebok.com/en/#p7): agent engineering, context and retrieval, private deployment, governance, and cost and performance.
+- [Part VIII: Field toolkit](https://www.fdebok.com/en/#c20): practical templates and checklists.
+- [Part IX: Learning and assessment](https://www.fdebok.com/en/#p9): learning paths, competency assessment, and growth.
 
 ## 中文内容提要
 

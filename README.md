@@ -66,6 +66,20 @@ It covers the full path from discovering valuable use cases and assessing real-w
 
 [Read the handbook source](https://github.com/fdebok/handbook/blob/main/index.html) · [Repository](https://github.com/fdebok/handbook)
 
+## Website build and language routes / 网站构建与语言路由
+
+The Chinese source page is `/`; the English edition is published as a separate, pre-rendered page at `/en/`. Platform-specific static introductions are generated at `/share/zh/wechat/`, `/share/zh/douyin/`, `/share/en/facebook/`, `/share/en/linkedin/`, and `/share/en/x/`. These share pages provide platform-specific Open Graph/Twitter preview copy and a clear route to the full handbook; they are marked `noindex` and canonicalize to the relevant language edition to avoid thin duplicate search results. Share pages contain no JavaScript and use a restrictive content-security policy that disallows scripts and embedded objects. The Pages workflow builds `dist/` with `python3 scripts/build_site.py --output-dir dist`, then deploys that directory. The generated pages should not be edited directly: update the translation map and `share-content-data` JSON in `index.html`. A local build requires Python 3 and Node.js. Run the focused tests with `node tests/test_share_ui.js`, `node tests/test_color_theme.js`, and `python3 -m unittest discover -s tests -p 'test_*.py'`.
+
+中文源页面位于 `/`，英文版在发布时预渲染为独立静态页面 `/en/`。另生成微信、抖音、Facebook、LinkedIn、X 五个静态分享介绍页，分别位于 `/share/zh/wechat/`、`/share/zh/douyin/`、`/share/en/facebook/`、`/share/en/linkedin/`、`/share/en/x/`。每页提供平台适配的 Open Graph/Twitter 展示文案及通往完整手册的入口；微型页设置 `noindex` 并 canonical 回对应语言的完整手册，避免薄内容重复收录。微型页不含 JavaScript，并配置限制脚本、嵌入对象等来源的内容安全策略。Pages 工作流运行 `python3 scripts/build_site.py --output-dir dist` 生成并部署。不要直接编辑生成页；如需修订英译或分享文案，请更新 `index.html` 中的 `ENG` 英译表或 `share-content-data` JSON。本地构建需要 Python 3 和 Node.js。可运行 `node tests/test_share_ui.js`、`node tests/test_color_theme.js` 与 `python3 -m unittest discover -s tests -p 'test_*.py'` 执行对应测试。
+
+The share panel previews platform-appropriate post copy, supports separate copy actions for the suggested wording and destination link, offers native device sharing when the browser supports it, and provides locale-specific QR codes. Facebook, LinkedIn, and X use their public share composers. For WeChat and Douyin, users can copy the text and link or scan the QR code; the device share sheet is offered when supported, but the site does not pretend to deep-link into either app. No platform SDK or share-specific tracking is added. The existing aggregate site-visit counter remains unchanged.
+
+Readers can switch among the original Classic Blue & Gold palette, Pine & Copper, and Graphite & Silver from the reading/bookmark panel. The selection is stored in this browser's local storage only; it is not uploaded or synchronized.
+
+分享面板先展示符合平台习惯的转发配文，并支持分别复制配文和链接；浏览器支持时才显示系统分享，同时提供按语言区分的二维码。Facebook、LinkedIn 和 X 使用各自公开的分享入口；微信和抖音可复制配文/链接或扫码，设备分享面板仅在支持时提供，不伪造应用内直达能力。此实现不接入平台 SDK，也不新增分享追踪，现有全站累计访问统计保持不变。
+
+读者可在阅读/书签面板中选择原有“典雅蓝金”、新增“松柏铜金”或“墨石紫银”配色。选择仅保存在当前浏览器本地，不会上传或跨设备同步。
+
 ---
 
 FDEBOK：让一线交付经验成为可复用的工程能力。
