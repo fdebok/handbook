@@ -53,12 +53,23 @@ cairo.cairo_stroke.argtypes = [ctypes.c_void_p]
 cairo.cairo_set_line_width.argtypes = [ctypes.c_void_p, ctypes.c_double]
 cairo.cairo_move_to.argtypes = [ctypes.c_void_p, ctypes.c_double, ctypes.c_double]
 cairo.cairo_line_to.argtypes = [ctypes.c_void_p, ctypes.c_double, ctypes.c_double]
+cairo.cairo_curve_to.argtypes = [
+    ctypes.c_void_p,
+    ctypes.c_double,
+    ctypes.c_double,
+    ctypes.c_double,
+    ctypes.c_double,
+    ctypes.c_double,
+    ctypes.c_double,
+]
 cairo.cairo_new_path.argtypes = [ctypes.c_void_p]
 cairo.cairo_close_path.argtypes = [ctypes.c_void_p]
 cairo.cairo_save.argtypes = [ctypes.c_void_p]
 cairo.cairo_restore.argtypes = [ctypes.c_void_p]
 cairo.cairo_translate.argtypes = [ctypes.c_void_p, ctypes.c_double, ctypes.c_double]
 cairo.cairo_scale.argtypes = [ctypes.c_void_p, ctypes.c_double, ctypes.c_double]
+cairo.cairo_set_line_cap.argtypes = [ctypes.c_void_p, ctypes.c_int]
+cairo.cairo_set_line_join.argtypes = [ctypes.c_void_p, ctypes.c_int]
 cairo.cairo_arc.argtypes = [
     ctypes.c_void_p,
     ctypes.c_double,
@@ -141,51 +152,64 @@ def text(
     gobject.g_object_unref(layout)
 
 
-def rounded_card(context: ctypes.c_void_p, x: int, y: int, width: int, height: int) -> None:
-    radius = 12
-    cairo.cairo_new_path(context)
-    cairo.cairo_arc(context, x + width - radius, y + radius, radius, -1.5708, 0)
-    cairo.cairo_arc(context, x + width - radius, y + height - radius, radius, 0, 1.5708)
-    cairo.cairo_arc(context, x + radius, y + height - radius, radius, 1.5708, 3.1416)
-    cairo.cairo_arc(context, x + radius, y + radius, radius, 3.1416, 4.7124)
-    cairo.cairo_close_path(context)
-    color(context, "#0b1728", 0.6)
-    cairo.cairo_fill(context)
-
-
 def draw_logo_mark(context: ctypes.c_void_p, x: int, y: int, size: int) -> None:
     scale = size / 96
     cairo.cairo_save(context)
     cairo.cairo_translate(context, x, y)
     cairo.cairo_scale(context, scale, scale)
-    cairo.cairo_rectangle(context, 3, 3, 90, 90)
-    color(context, "#172b45")
+    cairo.cairo_new_path(context)
+    cairo.cairo_arc(context, 72, 27, 24, -1.5708, 0)
+    cairo.cairo_arc(context, 72, 72, 24, 0, 1.5708)
+    cairo.cairo_arc(context, 27, 72, 24, 1.5708, 3.1416)
+    cairo.cairo_arc(context, 27, 27, 24, 3.1416, 4.7124)
+    cairo.cairo_close_path(context)
+    color(context, "#14233a")
     cairo.cairo_fill(context)
+
     cairo.cairo_set_line_width(context, 1)
-    color(context, "#d7e5f3", 0.08)
-    for offset in (24, 48, 72):
-        cairo.cairo_move_to(context, offset, 18)
-        cairo.cairo_line_to(context, offset, 78)
-        cairo.cairo_move_to(context, 18, offset)
-        cairo.cairo_line_to(context, 78, offset)
+    color(context, "#e9e2d2", 0.08)
+    cairo.cairo_new_path(context)
+    cairo.cairo_arc(context, 68, 28, 16, -1.5708, 0)
+    cairo.cairo_arc(context, 68, 68, 16, 0, 1.5708)
+    cairo.cairo_arc(context, 28, 68, 16, 1.5708, 3.1416)
+    cairo.cairo_arc(context, 28, 28, 16, 3.1416, 4.7124)
+    cairo.cairo_close_path(context)
     cairo.cairo_stroke(context)
+
+    cairo.cairo_set_line_cap(context, 1)
+    cairo.cairo_set_line_join(context, 1)
     cairo.cairo_set_line_width(context, 8)
-    color(context, "#edc66d")
-    cairo.cairo_move_to(context, 33, 70)
-    cairo.cairo_line_to(context, 33, 27)
-    cairo.cairo_line_to(context, 64, 27)
-    cairo.cairo_move_to(context, 33, 46)
-    cairo.cairo_line_to(context, 56, 46)
+    color(context, "#e9e2d2", 0.12)
+    cairo.cairo_move_to(context, 24, 54)
+    cairo.cairo_curve_to(context, 34, 54, 37, 35, 48, 35)
+    cairo.cairo_curve_to(context, 59, 35, 62, 54, 72, 54)
     cairo.cairo_stroke(context)
-    cairo.cairo_set_line_width(context, 5)
-    color(context, "#6fc5aa")
-    cairo.cairo_move_to(context, 56, 46)
-    cairo.cairo_line_to(context, 66, 46)
-    cairo.cairo_arc(context, 66, 57, 11, -1.5708, 0)
-    cairo.cairo_line_to(context, 77, 61)
+
+    cairo.cairo_set_line_width(context, 4.2)
+    color(context, "#f3efe4")
+    cairo.cairo_move_to(context, 24, 54)
+    cairo.cairo_curve_to(context, 34, 54, 37, 35, 48, 35)
+    cairo.cairo_curve_to(context, 59, 35, 62, 54, 72, 54)
     cairo.cairo_stroke(context)
-    cairo.cairo_arc(context, 77, 67, 6, 0, 6.2832)
-    cairo.cairo_fill(context)
+
+    cairo.cairo_set_line_width(context, 3.2)
+    color(context, "#c59b55")
+    cairo.cairo_move_to(context, 24, 55)
+    cairo.cairo_line_to(context, 24, 67)
+    cairo.cairo_move_to(context, 72, 55)
+    cairo.cairo_line_to(context, 72, 67)
+    cairo.cairo_move_to(context, 20, 68)
+    cairo.cairo_line_to(context, 76, 68)
+    cairo.cairo_stroke(context)
+
+    for node_x, node_y, radius, fill in (
+        (24, 54, 3.8, "#79c5ae"),
+        (48, 35, 4.8, "#edc773"),
+        (72, 54, 3.8, "#79c5ae"),
+    ):
+        cairo.cairo_arc(context, node_x, node_y, radius, 0, 6.2832)
+        color(context, fill)
+        cairo.cairo_fill(context)
     cairo.cairo_restore(context)
 
 
@@ -199,24 +223,22 @@ def draw_card(path: Path, english: bool) -> None:
     cairo.cairo_paint(context)
     cairo.cairo_pattern_destroy(gradient)
 
-    cairo.cairo_set_line_width(context, 1)
-    color(context, "#d7e5f3", 0.07)
-    for x in range(32, WIDTH, 48):
-        cairo.cairo_move_to(context, x, 0)
-        cairo.cairo_line_to(context, x, HEIGHT)
-    for y in range(30, HEIGHT, 48):
-        cairo.cairo_move_to(context, 0, y)
-        cairo.cairo_line_to(context, WIDTH, y)
-    cairo.cairo_stroke(context)
-
     draw_logo_mark(context, 80, 60, 74)
-    text(context, "FDEBOK", 177, 68, 34, "#f3f6fb", bold=True)
-    text(context, "FIELD DELIVERY  ·  KNOWLEDGE", 180, 111, 12, "#bdcbdc", bold=True)
-    cairo.cairo_set_line_width(context, 2)
-    color(context, "#d8b15d")
+    text(context, "FDE", 177, 68, 34, "#f3f6fb", bold=True)
+    text(context, "BOK", 264, 68, 34, "#d8b46c", bold=True)
+    text(context, "FIELD INSIGHT  ·  AI DELIVERY  ·  REAL IMPACT", 180, 111, 12, "#bdcbdc", bold=True)
+    cairo.cairo_set_line_width(context, 1)
+    color(context, "#d8b15d", 0.35)
     cairo.cairo_move_to(context, 82, 166)
     cairo.cairo_line_to(context, 1118, 166)
     cairo.cairo_stroke(context)
+
+    cairo.cairo_set_line_width(context, 1)
+    color(context, "#d8e2ed", 0.22)
+    cairo.cairo_move_to(context, 82, 407)
+    cairo.cairo_line_to(context, 1118, 407)
+    cairo.cairo_stroke(context)
+    draw_logo_mark(context, 885, 187, 190)
 
     if english:
         text(context, "From AI capability to", 88, 206, 43, "#f4f6fa", bold=True)
@@ -228,15 +250,20 @@ def draw_card(path: Path, english: bool) -> None:
         text(context, "让企业 AI 从场景", 88, 206, 43, "#f4f6fa", bold=True)
         text(context, "走向稳定交付", 88, 260, 43, "#edc66d", bold=True)
         text(context, "前线部署工程师知识体系手册 · 面向真实业务与生产现场", 91, 331, 20, "#d1dce9")
-        labels = (("22", "章  CHAPTERS"), ("10", "大知识域"), ("6", "交付阶段"), ("9", "现场模板"))
+        labels = (("22", "章节"), ("10", "知识域"), ("6", "交付阶段"), ("9", "现场模板"))
         footer = "FDEBOK · 开放、双语、可复用的企业 AI 交付实践指南"
 
-    card_width = 244
+    column_width = 258
     for index, (number, label) in enumerate(labels):
-        x = 89 + index * 258
-        rounded_card(context, x, 397, card_width, 98)
-        text(context, number, x + 17, 410, 27, "#edc66d", bold=True)
-        text(context, label, x + 18, 455, 13, "#d9e2ec", bold=True)
+        x = 89 + index * column_width
+        text(context, number, x, 423, 27, "#edc66d", bold=True)
+        text(context, label, x + 2, 463, 13, "#d9e2ec", bold=True)
+        if index < len(labels) - 1:
+            cairo.cairo_set_line_width(context, 1)
+            color(context, "#d8e2ed", 0.16)
+            cairo.cairo_move_to(context, x + column_width - 20, 426)
+            cairo.cairo_line_to(context, x + column_width - 20, 478)
+            cairo.cairo_stroke(context)
 
     text(context, footer, 91, 548, 14, "#bdcbdc", bold=True)
     text(context, "www.fdebok.com", 91, 580, 13, "#f2cb72", bold=True)
@@ -261,8 +288,8 @@ def draw_touch_icon(path: Path) -> None:
 
 
 def main() -> None:
-    draw_card(ROOT / "share-card-zh.png", english=False)
-    draw_card(ROOT / "share-card-en.png", english=True)
+    draw_card(ROOT / "share-card-zh-v3.png", english=False)
+    draw_card(ROOT / "share-card-en-v3.png", english=True)
     draw_touch_icon(ROOT / "apple-touch-icon.png")
     print("Rendered zh/en 1200x630 social cards and the 180x180 Apple touch icon.")
 

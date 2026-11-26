@@ -1,17 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <defs>
-    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#203b5c"/>
-      <stop offset="1" stop-color="#101e31"/>
+    <linearGradient id="field" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#1b3150"/>
+      <stop offset="1" stop-color="#101a2c"/>
     </linearGradient>
-    <linearGradient id="route" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#f0ce7c"/>
-      <stop offset="1" stop-color="#b98c3f"/>
+    <linearGradient id="bridge" x1=".12" y1=".14" x2=".9" y2=".86">
+      <stop stop-color="#f0d48e"/>
+      <stop offset=".54" stop-color="#c59b55"/>
+      <stop offset="1" stop-color="#79bda8"/>
     </linearGradient>
   </defs>
-  <rect x="3" y="3" width="90" height="90" rx="23" fill="url(#panel)"/>
-  <path d="M24 24h48M24 48h48M24 72h48M24 24v48M48 24v48M72 24v48" fill="none" stroke="#d7e5f3" stroke-opacity=".055" stroke-width="1"/>
-  <path d="M33 70V27h31M33 46h23" fill="none" stroke="url(#route)" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
-  <path d="M56 46h10c7 0 11 4 11 11v4" fill="none" stroke="#6fc5aa" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
-  <circle cx="77" cy="67" r="6" fill="#6fc5aa"/>
+  <rect x="3" y="3" width="94" height="94" rx="26" fill="url(#field)"/>
+  <rect x="15" y="15" width="70" height="70" rx="19" fill="none" stroke="#e9e2d2" stroke-opacity=".09"/>
+  <path d="M25 56c10 0 14-20 25-20s15 20 25 20" fill="none" stroke="#e9e2d2" stroke-opacity=".16" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
+  <path d="M25 57v12m50-12v12M21 71h58" fill="none" stroke="url(#bridge)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"/>
+  <path d="M25 56c10 0 14-20 25-20s15 20 25 20" fill="none" stroke="#f3efe4" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"/>
+  <circle cx="25" cy="56" r="4.2" fill="#79c5ae"/>
+  <circle cx="50" cy="36" r="5.2" fill="#edc773"/>
+  <circle cx="75" cy="56" r="4.2" fill="#79c5ae"/>
 </svg>

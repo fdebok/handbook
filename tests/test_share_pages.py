@@ -135,8 +135,8 @@ class SharePageTests(unittest.TestCase):
                     "brand-mark.svg",
                     "brand-logo.svg",
                     "apple-touch-icon.png",
-                    "share-card-zh.png",
-                    "share-card-en.png",
+                    "share-card-zh-v3.png",
+                    "share-card-en-v3.png",
                 )
             }
 
@@ -144,17 +144,18 @@ class SharePageTests(unittest.TestCase):
             with self.subTest(asset=asset):
                 self.assertTrue(assets[asset])
 
-        self.assertIn('href="/favicon.svg"', chinese)
-        self.assertIn('href="/apple-touch-icon.png"', chinese)
-        self.assertIn('src="/brand-mark.svg"', chinese)
-        self.assertIn('src="/brand-logo.svg"', wechat)
-        self.assertIn('content="https://www.fdebok.com/share-card-zh.png"', chinese)
-        self.assertIn('content="https://www.fdebok.com/share-card-en.png"', english)
-        self.assertIn('og:image" content="https://www.fdebok.com/share-card-zh.png"', wechat)
-        self.assertIn('og:image" content="https://www.fdebok.com/share-card-en.png"', linkedin)
+        self.assertIn('href="/favicon.svg?v=3"', chinese)
+        self.assertIn('href="/apple-touch-icon.png?v=3"', chinese)
+        self.assertIn('src="/brand-mark.svg?v=3"', chinese)
+        self.assertIn('src="/brand-logo.svg?v=3"', wechat)
+        self.assertIn(".brand-logo{width:min(190px,48vw)}", wechat)
+        self.assertIn('content="https://www.fdebok.com/share-card-zh-v3.png"', chinese)
+        self.assertIn('content="https://www.fdebok.com/share-card-en-v3.png"', english)
+        self.assertIn('og:image" content="https://www.fdebok.com/share-card-zh-v3.png"', wechat)
+        self.assertIn('og:image" content="https://www.fdebok.com/share-card-en-v3.png"', linkedin)
         for filename, dimensions in (
-            ("share-card-zh.png", (1200, 630)),
-            ("share-card-en.png", (1200, 630)),
+            ("share-card-zh-v3.png", (1200, 630)),
+            ("share-card-en-v3.png", (1200, 630)),
             ("apple-touch-icon.png", (180, 180)),
         ):
             with self.subTest(filename=filename):
