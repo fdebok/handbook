@@ -384,14 +384,18 @@ blockquote footer{font-family:var(--sans);font-size:13px;color:var(--sub);margin
   color:var(--ink2);box-shadow:0 6px 20px rgba(22,36,61,.16);cursor:pointer;
   font-size:12px;font-weight:750;transition:background .18s,color .18s,transform .18s}
 #reading-tools-toggle:hover{background:#f1f5f8;transform:translateY(-2px)}
-#reading-tools-toggle[aria-expanded="true"],#reading-tools-toggle.has-bookmark{
-  background:var(--ink2);color:#fff}
+#reading-tools-toggle[aria-expanded="true"]{background:var(--ink2);color:#fff}
+#reading-tools-toggle.has-bookmark:not([aria-expanded="true"]){
+  border-color:#bd9850;background:#fff2cf;color:#654b1b;
+  box-shadow:0 6px 20px rgba(148,114,47,.22)}
+#reading-tools-toggle.has-bookmark:not([aria-expanded="true"]):hover{background:#f4e4b7}
 #reading-tools-toggle svg{width:17px;height:17px;flex:0 0 auto}
 #reading-panel[hidden]{display:none}
 #reading-panel{position:fixed;z-index:110;right:16px;bottom:84px;width:min(360px,calc(100vw - 32px));
-  max-height:min(68vh,440px);overflow:auto;padding:17px;border:1px solid rgba(29,53,87,.14);
-  border-radius:14px;background:rgba(255,255,255,.98);color:var(--text);
-  box-shadow:0 18px 48px rgba(20,34,56,.2);backdrop-filter:blur(16px)}
+  max-height:min(68vh,440px);overflow:auto;padding:17px;border:1px solid rgba(148,114,47,.28);
+  border-top:3px solid var(--gold2);border-radius:14px;
+  background:linear-gradient(155deg,#fffdf8 0%,rgba(255,255,255,.98) 72%);color:var(--text);
+  box-shadow:0 18px 48px rgba(67,51,22,.2);backdrop-filter:blur(16px)}
 .reading-panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
 .reading-panel-head h2{margin:0;color:var(--ink);font-family:var(--serif);font-size:17px;line-height:1.45}
 .reading-panel-close{display:grid;place-items:center;flex:0 0 34px;width:34px;height:34px;
@@ -402,9 +406,27 @@ blockquote footer{font-family:var(--sans);font-size:13px;color:var(--sub);margin
 .reading-panel-actions button{min-height:40px;padding:8px 10px;border:1px solid #d5dce3;
   border-radius:8px;background:#fff;color:var(--ink2);cursor:pointer;font-size:12px;font-weight:700}
 .reading-panel-actions button:hover{border-color:#9cabb9;background:#f7f9fb}
-#reading-bookmark-save{grid-column:1/-1;border-color:var(--ink2);background:var(--ink2);color:#fff}
-#reading-bookmark-save:hover{background:#29486e}
-.reading-panel-status{min-height:1.5em;margin:11px 0 0;color:var(--sub);font-size:11.5px;line-height:1.55}
+#reading-bookmark-save{grid-column:1/-1;border-color:#b08a3c;
+  background:linear-gradient(135deg,#e4c978,#d0ad5d);color:#27334a;
+  box-shadow:0 3px 9px rgba(148,114,47,.17)}
+#reading-bookmark-save:hover{border-color:#9a742e;background:#d6b45e}
+#reading-bookmark-open{border-color:#9db6a6;background:#eff6f0;color:#315a43}
+#reading-bookmark-open:hover{border-color:#6e947c;background:#e3efe5}
+#reading-bookmark-clear{border-color:#d8b6af;background:#fbf1ef;color:#874b43}
+#reading-bookmark-clear:hover{border-color:#bd8980;background:#f6e5e1}
+.reading-panel-status{min-height:1.5em;margin:11px 0 0;padding:9px 11px;
+  border:1px solid #e6deca;border-left:3px solid #b08a3c;border-radius:8px;
+  background:#faf7ef;color:#625b4b;font-size:11.5px;line-height:1.55}
+.reading-panel-status[data-state="bookmarkSaved"],
+.reading-panel-status[data-state="bookmarkOpened"]{
+  border-color:#e3cd91;border-left-color:#94722f;background:#fff5da;color:#634d20;font-weight:650}
+.reading-panel-status[data-state="bookmarkCleared"]{
+  border-color:#d8e4da;border-left-color:#64856f;background:#f2f7f2;color:#46634e}
+.reading-panel-status[data-state="storageError"]{
+  border-color:#e6c6c1;border-left-color:#b8433f;background:#fcf1ef;color:#8f3936}
+main article.bookmark-target,main .part-band.bookmark-target{
+  outline:3px solid #b08a3c;outline-offset:4px}
+main article.bookmark-target{background-color:#fff9e9}
 .footer-activity{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px 14px;
   margin:16px auto 0;color:var(--sub);font-size:11px;line-height:1.5}
 .visit-counter{display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border:1px solid #e1e5e9;
@@ -3354,10 +3376,13 @@ footer.pg .rights-short a{color:#647488;text-underline-offset:3px}
  var readingStorageUnavailable=false;
  var savedReadingBookmark=null;
  var readingSaveTimer=null;
+ var readingBookmarkHighlightTimer=null;
+ var activeReadingBookmarkTarget=null;
  function setReadingStatus(state){
    readingStatusState=state;
    var status=document.getElementById('reading-panel-status');
    if(!status)return;
+   status.dataset.state=state;
    var isEnglish=document.documentElement.lang==='en';
    var messages={
      ready:['阅读位置会在本机自动保存；下次打开时继续。','Your reading position is saved locally and restored next time.'],
@@ -3424,15 +3449,17 @@ footer.pg .rights-short a{color:#647488;text-underline-offset:3px}
    var count=document.getElementById('page-visit-count');
    if(!counter||!count||counter.dataset.requestStarted==='true')return;
    counter.dataset.requestStarted='true';
-   var productionOrigins=['https://www.fdebok.com','https://fdebok.com','https://fdebok.github.io'];
-   if(productionOrigins.indexOf(window.location.origin)===-1){
+   if(window.location.origin!=='https://www.fdebok.com'){
      counter.dataset.status='preview';
      updateVisitCounterLabel();
      return;
    }
    counter.dataset.status='loading';
    updateVisitCounterLabel();
-   fetch('https://weathered-haze-7b48.fdebok.workers.dev?path=global')
+   var controller=typeof AbortController==='function'?new AbortController():null;
+   var timeoutId=controller?window.setTimeout(function(){controller.abort();},10000):null;
+   var requestOptions=controller?{signal:controller.signal}:{};
+   fetch('https://weathered-haze-7b48.fdebok.workers.dev?path=global',requestOptions)
      .then(function(response){
        if(!response.ok)throw new Error('Visit counter request failed: HTTP '+response.status);
        return response.json();
@@ -3449,6 +3476,9 @@ footer.pg .rights-short a{color:#647488;text-underline-offset:3px}
        counter.dataset.status='error';
        updateVisitCounterLabel();
        console.error('Failed to load page visit count',error);
+     })
+     .finally(function(){
+       if(timeoutId!==null)window.clearTimeout(timeoutId);
      });
  }
  function currentReadingPoint(){
@@ -3485,6 +3515,31 @@ footer.pg .rights-short a{color:#647488;text-underline-offset:3px}
    var section=point.sectionId&&document.getElementById(point.sectionId);
    if(section&&Number.isFinite(point.offset))y=section.getBoundingClientRect().top+window.scrollY+point.offset;
    return Math.max(0,Math.min(y,document.documentElement.scrollHeight-window.innerHeight));
+ }
+ function clearReadingBookmarkHighlight(){
+   if(readingBookmarkHighlightTimer!==null){
+     window.clearTimeout(readingBookmarkHighlightTimer);
+     readingBookmarkHighlightTimer=null;
+   }
+   if(activeReadingBookmarkTarget){
+     activeReadingBookmarkTarget.classList.remove('bookmark-target');
+     activeReadingBookmarkTarget=null;
+   }
+ }
+ function highlightReadingBookmark(){
+   clearReadingBookmarkHighlight();
+   if(!savedReadingBookmark||!savedReadingBookmark.sectionId)return;
+   var target=document.getElementById(savedReadingBookmark.sectionId);
+   if(!target||!target.matches('main article[id],main .part-band[id]'))return;
+   activeReadingBookmarkTarget=target;
+   target.classList.add('bookmark-target');
+   readingBookmarkHighlightTimer=window.setTimeout(function(){
+     if(activeReadingBookmarkTarget===target){
+       target.classList.remove('bookmark-target');
+       activeReadingBookmarkTarget=null;
+     }
+     readingBookmarkHighlightTimer=null;
+   },2600);
  }
  function scrollToReadingPosition(top){
    var root=document.documentElement;
@@ -3544,6 +3599,7 @@ footer.pg .rights-short a{color:#647488;text-underline-offset:3px}
        readingStorageUnavailable=false;
        updateReadingControls();
        setReadingStatus('bookmarkSaved');
+       highlightReadingBookmark();
      }catch(error){
        readingStorageUnavailable=true;
        setReadingStatus('storageError');
@@ -3554,12 +3610,14 @@ footer.pg .rights-short a{color:#647488;text-underline-offset:3px}
      var top=readingPointY(savedReadingBookmark);
      var reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
      window.scrollTo({top:top,behavior:reduceMotion?'auto':'smooth'});
+     highlightReadingBookmark();
      setReadingStatus('bookmarkOpened');
    });
    clearBookmark.addEventListener('click',function(){
      try{
        localStorage.removeItem(readingBookmarkKey);
        savedReadingBookmark=null;
+       clearReadingBookmarkHighlight();
        updateReadingControls();
        setReadingStatus('bookmarkCleared');
      }catch(error){
