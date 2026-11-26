@@ -3424,7 +3424,8 @@ footer.pg .rights-short a{color:#647488;text-underline-offset:3px}
    var count=document.getElementById('page-visit-count');
    if(!counter||!count||counter.dataset.requestStarted==='true')return;
    counter.dataset.requestStarted='true';
-   if(window.location.origin!=='https://fdebok.github.io'){
+   var productionOrigins=['https://www.fdebok.com','https://fdebok.com','https://fdebok.github.io'];
+   if(productionOrigins.indexOf(window.location.origin)===-1){
      counter.dataset.status='preview';
      updateVisitCounterLabel();
      return;
