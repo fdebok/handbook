@@ -2603,8 +2603,8 @@ footer.pg .rights-short a{color:#647488;text-underline-offset:3px}
   十个知识域 · 六段生命周期 · 五级能力标尺 · 二十个高频痛点 · 九件现场资产
 <p class="rights-short">© 2026 FDEBOK（fdebok.com） · MIT License · <a href="#rights">许可与共建</a></p>
 <div class="footer-activity">
-<span class="visit-counter" id="page-visit-counter" aria-label="本页访问量加载中"><span>本页访问：</span><strong id="page-visit-count">--</strong><span>次</span></span>
-<span class="footer-activity-note">显示此页面的累计访问次数，由服务端统计。</span>
+<span class="visit-counter" id="page-visit-counter" aria-label="全站访问量加载中"><span>全站访问：</span><strong id="page-visit-count">--</strong><span>次</span></span>
+<span class="footer-activity-note">显示全站累计访问次数，由服务端统计。</span>
 </div>
 </footer>
 <button aria-label="返回顶部" id="top" title="返回顶部" type="button">↑</button>
@@ -3005,9 +3005,9 @@ footer.pg .rights-short a{color:#647488;text-underline-offset:3px}
    "复盘按决策点而非按流程撰写":"Retrospectives examine decision points, not just process steps.",
    "技术交流与社区共建":"Technical exchange and community building",
    "欢迎交流 FDE 一线实践、技术方案与工具经验，也欢迎一起筹划免费的线下分享或技术沙龙，或共建 FDE 同行交流社群。交流与活动以免费、非商业、互助共学为原则。欢迎来信说说你的想法，我们可以从一次轻松的技术交流开始。":"We welcome conversations about FDE field practice, technical approaches, and tools, as well as ideas for free meetups, tech talks, or a peer-led FDE community. Exchanges and events are free and non-commercial, centered on mutual learning. Drop us a line with an idea—or simply to start an informal conversation.",
-   "本页访问：":"Page views:",
+   "全站访问：":"Site visits:",
    "次":"visits",
-   "显示此页面的累计访问次数，由服务端统计。":"Cumulative visits to this page, counted by the server.",
+   "显示全站累计访问次数，由服务端统计。":"Cumulative visits to the site, counted by the server.",
    "阅读":"Read",
    "阅读进度与书签":"Reading progress and bookmarks",
    "关闭阅读面板":"Close reading panel",
@@ -3409,15 +3409,15 @@ footer.pg .rights-short a{color:#647488;text-underline-offset:3px}
    }
    if(label){
      label.hidden=false;
-     label.textContent=isEnglish?'Page views:':'本页访问：';
+     label.textContent=isEnglish?'Site visits:':'全站访问：';
    }
    if(suffix){
      suffix.hidden=false;
      suffix.textContent=isEnglish?'':'次';
    }
    counter.setAttribute('aria-label',status==='loaded'
-     ?(isEnglish?'Page views: '+count.textContent:'本页访问：'+count.textContent+' 次')
-     :(isEnglish?'Page views are loading':'本页访问量加载中'));
+     ?(isEnglish?'Site visits: '+count.textContent:'全站访问：'+count.textContent+' 次')
+     :(isEnglish?'Site visit count is loading':'全站访问量加载中'));
  }
  function loadPageVisitCount(){
    var counter=document.getElementById('page-visit-counter');
@@ -3432,13 +3432,13 @@ footer.pg .rights-short a{color:#647488;text-underline-offset:3px}
    }
    counter.dataset.status='loading';
    updateVisitCounterLabel();
-   fetch('https://weathered-haze-7b48.fdebok.workers.dev?path=index')
+   fetch('https://weathered-haze-7b48.fdebok.workers.dev?path=global')
      .then(function(response){
        if(!response.ok)throw new Error('Visit counter request failed: HTTP '+response.status);
        return response.json();
      })
      .then(function(data){
-       if(!data||data.path!=='index'||!Number.isSafeInteger(data.views)||data.views<0){
+       if(!data||data.path!=='global'||!Number.isSafeInteger(data.views)||data.views<0){
          throw new Error('Visit counter returned an invalid response');
        }
        count.textContent=String(data.views);
