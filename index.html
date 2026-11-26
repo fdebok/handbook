@@ -2642,7 +2642,7 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
 <tr><td>Runbook</td><td>运行手册</td><td>使他人无需提问即可完成操作与回滚的文档</td></tr>
 <tr><td>Delivery Package</td><td>交付包</td><td>部署物 + 配置 + 评测集 + 手册 + 变更记录</td></tr>
 <tr><td>Knowledge Governance</td><td>知识治理</td><td>权威源、时效、冲突裁决与责任人的持续机制</td></tr>
-<tr><td>Use-case Pipeline</td><td>场景池</td><td>经价值/可行/可纳三维评分后的候选场景序列</td></tr>
+<tr><td>Use-case Pool</td><td>场景池</td><td>经价值/可行/可纳三维评分后的候选场景序列</td></tr>
 <tr><td>Stage Gate</td><td>门径评审</td><td>以证据为条件的推进或终止决策点</td></tr>
 <tr><td>Post-incident Review</td><td>事故复盘</td><td>决策点追溯，而非流程检讨与责任分配</td></tr>
 <tr><td>Technology Radar</td><td>技术雷达</td><td>对前沿能力的分级跟踪与试用结论沉淀</td></tr>
@@ -2749,7 +2749,6 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
 </section>
 <div class="checklist-actions">
 <button form="domain-check-form" id="domain-check-reset" type="reset">清空全部勾选</button>
-<button id="domain-check-print" type="button">打印 / 保存为 PDF</button>
 </div>
 </article>
 <article id="apc">
@@ -3304,7 +3303,6 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
    "证据覆盖率":"Evidence coverage",
    "开始检查后，这里会区分已验证、待核验与关键门槛；关键项未核实前，不应仅凭总覆盖率推进高风险上线。":"As you work, this panel distinguishes verified items, items awaiting review, and critical gates. Do not rely on overall coverage to advance a high-risk launch while any critical item remains unverified.",
    "清空全部勾选":"Clear all selections",
-   "打印 / 保存为 PDF":"Print / Save as PDF",
    "诊断结论与优先行动":"Diagnosis and priority actions",
    "勾选证据后，系统会优先列出未闭环最多的领域与对应建议。":"After you mark evidence, priority actions will be listed for the domains with the most unresolved items.",
    "关键门槛":"Critical gate",
@@ -3415,6 +3413,116 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
    "分享内容暂不可用，请复制页面链接。":"Share content is unavailable. Copy the page URL instead.",
    "分享配文与链接可分开复制，粘贴更方便。":"Copy the post text and link separately for easier pasting.",
    "分享入口暂不可用，请复制分享链接。":"This share option is unavailable. Copy the share link instead."
+ });
+ // Move translations onto the next source node in the affected runs.
+ function realignTranslationRun(startKey,endKey){
+   var keys=Object.keys(ENG);
+   var start=keys.indexOf(startKey);
+   var end=keys.indexOf(endKey);
+   if(start<0||end<=start)throw new Error('Invalid translation range');
+   var run=keys.slice(start,end);
+   var values=run.map(function(key){return ENG[key];});
+   for(var i=1;i<run.length;i++)ENG[run[i]]=values[i-1];
+ }
+ realignTranslationRun("含义要点","APPENDIX B · 汇总");
+ realignTranslationRun("21.1 三十天节奏","21.2 转型者的优势与短板");
+ realignTranslationRun("22.1 六道考察题","22.2 个人自查十问");
+ realignTranslationRun("22.2 个人自查十问","附录");
+ Object.assign(ENG,{
+   "英文":"English",
+   "中文":"Chinese",
+   "含义要点":"Key points",
+   "前线部署工程师":"Forward Deployed Engineer",
+   "前线部署软件工程师":"Forward Deployed Software Engineer",
+   "端到端拥有问题、在真实约束下建生产系统、反哺产品的复合交付角色":"An end-to-end problem owner who builds production systems under real-world constraints and feeds learning back into the product.",
+   "检索增强生成":"Retrieval-augmented generation",
+   "拒答设计":"Abstention design",
+   "混合召回":"Hybrid retrieval",
+   "模型评分":"LLM-as-a-judge",
+   "人在环路":"Human-in-the-loop",
+   "审计留痕":"Audit trail",
+   "降级":"Fallback / degradation",
+   "灰度":"Canary / staged rollout",
+   "影子运行":"Shadow mode",
+   "私有化部署":"Private / on-premises deployment",
+   "离线交付":"Air-gapped delivery",
+   "单业务动作成本":"Inference cost per action",
+   "与客户对话的正确成本口径":"The appropriate cost definition to use in customer discussions.",
+   "场景池":"Use-case pool",
+   "门径评审":"Stage-gate review",
+   "产品反哺":"Product feedback loop",
+   "必须完成的具体产出":"Required deliverables",
+   "建立现场感":"Build field awareness",
+   "跑通一条链":"Complete an end-to-end flow",
+   "承担一个子块":"Own a bounded component",
+   "独立完成一次闭环":"Complete an end-to-end delivery loop",
+   "一份价值假设卡 + 一次基线测量 + 一轮评测报告 + 一次向客户业务负责人的正式汇报":"One value-hypothesis card, one baseline measurement, one evaluation report, and one formal presentation to the customer's business owner.",
+   "优先学有失效后果的东西":"Prioritize topics where failures carry consequences",
+   "：权限模型、回滚、评测、数据治理——它们不学不会出现在简历上，但一定会出现在事故报告里。":"—access controls, rollback, evaluation, and data governance may not appear on a résumé when handled well, but they will appear in incident reports when neglected.",
+   "谨慎追新框架":"Chase new frameworks cautiously",
+   "：框架更替极快，底层问题（检索质量、上下文分配、失败处理、成本）十年不变。":"—frameworks change rapidly, while the underlying problems (retrieval quality, context allocation, failure handling, and cost) remain stable.",
+   "把每个项目都变成一次公开写作":"Turn every project into a piece of public writing",
+   "：一份可被他人复用的参考架构，比三次内部口头分享更能建立影响力，也是 L3 晋升的实证材料。":"—a reusable reference architecture builds more influence than three internal presentations and provides evidence for L3 promotion.",
+   "考察题":"Interview question",
+   "想看到什么":"What to look for",
+   "危险信号":"Red flags",
+   "APPENDIX C · 读法":"APPENDIX C · Reading paths",
+   "直接到":"Go straight to ",
+   "第十三章病症表":"Chapter 13 symptom table",
+   "，按症状定位到对应知识域，再跳读该域的实践与检查项。多数现场问题可以在半小时内找到处方。":" and use symptoms to find the relevant knowledge domain, then review its practices and checklist. Most field problems can be diagnosed in under 30 minutes.",
+   "读":"Read ",
+   "定标尺，读":" to set the competency bar, then read ",
+   "编制":"staffing",
+   "与":" and ",
+   "计价":"pricing",
+   "定机制，用":" to set up mechanisms, use ",
+   "阶段交付物矩阵":"stage deliverables matrix",
+   "作为流程模板，最后用":" as the process template, and finally use ",
+   "风险登记册":"risk register",
+   "约定止损规则。":" to define stop-loss rules.",
+   "按":"Use the ",
+   "技能矩阵":"skills matrix",
+   "逐条对照，找出只能举出\"看过别人做\"的条目；用":" to identify areas where you have only observed others; use the ",
+   "九十天路径":"90-day path",
+   "安排训练顺序；每季度重做一次":" to plan your training sequence, and repeat the ",
+   "自查十问":"ten-question self-assessment",
+   "。":" quarterly."
+ });
+ Object.assign(ENG,{
+    "成长与评估":"Growth and assessment",
+    "能力可以被训练，但只能通过承担后果来训练。以下路径的设计原则是：尽早接触真实用户，尽量晚地依赖演示。":"Capability can be developed, but only by taking responsibility for outcomes. The paths below follow one principle: work with real users early and rely on demos as little as possible.",
+    "学习地图与 九十天上手":"Learning roadmap and getting started in 90 days",
+    "适用于两个场景：新入职 FDE 的前三个月安排，以及传统工程师向这一角色的转型路线。":"Designed for two scenarios: a new FDE's first three months, and a transition path for experienced engineers moving into the role.",
+    "21.1 三十天节奏":"21.1 · A 30-day cadence",
+    "21.2 转型者的优势与短板":"21.2 · Strengths and gaps for career changers",
+    "来自后端 / 平台":"From backend / platform engineering",
+    "强工程，弱业务":"Strong engineering, less business context",
+    "补：跟岗观察、价值量化、评测集设计。最容易犯的错是把\"技术上做完了\"当成\"交付完成\"。":"Build experience through shadowing, value quantification, and evaluation-set design. A common pitfall is treating technical completion as delivery completion.",
+    "来自实施 / 运维":"From implementation / operations",
+    "强现场，弱建模":"Strong field experience, less modeling depth",
+    "补：检索与编排的动手实现、评测流水线。最容易犯的错是只配置不改代码，遇到效果问题无从下手。":"Build hands-on skills in retrieval, orchestration, and evaluation pipelines. A common pitfall is configuring systems without coding, leaving quality issues difficult to diagnose.",
+    "来自算法 / 数据":"From algorithms / data",
+    "强模型，弱系统":"Strong modeling, less systems engineering",
+    "补：服务化、权限、可观测、交付文档。最容易犯的错是把指标优化当成业务价值，忽视采纳与运营。":"Build skills in serving, access control, observability, and delivery documentation. A common pitfall is treating metric optimization as business value while overlooking adoption and operations.",
+    "21.3 学习内容的取舍原则":"21.3 · Principles for prioritizing learning",
+    "评估：招聘考察与个人自查":"Hiring assessment and personal self-assessment",
+    "这个岗位无法通过刷题为筛选。有效的考察方式是给一个真实的混乱场景，看候选人如何提问、如何取舍、以及在信息不足时如何决策。":"This role cannot be assessed through interview puzzles alone. An effective interview presents a realistic, messy scenario and examines how the candidate asks questions, makes trade-offs, and decides with incomplete information.",
+    "22.1 六道考察题":"22.1 · Six interview questions",
+    "22.2 个人自查十问":"22.2 · Ten-question self-assessment",
+    "最近一个我交付的功能，我能说出它改变了哪个具体业务指标吗":"For the last feature I delivered, can I name the specific business metric it changed?",
+    "附录":"Appendices",
+    "术语速查、全域检查项汇总与阅读路径建议。":"This appendix includes a terminology quick reference, consolidated cross-domain checklists, and suggested reading paths.",
+    "APPENDIX A · 术语":"APPENDIX A · Terminology",
+    "中英对照速查":"Chinese–English quick reference",
+    "用于团队内部术语统一。正式文档建议固定中文译法，首次出现时附英文原词。":"Use this for consistent team terminology. In formal documents, choose one Chinese translation and include the English term at first mention.",
+    "三种使用路径":"Three reading paths",
+    "本手册不要求顺序通读。按你的角色选择路径，效率更高。":"The handbook need not be read cover to cover. Choose a path based on your role to get started efficiently.",
+    "路径一":"Path 1",
+    "正在做项目，卡住了":"Stuck on a project?",
+    "路径二":"Path 2",
+    "要搭一支交付团队":"Building a delivery team",
+    "路径三":"Path 3",
+    "个人能力成长":"Developing your capabilities"
  });
  var ATTR={"输入关键词筛选章节…": "Filter chapters by keyword…"};
  var selfCheckGuidance=[
@@ -3668,8 +3776,6 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
      }
      checklistSaveStatus();
    });
-   var printButton=document.getElementById('domain-check-print');
-   if(printButton)printButton.addEventListener('click',function(){window.print();});
    domainChecklistItems.forEach(function(item){
      var label=item.input.closest('label');
      if(label)label.classList.toggle('is-checked',item.input.checked);
