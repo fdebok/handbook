@@ -3946,7 +3946,7 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
      return;
    }
    if(status==='error'){
-     count.textContent=isEnglish?'Statistics failed to load':'统计加载失败';
+     count.textContent=isEnglish?'Visit statistics temporarily unavailable':'访问统计暂不可用';
      if(label)label.hidden=true;
      if(suffix)suffix.hidden=true;
      counter.setAttribute('aria-label',count.textContent);
@@ -3977,9 +3977,9 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
    counter.dataset.status='loading';
    updateVisitCounterLabel();
    var controller=typeof AbortController==='function'?new AbortController():null;
-   var timeoutId=controller?window.setTimeout(function(){controller.abort();},10000):null;
+   var timeoutId=controller?window.setTimeout(function(){controller.abort();},3000):null;
    var requestOptions=controller?{signal:controller.signal}:{};
-   fetch('https://weathered-haze-7b48.fdebok.workers.dev?path=global',requestOptions)
+   fetch('/api/visits?path=global',requestOptions)
      .then(function(response){
        if(!response.ok)throw new Error('Visit counter request failed: HTTP '+response.status);
        return response.json();
