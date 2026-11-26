@@ -69,3 +69,9 @@ It covers the full path from discovering valuable use cases and assessing real-w
 ---
 
 FDEBOK：让一线交付经验成为可复用的工程能力。
+
+## 许可 / License
+
+本仓库及手册原创内容按 MIT License 许可，详见 [LICENSE](./LICENSE)。允许商业使用、修改、分发及销售；分发副本或实质部分时，须附带版权声明和许可声明。第三方内容仍适用其各自许可；MIT 不授予 FDEBOK 名称、标志或商标权。
+
+This repository and the handbook's original content are licensed under the MIT License; see [LICENSE](./LICENSE). Commercial use, modification, redistribution, and sale are permitted. Copies or substantial portions must include the copyright and permission notice. Third-party material remains subject to its own license; the MIT License does not grant rights to the FDEBOK name, logo, or trademarks.

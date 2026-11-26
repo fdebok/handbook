@@ -1,0 +1,52 @@
+name: Self-assessment tool feedback
+description: Improve the self-check questions, scoring anchors, or diagnostic guidance
+title: "[评测工具反馈] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢帮助校准 FDEBOK 自查工具。该工具用于成长复盘，不是认证或招聘结论。
+        Thank you for helping calibrate the FDEBOK self-check. It supports reflection; it is not a certification or hiring decision.
+
+  - type: dropdown
+    id: feedback_type
+    attributes:
+      label: 反馈类型 / Feedback type
+      options:
+        - 题目不适用或表述不清 / Question applicability or wording
+        - 评分锚点不准确 / Scoring anchor
+        - 诊断结果或建议不合理 / Result or recommendation
+        - 可访问性或交互问题 / Accessibility or interaction
+        - 其他 / Other
+    validations:
+      required: true
+
+  - type: input
+    id: question
+    attributes:
+      label: 题号或页面位置 / Question number or page location
+      placeholder: 例如：第 3 题 · 评测与回归 / e.g. Question 3 · Evaluation and regression
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: 适用背景与观察 / Context and observed behavior
+      description: 说明适用角色、项目阶段及选择该评分后出现的建议；不要包含可识别客户或个人的信息。 / Describe the role, project stage, and resulting guidance. Do not include identifying customer or personal information.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 建议调整方式 / Suggested change
+      description: 可提供更可观察的判据、证据示例或更可执行的下一步。 / Suggest observable criteria, evidence examples, or a more actionable next step.
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        请勿提交客户数据、个人信息、密钥、内部文档或未获授权的第三方材料。
+        Do not include customer data, personal information, credentials, internal documents, or third-party material you are not authorized to share.

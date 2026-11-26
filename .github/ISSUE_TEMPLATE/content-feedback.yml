@@ -1,0 +1,52 @@
+name: Handbook content feedback
+description: Report a correction, suggest a clearer explanation, or share a field case
+title: "[内容反馈] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢帮助改进 FDEBOK。请提供可核对的章节位置和事实依据。
+        Thank you for improving FDEBOK. Include the relevant section and verifiable context.
+
+  - type: dropdown
+    id: feedback_type
+    attributes:
+      label: 反馈类型 / Feedback type
+      options:
+        - 事实或资料勘误 / Factual or source correction
+        - 表达与结构建议 / Clarity or structure
+        - 实战案例或模板建议 / Field case or template
+        - 其他 / Other
+    validations:
+      required: true
+
+  - type: input
+    id: location
+    attributes:
+      label: 章节、标题或链接 / Section, heading, or link
+      placeholder: 例如：第 7 章 · 技能矩阵 / e.g. Chapter 7 · Skills matrix
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: 问题或建议 / What should be corrected or improved?
+      description: 请说明当前内容、问题及其影响；案例请隐去客户与个人身份信息。 / Describe the current text, issue, and impact. Remove customer and personal identifiers from examples.
+      placeholder: 可引用必要的短句，并说明事实、场景或读者会遇到的具体困难。 / Quote only what is needed and describe the facts, context, or reader impact.
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 参考依据 / Supporting source (optional)
+      description: 可提供公开、可访问的一手资料或验证步骤。 / Share a public primary source or reproducible verification steps, if available.
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        请勿提交客户数据、个人信息、密钥、内部文档或未获授权的第三方材料。
+        Do not include customer data, personal information, credentials, internal documents, or third-party material you are not authorized to share.
