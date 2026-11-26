@@ -120,6 +120,22 @@ class SharePageTests(unittest.TestCase):
                 self.assertIn('.share-panel[data-mode="quick"] .share-quick-actions{display:flex}', page)
                 self.assertIn("navigator.share", page)
 
+    def test_brand_mark_meaning_is_visible_and_translated(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            output = Path(temporary_directory) / "site"
+            build_site.build(output)
+            chinese = (output / "index.html").read_text(encoding="utf-8")
+            english = (output / "en" / "index.html").read_text(encoding="utf-8")
+
+        self.assertIn(
+            '<p class="brand-meaning">桥连现场洞察、工程实践与 AI 交付；三点寓意协同。</p>',
+            chinese,
+        )
+        self.assertIn(
+            '<p class="brand-meaning">The bridge links field insight, engineering, and AI delivery; its three nodes signify collaboration.</p>',
+            english,
+        )
+
     def test_branding_assets_and_locale_share_cards_are_published(self):
         with tempfile.TemporaryDirectory() as temporary_directory:
             output = Path(temporary_directory) / "site"
