@@ -280,6 +280,13 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 .share-url{width:100%;min-height:42px;padding:8px 10px;border:1px solid rgba(218,229,242,.35);
   border-radius:7px;background:rgba(0,0,0,.2);color:#eef3fa;font-size:13px}
 .share-help{margin:8px 0;color:#b9c9dc;font-size:12px;line-height:1.6}
+.share-quick-actions{display:none;flex-direction:column;gap:10px}
+.share-quick-actions[hidden]{display:none}
+.share-quick-copy{width:100%;min-height:84px;padding:10px;border:1px solid rgba(218,229,242,.35);
+  border-radius:7px;background:rgba(0,0,0,.2);color:#eef3fa;font:inherit;font-size:13px;line-height:1.6}
+.share-quick-copy-button{min-height:46px;padding:10px 14px;border:1px solid var(--gold2);border-radius:8px;
+  background:var(--gold2);color:var(--ink);font-size:14px;font-weight:800;cursor:pointer}
+.share-quick-copy-button:hover{background:#f0d17d}
 .share-qr-row{display:flex;align-items:center;gap:14px;margin-top:14px;padding-top:14px;
   border-top:1px solid rgba(218,229,242,.18)}
 .share-qr{width:104px;height:104px;flex:none;padding:5px;border-radius:8px;background:#fff}
@@ -703,6 +710,14 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
   .hero-actions a{flex:1 1 170px}
   .hero-actions .share-trigger{flex:1 1 170px}
   .share-panel{padding:14px}
+  .share-panel[data-mode="quick"] #share-intro,
+  .share-panel[data-mode="quick"] .share-platform-picker,
+  .share-panel[data-mode="quick"] .share-preview-card,
+  .share-panel[data-mode="quick"] .share-panel-actions,
+  .share-panel[data-mode="quick"] #share-platform-note,
+  .share-panel[data-mode="quick"] .share-url,
+  .share-panel[data-mode="quick"] .share-qr-row{display:none}
+  .share-panel[data-mode="quick"] .share-quick-actions{display:flex}
   .share-qr-row{align-items:flex-start}
   .share-qr{width:88px;height:88px}
   footer.pg{padding:28px 20px}
@@ -848,10 +863,16 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
 <a class="share-open-platform" hidden id="share-open-platform" rel="noopener noreferrer" target="_blank">打开分享入口</a>
 </div>
 <p class="share-help" id="share-platform-note">微信、抖音目前没有通用的网页转发入口；可以复制配文和链接，再粘贴到对应 App。</p>
+<div class="share-quick-actions" hidden id="share-quick-actions">
+<p class="share-help" id="share-quick-note">系统分享不可用时，可一键复制配文和链接，再粘贴到常用 App；网页无法代替 App 内转发。</p>
+<label class="sr-only" for="share-quick-copy">分享内容（配文与链接）</label>
+<textarea class="share-quick-copy" id="share-quick-copy" readonly rows="3"></textarea>
+<button class="share-quick-copy-button" id="share-quick-copy-button" type="button">复制配文和链接</button>
+</div>
 <label class="sr-only" for="share-url">当前平台的分享链接</label>
 <input class="share-url" id="share-url" readonly type="url" value="https://www.fdebok.com/"/>
 <div class="share-qr-row">
-<img alt="扫码访问 FDEBOK 中文手册" class="share-qr" height="104" id="share-qr-image" src="/share-qr-zh.png" width="104"/>
+<img alt="扫码访问 FDEBOK 中文手册" class="share-qr" decoding="async" height="104" id="share-qr-image" loading="lazy" src="/share-qr-zh.png" width="104"/>
 <p class="share-qr-note" id="share-qr-note">电脑端可扫码，在手机上继续阅读中文手册。复制的链接会打开当前平台的介绍页。</p>
 </div>
 <p aria-live="polite" class="share-status" id="share-status" role="status"></p>
@@ -3412,7 +3433,13 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
    "无法打开系统分享，请复制链接或扫码。":"Could not open the share sheet. Copy the link or scan the QR code.",
    "分享内容暂不可用，请复制页面链接。":"Share content is unavailable. Copy the page URL instead.",
    "分享配文与链接可分开复制，粘贴更方便。":"Copy the post text and link separately for easier pasting.",
-   "分享入口暂不可用，请复制分享链接。":"This share option is unavailable. Copy the share link instead."
+   "分享入口暂不可用，请复制分享链接。":"This share option is unavailable. Copy the share link instead.",
+   "系统分享不可用时，可一键复制配文和链接，再粘贴到常用 App；网页无法代替 App 内转发。":"If device sharing is unavailable, copy the message and link once, then paste them into your preferred app. A web page cannot trigger an app's in-app forwarding menu.",
+   "分享内容（配文与链接）":"Share message and link",
+   "复制配文和链接":"Copy message and link",
+   "分享内容已复制。打开微信或抖音即可粘贴。":"Message and link copied. Open your preferred app to paste them.",
+   "复制失败，请手动选择分享内容复制。":"Copy failed. Select the share message and link and copy them manually.",
+   "设备分享暂不可用，请复制内容后在应用中粘贴。":"Device sharing is unavailable. Copy the content and paste it into your app."
  });
  // Move translations onto the next source node in the affected runs.
  function realignTranslationRun(startKey,endKey){
@@ -4273,6 +4300,9 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
    var nativeButton=document.getElementById('share-native');
    var copyTextButton=document.getElementById('share-copy-text');
    var copyLinkButton=document.getElementById('share-copy-link');
+   var quickActions=document.getElementById('share-quick-actions');
+   var quickCopyInput=document.getElementById('share-quick-copy');
+   var quickCopyButton=document.getElementById('share-quick-copy-button');
    var openPlatform=document.getElementById('share-open-platform');
    var urlInput=document.getElementById('share-url');
    var status=document.getElementById('share-status');
@@ -4285,10 +4315,12 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
    var intro=document.getElementById('share-intro');
    var contentNode=document.getElementById('share-content-data');
    if(!trigger||!panel||!close||!nativeButton||!copyTextButton||!copyLinkButton||
+      !quickActions||!quickCopyInput||!quickCopyButton||
       !openPlatform||!urlInput||!status||!qr||!caption||!previewTitle||
       !previewKicker||!platformNote||!qrNote||!intro||!contentNode)return;
    var isEnglish=document.documentElement.lang==='en';
    var locale=isEnglish?'en':'zh';
+   var quickShareUrl=isEnglish?'https://www.fdebok.com/en/':'https://www.fdebok.com/';
    qr.src=isEnglish?'/share-qr-en.png':'/share-qr-zh.png';
    qr.alt=isEnglish?'QR code for the FDEBOK English handbook':'扫码访问 FDEBOK 中文手册';
    nativeButton.hidden=typeof navigator.share!=='function';
@@ -4320,11 +4352,26 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
    var shareUrl='';
    var copyText='';
    function setStatus(message){status.textContent=message;}
-   function setOpen(open,returnFocus){
+   function setOpen(open,returnFocus,mode){
+     if(open){
+       panel.dataset.mode=mode||'full';
+       quickActions.hidden=panel.dataset.mode!=='quick';
+     }else{
+       panel.dataset.mode='full';
+       quickActions.hidden=true;
+     }
      panel.hidden=!open;
      trigger.setAttribute('aria-expanded',String(open));
      if(open)close.focus();
      else if(returnFocus)trigger.focus();
+   }
+   function isMobileViewport(){
+     return !!(window.matchMedia&&window.matchMedia('(max-width: 660px)').matches);
+   }
+   function openQuickFallback(message){
+     quickCopyInput.value=copyText+'\n\n'+quickShareUrl;
+     setOpen(true,false,'quick');
+     setStatus(message);
    }
    function fallbackCopy(value){
      var textArea=document.createElement('textarea');
@@ -4379,6 +4426,7 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
      selectedPlatform=platform;
      shareUrl='https://www.fdebok.com/share/'+locale+'/'+platform+'/';
      copyText=selectedContent.caption;
+     quickCopyInput.value=copyText+'\n\n'+quickShareUrl;
      platformButtons.forEach(function(button){
        button.setAttribute('aria-pressed',String(button.dataset.sharePlatform===platform));
      });
@@ -4405,7 +4453,49 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
      }
      setStatus('');
    }
-   trigger.addEventListener('click',function(){setOpen(panel.hidden,false);});
+   function shareFromDevice(quick){
+     if(typeof navigator.share!=='function'){
+       if(quick)openQuickFallback(isEnglish
+         ?'Device sharing is unavailable. Copy the content and paste it into your app.'
+         :'设备分享暂不可用，请复制内容后在应用中粘贴。');
+       else setStatus(isEnglish?'System sharing is unavailable. Copy the link or scan the QR code.':'暂不支持系统分享，请复制链接或扫码。');
+       return;
+     }
+     if(!selectedContent)return;
+     var sharePromise;
+     try{
+       sharePromise=navigator.share({
+         title:'FDEBOK · '+selectedContent.title,
+         text:copyText,
+         url:quick?quickShareUrl:shareUrl
+       });
+     }catch(error){
+       console.error('System sharing failed',error);
+       if(quick)openQuickFallback(isEnglish
+         ?'Could not open device sharing. Copy the content and paste it into your app.'
+         :'无法打开设备分享，请复制内容后在应用中粘贴。');
+       else setStatus(isEnglish?'Could not open the share sheet. Copy the link or scan the QR code.':'无法打开系统分享，请复制链接或扫码。');
+       return;
+     }
+     Promise.resolve(sharePromise).then(function(){setStatus('');}).catch(function(error){
+       if(error&&error.name==='AbortError')return;
+       console.error('System sharing failed',error);
+       if(quick)openQuickFallback(isEnglish
+         ?'Could not open device sharing. Copy the content and paste it into your app.'
+         :'无法打开设备分享，请复制内容后在应用中粘贴。');
+       else setStatus(isEnglish?'Could not open the share sheet. Copy the link or scan the QR code.':'无法打开系统分享，请复制链接或扫码。');
+     });
+   }
+   trigger.addEventListener('click',function(){
+     if(isMobileViewport()){
+       if(typeof navigator.share==='function'&&selectedContent)shareFromDevice(true);
+       else openQuickFallback(isEnglish
+         ?'Device sharing isn’t available here. Copy once, then paste into your preferred app.'
+         :'当前浏览器不支持系统分享。复制后打开微信或抖音粘贴；网页无法代替 App 内转发。');
+       return;
+     }
+     setOpen(panel.hidden,false,'full');
+   });
    close.addEventListener('click',function(){setOpen(false,true);});
    platformButtons.forEach(function(button){
      button.addEventListener('click',function(){updatePlatform(button.dataset.sharePlatform);});
@@ -4418,32 +4508,14 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
      if(selectedContent)copyValue(shareUrl,isEnglish?'Link copied.':'链接已复制。',
        isEnglish?'Copy failed. Select the URL and copy it manually.':'复制失败，请手动选择链接复制。',urlInput);
    });
+   quickCopyButton.addEventListener('click',function(){
+     if(selectedContent)copyValue(copyText+'\n\n'+quickShareUrl,
+       isEnglish?'Message and link copied. Open your preferred app to paste them.':'分享内容已复制。打开微信或抖音即可粘贴。',
+       isEnglish?'Copy failed. Select the share message and link and copy them manually.':'复制失败，请手动选择分享内容复制。',
+       quickCopyInput);
+   });
    nativeButton.addEventListener('click',function(){
-     if(typeof navigator.share!=='function'){
-       setStatus(isEnglish?'System sharing is unavailable. Copy the link or scan the QR code.':'暂不支持系统分享，请复制链接或扫码。');
-       return;
-     }
-     if(!selectedContent)return;
-     var sharePromise;
-     try{
-       sharePromise=navigator.share({
-         title:'FDEBOK · '+selectedContent.title,
-         text:copyText,
-         url:shareUrl
-       });
-     }
-     catch(error){
-       console.error('System sharing failed',error);
-       setStatus(isEnglish?'Could not open the share sheet. Copy the link or scan the QR code.':'无法打开系统分享，请复制链接或扫码。');
-       return;
-     }
-     sharePromise.then(function(){
-       setStatus('');
-     }).catch(function(error){
-       if(error&&error.name==='AbortError')return;
-       console.error('System sharing failed',error);
-       setStatus(isEnglish?'Could not open the share sheet. Copy the link or scan the QR code.':'无法打开系统分享，请复制链接或扫码。');
-     });
+     shareFromDevice(false);
    });
    if(!content[selectedPlatform])selectedPlatform=allowedPlatforms[0];
    if(selectedPlatform)updatePlatform(selectedPlatform);

@@ -100,6 +100,25 @@ class SharePageTests(unittest.TestCase):
             self.assertNotIn("打印 / 保存为 PDF", page)
             self.assertNotIn("Print / Save as PDF", page)
 
+    def test_mobile_share_fallback_is_localized_and_compact(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            output = Path(temporary_directory) / "site"
+            build_site.build(output)
+            chinese = (output / "index.html").read_text(encoding="utf-8")
+            english = (output / "en" / "index.html").read_text(encoding="utf-8")
+
+        for page, button_label, copy_label in (
+            (chinese, "复制配文和链接", "分享内容（配文与链接）"),
+            (english, "Copy message and link", "Share message and link"),
+        ):
+            with self.subTest(button_label=button_label):
+                self.assertIn('id="share-quick-copy-button"', page)
+                self.assertIn(button_label, page)
+                self.assertIn(copy_label, page)
+                self.assertIn('.share-panel[data-mode="quick"] .share-platform-picker', page)
+                self.assertIn('.share-panel[data-mode="quick"] .share-quick-actions{display:flex}', page)
+                self.assertIn("navigator.share", page)
+
     def test_build_keeps_english_tables_and_reading_paths_aligned(self):
         source = (ROOT / "index.html").read_text(encoding="utf-8")
         translations, _ = build_site.load_translations(source)

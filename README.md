@@ -72,11 +72,11 @@ The Chinese source page is `/`; the English edition is published as a separate, 
 
 中文源页面位于 `/`，英文版在发布时预渲染为独立静态页面 `/en/`。另生成微信、抖音、Facebook、LinkedIn、X 五个静态分享介绍页，分别位于 `/share/zh/wechat/`、`/share/zh/douyin/`、`/share/en/facebook/`、`/share/en/linkedin/`、`/share/en/x/`。每页提供平台适配的 Open Graph/Twitter 展示文案及通往完整手册的入口；微型页设置 `noindex` 并 canonical 回对应语言的完整手册，避免薄内容重复收录。微型页不含 JavaScript，并配置限制脚本、嵌入对象等来源的内容安全策略。Pages 工作流运行 `python3 scripts/build_site.py --output-dir dist` 生成并部署。不要直接编辑生成页；如需修订英译或分享文案，请更新 `index.html` 中的 `ENG` 英译表或 `share-content-data` JSON。本地构建需要 Python 3 和 Node.js。可运行 `node tests/test_share_ui.js`、`node tests/test_color_theme.js` 与 `python3 -m unittest discover -s tests -p 'test_*.py'` 执行对应测试。
 
-The share panel previews platform-appropriate post copy, supports separate copy actions for the suggested wording and destination link, offers native device sharing when the browser supports it, and provides locale-specific QR codes. Facebook, LinkedIn, and X use their public share composers. For WeChat and Douyin, users can copy the text and link or scan the QR code; the device share sheet is offered when supported, but the site does not pretend to deep-link into either app. No platform SDK or share-specific tracking is added. The existing aggregate site-visit counter remains unchanged.
+On mobile, one tap on Share opens the device's native share sheet when Web Share is supported. If sharing is unavailable or the browser is an embedded app webview, a compact fallback lets readers copy the suggested text and canonical handbook URL together. Desktop keeps the platform-specific preview, separate copy actions, QR codes, and public share composers for Facebook, LinkedIn, and X. WeChat and Douyin do not expose a universal web API for invoking their in-app forwarding menus, so the site does not promise a fake deep link. No platform SDK or share-specific tracking is added. The existing aggregate site-visit counter remains unchanged.
 
 Readers can switch among the original Classic Blue & Gold palette, Pine & Copper, and Graphite & Silver from the reading/bookmark panel. The selection is stored in this browser's local storage only; it is not uploaded or synchronized.
 
-分享面板先展示符合平台习惯的转发配文，并支持分别复制配文和链接；浏览器支持时才显示系统分享，同时提供按语言区分的二维码。Facebook、LinkedIn 和 X 使用各自公开的分享入口；微信和抖音可复制配文/链接或扫码，设备分享面板仅在支持时提供，不伪造应用内直达能力。此实现不接入平台 SDK，也不新增分享追踪，现有全站累计访问统计保持不变。
+手机端点击“分享”一次即可调起浏览器/系统原生分享面板（设备支持 Web Share 时）；若浏览器不支持或处于 App 内嵌网页，则显示精简兜底面板，可一键复制推荐配文与手册正式链接。电脑端保留平台专属预览、配文/链接分别复制、二维码，以及 Facebook、LinkedIn 和 X 的公开分享入口。微信、抖音未提供通用网页接口来直接调用其 App 内转发菜单，因此不伪造“直达分享”。不接入平台 SDK、不新增分享追踪，现有全站累计访问统计保持不变。
 
 读者可在阅读/书签面板中选择原有“典雅蓝金”、新增“松柏铜金”或“墨石紫银”配色。选择仅保存在当前浏览器本地，不会上传或跨设备同步。
 

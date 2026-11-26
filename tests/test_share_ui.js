@@ -58,15 +58,24 @@ class Element {
   remove() {}
 }
 
-async function exerciseLocale(locale, unsupportedNativeShare = false, rejectClipboard = false) {
+async function exerciseLocale(
+  locale,
+  unsupportedNativeShare = false,
+  rejectClipboard = false,
+  isMobile = false,
+  rejectShare = false,
+) {
   const ids = [
     "share-trigger", "share-panel", "share-close", "share-native",
     "share-copy-text", "share-copy-link", "share-open-platform", "share-url",
+    "share-quick-actions", "share-quick-copy", "share-quick-copy-button",
     "share-status", "share-qr-image", "share-preview-caption",
     "share-preview-title", "share-preview-kicker", "share-platform-note",
     "share-qr-note", "share-intro", "share-content-data",
   ];
   const elements = Object.fromEntries(ids.map((id) => [id, new Element(id)]));
+  elements["share-panel"].hidden = true;
+  elements["share-quick-actions"].hidden = true;
   elements["share-content-data"].textContent = JSON.stringify(shareContent);
   const platforms = ["wechat", "douyin", "facebook", "linkedin", "x"].map(
     (platform) => new Element(`platform-${platform}`, { sharePlatform: platform }),
@@ -74,6 +83,7 @@ async function exerciseLocale(locale, unsupportedNativeShare = false, rejectClip
   elements["share-panel"].querySelectorAll = () => platforms;
 
   const copied = [];
+  const loggedErrors = [];
   let shared;
   let selectedText;
   const selection = {
@@ -111,15 +121,25 @@ async function exerciseLocale(locale, unsupportedNativeShare = false, rejectClip
         : {
             share: (value) => {
               shared = value;
-              return Promise.resolve();
+              return rejectShare
+                ? Promise.reject(new Error("Share unavailable"))
+                : Promise.resolve();
             },
           }),
     },
-    console,
+    console: {
+      error: (...args) => loggedErrors.push(args),
+    },
     URLSearchParams,
   };
+  context.window.matchMedia = () => ({ matches: isMobile });
   vm.runInNewContext(initializer, context);
   context.initializeSharing();
+  if (!isMobile) {
+    elements["share-trigger"].handlers.click();
+    assert.equal(elements["share-panel"].hidden, false);
+    assert.equal(elements["share-trigger"].attributes["aria-expanded"], "true");
+  }
 
   const initialPlatform = locale === "zh" ? "wechat" : "linkedin";
   const nextPlatform = locale === "zh" ? "douyin" : "x";
@@ -145,7 +165,7 @@ async function exerciseLocale(locale, unsupportedNativeShare = false, rejectClip
     assert.equal(new URLSearchParams(elements["share-open-platform"].href.split("?")[1]).get("url"), destination);
   }
 
-  if (!unsupportedNativeShare) {
+  if (!unsupportedNativeShare && !isMobile) {
     elements["share-native"].handlers.click();
     await Promise.resolve();
     assert.equal(shared.url, destination);
@@ -170,6 +190,44 @@ async function exerciseLocale(locale, unsupportedNativeShare = false, rejectClip
     await Promise.resolve();
     assert.equal(copied[1], destination);
   }
+
+  if (isMobile) {
+    elements["share-trigger"].handlers.click();
+    if (unsupportedNativeShare) {
+      assert.equal(elements["share-panel"].hidden, false);
+      assert.equal(elements["share-panel"].dataset.mode, "quick");
+      assert.equal(elements["share-quick-actions"].hidden, false);
+      assert.equal(elements["share-quick-copy"].value,
+        `${nextContent.caption}\n\n${locale === "en" ? "https://www.fdebok.com/en/" : "https://www.fdebok.com/"}`);
+      elements["share-quick-copy-button"].handlers.click();
+      if (rejectClipboard) {
+        await new Promise(setImmediate);
+        assert.equal(elements["share-quick-copy"].focused, true);
+        assert.equal(elements["share-quick-copy"].selected, true);
+      } else {
+        await Promise.resolve();
+        assert.equal(copied.at(-1), elements["share-quick-copy"].value);
+      }
+      elements["share-close"].handlers.click();
+      assert.equal(elements["share-panel"].hidden, true);
+      assert.equal(elements["share-trigger"].attributes["aria-expanded"], "false");
+    } else if (rejectShare) {
+      await new Promise(setImmediate);
+      assert.equal(elements["share-panel"].hidden, false);
+      assert.equal(elements["share-panel"].dataset.mode, "quick");
+      assert.equal(elements["share-quick-actions"].hidden, false);
+      assert.equal(loggedErrors[0][0], "System sharing failed");
+    } else {
+      await Promise.resolve();
+      assert.equal(elements["share-panel"].hidden, true);
+      assert.equal(shared.url, locale === "en" ? "https://www.fdebok.com/en/" : "https://www.fdebok.com/");
+      assert.equal(shared.text, nextContent.caption);
+    }
+  } else {
+    elements["share-close"].handlers.click();
+    assert.equal(elements["share-panel"].hidden, true);
+    assert.equal(elements["share-trigger"].attributes["aria-expanded"], "false");
+  }
   console.log(`${locale}: platform selection, preview, share, and copy actions passed`);
 }
 
@@ -178,6 +236,10 @@ async function exerciseLocale(locale, unsupportedNativeShare = false, rejectClip
   await exerciseLocale("en");
   await exerciseLocale("en", true);
   await exerciseLocale("zh", false, true);
+  await exerciseLocale("zh", false, false, true);
+  await exerciseLocale("zh", true, false, true);
+  await exerciseLocale("zh", true, true, true);
+  await exerciseLocale("en", false, false, true, true);
 })().catch((error) => {
   console.error(error);
   process.exitCode = 1;
