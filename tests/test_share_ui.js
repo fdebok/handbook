@@ -8,6 +8,10 @@ const mainScript = scripts.map((match) => match[1]).find((script) =>
   script.includes("function initializeSharing(){"),
 );
 assert.ok(mainScript, "share UI initializer exists");
+assert.match(
+  mainScript,
+  /var shareImageUrl=isEnglish\?'https:\/\/www\.fdebok\.com\/share-card-en\.png':'https:\/\/www\.fdebok\.com\/share-card-zh\.png'/,
+);
 
 const start = mainScript.indexOf(" function initializeSharing(){");
 const end = mainScript.indexOf("\n window.addEventListener('DOMContentLoaded'", start);
@@ -121,9 +125,10 @@ async function exerciseLocale(
         : {
             share: (value) => {
               shared = value;
-              return rejectShare
-                ? Promise.reject(new Error("Share unavailable"))
-                : Promise.resolve();
+              if (!rejectShare) return Promise.resolve();
+              const error = new Error("Share unavailable");
+              if (rejectShare === "abort") error.name = "AbortError";
+              return Promise.reject(error);
             },
           }),
     },
@@ -198,7 +203,7 @@ async function exerciseLocale(
       assert.equal(elements["share-panel"].dataset.mode, "quick");
       assert.equal(elements["share-quick-actions"].hidden, false);
       assert.equal(elements["share-quick-copy"].value,
-        `${nextContent.caption}\n\n${locale === "en" ? "https://www.fdebok.com/en/" : "https://www.fdebok.com/"}`);
+        `${nextContent.caption}\n\n${locale === "en" ? "https://www.fdebok.com/en/?share=brand-v2" : "https://www.fdebok.com/?share=brand-v2"}`);
       elements["share-quick-copy-button"].handlers.click();
       if (rejectClipboard) {
         await new Promise(setImmediate);
@@ -216,12 +221,24 @@ async function exerciseLocale(
       assert.equal(elements["share-panel"].hidden, false);
       assert.equal(elements["share-panel"].dataset.mode, "quick");
       assert.equal(elements["share-quick-actions"].hidden, false);
-      assert.equal(loggedErrors[0][0], "System sharing failed");
+      if (rejectShare === "abort") {
+        assert.equal(elements["share-status"].textContent,
+          "分享已取消。你可以复制配文和链接，稍后在任意 App 粘贴。");
+        assert.equal(loggedErrors.length, 0);
+      } else {
+        assert.equal(loggedErrors[0][0], "System sharing failed");
+      }
     } else {
-      await Promise.resolve();
-      assert.equal(elements["share-panel"].hidden, true);
-      assert.equal(shared.url, locale === "en" ? "https://www.fdebok.com/en/" : "https://www.fdebok.com/");
-      assert.equal(shared.text, nextContent.caption);
+      await new Promise(setImmediate);
+      assert.equal(elements["share-panel"].hidden, false);
+      assert.equal(elements["share-panel"].dataset.mode, "quick");
+      assert.deepEqual(Object.keys(shared), ["url"]);
+      assert.equal(shared.url, locale === "en"
+        ? "https://www.fdebok.com/en/?share=brand-v2"
+        : "https://www.fdebok.com/?share=brand-v2");
+      assert.equal(elements["share-status"].textContent, locale === "en"
+        ? "Returned to the page. Only the target app can confirm whether it sent the share. If it did not, copy the content and try again."
+        : "已返回网页。分享结果由目标 App 确认；如未成功，可复制内容后重试。");
     }
   } else {
     elements["share-close"].handlers.click();
@@ -240,6 +257,7 @@ async function exerciseLocale(
   await exerciseLocale("zh", true, false, true);
   await exerciseLocale("zh", true, true, true);
   await exerciseLocale("en", false, false, true, true);
+  await exerciseLocale("zh", false, false, true, "abort");
 })().catch((error) => {
   console.error(error);
   process.exitCode = 1;

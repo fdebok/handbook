@@ -21,7 +21,7 @@ EN_DESCRIPTION = (
     "delivery lifecycle, an L1–L5 competency framework, 20 enterprise AI "
     "challenges, and nine field templates."
 )
-EN_IMAGE_URL = "https://www.fdebok.com/og-image-en.png"
+EN_IMAGE_URL = "https://www.fdebok.com/share-card-en.png"
 ZH_URL = "https://www.fdebok.com/"
 SHARE_PLATFORMS = {
     "zh": ("wechat", "douyin"),
@@ -42,9 +42,15 @@ STATIC_FILES = (
     "LICENSE",
     "index.html",
     "llms.txt",
+    "apple-touch-icon.png",
+    "brand-logo.svg",
+    "brand-mark.svg",
+    "favicon.svg",
     "og-image.png",
     "og-image-en.png",
     "robots.txt",
+    "share-card-en.png",
+    "share-card-zh.png",
     "sitemap.xml",
     "share-qr-en.png",
     "share-qr-zh.png",
@@ -139,7 +145,7 @@ def render_share_page(locale: str, platform: str, content: dict[str, str]) -> st
     language = "en" if is_english else "zh-CN"
     canonical_url = EN_URL if is_english else ZH_URL
     share_url = f"https://www.fdebok.com/share/{locale}/{platform}/"
-    share_image = EN_IMAGE_URL if is_english else "https://www.fdebok.com/og-image.png"
+    share_image = EN_IMAGE_URL if is_english else "https://www.fdebok.com/share-card-zh.png"
     accent = PLATFORM_ACCENTS[platform]
     page_title = f"{content['title']} | FDEBOK"
     description = content["caption"]
@@ -163,6 +169,8 @@ def render_share_page(locale: str, platform: str, content: dict[str, str]) -> st
 <meta name="robots" content="noindex,follow,max-image-preview:large"/>
 <meta name="theme-color" content="#142238"/>
 <meta name="referrer" content="strict-origin-when-cross-origin"/>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180"/>
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; style-src 'unsafe-inline'; script-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"/>
 <link rel="canonical" href="{canonical_url}"/>
 <title>{html.escape(page_title)}</title>
@@ -191,8 +199,7 @@ a{{color:inherit}}
 .page{{width:min(100% - 32px,960px);margin:0 auto;padding:24px 0 32px}}
 .masthead{{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:8px 2px 22px}}
 .brand{{display:inline-flex;align-items:center;gap:12px;color:var(--ink);font-weight:850;letter-spacing:.04em;text-decoration:none}}
-.brand-mark{{display:grid;width:38px;height:38px;place-items:center;border-radius:10px;background:var(--ink);color:#fff;font-size:13px}}
-.brand-name{{font-size:15px}}
+.brand-logo{{display:block;width:190px;height:auto;flex:none}}
 .masthead-note{{color:var(--sub);font-size:11px;font-weight:750;letter-spacing:.12em;text-align:right;text-transform:uppercase}}
 .card{{position:relative;overflow:hidden;padding:clamp(24px,6vw,58px);border:1px solid rgba(30,53,82,.12);border-radius:22px;background:linear-gradient(145deg,#fff 0%,#fbfcfb 62%,#f2f5f4 100%);box-shadow:0 24px 70px rgba(27,45,68,.10)}}
 .card::before{{position:absolute;inset:0 auto 0 0;width:5px;background:linear-gradient(var(--accent),var(--gold));content:""}}
@@ -220,8 +227,8 @@ h1{{max-width:760px;margin:0;color:var(--ink);font-family:Georgia,"Noto Serif SC
 <body>
 <div class="page">
 <header class="masthead">
-<a class="brand" href="{canonical_url}" aria-label="FDEBOK">
-<span aria-hidden="true" class="brand-mark">FDE</span><span class="brand-name">FDEBOK</span>
+<a class="brand" href="{canonical_url}">
+<img alt="FDEBOK · Forward Deployed Engineer Body of Knowledge" class="brand-logo" height="43" src="/brand-logo.svg" width="190"/>
 </a>
 <span class="masthead-note">Forward Deployed Engineer<br/>Body of Knowledge</span>
 </header>

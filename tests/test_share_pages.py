@@ -1,4 +1,5 @@
 import json
+import struct
 import sys
 import tempfile
 import unittest
@@ -118,6 +119,48 @@ class SharePageTests(unittest.TestCase):
                 self.assertIn('.share-panel[data-mode="quick"] .share-platform-picker', page)
                 self.assertIn('.share-panel[data-mode="quick"] .share-quick-actions{display:flex}', page)
                 self.assertIn("navigator.share", page)
+
+    def test_branding_assets_and_locale_share_cards_are_published(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            output = Path(temporary_directory) / "site"
+            build_site.build(output)
+            chinese = (output / "index.html").read_text(encoding="utf-8")
+            english = (output / "en" / "index.html").read_text(encoding="utf-8")
+            wechat = (output / "share" / "zh" / "wechat" / "index.html").read_text(encoding="utf-8")
+            linkedin = (output / "share" / "en" / "linkedin" / "index.html").read_text(encoding="utf-8")
+            assets = {
+                name: (output / name).read_bytes()
+                for name in (
+                    "favicon.svg",
+                    "brand-mark.svg",
+                    "brand-logo.svg",
+                    "apple-touch-icon.png",
+                    "share-card-zh.png",
+                    "share-card-en.png",
+                )
+            }
+
+        for asset in ("favicon.svg", "brand-mark.svg", "brand-logo.svg", "apple-touch-icon.png"):
+            with self.subTest(asset=asset):
+                self.assertTrue(assets[asset])
+
+        self.assertIn('href="/favicon.svg"', chinese)
+        self.assertIn('href="/apple-touch-icon.png"', chinese)
+        self.assertIn('src="/brand-mark.svg"', chinese)
+        self.assertIn('src="/brand-logo.svg"', wechat)
+        self.assertIn('content="https://www.fdebok.com/share-card-zh.png"', chinese)
+        self.assertIn('content="https://www.fdebok.com/share-card-en.png"', english)
+        self.assertIn('og:image" content="https://www.fdebok.com/share-card-zh.png"', wechat)
+        self.assertIn('og:image" content="https://www.fdebok.com/share-card-en.png"', linkedin)
+        for filename, dimensions in (
+            ("share-card-zh.png", (1200, 630)),
+            ("share-card-en.png", (1200, 630)),
+            ("apple-touch-icon.png", (180, 180)),
+        ):
+            with self.subTest(filename=filename):
+                image_header = assets[filename][:24]
+                self.assertEqual(image_header[:8], b"\x89PNG\r\n\x1a\n")
+                self.assertEqual(struct.unpack(">II", image_header[16:24]), dimensions)
 
     def test_build_keeps_english_tables_and_reading_paths_aligned(self):
         source = (ROOT / "index.html").read_text(encoding="utf-8")

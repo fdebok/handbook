@@ -7,6 +7,8 @@
 <meta name="description" content="FDEBOK 前线部署工程师（FDE）知识体系手册：22 章、十大知识域、六阶段交付生命周期、L1–L5 能力框架、20 类企业 AI 落地痛点与 9 份现场模板。"/>
 <meta name="robots" content="index,follow,max-image-preview:large"/>
 <meta name="theme-color" content="#142238"/>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180"/>
 <script>
 (function(){
   var root=document.documentElement;
@@ -35,8 +37,8 @@
 <meta property="og:locale" content="zh_CN"/>
 <meta property="og:title" content="FDEBOK｜前线部署工程师知识体系手册"/>
 <meta property="og:description" content="22 章系统梳理 FDE 能力、企业 AI 交付、十大知识域、六阶段生命周期、常见痛点与一线模板。"/>
-<meta property="og:image" content="https://www.fdebok.com/og-image.png"/>
-<meta property="og:image:secure_url" content="https://www.fdebok.com/og-image.png"/>
+<meta property="og:image" content="https://www.fdebok.com/share-card-zh.png"/>
+<meta property="og:image:secure_url" content="https://www.fdebok.com/share-card-zh.png"/>
 <meta property="og:image:type" content="image/png"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
@@ -44,7 +46,7 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="FDEBOK｜前线部署工程师知识体系手册"/>
 <meta name="twitter:description" content="22 章系统梳理 FDE 能力、企业 AI 交付、十大知识域、六阶段生命周期、常见痛点与一线模板。"/>
-<meta name="twitter:image" content="https://www.fdebok.com/og-image.png"/>
+<meta name="twitter:image" content="https://www.fdebok.com/share-card-zh.png"/>
 <meta name="twitter:image:alt" content="FDEBOK 前线部署工程师知识体系手册：知识域、交付阶段、能力框架与现场模板"/>
 <title>FDEBOK｜前线部署工程师知识体系手册 · 企业 AI 交付实践指南</title>
 <script type="application/ld+json">
@@ -232,8 +234,9 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 .cover-layout{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(340px,.8fr);
   gap:clamp(32px,5vw,72px);align-items:center;margin-top:28px}
 .cover-copy,.hero-panel{min-width:0}
-.cover h1{font-family:var(--serif);font-size:clamp(56px,7vw,92px);line-height:1.02;margin:0 0 14px;
+.cover h1{display:flex;align-items:center;gap:14px;font-family:var(--serif);font-size:clamp(56px,7vw,92px);line-height:1.02;margin:0 0 14px;
   font-weight:800;letter-spacing:-.5px}
+.cover-brand-mark{width:clamp(42px,7vw,62px);height:auto;flex:none;border-radius:15px}
 .cover h1 em{font-style:normal;color:var(--gold2)}
 .cover .sub{font-family:var(--serif);font-size:clamp(17px,2.1vw,23px);color:var(--cover-muted);
   margin:0 0 22px;font-weight:400;letter-spacing:.04em;line-height:1.65}
@@ -641,7 +644,8 @@ main article.bookmark-target{background-color:var(--bookmark-target-bg)}
 footer.pg{max-width:1280px;margin:0 auto;padding:40px;border-top:1px solid var(--line);
   color:var(--sub);font-size:13.5px;text-align:center}
 footer.pg b{font-family:var(--serif);color:var(--ink);letter-spacing:.1em}
-footer.pg .rights-short{max-width:850px;margin:18px auto 0;color:var(--sub);font-size:11.5px;line-height:1.6}
+footer.pg .rights-short{display:flex;align-items:center;justify-content:center;gap:8px;max-width:850px;margin:18px auto 0;color:var(--sub);font-size:11.5px;line-height:1.6}
+footer.pg .footer-brand-mark{width:24px;height:24px;flex:none}
 footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
 .theme-picker{margin:14px 0 13px;padding:12px 0 0;border:0;border-top:1px solid var(--line)}
 .theme-picker legend{padding:0 8px 0 0;color:var(--ink2);font-size:12px;font-weight:800}
@@ -825,7 +829,7 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
 <span class="kicker" lang="en">FIELD GUIDE  ·  EDITION 1.0  ·  2026</span>
 <div class="cover-layout">
 <div class="cover-copy">
-<h1>FDE<em>BOK</em></h1>
+<h1><img alt="" class="cover-brand-mark" height="62" src="/brand-mark.svg" width="62"/><span>FDE<em>BOK</em></span></h1>
 <p class="sub">前线部署工程师知识体系手册<br/>Forward Deployed Engineer Body of Knowledge</p>
 <p class="lede">把 AI 从业务问题带到稳定交付。FDEBOK 汇集前线方法、工程实践与现场工具，覆盖场景发现、方案验证、生产上线和持续运营，帮助团队将业务价值转化为可衡量、可复用的成果。</p>
 <div class="hero-actions">
@@ -864,7 +868,7 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
 </div>
 <p class="share-help" id="share-platform-note">微信、抖音目前没有通用的网页转发入口；可以复制配文和链接，再粘贴到对应 App。</p>
 <div class="share-quick-actions" hidden id="share-quick-actions">
-<p class="share-help" id="share-quick-note">系统分享不可用时，可一键复制配文和链接，再粘贴到常用 App；网页无法代替 App 内转发。</p>
+<p class="share-help" id="share-quick-note">选择目标 App 后，通常还需在 App 内选择好友/朋友圈并确认发送；也可一键复制配文和链接。网页无法代替 App 确认发送。</p>
 <label class="sr-only" for="share-quick-copy">分享内容（配文与链接）</label>
 <textarea class="share-quick-copy" id="share-quick-copy" readonly rows="3"></textarea>
 <button class="share-quick-copy-button" id="share-quick-copy-button" type="button">复制配文和链接</button>
@@ -2957,7 +2961,7 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
 <footer class="pg">
 <b>FDEBOK</b> · 前线部署工程师知识体系手册<br/>
   十个知识域 · 六段生命周期 · 五级能力标尺 · 二十个高频痛点 · 九件现场资产
-<p class="rights-short">© 2026 FDEBOK（fdebok.com） · MIT License · <a href="#rights">许可与共建</a></p>
+<p class="rights-short"><img alt="" class="footer-brand-mark" height="24" src="/brand-mark.svg" width="24"/>© 2026 FDEBOK（fdebok.com） · MIT License · <a href="#rights">许可与共建</a></p>
 <div class="footer-activity">
 <span class="visit-counter" id="page-visit-counter" aria-label="全站访问量加载中"><span>全站访问：</span><strong id="page-visit-count">--</strong><span>次</span></span>
 <span class="footer-activity-note">显示全站累计访问次数，由服务端统计。</span>
@@ -3434,12 +3438,15 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
    "分享内容暂不可用，请复制页面链接。":"Share content is unavailable. Copy the page URL instead.",
    "分享配文与链接可分开复制，粘贴更方便。":"Copy the post text and link separately for easier pasting.",
    "分享入口暂不可用，请复制分享链接。":"This share option is unavailable. Copy the share link instead.",
-   "系统分享不可用时，可一键复制配文和链接，再粘贴到常用 App；网页无法代替 App 内转发。":"If device sharing is unavailable, copy the message and link once, then paste them into your preferred app. A web page cannot trigger an app's in-app forwarding menu.",
+   "选择目标 App 后，通常还需在 App 内选择好友/朋友圈并确认发送；也可一键复制配文和链接。网页无法代替 App 确认发送。":"After choosing an app, you may still need to select a recipient or feed and confirm in that app. Or copy the message and link together. A web page cannot confirm sending for another app.",
    "分享内容（配文与链接）":"Share message and link",
    "复制配文和链接":"Copy message and link",
    "分享内容已复制。打开微信或抖音即可粘贴。":"Message and link copied. Open your preferred app to paste them.",
    "复制失败，请手动选择分享内容复制。":"Copy failed. Select the share message and link and copy them manually.",
-   "设备分享暂不可用，请复制内容后在应用中粘贴。":"Device sharing is unavailable. Copy the content and paste it into your app."
+   "设备分享暂不可用，请复制内容后在应用中粘贴。":"Device sharing is unavailable. Copy the content and paste it into your app.",
+   "正在打开系统分享。选择目标 App 后，请在 App 内继续选择好友或朋友圈并确认发送。":"Opening device sharing. After choosing an app, select a recipient or feed and confirm the share in that app.",
+   "已返回网页。分享结果由目标 App 确认；如未成功，可复制内容后重试。":"Returned to the page. Only the target app can confirm whether it sent the share. If it did not, copy the content and try again.",
+   "分享已取消。你可以复制配文和链接，稍后在任意 App 粘贴。":"Sharing was cancelled. Copy the message and link, then paste them into any app when ready."
  });
  // Move translations onto the next source node in the affected runs.
  function realignTranslationRun(startKey,endKey){
@@ -4242,7 +4249,7 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
    var openGraphSecureImage=document.querySelector('meta[property="og:image:secure_url"]');
    var twitterImage=document.querySelector('meta[name="twitter:image"]');
    var canonicalUrl=isEnglish?'https://www.fdebok.com/en/':'https://www.fdebok.com/';
-   var shareImageUrl=isEnglish?'https://www.fdebok.com/og-image-en.png':'https://www.fdebok.com/og-image.png';
+   var shareImageUrl=isEnglish?'https://www.fdebok.com/share-card-en.png':'https://www.fdebok.com/share-card-zh.png';
    if(shareTitle)shareTitle.content=pageTitle;
    if(shareDescription)shareDescription.content=pageDescription;
    if(twitterTitle)twitterTitle.content=pageTitle;
@@ -4320,7 +4327,9 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
       !previewKicker||!platformNote||!qrNote||!intro||!contentNode)return;
    var isEnglish=document.documentElement.lang==='en';
    var locale=isEnglish?'en':'zh';
-   var quickShareUrl=isEnglish?'https://www.fdebok.com/en/':'https://www.fdebok.com/';
+   var quickShareUrl=isEnglish
+     ?'https://www.fdebok.com/en/?share=brand-v2'
+     :'https://www.fdebok.com/?share=brand-v2';
    qr.src=isEnglish?'/share-qr-en.png':'/share-qr-zh.png';
    qr.alt=isEnglish?'QR code for the FDEBOK English handbook':'扫码访问 FDEBOK 中文手册';
    nativeButton.hidden=typeof navigator.share!=='function';
@@ -4462,13 +4471,18 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
        return;
      }
      if(!selectedContent)return;
+     if(quick)openQuickFallback(isEnglish
+       ?'Opening device sharing. After choosing an app, select a recipient or feed and confirm the share in that app.'
+       :'正在打开系统分享。选择目标 App 后，请在 App 内继续选择好友或朋友圈并确认发送。');
      var sharePromise;
      try{
-       sharePromise=navigator.share({
-         title:'FDEBOK · '+selectedContent.title,
-         text:copyText,
-         url:quick?quickShareUrl:shareUrl
-       });
+       sharePromise=quick
+         ?navigator.share({url:quickShareUrl})
+         :navigator.share({
+           title:'FDEBOK · '+selectedContent.title,
+           text:copyText,
+           url:shareUrl
+         });
      }catch(error){
        console.error('System sharing failed',error);
        if(quick)openQuickFallback(isEnglish
@@ -4477,8 +4491,19 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
        else setStatus(isEnglish?'Could not open the share sheet. Copy the link or scan the QR code.':'无法打开系统分享，请复制链接或扫码。');
        return;
      }
-     Promise.resolve(sharePromise).then(function(){setStatus('');}).catch(function(error){
-       if(error&&error.name==='AbortError')return;
+     Promise.resolve(sharePromise).then(function(){
+       setStatus(quick
+         ?(isEnglish
+           ?'Returned to the page. Only the target app can confirm whether it sent the share. If it did not, copy the content and try again.'
+           :'已返回网页。分享结果由目标 App 确认；如未成功，可复制内容后重试。')
+         :'');
+     }).catch(function(error){
+       if(error&&error.name==='AbortError'){
+         if(quick)setStatus(isEnglish
+           ?'Sharing was cancelled. Copy the message and link, then paste them into any app when ready.'
+           :'分享已取消。你可以复制配文和链接，稍后在任意 App 粘贴。');
+         return;
+       }
        console.error('System sharing failed',error);
        if(quick)openQuickFallback(isEnglish
          ?'Could not open device sharing. Copy the content and paste it into your app.'

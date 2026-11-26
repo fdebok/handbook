@@ -72,13 +72,15 @@ The Chinese source page is `/`; the English edition is published as a separate, 
 
 中文源页面位于 `/`，英文版在发布时预渲染为独立静态页面 `/en/`。另生成微信、抖音、Facebook、LinkedIn、X 五个静态分享介绍页，分别位于 `/share/zh/wechat/`、`/share/zh/douyin/`、`/share/en/facebook/`、`/share/en/linkedin/`、`/share/en/x/`。每页提供平台适配的 Open Graph/Twitter 展示文案及通往完整手册的入口；微型页设置 `noindex` 并 canonical 回对应语言的完整手册，避免薄内容重复收录。微型页不含 JavaScript，并配置限制脚本、嵌入对象等来源的内容安全策略。Pages 工作流运行 `python3 scripts/build_site.py --output-dir dist` 生成并部署。不要直接编辑生成页；如需修订英译或分享文案，请更新 `index.html` 中的 `ENG` 英译表或 `share-content-data` JSON。本地构建需要 Python 3 和 Node.js。可运行 `node tests/test_share_ui.js`、`node tests/test_color_theme.js` 与 `python3 -m unittest discover -s tests -p 'test_*.py'` 执行对应测试。
 
-On mobile, one tap on Share opens the device's native share sheet when Web Share is supported. If sharing is unavailable or the browser is an embedded app webview, a compact fallback lets readers copy the suggested text and canonical handbook URL together. Desktop keeps the platform-specific preview, separate copy actions, QR codes, and public share composers for Facebook, LinkedIn, and X. WeChat and Douyin do not expose a universal web API for invoking their in-app forwarding menus, so the site does not promise a fake deep link. No platform SDK or share-specific tracking is added. The existing aggregate site-visit counter remains unchanged.
+The brand uses an original FDEBOK route-mark logo, SVG favicon, Apple touch icon, and separate Chinese/English 1200×630 social preview cards. The cards are rendered from `scripts/render_brand_artwork.py` (requires system Cairo and Pango libraries); the SVG files are the scalable logo masters.
 
-Readers can switch among the original Classic Blue & Gold palette, Pine & Copper, and Graphite & Silver from the reading/bookmark panel. The selection is stored in this browser's local storage only; it is not uploaded or synchronized.
+On mobile, one tap on Share opens the native share sheet with the language-specific handbook URL and a non-tracking `share=brand-v2` cache-busting query; the page's canonical URL remains query-free. Recipient apps can then build a rich preview from the Open Graph title, description, and social card. The compact copy fallback remains visible behind the native sheet and can copy a suggested message plus link if needed. After returning, the page explains that only the destination app can confirm sending. WeChat, Douyin, and other apps may require another in-app choice (such as a recipient or feed) and a final confirmation; a web page cannot automate or observe those private app steps. Desktop keeps platform previews, separate copy actions, QR codes, and public share composers where available. No platform SDK or share-specific tracking is added; the aggregate site-visit counter is unchanged.
 
-手机端点击“分享”一次即可调起浏览器/系统原生分享面板（设备支持 Web Share 时）；若浏览器不支持或处于 App 内嵌网页，则显示精简兜底面板，可一键复制推荐配文与手册正式链接。电脑端保留平台专属预览、配文/链接分别复制、二维码，以及 Facebook、LinkedIn 和 X 的公开分享入口。微信、抖音未提供通用网页接口来直接调用其 App 内转发菜单，因此不伪造“直达分享”。不接入平台 SDK、不新增分享追踪，现有全站累计访问统计保持不变。
+品牌采用原创 FDEBOK 路径标识，并应用于 SVG 网站图标、苹果主屏图标、首页与分享页；中文/英文分享卡分别为 1200×630 社交预览图。可用 `python3 scripts/render_brand_artwork.py` 重绘 PNG（需系统安装 Cairo 与 Pango）；SVG 为可缩放标识源文件。
 
-读者可在阅读/书签面板中选择原有“典雅蓝金”、新增“松柏铜金”或“墨石紫银”配色。选择仅保存在当前浏览器本地，不会上传或跨设备同步。
+手机端点击“分享”一次即调起系统原生分享面板（设备支持 Web Share 时），只传递语言对应的手册 URL，并附不参与统计的 `share=brand-v2` 参数，帮助社交 App 刷新缓存的分享卡；规范 canonical URL 不带该参数。微信等目标 App 根据 Open Graph 元数据生成卡片预览；精简复制面板留在网页下方，若系统分享不可用或未完成，可复制推荐配文与链接。返回网页后会明确提示：只有目标 App 能确认是否真正发送。微信、抖音等 App 可能还要求在其内部选择联系人/朋友圈并最终确认；网页无法自动代替或监测这些私有流程。电脑端保留平台预览、分别复制、二维码及可用的公开分享入口。不接入平台 SDK、不新增分享追踪，全站访问计数保持不变。
+
+Readers can switch among the original Classic Blue & Gold, Pine & Copper, and Graphite & Silver themes from the reading/bookmark panel. The selection is stored in this browser's local storage only; it is not uploaded or synchronized.
 
 ---
 
