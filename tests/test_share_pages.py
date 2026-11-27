@@ -98,9 +98,11 @@ class SharePageTests(unittest.TestCase):
             self.assertEqual(key_file.read_text(encoding="utf-8").strip(), build_site.INDEXNOW_KEY)
 
         workflow = (ROOT / ".github" / "workflows" / "static.yml").read_text(encoding="utf-8")
+        artifact_wait_step = workflow.index("- name: Allow Pages artifact availability to propagate")
         deploy_step = workflow.index("- name: Deploy to GitHub Pages")
         verify_step = workflow.index("- name: Verify published discovery endpoints")
         notify_step = workflow.index("- name: Notify IndexNow")
+        self.assertLess(artifact_wait_step, deploy_step)
         self.assertLess(deploy_step, verify_step)
         self.assertLess(verify_step, notify_step)
         self.assertIn("--retry 5 --retry-all-errors", workflow)
