@@ -1,0 +1,31 @@
+{
+  "model": "Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice",
+  "revision": "85e237c12c027371202489a0ec509ded67b5e4b5",
+  "license": "Apache-2.0",
+  "voices": {
+    "zh-CN": {
+      "female": {
+        "nickname": "知微",
+        "speaker": "Vivian",
+        "instruct": "用清晰、自然、标准的普通话讲解。声音柔和、温婉、亲切，语气专业而轻松，节奏从容，吐字清晰；不要甜腻、夸张表演或像新闻播报。品牌名 FDEBOK 读作“eff-dee-bok”，F-D-E 连读后接 bok，不要逐个读出六个字母。"
+      },
+      "male": {
+        "nickname": "行远",
+        "speaker": "Uncle_Fu",
+        "instruct": "用清晰、自然、标准的普通话讲解。语气专业、轻松、沉稳，节奏从容，不要夸张表演或像新闻播报。品牌名 FDEBOK 读作“eff-dee-bok”，F-D-E 连读后接 bok，不要逐个读出六个字母。"
+      }
+    },
+    "en": {
+      "female": {
+        "nickname": "Mira",
+        "speaker": "Serena",
+        "instruct": "Speak in clear, natural English with a gentle, graceful, warm, and approachable voice. Keep the delivery professional and relaxed, with an even conversational pace and clear articulation. Avoid an overly sweet or theatrical tone and avoid sounding like a newsreader. Pronounce FDEBOK as “eff-dee-bok,” linking F-D-E as “eff-dee” and then saying “bok”; do not spell out all six letters."
+      },
+      "male": {
+        "nickname": "Miles",
+        "speaker": "Aiden",
+        "instruct": "Speak in clear, natural English with a professional, relaxed, warm delivery. Use an even conversational pace; avoid theatrical emphasis or a newsreader style. Pronounce FDEBOK as “eff-dee-bok,” linking F-D-E as “eff-dee” and then saying “bok”; do not spell out all six letters."
+      }
+    }
+  }
+}

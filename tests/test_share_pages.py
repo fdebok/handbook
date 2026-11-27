@@ -17,8 +17,48 @@ import build_site
 class SharePageTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        source = (ROOT / "index.html").read_text(encoding="utf-8")
-        cls.content = build_site.load_share_content(source)
+        cls.content = build_site.load_share_content(ROOT / build_site.SHARE_CONTENT_PATH)
+
+    def test_data_sources_are_injected_into_both_built_handbooks(self):
+        translation_data = build_site.load_translations(
+            ROOT / build_site.TRANSLATIONS_PATH
+        )
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            output = Path(temporary_directory) / "site"
+            build_site.build(output)
+            pages = (
+                (output / "index.html").read_text(encoding="utf-8"),
+                (output / "en" / "index.html").read_text(encoding="utf-8"),
+            )
+
+        for page in pages:
+            with self.subTest(page=page[:40]):
+                match = re.search(
+                    r'<script id="share-content-data" type="application/json">'
+                    r'([\s\S]*?)</script>',
+                    page,
+                )
+                self.assertIsNotNone(match)
+                self.assertEqual(json.loads(match.group(1)), self.content)
+                translation_match = re.search(
+                    r'<script id="translation-data" type="application/json">'
+                    r'([\s\S]*?)</script>',
+                    page,
+                )
+                self.assertIsNotNone(translation_match)
+                self.assertEqual(json.loads(translation_match.group(1)), translation_data)
+
+    def test_share_content_is_escaped_when_embedded(self):
+        source = (
+            ROOT / "src" / "site" / "pages" / "zh" / "index.html"
+        ).read_text(encoding="utf-8")
+        unsafe_content = json.loads(json.dumps(self.content))
+        unsafe_content["zh"]["wechat"]["caption"] = "</script><script>alert(1)</script>"
+
+        page = build_site.inject_share_content(source, unsafe_content)
+
+        self.assertIn(r"\u003c/script>", page)
+        self.assertNotIn("</script><script>alert(1)", page)
 
     def test_platform_pages_have_distinct_previews_and_canonical_handbook_urls(self):
         for locale, platforms in build_site.SHARE_PLATFORMS.items():
@@ -64,6 +104,12 @@ class SharePageTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary_directory:
             output = Path(temporary_directory) / "site"
             build_site.build(output)
+            for output_name, source_path in build_site.STATIC_ASSETS.items():
+                with self.subTest(asset=output_name):
+                    self.assertEqual(
+                        (output / output_name).read_bytes(),
+                        (ROOT / source_path).read_bytes(),
+                    )
             for locale, platforms in build_site.SHARE_PLATFORMS.items():
                 for platform in platforms:
                     route = output / "share" / locale / platform / "index.html"
@@ -114,7 +160,7 @@ class SharePageTests(unittest.TestCase):
         self.assertIn('"urlList":["https://www.fdebok.com/","https://www.fdebok.com/en/"]', workflow)
 
     def test_robots_allows_search_and_ai_crawlers(self):
-        robots = (ROOT / "robots.txt").read_text(encoding="utf-8")
+        robots = (ROOT / "src" / "public" / "robots.txt").read_text(encoding="utf-8")
         for user_agent in (
             "Googlebot",
             "Googlebot-Image",
@@ -210,6 +256,8 @@ class SharePageTests(unittest.TestCase):
         for locale, page in pages.items():
             expected = expectations[locale]
             with self.subTest(locale=locale):
+                self.assertIn('<link rel="stylesheet" href="/site.css?v=1"/>', page)
+                self.assertIn('<script src="/site.js?v=1"></script>', page)
                 self.assertIn(f'<html lang="{expected["language"]}"', page)
                 self.assertIn(f"<title>{expected['title']}</title>", page)
                 self.assertIn(f'<link rel="canonical" href="{expected["url"]}"/>', page)
@@ -260,7 +308,7 @@ class SharePageTests(unittest.TestCase):
 
     def test_discovery_summaries_cover_synonyms_and_distinguish_related_roles(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        llms = (ROOT / "llms.txt").read_text(encoding="utf-8")
+        llms = (ROOT / "src" / "public" / "llms.txt").read_text(encoding="utf-8")
 
         for name, document in (("README", readme), ("llms.txt", llms)):
             with self.subTest(document=name):
@@ -273,7 +321,9 @@ class SharePageTests(unittest.TestCase):
         self.assertIn("并非在所有组织中都与 FDE 同义", llms)
 
     def test_feedback_and_repository_links_point_to_the_canonical_project(self):
-        source = (ROOT / "index.html").read_text(encoding="utf-8")
+        source = (
+            ROOT / "src" / "site" / "pages" / "zh" / "index.html"
+        ).read_text(encoding="utf-8")
         self.assertNotIn("github.com/fdebok/fdebok", source)
         self.assertIn("https://github.com/fdebok/handbook/issues/new?template=content-feedback.yml", source)
         self.assertIn("https://github.com/fdebok/handbook/issues/new?template=assessment-feedback.yml", source)
@@ -297,6 +347,8 @@ class SharePageTests(unittest.TestCase):
             build_site.build(output)
             chinese = (output / "index.html").read_text(encoding="utf-8")
             english = (output / "en" / "index.html").read_text(encoding="utf-8")
+            stylesheet = (output / "site.css").read_text(encoding="utf-8")
+            page_script = (output / "site.js").read_text(encoding="utf-8")
 
         for page, button_label, copy_label in (
             (chinese, "复制配文和链接", "分享内容（配文与链接）"),
@@ -306,9 +358,12 @@ class SharePageTests(unittest.TestCase):
                 self.assertIn('id="share-quick-copy-button"', page)
                 self.assertIn(button_label, page)
                 self.assertIn(copy_label, page)
-                self.assertIn('.share-panel[data-mode="quick"] .share-platform-picker', page)
-                self.assertIn('.share-panel[data-mode="quick"] .share-quick-actions{display:flex}', page)
-                self.assertIn("navigator.share", page)
+                self.assertIn('.share-panel[data-mode="quick"] .share-platform-picker', stylesheet)
+                self.assertIn(
+                    '.share-panel[data-mode="quick"] .share-quick-actions{display:flex}',
+                    stylesheet,
+                )
+                self.assertIn("navigator.share", page_script)
 
     def test_brand_slogan_is_metadata_only_and_logo_scales_with_wordmark(self):
         with tempfile.TemporaryDirectory() as temporary_directory:
@@ -316,14 +371,15 @@ class SharePageTests(unittest.TestCase):
             build_site.build(output)
             chinese = (output / "index.html").read_text(encoding="utf-8")
             english = (output / "en" / "index.html").read_text(encoding="utf-8")
+            stylesheet = (output / "site.css").read_text(encoding="utf-8")
 
         for locale, page in (("zh", chinese), ("en", english)):
             with self.subTest(locale=locale):
                 self.assertNotIn('class="brand-meaning"', page)
                 self.assertIn('<h1><img alt="" class="cover-brand-mark"', page)
-                self.assertIn('gap:.16em', page)
-                self.assertIn('.cover-brand-mark{width:.96em;height:.96em', page)
-                self.assertIn('font-size:clamp(46px,14vw,68px)', page)
+                self.assertIn('gap:.16em', stylesheet)
+                self.assertIn('.cover-brand-mark{width:.96em;height:.96em', stylesheet)
+                self.assertIn('font-size:clamp(46px,14vw,68px)', stylesheet)
 
     def test_branding_assets_and_locale_share_cards_are_published(self):
         with tempfile.TemporaryDirectory() as temporary_directory:
@@ -430,8 +486,9 @@ class SharePageTests(unittest.TestCase):
         self.assertIn("Do FDEBOK A/P/M badges count as formal FDE certifications?", llms)
 
     def test_build_keeps_english_tables_and_reading_paths_aligned(self):
-        source = (ROOT / "index.html").read_text(encoding="utf-8")
-        translations, _ = build_site.load_translations(source)
+        translations = build_site.load_translations(
+            ROOT / build_site.TRANSLATIONS_PATH
+        )["eng"]
         with tempfile.TemporaryDirectory() as temporary_directory:
             output = Path(temporary_directory) / "site"
             build_site.build(output)
@@ -469,13 +526,11 @@ class SharePageTests(unittest.TestCase):
 
     def test_share_content_defines_only_supported_platforms(self):
         invalid = json.dumps({"zh": {}, "en": {}})
-        source = (
-            '<script id="share-content-data" type="application/json">'
-            + invalid
-            + "</script>"
-        )
-        with self.assertRaisesRegex(RuntimeError, "Unexpected platform list"):
-            build_site.load_share_content(source)
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            content_path = Path(temporary_directory) / "share-content.json"
+            content_path.write_text(invalid, encoding="utf-8")
+            with self.assertRaisesRegex(RuntimeError, "Unexpected platform list"):
+                build_site.load_share_content(content_path)
 
     def test_x_post_copy_leaves_room_for_the_link(self):
         x_caption = self.content["en"]["x"]["caption"]

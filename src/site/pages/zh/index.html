@@ -1,0 +1,2340 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN" data-theme="classic">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="FDEBOK：免费中英双语前线部署工程师知识体系指南与实践手册。介绍 Forward Deployed Engineer（FDE）是什么、岗位职责、能力模型、职业发展，以及企业 AI 项目交付、评测运维和现场模板。"/>
+<meta name="robots" content="index,follow,max-image-preview:large"/>
+<meta name="theme-color" content="#142238"/>
+<link rel="icon" href="/favicon.svg?v=6" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=6" sizes="180x180"/>
+<script>
+(function(){
+  var root=document.documentElement;
+  try{
+    var saved=localStorage.getItem('fdebok-color-theme-v1');
+    if(saved==='classic'||saved==='forest'||saved==='plum')root.dataset.theme=saved;
+  }catch(error){
+    root.dataset.themeStorage='unavailable';
+    console.warn('Could not restore the saved color theme',error);
+  }
+})();
+</script>
+<meta name="author" content="FDEBOK (fdebok.com)"/>
+<meta name="copyright" content="Copyright © 2026 FDEBOK (fdebok.com)"/>
+<meta name="rights" content="Licensed under the MIT License. Use, modification, redistribution, and commercial sale are permitted; copies or substantial portions must include the copyright and permission notice. See https://www.fdebok.com/LICENSE."/>
+<meta name="license" content="https://www.fdebok.com/LICENSE"/>
+<meta name="spdx-license-identifier" content="MIT"/>
+<link rel="canonical" href="https://www.fdebok.com/"/>
+<link rel="alternate" hreflang="zh-CN" href="https://www.fdebok.com/"/>
+<link rel="alternate" hreflang="en" href="https://www.fdebok.com/en/"/>
+<link rel="alternate" hreflang="x-default" href="https://www.fdebok.com/en/"/>
+<link rel="license" href="https://www.fdebok.com/LICENSE"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="FDEBOK"/>
+<meta property="og:url" content="https://www.fdebok.com/"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta property="og:locale:alternate" content="en_US"/>
+<meta property="og:title" content="FDEBOK｜前线部署工程师知识体系指南（FDE 指南）"/>
+<meta property="og:description" content="FDE 是什么？FDEBOK 是面向前线部署工程师的中英双语知识体系指南与实践手册，覆盖岗位职责、能力模型、职业发展、企业 AI 交付、评测运维和现场模板。"/>
+<meta property="og:image" content="https://www.fdebok.com/share-card-zh-v6.png"/>
+<meta property="og:image:secure_url" content="https://www.fdebok.com/share-card-zh-v6.png"/>
+<meta property="og:image:type" content="image/png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:alt" content="FDEBOK 前线部署工程师知识体系指南：知识域、交付阶段、能力框架与现场模板"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="FDEBOK｜前线部署工程师知识体系指南（FDE 指南）"/>
+<meta name="twitter:description" content="FDE 是什么？FDEBOK 是面向前线部署工程师的中英双语知识体系指南与实践手册，覆盖岗位职责、能力模型、职业发展、企业 AI 交付、评测运维和现场模板。"/>
+<meta name="twitter:image" content="https://www.fdebok.com/share-card-zh-v6.png"/>
+<meta name="twitter:image:alt" content="FDEBOK 前线部署工程师知识体系指南：知识域、交付阶段、能力框架与现场模板"/>
+<title>FDEBOK｜前线部署工程师知识体系指南（FDE 指南）</title>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"Organization",
+      "@id":"https://www.fdebok.com/#organization",
+      "name":"FDEBOK",
+      "slogan":"三点架成桥，洞察连工程，AI 稳落地，价值步步通",
+      "description":"FDEBOK 是开放的中英双语前线部署工程师知识体系项目；本网站与 GitHub 仓库是其官方发布与协作渠道。",
+      "url":"https://www.fdebok.com/",
+      "sameAs":"https://github.com/fdebok/handbook",
+      "logo":{
+        "@type":"ImageObject",
+        "url":"https://www.fdebok.com/apple-touch-icon.png",
+        "width":180,
+        "height":180
+      }
+    },
+    {
+      "@type":"WebSite",
+      "@id":"https://www.fdebok.com/#website",
+      "url":"https://www.fdebok.com/",
+      "name":"FDEBOK",
+      "inLanguage":["zh-CN","en"],
+      "publisher":{"@id":"https://www.fdebok.com/#organization"}
+    },
+    {
+      "@type":"WebPage",
+      "@id":"https://www.fdebok.com/#webpage",
+      "url":"https://www.fdebok.com/",
+      "name":"FDEBOK｜前线部署工程师知识体系指南（FDE 指南）",
+      "description":"FDEBOK：免费中英双语前线部署工程师知识体系指南与实践手册。介绍 Forward Deployed Engineer（FDE）是什么、岗位职责、能力模型、职业发展，以及企业 AI 项目交付、评测运维和现场模板。",
+      "inLanguage":"zh-CN",
+      "isPartOf":{"@id":"https://www.fdebok.com/#website"},
+      "mainEntity":{"@id":"https://www.fdebok.com/#handbook"}
+    },
+    {
+      "@type":["CreativeWork","LearningResource"],
+      "@id":"https://www.fdebok.com/#handbook",
+      "name":"FDEBOK｜前线部署工程师知识体系指南",
+      "alternateName":[
+        "前线部署工程师知识体系手册",
+        "FDE 手册",
+        "Forward Deployed Engineer Body of Knowledge"
+      ],
+      "url":"https://www.fdebok.com/",
+      "mainEntityOfPage":{"@id":"https://www.fdebok.com/#webpage"},
+      "description":"面向前线部署工程师与企业 AI 交付团队的中英双语知识体系指南与实践手册，覆盖角色职责、能力发展、项目交付、评测运维及现场工具。",
+      "inLanguage":["zh-CN","en"],
+      "genre":"Professional handbook",
+      "learningResourceType":"专业实践指南与自学资源",
+      "educationalLevel":"从入门到进阶",
+      "teaches":[
+        "FDE 角色与职责边界",
+        "FDE 能力模型与职业发展",
+        "企业 AI 项目交付与运行",
+        "AI 系统评测、安全与治理"
+      ],
+      "keywords":[
+        "FDEBOK",
+        "FDE 指南",
+        "FDE 手册",
+        "FDE 是什么",
+        "FDE 岗位职责",
+        "FDE 工作内容",
+        "FDE 能力模型",
+        "FDE 技能要求",
+        "FDE 职业发展",
+        "FDE 学习指南",
+        "如何成为 FDE",
+        "前线部署工程师",
+        "前线部署工程师知识体系指南",
+        "前线部署工程师知识体系手册",
+        "Forward Deployed Engineer",
+        "Forward Deployed Engineer guide",
+        "Forward Deployed Engineer handbook",
+        "企业 AI 项目交付",
+        "企业 AI 落地",
+        "AI 项目交付指南",
+        "AI 交付实践指南",
+        "AI 工程实践",
+        "AI 评测与运维",
+        "FDE 与前端工程师的区别",
+        "enterprise AI delivery",
+        "enterprise AI implementation guide",
+        "FDE career development",
+        "FDE learning path",
+        "FDEBOK A/P/M 徽章"
+      ],
+      "audience":[
+        {"@type":"Audience","audienceType":"FDEs and AI engineers"},
+        {"@type":"Audience","audienceType":"Enterprise AI delivery and technology leaders"},
+        {"@type":"Audience","audienceType":"Product, solution, and consulting teams"}
+      ],
+      "author":{"@id":"https://www.fdebok.com/#organization"},
+      "publisher":{"@id":"https://www.fdebok.com/#organization"},
+      "citation":[
+        {
+          "@type":"CreativeWork",
+          "name":"NIST AI Risk Management Framework 1.0",
+          "url":"https://www.nist.gov/itl/ai-risk-management-framework"
+        },
+        {
+          "@type":"CreativeWork",
+          "name":"NIST AI 600-1: Generative Artificial Intelligence Profile",
+          "url":"https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+        },
+        {
+          "@type":"CreativeWork",
+          "name":"OWASP Top 10 for LLM Applications",
+          "url":"https://genai.owasp.org/llm-top-10/"
+        },
+        {
+          "@type":"CreativeWork",
+          "name":"W3C Web Content Accessibility Guidelines 2.2",
+          "url":"https://www.w3.org/TR/WCAG22/"
+        }
+      ],
+      "copyrightHolder":{"@id":"https://www.fdebok.com/#organization"},
+      "copyrightYear":2026,
+      "copyrightNotice":"© 2026 FDEBOK (fdebok.com). Licensed under the MIT License; copies or substantial portions must include the copyright and permission notice.",
+      "license":"https://www.fdebok.com/LICENSE",
+      "isAccessibleForFree":true,
+      "encodingFormat":"text/html"
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="/site.css?v=1"/>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到正文 / Skip to content</a>
+<div aria-hidden="true" id="bar"></div>
+<header class="cover">
+<div aria-label="Language / 语言" class="langbar" role="group">
+<button aria-label="中文 — 切换到中文" aria-pressed="true" class="on" id="btnzh" type="button">中文</button>
+<button aria-label="EN — Switch to English" aria-pressed="false" id="btnen" type="button">EN</button>
+</div>
+<div class="cover-in">
+<span class="kicker" lang="en">FIELD GUIDE  ·  EDITION 1.0  ·  2026</span>
+<div class="cover-layout">
+<div class="cover-copy">
+<h1><img alt="" class="cover-brand-mark" height="62" src="/brand-mark.svg?v=6" width="62"/><span>FDE<em>BOK</em></span></h1>
+<p class="sub">前线部署工程师知识体系指南<br/>Forward Deployed Engineer Body of Knowledge</p>
+<p class="lede">把 AI 从业务问题带到稳定交付。FDEBOK 汇集前线方法、工程实践与现场工具，覆盖场景发现、方案验证、生产上线和持续运营，帮助团队将业务价值转化为可衡量、可复用的成果。</p>
+<div class="hero-actions">
+<a href="#c1">开始阅读 <span aria-hidden="true">→</span></a>
+<a href="#c20">探索现场工具箱</a>
+<button aria-controls="share-panel" aria-expanded="false" class="share-trigger" id="share-trigger" type="button">分享</button>
+</div>
+<section aria-labelledby="share-heading" class="share-panel" hidden id="share-panel">
+<div class="share-panel-head">
+<h2 id="share-heading">把这本手册推荐给同行</h2>
+<button aria-label="关闭分享面板" class="share-panel-close" id="share-close" type="button">×</button>
+</div>
+<p class="share-help" id="share-intro">选择平台，看看怎样介绍这本手册。可以复制配文和链接，再粘贴到聊天或动态里。</p>
+<div aria-label="选择分享平台" class="share-platform-picker" id="share-platform-picker" role="group">
+<button aria-pressed="true" data-share-platform="wechat" type="button">微信</button>
+<button aria-pressed="false" data-share-platform="douyin" type="button">抖音</button>
+<button aria-pressed="false" data-share-platform="facebook" type="button">Facebook</button>
+<button aria-pressed="false" data-share-platform="linkedin" type="button">LinkedIn</button>
+<button aria-pressed="false" data-share-platform="x" type="button">X</button>
+</div>
+<article class="share-preview-card" id="share-preview-card">
+<p class="share-preview-kicker" id="share-preview-kicker">FDEBOK · 微信转发</p>
+<div aria-live="polite" id="share-preview-live">
+<h3 id="share-preview-title">企业 AI 落地，不止于模型</h3>
+<p id="share-preview-caption">如果你也在做企业 AI 落地，可以看看这份 FDEBOK 手册。</p>
+</div>
+<ul aria-label="手册内容概览" class="share-preview-facts">
+<li>22 章</li><li>十大知识域</li><li>六阶段交付</li><li>9 份现场模板</li>
+</ul>
+</article>
+<div class="share-panel-actions">
+<button id="share-native" type="button">系统分享</button>
+<button id="share-copy-text" type="button">复制配文</button>
+<button id="share-copy-link" type="button">复制链接</button>
+<a class="share-open-platform" hidden id="share-open-platform" rel="noopener noreferrer" target="_blank">打开分享入口</a>
+</div>
+<p class="share-help" id="share-platform-note">微信、抖音目前没有通用的网页转发入口；可以复制配文和链接，再粘贴到对应 App。</p>
+<div class="share-quick-actions" hidden id="share-quick-actions">
+<p class="share-help" id="share-quick-note">选择目标 App 后，通常还需在 App 内选择好友/朋友圈并确认发送；也可一键复制配文和链接。网页无法代替 App 确认发送。</p>
+<label class="sr-only" for="share-quick-copy">分享内容（配文与链接）</label>
+<textarea class="share-quick-copy" id="share-quick-copy" readonly rows="3"></textarea>
+<button class="share-quick-copy-button" id="share-quick-copy-button" type="button">复制配文和链接</button>
+</div>
+<label class="sr-only" for="share-url">当前平台的分享链接</label>
+<input class="share-url" id="share-url" readonly type="url" value="https://www.fdebok.com/"/>
+<div class="share-qr-row">
+<img alt="扫码访问 FDEBOK 中文手册" class="share-qr" decoding="async" height="104" id="share-qr-image" loading="lazy" src="/share-qr-zh.png" width="104"/>
+<p class="share-qr-note" id="share-qr-note">电脑端可扫码，在手机上继续阅读中文手册。复制的链接会打开当前平台的介绍页。</p>
+</div>
+<p aria-live="polite" class="share-status" id="share-status" role="status"></p>
+</section>
+<script id="share-content-data" type="application/json">{}</script>
+</div>
+<aside class="hero-panel" aria-labelledby="hero-panel-title">
+<h2 class="hero-panel-title" id="hero-panel-title">体系速览</h2>
+<div class="hero-stats">
+<div class="hero-stat"><b>10</b><span>核心知识域</span></div>
+<div class="hero-stat"><b>6 + 4</b><span>交付阶段 · 决策门</span></div>
+<div class="hero-stat"><b>L1 – L5</b><span>能力成长标尺</span></div>
+<div class="hero-stat"><b>9</b><span>可直接使用的现场模板</span></div>
+</div>
+<div class="hero-audience">
+<strong>适合对象</strong>
+<p>FDE 与 AI 工程师 · 交付团队 · 平台及技术负责人</p>
+</div>
+</aside>
+</div>
+</div>
+</header>
+<div class="wrap">
+<nav aria-label="章节导航" class="toc">
+<h2 class="toc-heading">目录导航</h2>
+<details class="toc-panel" id="toc-panel" open>
+<summary><span>目录与章节搜索</span><span class="sr-only">打开或收起章节目录</span></summary>
+<div id="tocbox"><label class="sr-only" for="tq">输入关键词筛选章节 / Filter chapters by keyword</label>
+<input autocomplete="off" id="tq" placeholder="输入关键词筛选章节…" type="search" aria-controls="toclist"/>
+<div aria-live="polite" class="toc-empty" id="toc-empty">没有匹配的章节</div><div id="toclist"></div></div>
+</details>
+</nav>
+<main id="main" tabindex="-1">
+<!-- ============ PART I ============ -->
+<section class="part-band" data-n="I" id="p1">
+<span class="pnum">Part One</span>
+<h2>认知基础</h2>
+<p>先把概念钉死。一个岗位一旦含义漂移，后面所有方法论都会失焦，因此本部分只做三件事：定义、划界、说明价值来源。</p>
+</section>
+<article id="c1">
+<h3><span class="no">CHAPTER 01 · 定义与判据</span>FDE 是什么，凭什么成立</h3>
+<p class="deck">Forward Deployed Engineer：以客户的业务结果为验收标准，在客户真实约束下把 AI 能力构建成可运行系统的工程角色。</p>
+<h4 id="c1-s1">1.1 术语校准</h4>
+<p>FDE 的全称是 <strong>Forward Deployed Engineer</strong>。中文通行译法有三种——<em>前线部署工程师</em>、<em>前沿部署工程师</em>、<em>前置部署工程师</em>，三者指同一角色，正式文本中应固定一种并在首次出现时给出英文原词。</p>
+<p>必须澄清一个高频误读：<strong>这里的 F 不是 Front-End</strong>。前端工程师的缩写是 FE，FDE 与页面开发没有直接关系。"Forward Deployed"借自军事用语，含义是"前出部署"——不留在后方等待需求被整理清楚，而是推进到最接近问题的一侧，在信息不完整、条件不允许逐级上报的环境里当场判断、当场构建。</p>
+<p>另一个需要区分的对象是"驻场"。驻场描述的是<b>物理位置</b>，FDE 描述的是<b>责任边界与决策权限</b>。一个人可以在客户现场待六个月却仍然只是一个远程接单的开发者；也有人每周只去一天，却在承担 FDE 的全部职能。判据不在考勤，在于下述三条。</p>
+<h4 id="c1-s2">1.2 成立的三条判据</h4>
+<p>判断一个角色是否在做 FDE 的工作，只看三条标准。三条同时成立才是，缺任何一条都只是相邻角色的改名。</p>
+<div class="grid g3">
+<div class="kc">
+<div class="kk">判据一</div>
+<h4>端到端拥有问题</h4>
+<p>不是"接需求—开发—移交"，而是从场景识别一路负责到系统真的被使用。中间任何一环缺失（数据接不进、没人审核、客户不愿用）都算自己的责任。</p>
+</div>
+<div class="kc">
+<div class="kk">判据二</div>
+<h4>在真实约束下构建生产级系统</h4>
+<p>交付环境包含遗留系统、权限审批、内网隔离、数据脏乱、政治阻力与不配合的用户。能在这些约束里做出可维护、可回滚、可审计的东西，而不是能跑的演示。</p>
+</div>
+<div class="kc">
+<div class="kk">判据三</div>
+<h4>把现场经验反哺为能力</h4>
+<p>项目结束时留下的不只是这一套系统，还应包括连接器、评测集、模板、脚本、文档结构——让下一次交付更快、更便宜、更不依赖个人。</p>
+</div>
+</div>
+<div class="co deep">
+<span class="ct">本质命题</span>
+<p>FDE 这门生意成立的前提，是一段时间差：<strong>模型的能力已经就绪，而把它变成业务系统的能力严重稀缺</strong>。购买模型是即时的，把模型塞进一个有二十年历史包袱、权限模型混乱、员工没时间学新工具的组织，是缓慢的。FDE 的全部价值都发生在这条缝里。</p>
+</div>
+<h4 id="c1-s3">1.3 为什么这一角色在 AI 交付中受到关注</h4>
+<p>“Forward Deployed Engineer”在不同组织中的职责并不完全相同，也不存在一套普遍适用的行业认证定义。它与现场工程、嵌入式交付和产品工程等实践有交集；本文采用可检验的工作边界来定义 FDE，而不把某一家公司的岗位设计当作行业标准。</p>
+<p>AI 项目中，以下变化让贴近业务现场的工程交付更受重视。它们是需要在具体项目中验证的工作假设，不代表每个组织都会以相同方式经历：</p>
+<div class="tw" role="group" aria-label="FDE 角色背景对照表" tabindex="0"><table>
+<thead><tr><th style="width:190px">变化</th><th>带来的交付后果</th><th style="width:210px">对角色的要求</th></tr></thead>
+<tbody>
+<tr><td><b>能力商品化</b></td><td>模型能力本身变得极易获得，价格持续下降，无法再靠"我有模型"构筑壁垒；竞争重心从模型转向落地。</td><td>需要有人负责"用起来"这一段</td></tr>
+<tr><td><b>交付物不确定</b></td><td>概率型系统没有确定验收口径，"看起来能用"与"可以托付业务"之间需要工程化的评测与兜底。</td><td>需要懂评测与失效设计的工程师</td></tr>
+<tr><td><b>需求不可预先描述</b></td><td>业务方只知道"这里想省钱"，不知道什么可自动化；真实需求只有在现场观察与快速试错中才会显形。</td><td>需要能自行完成需求发现的人</td></tr>
+<tr><td><b>责任必须落地</b></td><td>智能体开始持有写权限、发起交易、修改工单，出错需要有人能在小时级定位并止损。</td><td>需要在现场、有决策权、能改代码</td></tr>
+</tbody>
+</table></div>
+<h4 id="c1-s4">1.4 一句话定义与常见错误定义</h4>
+<blockquote>
+    FDE 在客户问题一线承担从问题定义、工程交付到运行反馈的闭环责任；具体范围、决策权和验收标准应在项目开始前明确。
+  </blockquote>
+<div class="tw"><table>
+<thead><tr><th style="width:50%">错误定义</th><th>为什么错</th></tr></thead>
+<tbody>
+<tr><td>"懂 AI 的实施工程师"</td><td>实施是照既定方案配置，FDE 的输入往往没有方案，方案本身是产出。</td></tr>
+<tr><td>"会写代码的售前"</td><td>售前的产出是承诺，FDE 的产出是运行中的系统与被改善的指标。</td></tr>
+<tr><td>"高级定制外包"</td><td>外包以人天为商品，交付结束关系即终止；FDE 以复用为商品，交付结束沉淀才开始产生价值。</td></tr>
+<tr><td>"驻场解决方案架构师"</td><td>架构师画蓝图后交棒；FDE 不交棒，自己把蓝图建到能承重为止。</td></tr>
+<tr><td>"AI 时代的项目经理"</td><td>项目经理管理的是排期与干系人，FDE 管理的是从数据到结果的技术因果链。</td></tr>
+</tbody>
+</table></div>
+</article>
+<article id="c2">
+<h3><span class="no">CHAPTER 02 · 角色划界</span>与相邻角色的边界</h3>
+<p class="deck">FDE 之所以难招人、难定价、难考核，是因为它跨越了四个既有职位的边界。划不清边界，就会把它做成一个"什么都干一点"的模糊岗。</p>
+<h4>2.1 六角色对照</h4>
+<div class="tw"><table class="wide">
+<thead><tr><th style="width:150px">维度</th><th>软件工程师</th><th>解决方案架构师</th><th>咨询顾问</th><th>实施 / 交付工程师</th><th>客户成功经理</th><th><b>FDE</b></th></tr></thead>
+<tbody>
+<tr><td><b>工作对象</b></td><td>产品代码库</td><td>技术蓝图</td><td>问题与结论</td><td>已定型的产品</td><td>客户关系与续约</td><td><b>客户的业务流程本身</b></td></tr>
+<tr><td><b>时间尺度</b></td><td>版本迭代</td><td>售前周期</td><td>项目周期</td><td>上线周期</td><td>续费周期</td><td><b>业务的持续运转</b></td></tr>
+<tr><td><b>产出物</b></td><td>功能</td><td>方案文档</td><td>报告与建议</td><td>配置完成的系统</td><td>健康度与续约</td><td><b>可运行的系统 + 被改写的流程 + 可复用组件</b></td></tr>
+<tr><td><b>成功标准</b></td><td>质量与进度达标</td><td>方案被采纳</td><td>客户认可</td><td>验收签字</td><td>续约与增购</td><td><b>客户业务指标改善且可持续</b></td></tr>
+<tr><td><b>对环境的态度</b></td><td>假设有稳定环境</td><td>假设环境可调研</td><td>假设环境可抽象</td><td>假设环境已就绪</td><td>假设产品已适配</td><td><b>环境是待改造的对象</b></td></tr>
+<tr><td><b>失败的样子</b></td><td>延期、缺陷</td><td>方案落不了地</td><td>建议无人执行</td><td>上线即停滞</td><td>静默流失</td><td><b>系统跑着，但没人因此少干一小时活</b></td></tr>
+</tbody>
+</table></div>
+<h4>2.2 三条最容易越界的分界线</h4>
+<div class="grid g3">
+<div class="kc"><div class="kk">分界线 A</div><h4>与解决方案架构师：谁动代码</h4>
+<p>架构师交付"应该怎么做"，FDE 交付"已经做成了"。判断方法：出问题时，谁能在今晚改代码修好。</p></div>
+<div class="kc"><div class="kk">分界线 B</div><h4>与产品经理：谁的输入是客户</h4>
+<p>产品经理聚合多个客户抽象出共性需求，服务的是产品；FDE 深扎单个客户，服务的是结果。二者冲突点是"为这一家改不改底层"。</p></div>
+<div class="kc"><div class="kk">分界线 C</div><h4>与咨询顾问：谁承担风险</h4>
+<p>顾问的建议错了，客户可以不接受；FDE 建的系统错了，业务状态已经改变。风险是否由交付方实际持有，是两类角色的根本差异。</p></div>
+</div>
+<h4>2.3 三类"伪 FDE"</h4>
+<p>岗位名称流行之后，大量旧职能换牌上岗。以下三类在招聘与外包市场中最常见，识别它们能避免用 FDE 的预算买到非 FDE 的能力。</p>
+<div class="tw"><table>
+<thead><tr><th style="width:150px">类型</th><th>表现</th><th>断点在哪</th><th style="width:170px">真实能力定位</th></tr></thead>
+<tbody>
+<tr><td><span class="tag r">部署型</span></td><td>能完成私有化安装、组件拉起、镜像导入，环境一旦报错就无法定位到模型、检索链路或数据层的具体原因。</td><td>缺模型与智能体的内部机理认知，只能配置不能改造。</td><td>运维 / 实施工程师</td></tr>
+<tr><td><span class="tag r">文档型</span></td><td>需求方案、架构图、汇报材料质量很高，但从不亲自接通一个真实接口、跑通一条真实数据。</td><td>缺工程执行，方案与客户环境之间无人承重。</td><td>售前 / 解决方案架构师</td></tr>
+<tr><td><span class="tag r">项目型</span></td><td>能按合同把功能做完并验收离场，离场时未沉淀任何可复用件，第二个项目从零开始。</td><td>缺组件意识与产品反哺意识。</td><td>定制开发 / 外包项目经理</td></tr>
+</tbody>
+</table></div>
+<div class="co warn">
+<span class="ct">组织风险</span>
+<p>把"伪 FDE"当成 FDE 招聘或外包，最典型的后果是：<b>交付成本随客户数线性增长，且无法收敛</b>。因为你买入的是人力工时，而不是可复用资产。判断一个团队是否真具备 FDE 能力，只需问一句：上一次交付里有哪些部件被下一次交付直接用了？</p>
+</div>
+</article>
+<article id="c3">
+<h3><span class="no">CHAPTER 03 · 价值模型</span>最后一公里是怎么算账的</h3>
+<p class="deck">FDE 常被批评为"人力生意"。批评成立的条件是：交付过程没有被资产化。本章给出区分人力生意与资产生意的成本结构模型。</p>
+<h4>3.1 交付成本的四种成分</h4>
+<p>每一次现场交付的工时，可拆成四类。四类占比决定这门生意的天花板：若 A 类长期高于 50%，说明组织在做外包；若 D 类持续上升，说明在做产品。</p>
+<div class="grid g4">
+<div class="kc"><div class="kk">A · 一次性</div><h4>现场理解成本</h4><p>听业务说话、摸清流程、找出真正卡人的环节、说服关键角色。难以完全压缩，但可以模板化提问。</p></div>
+<div class="kc"><div class="kk">B · 半复用</div><h4>环境适配成本</h4><p>网络、权限、版本、接口差异。可通过连接器骨架与诊断工具逐年压降。</p></div>
+<div class="kc"><div class="kk">C · 可复用</div><h4>通用工程成本</h4><p>检索链路、评测框架、审计日志、兜底策略。应一次性沉淀为平台件，禁止重复手写。</p></div>
+<div class="kc"><div class="kk">D · 资产</div><h4>沉淀成本</h4><p>把 A/B/C 中重复出现的部分抽成组件、模板与文档。短期抬高工时，长期决定毛利。</p></div>
+</div>
+<h4>3.2 复利来自组件，不来自工时</h4>
+<p>人天模式的收入等于「人数 × 单价 × 可用人天」，天花板是招聘速度；资产模式的收入等于「组件覆盖的场景数 × 单位场景价值」，天花板是分发效率。二者的差别不在努力程度，在于产出的<strong>是否可携带</strong>。</p>
+<div class="tw"><table>
+<thead><tr><th style="width:180px">观察指标</th><th>人力型交付团队</th><th>资产型交付团队</th></tr></thead>
+<tbody>
+<tr><td>第二次同类交付耗时</td><td>与第一次接近，甚至更久（客户换了，经验随人走）</td><td>显著低于第一次，通常可压缩至三至五成</td></tr>
+<tr><td>新人独立交付所需时间</td><td>依赖跟随老员工，无文档可学</td><td>按手册与模板可独立完成首次接入</td></tr>
+<tr><td>人员离职影响</td><td>该客户后续无人能维护</td><td>知识在仓库里，交接以天计</td></tr>
+<tr><td>毛利率变化</td><td>随规模下降（沟通与差旅成本超线性增长）</td><td>随规模上升（组件摊销）</td></tr>
+<tr><td>客户续约理由</td><td>关系与人情</td><td>系统已嵌入业务流程，替换成本高</td></tr>
+</tbody>
+</table></div>
+<h4>3.3 价值的三层结构</h4>
+<p>评估 FDE 的贡献必须分三层，只算第一层会严重低估，只算第三层容易沦为自证。</p>
+<div class="grid g3">
+<div class="kc"><div class="kk">第一层</div><h4>项目价值</h4><p>这一次交付省下的人工小时、缩短的处理周期、减少的差错率。口径清晰、最容易被客户财务部门接受，也是续约的直接依据。</p></div>
+<div class="kc"><div class="kk">第二层</div><h4>客户组织能力价值</h4><p>客户因此获得的可迁移能力：一套能自建场景的内部团队、一套数据治理规范、一套评测习惯。它决定第二年是否还需要你。</p></div>
+<div class="kc"><div class="kk">第三层</div><h4>产品与标准价值</h4><p>现场暴露的需求回流为产品路线图，现场写出的组件成为下一个客户默认自带的东西。这是 FDE 唯一无法被外包公司复制的部分。</p></div>
+</div>
+<h4>3.4 ROI 论证的三条纪律</h4>
+<div class="co act">
+<span class="ct">操作纪律</span>
+<p><b>一、先测基线，再上线。</b>没有上线前的真实测量数据，任何"效率提升"都是修辞，也无法通过客户内部审计。基线测量本身要占交付工时的合理预算。<br/>
+<b>二、用业务口径而不是技术口径计价。</b>客户买的是"每张工单少花 4 分钟"，不是"准确率提升 8 个百分点"；技术指标必须换算成业务动作与工时。<br/>
+<b>三、承认折损。</b>试点环境的收益无法全额复制到全量：长尾问题、用户不配合、并发与数据膨胀都会吃掉一部分。对外承诺应给出区间与前提条件，而不是单点数字。</p>
+</div>
+<p>与之相对，一个成熟的做法是在合同里同时约定<b>投入指标</b>（连接了多少系统、覆盖了多少岗位）与<b>结果指标</b>（采纳率、周期、差错率），并明确后者的测量方法与争议处理机制。只约定投入指标，交付方会做出一堆无人使用的功能；只约定结果指标，交付方会承担自己无法控制的组织变量。</p>
+</article>
+<article id="c4">
+<h3><span class="no">CHAPTER 04 · 角色谱系</span>变体、归属与协作界面</h3>
+<p class="deck">同一名之下，职责差异可能非常大。选型、定薪、考核之前，先确定你要的是哪一个变体、归属在哪条线上。</p>
+<h4>4.1 岗位变体谱系</h4>
+<div class="tw"><table>
+<thead><tr><th style="width:210px">变体</th><th>核心交付物</th><th>最硬核的能力</th><th style="width:180px">典型失效场景</th></tr></thead>
+<tbody>
+<tr><td><b>AI / 软件方向</b><br/>Forward Deployed Software Engineer</td><td>可运行的业务应用与集成链路</td><td>全栈工程能力 + 系统集成</td><td>系统能跑但效果不达预期，缺评测</td></tr>
+<tr><td><b>智能体方向</b><br/>Agent / Automation Engineer</td><td>工具编排、多智能体流程、任务闭环</td><td>上下文工程、编排与失效设计</td><td>演示很炫，真实任务成功率低</td></tr>
+<tr><td><b>评测方向</b><br/>Evaluation Engineer</td><td>评测集、评分器、回归门禁</td><td>错误分析、指标设计、数据标注治理</td><td>评测集与业务无关，分数好看无意义</td></tr>
+<tr><td><b>安全方向</b><br/>Forward Deployed Security Engineer</td><td>权限模型、隔离与审计、红队用例</td><td>最小权限设计、提示注入防护</td><td>只防数据泄露，不防行动越权</td></tr>
+<tr><td><b>基础设施方向</b><br/>Forward Deployed Infrastructure Engineer</td><td>推理服务、私有化底座、容量与成本</td><td>调度、缓存、可观测性、成本工程</td><td>上线后延迟与成本失控</td></tr>
+<tr><td><b>架构方向</b><br/>Principal Forward Deployed Architect</td><td>跨系统方案、技术路线决策、组织级治理框架</td><td>抽象与谈判、长期权衡</td><td>方案宏大，无一手代码验证</td></tr>
+<tr><td><b>行业方向</b><br/>Domain FDE（金融 / 医药 / 制造 / 政务）</td><td>行业专属流程组件与合规话术</td><td>行业知识与监管理解</td><td>技术先进但过不了合规审查</td></tr>
+</tbody>
+</table></div>
+<h4>4.2 四种组织归属</h4>
+<div class="grid g4">
+<div class="kc"><div class="kk">归属一</div><h4>模型 / 平台厂商</h4><p>把前沿能力送进头部客户，同时把现场洞察反哺模型与产品。差旅极重，考核看标杆客户与组件回流量。</p></div>
+<div class="kc"><div class="kk">归属二</div><h4>解决方案 / 集成商</h4><p>为多家客户交付，最容易滑向人天生意，必须靠组件库与内部平台对抗复用率下滑。</p></div>
+<div class="kc"><div class="kk">归属三</div><h4>甲方自建</h4><p>企业内部设置的"AI 落地"角色，绕开供应商，直接对接业务部门。核心难点是权力来源与编制归属。</p></div>
+<div class="kc"><div class="kk">归属四</div><h4>独立交付单元</h4><p>以利润中心形式存在，同时承担售前、交付与产品孵化。对负责人的综合能力要求最高。</p></div>
+</div>
+<h4>4.3 协作界面：四个必须事先谈清楚的接缝</h4>
+<div class="tw"><table>
+<thead><tr><th style="width:130px">接缝</th><th>必须事先约定的事</th><th>不约定的后果</th></tr></thead>
+<tbody>
+<tr><td><b>与销售</b></td><td>承诺权限边界：哪些能力可以卖，哪些必须现场验证后才能承诺；售前是否由 FDE 参与技术范围界定。</td><td>签下无法交付的合同，交付方被迫用加班和降级方案填补售前过度承诺。</td></tr>
+<tr><td><b>与产品</b></td><td>定制与标准化的裁决机制：为单个客户改底层的申请由谁批、改动如何回流、多久合入主干。</td><td>产品分支失控，每个客户一套代码，无法升级，团队被历史定制拖死。</td></tr>
+<tr><td><b>与平台工程</b></td><td>责任分层：底座能力（推理、检索、观测、审计）归平台，场景能力归 FDE；FDE 不得私搭底座。</td><td>每个现场各造一套轮子，安全与合规口径不统一，事故无法归因。</td></tr>
+<tr><td><b>与客户 IT / 安全</b></td><td>最小权限申请路径、数据出域边界、审计留痕要求、变更窗口与回滚责任人。</td><td>上线前一周被安全审查卡死，或临时开高权限且事后不清理，成为长期风险敞口。</td></tr>
+</tbody>
+</table></div>
+<div class="co principle">
+<span class="ct">原则</span>
+<p>FDE 的权限必须与责任同尺寸。要求它对业务结果负责，却不给它在现场改配置、提权申请、调整方案的权力，等于要求一个人对天气负责。</p>
+</div>
+</article>
+<!-- ============ PART II ============ -->
+<section class="part-band" data-n="II" id="p2">
+<span class="pnum">Part Two</span>
+<h2>能力模型</h2>
+<p>把"复合型人才"这个含糊说法拆成可训练的单元：四项基座能力、两项贯穿约束、五个职级标尺，以及一张可逐条打勾的技能矩阵。</p>
+</section>
+<article id="c5">
+<h3><span class="no">CHAPTER 05 · 能力基座</span>4 + 2 模型</h3>
+<p class="deck">四项基座决定能不能交付，两项约束决定交付会不会变成风险。基座缺一项，角色退化为相邻岗位；约束缺一项，角色退化为事故来源。</p>
+<h4>5.1 四项基座</h4>
+<div class="grid g2">
+<div class="kc">
+<div class="kk">BASE · 01</div><h4>工程能力 —— 保证"落得下"</h4>
+<ul>
+<li>全栈交付：能从零搭出可用的前端界面、后端服务、异步任务与数据持久化，不必等待别人排期。</li>
+<li>系统集成：读得懂陌生系统的接口文档与数据库结构，能用 REST、消息队列、数据库直连、文件同步等多种方式打通。</li>
+<li>检索与上下文：分块、向量化、混合检索、重排序、上下文装配，能针对具体语料调整策略而非套用默认参数。</li>
+<li>编排与工具调用：把流程拆成可组合的步骤，定义输入输出契约，处理超时、重试、幂等。</li>
+<li>可靠性工程：日志、指标、追踪三件套；知道如何在无法复现的现场定位问题。</li>
+</ul>
+</div>
+<div class="kc">
+<div class="kk">BASE · 02</div><h4>业务理解 —— 保证"落得对"</h4>
+<ul>
+<li>流程拆解：把一个岗位的一天还原为动作序列，标出耗时、频次、出错代价与信息依赖。</li>
+<li>价值判断：区分刚性需求、优化需求与伪需求；知道哪些环节用规则引擎更合适，不必为了用 AI 而用 AI。</li>
+<li>指标翻译：把技术改善换算成业务语言——工时、周期、转化、差错、库存周转。</li>
+<li>组织感知：识别谁是真实使用者、谁是决策者、谁会因为效率变化而受损。</li>
+</ul>
+</div>
+<div class="kc">
+<div class="kk">BASE · 03</div><h4>沟通协调 —— 保证"被接受"</h4>
+<ul>
+<li>向上沟通：向管理层用风险与收益说话，能主动报告坏消息并附带方案。</li>
+<li>向下沟通：向一线员工解释"这不是来替代你的"，用他们的语言描述变化。</li>
+<li>预期管理：明确说出做不到什么、什么时候能做到、需要什么条件。</li>
+<li>冲突处理：在安全、合规、业务三方诉求之间提出第三方案，而不是选边。</li>
+</ul>
+</div>
+<div class="kc">
+<div class="kk">BASE · 04</div><h4>产品思维 —— 保证"可复制"</h4>
+<ul>
+<li>抽象能力：从一次定制中识别出通用参数与通用逻辑，把"这家客户的做法"变成"这类场景的做法"。</li>
+<li>取舍纪律：抵制为单一客户把系统复杂化的诱惑，区分配置项与代码分支。</li>
+<li>文档习惯：交付物天然包含可自助使用的说明书，而不是只有自己能懂的脚本。</li>
+<li>回流意识：把现场缺陷写成产品需求，把变通方案写成平台改进提案。</li>
+</ul>
+</div>
+</div>
+<h4>5.2 两项贯穿约束</h4>
+<div class="grid g2">
+<div class="kc" style="border-top-color:#b8433f">
+<div class="kk">CONSTRAINT · A</div><h4>评测意识 —— 对效果负责的资格</h4>
+<p>这是 AI 时代的 FDE 与传统交付工程师之间最硬的分水岭。传统软件可以用断言测试，概率型系统只能靠评测。没有自建评测集与回归门禁的能力，任何"效果不错"的判断都只是印象；没有基线，也无法证明后续改动是改进而不是退化。评测必须发生在写代码之前，因为评测集就是需求的形式化表达。</p>
+</div>
+<div class="kc" style="border-top-color:#b8433f">
+<div class="kk">CONSTRAINT · B</div><h4>安全与失效设计 —— 让系统敢于行动</h4>
+<p>一旦系统持有写权限，模型错误的性质就从"信息错误"变为"业务状态被改变"。因此必须内建四件事：最小权限与显式提权路径、建议/决策/执行三层分离、不确定时停止而非绕行、全链路留痕以便事后解释。不可靠的不是模型，是没有为失败做设计的系统。</p>
+</div>
+</div>
+<div class="co principle">
+<span class="ct">能力优先级</span>
+<p>六项之间不是并列关系。<b>工程能力是入场券</b>，缺它一切为零；<b>评测意识是区分器</b>，决定你是否具备对结果负责的资格；<b>产品思维决定天花板</b>，决定这个岗位在你身上是成本还是资产。业务理解与沟通能力可以通过行业资深同事补齐，工程与评测无法外包。</p>
+</div>
+</article>
+<article id="c6">
+<h3><span class="no">CHAPTER 06 · 职级标尺</span>L1 – L5 能力分级</h3>
+<p class="deck">分级依据不是工龄，也不是掌握工具的多少，而是"在多大程度上可以在无人指导的情况下承担后果"。每一级的判据都是可观察的行为。</p>
+<div class="tw"><table class="wide">
+<thead><tr><th style="width:96px">等级</th><th style="width:132px">称谓</th><th>可独立处理的问题复杂度</th><th>决策半径</th><th>沉淀产出要求</th></tr></thead>
+<tbody>
+<tr>
+<td><b>L1</b></td><td>见习 / 跟随</td>
+<td>在给定方案与模板下完成环境部署、数据清洗、接口联调、执行评测任务；遇到非预期报错需求助。</td>
+<td>不对外承诺任何事项，不直接与客户决策层对话。</td>
+<td>按模板填写文档，记录踩坑日志。</td>
+</tr>
+<tr>
+<td><b>L2</b></td><td>独立交付</td>
+<td>面对一个边界清晰的单一场景，能独立完成接入、实现、自测与上线，并识别出关键风险上报。</td>
+<td>可在既有架构与安全边界内自主做技术选型与实现决策。</td>
+<td>产出可被他人复用的脚本、配置模板或连接器雏形。</td>
+</tr>
+<tr>
+<td><b>L3</b></td><td>场景负责人</td>
+<td>面对需求模糊、数据脏乱、多方利益冲突的完整场景，能自行完成需求发现、方案设计、评测体系搭建与验收；能在约束下重排技术路线。</td>
+<td>代表交付方向客户业务负责人做技术承诺；可否决不可行需求。</td>
+<td>沉淀该场景的标准交付包：诊断清单 + 评测集 + 运行手册 + 组件。</td>
+</tr>
+<tr>
+<td><b>L4</b></td><td>领域专家 / 小组长</td>
+<td>负责跨系统、跨部门、含高风险写操作的复杂链路；能设计组织级方案（权限模型、评测治理、灰度与回滚策略）；能处理事故与复盘。</td>
+<td>裁决定制与标准化的边界，对团队技术债负责；参与售前承诺评审。</td>
+<td>建设可跨客户复用的组件与工具，制定团队方法标准，带教 L1–L2。</td>
+</tr>
+<tr>
+<td><b>L5</b></td><td>体系设计者</td>
+<td>定义一类问题的解法：为陌生行业设计交付范式，判断技术路线的三到五年走向，并在信息严重不足时做出可辩护的取舍。</td>
+<td>对产品路线图、商业模式与组织形态有实质影响力。</td>
+<td>形成方法论并被其他团队采纳为默认做法。</td>
+</tr>
+</tbody>
+</table></div>
+<h4>6.1 晋级的三个真实门槛</h4>
+<div class="grid g3">
+<div class="kc"><div class="kk">门槛一 · L1 → L2</div><h4>从执行到闭环</h4><p>标志事件：你第一次在没有他人介入的情况下，让一个功能真正被某个用户每天使用，并在出问题时自己定位到根因。</p></div>
+<div class="kc"><div class="kk">门槛二 · L2 → L3</div><h4>从接受需求到定义需求</h4><p>标志事件：你否掉过客户提出的需求，用更好的方案替代它，并且对方接受了——这要求你同时具备技术判断与信任资本。</p></div>
+<div class="kc"><div class="kk">门槛三 · L3 → L4</div><h4>从交付到复用</h4><p>标志事件：别人在没告诉你的情况下，用你沉淀的组件完成了一次交付，并且没有来找你救火。</p></div>
+</div>
+<div class="co warn">
+<span class="ct">考核陷阱</span>
+<p>不要用"掌握的工具数量"或"参与过的项目数量"定级。FDE 的能力高度依赖<b>在压力下做出的判断</b>，而判断只能通过复盘真实决策来考察。可行的评估方式是：让候选人讲一个自己失败的场景，看他能否准确说出当时的信息条件、替代选项与为什么选错。讲不出替代选项的人，通常尚未真正独立决策过。</p>
+</div>
+</article>
+<article id="c7">
+<h3><span class="no">CHAPTER 07 · 技能矩阵</span>技术栈清单与能力自查</h3>
+<p class="deck">下表是给个人与招聘方的双向工具。三档标准：<b>必会</b>＝可以独立完成且不需他人兜底；<b>应会</b>＝理解原理、能借助文档完成；<b>了解</b>＝知道边界与代价，能判断是否引入。</p>
+<h4>7.1 技术技能</h4>
+<div class="tw"><table>
+<thead><tr><th style="width:150px">领域</th><th>具体能力项</th><th style="width:86px">档位</th><th>达到"必会"的判断标准</th></tr></thead>
+<tbody>
+<tr><td rowspan="4"><b>编程语言</b></td><td>Python（服务、数据处理、异步）</td><td><span class="tag y">必会</span></td><td>能在半天内写出带日志与异常处理的可部署服务</td></tr>
+<tr><td>SQL 与查询优化</td><td><span class="tag y">必会</span></td><td>能读懂陌生库表结构并写出正确且不太慢的关联查询</td></tr>
+<tr><td>TypeScript / 前端基础</td><td><span class="tag g">应会</span></td><td>能独立搭出可用的操作界面，不必等待前端排期</td></tr>
+<tr><td>Shell / 文本处理</td><td><span class="tag y">必会</span></td><td>能在无图形界面的内网服务器上完成排查与批处理</td></tr>
+<tr><td rowspan="4"><b>数据</b></td><td>非结构化数据处理与清洗</td><td><span class="tag y">必会</span></td><td>能把混杂格式、多版本、含冲突的资料整理成可检索的语料</td></tr>
+<tr><td>向量库与索引策略</td><td><span class="tag y">必会</span></td><td>能解释分块策略如何影响命中率，并据此调优</td></tr>
+<tr><td>数据血缘与时效管理</td><td><span class="tag g">应会</span></td><td>能说清一条知识从产生到被检索到的完整路径与失效机制</td></tr>
+<tr><td>流式与批量同步</td><td><span class="tag b">了解</span></td><td>知道增量更新与全量重建的代价差异</td></tr>
+<tr><td rowspan="5"><b>模型与智能体</b></td><td>提示工程与上下文装配</td><td><span class="tag y">必会</span></td><td>能针对失败样例定位是提示、检索还是模型能力问题</td></tr>
+<tr><td>RAG 全链路（检索—重排—生成—引用）</td><td><span class="tag y">必会</span></td><td>能在自有场景上把命中率与引用准确率提升到可验收水平</td></tr>
+<tr><td>工具调用与多智能体编排</td><td><span class="tag g">应会</span></td><td>能设计可控的分解—执行—校验回路，并处理循环与发散</td></tr>
+<tr><td>轻量微调与替代方案比较</td><td><span class="tag b">了解</span></td><td>知道何时该改数据、改提示、换模型，而不是默认微调</td></tr>
+<tr><td>模型能力边界评估</td><td><span class="tag y">必会</span></td><td>能在选型阶段用少量样例判断模型能否胜任该任务</td></tr>
+<tr><td rowspan="4"><b>基础设施</b></td><td>容器化与依赖打包</td><td><span class="tag y">必会</span></td><td>能在离线内网环境完成部署，不依赖外网拉取</td></tr>
+<tr><td>推理服务与并发控制</td><td><span class="tag g">应会</span></td><td>能估算并发、显存与吞吐，做出容量与降级决策</td></tr>
+<tr><td>高可用与回滚</td><td><span class="tag g">应会</span></td><td>任何现场改动都有一条已验证的还原路径</td></tr>
+<tr><td>密钥与配置管理</td><td><span class="tag y">必会</span></td><td>密钥不入库、不进日志、可轮换</td></tr>
+<tr><td rowspan="3"><b>评测与观测</b></td><td>评测集设计与标注治理</td><td><span class="tag y">必会</span></td><td>能构建与业务失败模式对齐的金标集并说明覆盖率</td></tr>
+<tr><td>自动评分与回归门禁</td><td><span class="tag y">必会</span></td><td>改动模型或提示后能在小时级知道是否退化</td></tr>
+<tr><td>线上质量监控</td><td><span class="tag g">应会</span></td><td>能用抽样与用户反馈持续追踪真实表现与漂移</td></tr>
+<tr><td rowspan="3"><b>安全合规</b></td><td>最小权限与访问控制建模</td><td><span class="tag y">必会</span></td><td>能给出可被安全部门接受的角色—资源—动作矩阵</td></tr>
+<tr><td>注入攻击与越权防护</td><td><span class="tag g">应会</span></td><td>能为自有场景列出攻击面与对应缓解措施</td></tr>
+<tr><td>数据出域与脱敏策略</td><td><span class="tag y">必会</span></td><td>能在方案设计阶段就说清哪些数据不能动</td></tr>
+</tbody>
+</table></div>
+<h4>7.2 非技术技能</h4>
+<div class="tw"><table>
+<thead><tr><th style="width:170px">能力</th><th>可观察的行为标准</th><th style="width:86px">档位</th></tr></thead>
+<tbody>
+<tr><td><b>结构化访谈</b></td><td>能用一套提问在两周内还原一个岗位的完整流程与隐性规则，并识别出关键干系人</td><td><span class="tag y">必会</span></td></tr>
+<tr><td><b>价值量化</b></td><td>能在上线前与业务方共同确定基线、目标区间与测量方法，并写进验收条款</td><td><span class="tag y">必会</span></td></tr>
+<tr><td><b>坏消息沟通</b></td><td>发现方案不可行时，能在 24 小时内向上级与客户同步，并附带两个以上备选</td><td><span class="tag y">必会</span></td></tr>
+<tr><td><b>范围谈判</b></td><td>面对不断膨胀的需求，能用"本期做什么、下期做什么、代价是什么"重新划定边界</td><td><span class="tag g">应会</span></td></tr>
+<tr><td><b>文档与交接</b></td><td>写出使另一名工程师无需询问即可完成一次部署与一次回滚的材料</td><td><span class="tag y">必会</span></td></tr>
+<tr><td><b>复盘与归因</b></td><td>能把失败归因到具体决策点而非"客户不配合"这类外部解释</td><td><span class="tag g">应会</span></td></tr>
+<tr><td><b>行业术语习得</b></td><td>进入新行业时，能在两周内建立基本业务语汇，避免在客户面前暴露外行</td><td><span class="tag g">应会</span></td></tr>
+<tr><td><b>时间与人手自平衡</b></td><td>能预估交付工时并识别超支信号，在超支前申请资源或削减范围</td><td><span class="tag y">必会</span></td></tr>
+</tbody>
+</table></div>
+<div class="co deep">
+<span class="ct">自查方法</span>
+<p>按最近 12 个月或两个有代表性的项目，记录每项能力的亲自实践、可核验证据与尚待补足之处。评估的目的是找到下一步练习，而非给个人贴标签；也可使用<a class="xref" href="#self-check-form">第 22 章的证据型自查</a>获取即时参考分数与行动建议。</p>
+</div>
+</article>
+<!-- ============ PART III ============ -->
+<section class="part-band" data-n="III" id="p3">
+<span class="pnum">Part Three · Core</span>
+<h2>十大知识域</h2>
+<p>本部分是手册的主干。十个域覆盖从"发现值得做的事"到"让它变成资产"的完整链路，每个域按统一结构书写：目标 → 输入 → 核心实践 → 产出物 → 度量 → 反模式 → 检查项。</p>
+</section>
+<article id="d1">
+<h3><span class="no">DOMAIN 01</span>场景识别与价值定义</h3>
+<p class="deck">目的：在投入工程资源之前，确认这件事值得做、能够做、有人会用，并且做成了能被证明。</p>
+<h4>域目标</h4>
+<p>多数失败的 AI 项目不是死于技术，而是死于起点选错——场景太宽、价值太虚、责任太散。本域的任务是把"想用 AI"翻译成一份可执行的场景契约：明确业务指标、约束条件、验收口径与不做什么。</p>
+<h4>触发时机</h4>
+<ul>
+<li>新客户启动、老客户增购前的场景盘点；</li>
+<li>客户给出宽泛诉求（"提升客服效率""做企业知识库"）需要收敛；</li>
+<li>多个候选场景并存，需要排优先级；</li>
+<li>已有试点停滞，需要判断是继续、收缩还是放弃。</li>
+</ul>
+<h4>核心实践</h4>
+<h5>1. 用"为什么过去没被自动化"筛场景</h5>
+<p>这是本域最重要的一条判据。今天几乎所有知识工作都能找到 AI 的参与方式，因此"AI 能不能做"已经没有区分度。真正有区分度的问题是：<b>这件事为什么一直没被很好地自动化</b>。答案通常落在四类——需要理解大量非结构化信息、规则无法穷举、人工判断成本过高、需要在长上下文中综合判断。若这四条都不成立，而流程本身规则清晰、输入稳定、结果可验证，那么正确答案往往是规则引擎、搜索或传统脚本，不是模型。</p>
+<h5>2. 三层价值筛选矩阵</h5>
+<div class="tw"><table>
+<thead><tr><th style="width:130px">维度</th><th>要回答的问题</th><th>淘汰信号</th></tr></thead>
+<tbody>
+<tr><td><b>业务价值</b></td><td>影响哪条指标？涉及多少人次与频次？单次错误代价多大？</td><td>说不清受益人，或受益人不是付费人</td></tr>
+<tr><td><b>技术可行</b></td><td>所需数据是否可得且质量可接受？容错空间多大？是否有确定性校验手段？</td><td>要求百分之百准确但无人工复核环节</td></tr>
+<tr><td><b>组织可纳</b></td><td>有没有明确责任人愿意推动使用？流程是否允许被改变？</td><td>无人对采纳负责，或改变流程需跨越过多部门</td></tr>
+</tbody>
+</table></div>
+<p>三项同时通过才进入交付候选。实践中最常见的错误是只评估前两项——技术团队被"能实现"说服，接受了第三项根本不成立的场景，结果做出一套无人使用的系统。</p>
+<h5>3. 价值假设必须写成可反驳的句式</h5>
+<p>把模糊承诺改写成单一可证伪的命题，格式固定为三段：<em>对【谁】，在【什么流程环节】，把【指标】从【基线】提升到【目标区间】，前提是【数据与配合条件】</em>。写不出基线的场景，说明还没有做需求发现的基本功；写不出前提的场景，说明还没有识别约束。</p>
+<div class="co act">
+<span class="ct">示例改写</span>
+<p><b>弱表述：</b>建设智能客服知识库，提升服务效率。<br/>
+<b>强表述：</b>对二线工单处理组（14 人），在"检索处理方案"这一环节，把平均单张工单处理时长从基线约 11 分钟降至 6–8 分钟；前提是近 12 个月的历史工单可导出、且工单负责人承诺每天抽检 20 条回答质量。</p>
+</div>
+<h5>4. 收益必须换算成业务口径</h5>
+<p>准确率、召回率、响应时间是中间指标，不是价值指标。换算链条应当显式写出：质量提升 → 人工复核量减少 → 单件工时下降 → 人力成本或处理量变化。链条中每一环都要有数据来源，否则客户财务部门不会承认这笔账。</p>
+<h5>5. 提前定义"不做"</h5>
+<p>范围说明书里必须有一节明确排除项与延后项。典型排除：涉及资金处置的自动执行、跨法人主体的数据打通、未经流程Owner签字的岗位动作变更。写明不做的部分，是防止交付过程中范围被无声吞掉的最有效手段。</p>
+<h4>产出物</h4>
+<ul>
+<li><b>场景清单与优先级矩阵</b>：候选场景 × 价值/可行/可纳三维评分，附排序依据。</li>
+<li><b>价值假设书</b>：目标人群、环节、指标、基线、目标区间、前提条件、测量方法。</li>
+<li><b>基线测量计划</b>：需要采集哪些数据、由谁采集、采多久、如何防 Hawthorne 效应。</li>
+<li><b>范围与排除清单</b>：本期交付项、延后项、明确不做项。</li>
+<li><b>干系人地图</b>：付费人、决策人、流程 Owner、一线使用者、阻挠者。</li>
+</ul>
+<h4>度量指标</h4>
+<div class="kpi">
+<div><b>假设可测率</b><span>进入交付的场景中，已约定测量方法与数据源的比例。目标：百分之百。</span></div>
+<div><b>基线完备率</b><span>开工前已完成基线测量的场景比例。低于八成就存在验收争议风险。</span></div>
+<div><b>场景淘汰比</b><span>候选场景中被本域否掉的比例。健康的团队应淘汰过半，全收说明判断缺位。</span></div>
+<div><b>上线后采纳率</b><span>目标用户中实际使用该功能的比例。这是本域质量的最终检验。</span></div>
+</div>
+<h4>反模式</h4>
+<div class="tw"><table>
+<thead><tr><th style="width:190px">反模式</th><th>特征</th><th>后果与纠正</th></tr></thead>
+<tbody>
+<tr><td><b>聊天框化思维</b></td><td>把任何场景都做成一个问答入口，不改变任何既有流程。</td><td>三个月后无人使用。纠正：从"这个动作由谁完成最合适"出发重新设计流程。</td></tr>
+<tr><td><b>Demo 驱动立项</b></td><td>因为演示效果惊艳而立项，未做数据与约束勘察。</td><td>现场无法复现演示效果。纠正：立项必须附带数据可得性核验结论。</td></tr>
+<tr><td><b>指标挪用</b></td><td>引用公开榜单分数或他人项目收益作为本项目目标。</td><td>目标与实际脱节。纠正：只用自己的数据测自己的基线。</td></tr>
+<tr><td><b>全员受益幻觉</b></td><td>声称"所有部门都能用"，无具体角色与环节。</td><td>无人负责采纳。纠正：必须先找到一个愿意背指标的部门。</td></tr>
+<tr><td><b>把合规当后期议题</b></td><td>先做功能，上线前才找安全与法务。</td><td>最后一周被否决。纠正：合规约束进入第一版方案设计输入。</td></tr>
+</tbody>
+</table></div>
+<h4>本域检查项</h4>
+<ul class="ck">
+<li>该场景"过去为什么没被自动化"有明确答案，且答案指向模型擅长的能力</li>
+<li>存在一位具名的业务责任人，其考核指标与本项目目标相关</li>
+<li>价值假设已写成含基线、目标区间与前提条件的单一命题</li>
+<li>基线数据来源、采集方式与采集周期已约定并获客户确认</li>
+<li>所需数据与系统接口的可得性已做过核验（不是口头承诺）</li>
+<li>已列出本期不做与延后的内容，且客户已签署</li>
+<li>已识别至少一个潜在阻挠者及其反对理由</li>
+<li>技术改善到业务价值的换算链条每一步都有数据来源</li>
+</ul>
+</article>
+<article id="d2">
+<h3><span class="no">DOMAIN 02</span>现场诊断与环境勘察</h3>
+<p class="deck">目的：把"客户环境"从一个形容词变成一份可核对的事实清单，让所有后续决策建立在实测而非假设上。</p>
+<h4>域目标</h4>
+<p>交付中大量的返工、延期和事故，根源是开工前对环境的假设与真实情况不符。本域产出一份<b>环境事实基线</b>：算力与网络边界、系统与接口清单、数据分布与质量、权限申请路径、既有工具与规范、可变更范围与禁区。它的价值不止于指导实施，更在于把结论变成双方认可的书面事实——出问题时不必再争论"当初是谁说的"。</p>
+<h4>触发时机</h4>
+<ul>
+<li>项目启动后的第一周，任何编码之前；</li>
+<li>接入新系统、新数据源、新部门之前的增量勘察；</li>
+<li>客户发生组织调整、系统升级、网络改造之后；</li>
+<li>试点扩量（从部门级到集团级）之前。</li>
+</ul>
+<h4>核心实践</h4>
+<h5>1. 四类勘察对象，一类都不能少</h5>
+<div class="grid g4">
+<div class="kc"><div class="kk">A · 底座</div><h4>算力与运行环境</h4><p>服务器型号与显卡、显存、内网/专线路径、可用中间件版本、容器与编排能力、外网访问策略、镜像导入方式、时钟与证书。</p></div>
+<div class="kc"><div class="kk">B · 系统</div><h4>接口与数据源</h4><p>业务系统清单与责任人、接口形态与鉴权方式、字段口径、调用配额与限流、历史数据规模、变更发布节奏。</p></div>
+<div class="kc"><div class="kk">C · 治理</div><h4>权限与合规约束</h4><p>账号申请链路与平均耗时、数据分级分类规则、出域与脱敏要求、审计与留痕规范、变更窗口、上线审批流程。</p></div>
+<div class="kc"><div class="kk">D · 人</div><h4>流程与使用习惯</h4><p>目标岗位的真实一天、现有工具（往往含大量自建表格）、既有考核方式、培训渠道、抵触来源。</p></div>
+</div>
+<h5>2. 先做体检，再做假设</h5>
+<p>诊断必须由工具产出，而不是由人复述。一份合格的自动体检报告至少包含：连通性结果（逐条接口成功/失败与错误码）、资源水位（CPU/显存/磁盘/带宽峰值）、版本与依赖矩阵、数据规模抽样统计、权限可达性验证。凡"客户说有"而未验证的项目，一律标注为待验证并限期闭环。</p>
+<div class="fig">
+<div class="flow">
+<span class="st">清单模板</span><span class="ar">→</span>
+<span class="st">自动采集</span><span class="ar">→</span>
+<span class="st">体检报告</span><span class="ar">→</span>
+<span class="st">缺口清单</span><span class="ar">→</span>
+<span class="st hot">双方签字确认</span><span class="ar">→</span>
+<span class="st">进入设计</span>
+</div>
+<div class="cap">诊断流程：结论可追溯到采集项，才能作为后续变更的依据</div>
+</div>
+<h5>3. 把约束写成三类标签</h5>
+<div class="tw"><table>
+<thead><tr><th style="width:130px">标签</th><th>含义</th><th>处理方式</th></tr></thead>
+<tbody>
+<tr><td><span class="tag r">硬约束</span></td><td>不可能改变（监管要求、网络隔离、组织架构、既有系统不可改造）</td><td>作为设计前提直接吸收，不做任何绕过尝试</td></tr>
+<tr><td><span class="tag y">软约束</span></td><td>可以改变但需要成本与时间（权限审批、接口改造、流程调整）</td><td>给出改造提案、代价与替代方案，交客户决策</td></tr>
+<tr><td><span class="tag g">伪约束</span></td><td>只是习惯或信息不足造成的阻力（"我们从来都是手工做"）</td><td>用一次小范围实证打破，而不是争论</td></tr>
+</tbody>
+</table></div>
+<p>区分这三类的唯一方法是追问"这是谁定的、违反会怎样、有没有例外先例"。把伪约束当硬约束，会白白放弃本可创造的价值；把硬约束当软约束去挑战，会输掉信任。</p>
+<h5>4. 数据质量的七项核验</h5>
+<ul>
+<li><b>规模与覆盖</b>：样本量是否足以代表真实分布，长尾情形有没有出现。</li>
+<li><b>新鲜度</b>：最后更新时间，是否存在多版本并存（这是检索型项目最常见死因）。</li>
+<li><b>一致性</b>：不同系统对同一事实是否给出不同答案，以谁为准。</li>
+<li><b>权威性</b>：是否存在明确的唯一出处，还是各说各话。</li>
+<li><b>结构化程度</b>：字段缺失率、格式混杂度、扫描件与表格占比。</li>
+<li><b>敏感分布</b>：个人信息、商业机密、密钥的分布位置与暴露方式。</li>
+<li><b>可访问性</b>：能不能拿到、以什么频率拿到、拿到后允许保留多久。</li>
+</ul>
+<h4>产出物</h4>
+<ul>
+<li><b>环境事实基线</b>（含采集时间与责任人，具备版本）；</li>
+<li><b>系统与接口清单</b>（含鉴权方式、限流、可用时段、对接人）；</li>
+<li><b>数据质量核验结论</b>（七项逐条，标注阻断项）；</li>
+<li><b>约束台账</b>（硬/软/伪三类，含来源与验证方式）；</li>
+<li><b>权限申请路径图</b>（谁申请、谁审批、平均耗时、临时权限如何回收）；</li>
+<li><b>风险与未知项清单</b>（每条注明何时以何种方式消除）。</li>
+</ul>
+<h4>反模式</h4>
+<div class="co warn">
+<span class="ct">高频事故来源</span>
+<p><b>一、用客户 IT 的口述代替实测。</b>对方说"接口都有"，往往意味着"文档里有，但没人调通过"。<br/>
+<b>二、把开发环境的便利当成生产约束。</b>能连外网、有管理员权限、数据是脱敏样本——这三点同时不成立时，工期估算应显著上调。<br/>
+<b>三、只勘察系统不勘察人。</b>技术上打通了，一线员工用另一张 Excel 继续干活，是极为常见的失败形态。</p>
+</div>
+</article>
+<article id="d3">
+<h3><span class="no">DOMAIN 03</span>数据接入与知识治理</h3>
+<p class="deck">目的：让模型读到的世界，尽可能接近真实世界；并在无法接近时，让系统知道自己不知道。</p>
+<h4>域目标</h4>
+<p>模型从不直接接触现实，它理解的是企业提供给它的那份<em>代理现实</em>。库存系统写着一百件，模型就认为仓库里有一百件；知识库里存着三个月前已废止的制度，模型不会天然知道它失效了。因此本域的真正交付物不是"把数据接进来"，而是<b>建立一条可维护、可追责、有时效的知识供给管道</b>。</p>
+<h4>核心实践</h4>
+<h5>1. 接入方式的优先级判断</h5>
+<div class="tw"><table>
+<thead><tr><th style="width:120px">方式</th><th>适用</th><th>优点</th><th>代价与风险</th></tr></thead>
+<tbody>
+<tr><td><b>标准 API</b></td><td>对方有稳定开放接口</td><td>契约清晰、可审计、易维护</td><td>覆盖不全、字段口径由对方决定、配额受限</td></tr>
+<tr><td><b>数据库只读</b></td><td>需要灵活关联与批量分析</td><td>数据完整、时效可控</td><td>表结构耦合、权限敏感、易被误用为写操作</td></tr>
+<tr><td><b>消息 / CDC</b></td><td>需要准实时同步</td><td>低延迟、解耦</td><td>运维复杂、乱序与重复处理成本高</td></tr>
+<tr><td><b>文件 / 批量导出</b></td><td>老系统、内网隔离环境</td><td>阻力最小、最快落地</td><td>时效差、版本混乱、缺乏血缘</td></tr>
+<tr><td><b>页面采集</b></td><td>无接口且不可改造</td><td>最后手段，几乎总能工作</td><td>极脆弱，改版即失效，合规风险需评估</td></tr>
+</tbody>
+</table></div>
+<p>选择原则不是"哪个先进"，而是<b>哪个能被长期维护且退出成本最低</b>。为一次演示接页面采集，往往成为三年后的事故源。</p>
+<h5>2. 知识供给管道的五段结构</h5>
+<div class="fig">
+<div class="flow">
+<span class="st">采集</span><span class="ar">→</span>
+<span class="st">规范化</span><span class="ar">→</span>
+<span class="st">去重与冲突裁决</span><span class="ar">→</span>
+<span class="st">索引与分块</span><span class="ar">→</span>
+<span class="st hot">时效与失效管理</span>
+</div>
+<div class="cap">大多数项目只做了第 1、4 段，因此质量无法收敛</div>
+</div>
+<p>其中第 3、5 段最常被忽略，也最能决定最终表现。<b>去重与冲突裁决</b>意味着对同一事实的多个版本必须指定唯一权威出处，否则检索返回哪一版取决于运气。<b>时效管理</b>意味着每条知识都要有生效与失效时间、来源系统与责任人，废止文档必须被显式下线而不是留在库里"以防万一"。</p>
+<h5>3. 分块策略与任务对齐</h5>
+<ul>
+<li>块的大小由"回答一个问题需要多大的上下文"决定，而不是由经验值统一设定。</li>
+<li>结构化文档（制度、手册、工单）按语义单元切分，禁止按固定字符数机械切分表格与代码。</li>
+<li>为每条切片保留元数据：来源、章节路径、版本、生效期、密级、责任人——这些字段直接支撑引用与权限过滤。</li>
+<li>表格与多列表项需要专门的表示方式（保留行列语义），否则会退化为难以理解的文字串。</li>
+<li>建立"检索失败"的显式记录：哪些问题检索不到任何可用片段，是知识库缺口的最直接证据。</li>
+</ul>
+<h5>4. 为"不知道"设计出口</h5>
+<p>数据永远不足以代表全部现实。成熟系统的标志是：当证据不足时，输出的是"未找到依据，建议转人工"，而不是一段合理但错误的回答。实现上需要三件事——引用强制（每个结论都必须指向具体来源片段）、置信度门槛（低于阈值走兜底）、拒答口径（预先与客户约定什么情况下允许说不知道）。</p>
+<h4>产出物</h4>
+<ul>
+<li>接入清单与接口契约（含限流、超时、错误码约定、幂等策略）；</li>
+<li>语料治理规范（格式要求、版本规则、冲突裁决规则、废止流程）；</li>
+<li>索引方案说明（分块策略、元数据字段表、检索与重排配置及理由）；</li>
+<li>数据质量看板（覆盖率、时效性、拒答率、检索空结果率）；</li>
+<li>知识责任矩阵（每类知识的归属部门与更新频率）。</li>
+</ul>
+<h4>度量指标</h4>
+<div class="kpi">
+<div><b>事实命中率</b><span>抽样问题中，检索返回片段包含正确依据的比例。是问答质量的上限。</span></div>
+<div><b>检索空结果率</b><span>找不到任何候选片段的比例，直接暴露知识缺口。</span></div>
+<div><b>引用可核验率</b><span>输出结论可追溯到具体来源片段的比例，目标接近百分之百。</span></div>
+<div><b>知识时效偏差</b><span>被检索内容中已过期的比例，需持续下降至可忽略。</span></div>
+</div>
+<div class="co principle">
+<span class="ct">原则</span>
+<p>数据治理不是项目前置的一次性劳动，而是需要有人在运行期持续承担的职责。合同里若只写了"知识库建设"而没有写"知识运营"，项目在三个月后必然退化。FDE 的尽责做法是在交接时把知识运营责任显式转移给客户某一位具名角色，并给出可执行的日常动作清单。</p>
+</div>
+</article>
+<article id="d4">
+<h3><span class="no">DOMAIN 04</span>权限、安全与合规</h3>
+<p class="deck">目的：让系统在被授予行动能力之后，仍然处在一个可解释、可阻止、可追责的边界之内。</p>
+<h4>域目标</h4>
+<p>一个能读知识库的系统与一个能改订单的系统，虽然都叫企业 AI，但属于完全不同的风险等级。<strong>权限授予的那一刻，问题的性质就从"回答是否正确"变成"业务状态是否被改变"。</strong>本域要交付的不是安全产品，而是把行动能力关进笼子的工程设计。</p>
+<h4>核心实践</h4>
+<h5>1. 建议—决策—执行三层分离</h5>
+<div class="fig">
+<div class="flow">
+<span class="st">模型输出<br/><b>建议</b></span><span class="ar">→</span>
+<span class="st">规则与人审<br/><b>决策</b></span><span class="ar">→</span>
+<span class="st hot">受控通道<br/><b>执行</b></span><span class="ar">→</span>
+<span class="st">回执与留痕</span>
+</div>
+<div class="cap">三层之间的边界由系统强制，而非由提示词约定</div>
+</div>
+<p>模型可以生成判断，但判断不等于授权。真正的执行必须经过一条模型无法绕过的受控通道：独立的凭证、明确的动作白名单、参数校验、幂等键与回执。绝不能让模型直接持有生产系统的管理员凭据——它一旦被诱导，就具备了以人的身份做错事的全部能力。</p>
+<h5>2. 最小权限的落地方法</h5>
+<ul>
+<li><b>身份分离</b>：系统使用独立服务账号，绝不复用任何人的账号；每个账号只授予完成任务所需的最小动作集。</li>
+<li><b>读写分离</b>：读路径与写路径使用不同凭证；写凭证只存在于受控执行层，不进入模型可访问的工具列表。</li>
+<li><b>范围收窄</b>：数据访问按密级、部门、时间窗三重过滤；检索层先过滤、再生成，而不是生成后再遮挡。</li>
+<li><b>额度与频率</b>：单笔金额上限、单位时间动作次数上限、累计影响记录数上限，三者都要有硬性拦截。</li>
+<li><b>时效与回收</b>：临时权限必须有到期时间；离场与项目结束时的一次性核对清单应包含"账号已注销"这一项。</li>
+</ul>
+<h5>3. 攻击面清单（现场必须逐条过一遍）</h5>
+<div class="tw"><table>
+<thead><tr><th style="width:170px">攻击面</th><th>典型利用方式</th><th>缓解设计</th></tr></thead>
+<tbody>
+<tr><td><b>间接提示注入</b></td><td>恶意内容藏在被检索的文档、邮件、网页或工单备注中，诱导模型改变行为。</td><td>把外部内容严格标记为数据而非指令；工具调用与内容来源隔离；高影响动作强制人审。</td></tr>
+<tr><td><b>工具越权</b></td><td>通过组合合法工具达成未被授权的效果（先读敏感数据再写出到外部）。</td><td>定义工具组合规则与数据流向白名单，禁止跨密级串联。</td></tr>
+<tr><td><b>权限继承泄漏</b></td><td>以高权限账号身份代为查询，把结果呈现给低权限用户。</td><td>检索层按请求者身份过滤；引用内容不越过其原始密级。</td></tr>
+<tr><td><b>敏感信息进入外部调用</b></td><td>把客户数据作为参数发送给外部模型服务。</td><td>出域开关显式化、字段级脱敏、默认本地推理、留痕可稽核。</td></tr>
+<tr><td><b>日志泄密</b></td><td>调试日志记录了完整对话、身份证号码、密钥。</td><td>日志分级与字段掩码；调试模式与生产模式隔离；保留期约定。</td></tr>
+<tr><td><b>记忆污染</b></td><td>用户或系统写入的错误偏好长期影响后续判断。</td><td>记忆条目带来源与有效期，可审核可回滚，高影响记忆需确认。</td></tr>
+<tr><td><b>供应链</b></td><td>依赖包、模型权重、镜像来源不明。</td><td>固定版本、校验摘要、离线源、最小依赖。</td></tr>
+</tbody>
+</table></div>
+<h5>4. 人工接管的正确设计</h5>
+<p>"人在环路中"很容易退化为一个橡皮图章——一个总是被点同意的确认按钮，只增加摩擦不增加安全。真正有价值的介入点只有四类：<b>风险显著升高时</b>（金额、影响范围、不可逆性）、<b>置信度低于阈值时</b>、<b>数据源相互冲突时</b>、<b>当前状态无法确认时</b>。人不是流程里的一个按钮，而是系统面对不确定性时保留的另一种判断能力。</p>
+<h5>5. 证据与可解释</h5>
+<p>事故之后能否解释，取决于事前留痕是否完整。一次高影响动作至少应可还原：触发它的输入是什么、检索到了哪些依据、模型给出的建议与理由、经过了谁的批准、实际执行了什么、结果回执是什么、以及事后由谁关闭了这个循环。这套记录同时服务于合规审计、责任划分与后续优化，是三者共用的一份资产。</p>
+<h4>产出物</h4>
+<ul>
+<li><b>角色—资源—动作权限矩阵</b>（可直接交安全部门评审的格式）；</li>
+<li><b>高危动作清单与拦截策略</b>（金额阈值、次数阈值、必人审场景）；</li>
+<li><b>数据流向图</b>（哪些数据到哪里、是否出域、保留多久）；</li>
+<li><b>红队用例集</b>（按上文七个攻击面设计，纳入回归）；</li>
+<li><b>审计留痕规范</b>（字段、格式、存储、检索方式、保留期）；</li>
+<li><b>应急与止损预案</b>（发现失控时如何在分钟级停用某项能力）。</li>
+</ul>
+<div class="co warn">
+<span class="ct">最常见的自欺</span>
+<p>把安全策略写进提示词。提示词是概率性约束，不是访问控制。真正的边界必须由代码、凭证与网络策略实现：<b>模型不知道它不能做什么，但它尝试时确实做不到</b>——这才叫安全设计。</p>
+</div>
+</article>
+<article id="d5">
+<h3><span class="no">DOMAIN 05</span>方案设计与快速验证</h3>
+<p class="deck">目的：用最小代价证伪最危险的假设，并让验证成果可以直接长成生产系统，而不是一次性消耗品。</p>
+<h4>域目标</h4>
+<p>概念验证之所以常常变成终点，是因为它被设计成了一次<b>证明可行</b>的表演，而不是一次<b>寻找失败点</b>的实验。本域要求：从第一天起就按生产标准搭骨架，把验证目标定义为"在真实数据、真实权限、真实用户下，能否达到约定指标"。</p>
+<h4>核心实践</h4>
+<h5>1. 手段选择的决策顺序（不要从微调开始）</h5>
+<div class="fig">
+<div class="flow">
+<span class="st">规则 / 模板</span><span class="ar">→</span>
+<span class="st">检索增强</span><span class="ar">→</span>
+<span class="st">提示与上下文工程</span><span class="ar">→</span>
+<span class="st">工具 / 编排</span><span class="ar">→</span>
+<span class="st hot">微调</span><span class="ar">→</span>
+<span class="st">换模型 / 换架构</span>
+</div>
+<div class="cap">成本与锁定风险由左至右递增；多数质量问题在前四步即可解决</div>
+</div>
+<div class="tw"><table>
+<thead><tr><th style="width:150px">手段</th><th>适合解决的问题</th><th>不适合</th></tr></thead>
+<tbody>
+<tr><td><b>确定性规则</b></td><td>逻辑封闭、输入稳定、要求百分之百正确</td><td>需要理解自然语言语义</td></tr>
+<tr><td><b>检索增强</b></td><td>知识分散在文档、需引用、需随业务更新</td><td>事实不存在于任何语料中</td></tr>
+<tr><td><b>上下文工程</b></td><td>输出格式、风格、判断口径不稳定</td><td>缺依据、缺能力</td></tr>
+<tr><td><b>工具与编排</b></td><td>任务需多步、需真实系统动作、需外部计算</td><td>步骤本身不可控</td></tr>
+<tr><td><b>轻量微调</b></td><td>领域表达范式、术语习惯、稳定的输出偏好</td><td>补知识（会引发幻觉，应交给检索）</td></tr>
+</tbody>
+</table></div>
+<h5>2. 验证设计：先写下"我将以什么方式失败"</h5>
+<p>启动前完成一张假设卡：本方案依赖哪些前提（数据存在、接口可通、用户会用、指标可测），每条前提的失败征兆是什么，用什么最小实验在两周内证伪。经验是：<b>最容易让项目死掉的前提，往往是最不容易被写下来的那一条</b>——通常是"用户会改变自己的工作方式"。</p>
+<h5>3. 骨架优先，替换其后</h5>
+<p>验证阶段就要建立生产系统的空骨架：配置化而非硬编码、凭证走正式路径、日志与追踪从第一行代码开始、部署方式与生产一致。任何"先随便写写，之后再重构"的做法，在 FDE 的场景下几乎不会发生之后——人会被派往下一个现场。</p>
+<div class="co act">
+<span class="ct">判别法</span>
+<p>如果验证环境的任何一个环节（数据来源、权限方式、部署方式、评测方式）与生产环境不同，那么这次验证的结论对生产没有参考价值，只能用于讲故事。</p>
+</div>
+<h5>4. 四道门径（Gate）与判据</h5>
+<div class="tw"><table>
+<thead><tr><th style="width:110px">门径</th><th>要证明什么</th><th>客观判据示例</th><th style="width:130px">未通过时</th></tr></thead>
+<tbody>
+<tr><td><b>G1 立项</b></td><td>场景值得做，责任人到位</td><td>价值假设已签字；基线可测；接口可得性已核验</td><td>退回 D1 重新选场景</td></tr>
+<tr><td><b>G2 可行</b></td><td>真实约束下能达到最低效果线</td><td>真实数据抽样评测达标；关键接口已实际调通</td><td>降级方案或终止，不追加投入</td></tr>
+<tr><td><b>G3 可上线</b></td><td>具备承重运行的工程条件</td><td>评测集与回归门禁就绪；权限与审计合规；回滚演练通过；兜底路径可用</td><td>延后上线，补齐工程项</td></tr>
+<tr><td><b>G4 可交接</b></td><td>离开交付方也能继续运转</td><td>运行手册使他人独立完成一次部署与回滚；知识运营责任人到位；组件已回收</td><td>延长驻场或减范围</td></tr>
+</tbody>
+</table></div>
+<p>门径的意义不在流程合规，而在<strong>止损</strong>：它规定了在什么证据下必须停手。没有 G2 的项目，会把六个月的时间投在一个第一天就能证伪的前提上。</p>
+<h5>5. 成本与容量前置估算</h5>
+<p>方案设计阶段必须给出三项粗略估算并说明假设：单次请求的 token 与延迟量级、日活与峰值并发下的总量、以及私有化场景的显存与存储需求。估算不必精确，但必须显式——上线后才发现成本超预算，是 FDE 信誉损失最快的方式之一。</p>
+<h4>产出物</h4>
+<ul>
+<li>方案说明书（目标、备选比较、选定理由、已知妥协点）；</li>
+<li>假设卡与验证计划（每条前提 × 最小实验 × 判据 × 时限）；</li>
+<li>架构分层图与边界约定（哪些归平台、哪些归场景、哪些归客户）；</li>
+<li>容量与成本估算（含假设与敏感区间）；</li>
+<li>可逆性说明（每一步改动如何回退，含数据回退）。</li>
+</ul>
+<div class="co principle">
+<span class="ct">原则</span>
+<p>演示只证明正常路径可以工作；生产要求你在意的是异常路径。设计评审时，把至少一半时间花在"它出错时会发生什么"上，而不是"它最好时有多惊艳"。</p>
+</div>
+</article>
+<article id="d6">
+<h3><span class="no">DOMAIN 06</span>智能体与模型工程实现</h3>
+<p class="deck">目的：把方案变成可控、可测、可回滚的运行代码；把概率组件放进确定性责任体系。</p>
+<h4>域目标</h4>
+<p>这是把前面所有约束落进代码的域。核心难点不在"让智能体完成任务"，而在<b>让它在真实、混乱、随时变化的环境中稳定完成任务，并且在不能完成时正确地停下来</b>。</p>
+<h4>核心实践</h4>
+<h5>1. 编排范式选择</h5>
+<div class="tw"><table>
+<thead><tr><th style="width:150px">范式</th><th>结构</th><th>适用</th><th>风险</th></tr></thead>
+<tbody>
+<tr><td><b>固定工作流</b></td><td>预定义节点与分支，模型只在节点内部发挥作用</td><td>步骤稳定、需要审计、SLA 明确</td><td>覆盖不了长尾，需持续加规则</td></tr>
+<tr><td><b>推理—行动循环</b></td><td>模型自主决定下一步调用哪个工具</td><td>任务开放、路径不可预知</td><td>发散、绕圈、成本不可控，需步数与预算上限</td></tr>
+<tr><td><b>规划—执行分层</b></td><td>先产出计划再逐步执行，可插入校验点</td><td>多步骤、可分解、需人审关键节点</td><td>计划失效时无法自适应，需重规划触发条件</td></tr>
+<tr><td><b>多智能体分工</b></td><td>按岗位拆分角色与职责，串行或并行协作</td><td>任务天然分岗、需要不同权限与知识域</td><td>协调开销与错误累积，容易变成表演性架构</td></tr>
+</tbody>
+</table></div>
+<p>选择纪律：<b>能用固定工作流解决的，不要上自主循环；能用单智能体加好工具解决的，不要上多智能体。</b>架构复杂度必须用可测量的收益来支付，而收益的唯一凭证是评测集上的对比结果。</p>
+<h5>2. 工具与上下文契约</h5>
+<ul>
+<li>每个工具必须有明确的使用条件、输入 schema、输出格式、失败语义（超时、空结果、权限拒绝分别返回什么）。</li>
+<li>返回给模型的内容要经过裁剪与结构化，避免把整段原始 JSON 或整页文档塞回上下文——这既烧预算又降低注意力质量。</li>
+<li>写操作类工具必须返回回执与幂等键，供上层判断是否已生效，避免重复执行。</li>
+<li>把外部内容严格标记为待处理数据，与系统指令分区；不允许外部内容影响工具选择与执行策略。</li>
+</ul>
+<h5>3. 上下文工程</h5>
+<p>上下文不是越满越好，而是每一条都要有存在的理由。装配顺序建议遵循：<em>稳定系统约束 → 任务定义与验收标准 → 领域事实（带来源） → 当前状态与历史摘要 → 本轮输入</em>。需要长期记忆时，把记忆分层：短期会话状态、跨会话偏好、组织级事实，三者分别有写入条件、有效期与清理机制。</p>
+<div class="co deep">
+<span class="ct">现场经验</span>
+<p>效果不稳定时，先做<em>消融</em>而不是加东西：逐段移除上下文，看分数怎么变。多数"需要更强的模型"的案例，实际上是检索到的依据错了、或者无关材料挤占了注意力。加内容是最容易想到的动作，也常常是最错误的动作。</p>
+</div>
+<h5>4. 失败路径设计（比成功路径更重要）</h5>
+<ul>
+<li><b>可恢复失败</b>：网络抖动、超时、限流——退避重试，且重试必须幂等。</li>
+<li><b>部分失败</b>：多步任务中途失败——已生效的部分如何补偿，未生效的部分如何避免重复。</li>
+<li><b>状态不确定</b>：不知道是否执行成功——<b>默认停止并升级给人</b>，绝不自动重试写操作。</li>
+<li><b>能力不足</b>：模型判断超出把握——按预设口径拒答或转人工，并把该问题写入知识缺口清单。</li>
+<li><b>外部变化</b>：执行过程中业务状态已被他人改动——执行前做前置条件校验，失败则重新规划。</li>
+<li><b>降级链</b>：全自动 → 半自动 → 规则 → 人工，每一级都要真实可用，且切换可观测。</li>
+</ul>
+<p>需要特别注意的一点：具备规划能力的系统，遇到未定义路径时可能自行寻找替代方案继续达成目标。这既是它最有价值的能力，也是最需要被约束的能力。<strong>系统越擅长解决问题，就越需要明确知道什么情况下不该继续解决。</strong></p>
+<h5>5. 可观测性</h5>
+<p>概率系统的问题无法靠日志行数定位。最小观测集包括：每次请求的完整调用轨迹（步骤、工具、耗时、token）、检索到的片段与分数、被装配的上下文摘要（可按密级脱敏）、输出与判定结果、人审干预记录、以及按业务场景聚合的质量与成本趋势。观测数据同时是评测数据来源，设计时应统一存储，避免两套系统。</p>
+<h4>产出物</h4>
+<ul>
+<li>模块与接口契约文档（含错误语义与幂等约定）；</li>
+<li>编排结构说明（为何选此范式、放弃了哪些替代方案）；</li>
+<li>上下文装配规范（分区、优先级、预算分配、记忆策略）；</li>
+<li>失败处理矩阵（六类失败 × 处理策略 × 触发条件 × 告警口径）；</li>
+<li>调用轨迹与观测实现（字段定义与保留期）。</li>
+</ul>
+<div class="co warn">
+<span class="ct">反模式</span>
+<p><b>表演性架构</b>：为了显得先进而堆叠多智能体、框架与协议，实际任务三步就能完成。<b>提示词当配置管理</b>：关键业务规则散落在十几段提示文本里，无人知道哪段生效、改了会影响什么。<b>无限重试</b>：出错就重跑，导致重复发消息、重复扣款、重复建单。<b>把置信度当事实</b>：模型自称"很有把握"，就取消人工确认。</p>
+</div>
+</article>
+<article id="d7">
+<h3><span class="no">DOMAIN 07</span>评测与质量保障</h3>
+<p class="deck">目的：把"效果不错"变成可复现、可回归、可辩论的事实；让质量成为一条曲线，而不是一个形容词。</p>
+<h4>域目标</h4>
+<p>这是 AI 交付工程师区别于传统交付工程师最硬核的能力域，也是企业试点最常见的断点。传统软件可以确定性测试——要么对要么不对；生成式系统必须在相关性、一致性、事实准确性、政策符合度、稳定性等多个维度上持续度量。<strong>没有评测体系，就没有对效果负责的资格</strong>：你既无法证明上线是对的，也无法证明改动没把事情变坏。</p>
+<p>缺少这套机制通常导致两种极端结果：过度自信（"演示很好，直接全量"）或彻底瘫痪（"没人说得清到底行不行，先放着"）。两者都终止于同一个状态——项目停滞。</p>
+<h4>核心实践</h4>
+<h5>1. 评测先行：把评测集当作需求的形式化表达</h5>
+<p>正确顺序是<b>先写评测集，再写实现</b>。评测集定义了"什么算好"，等同于传统开发中的验收标准。若一个项目在编码两周后仍然没有评测集，说明连成功长什么样都还没定义，此时任何进度都是虚假的。</p>
+<h5>2. 三层评测结构</h5>
+<div class="grid g3">
+<div class="kc"><div class="kk">L1 · 离线</div><h4>金标集回归</h4><p>由真实业务样例构成，含期望答案与判定规则；每次改动必须全量跑，作为发布门禁。规模不必大，但必须覆盖已知失败模式。</p></div>
+<div class="kc"><div class="kk">L2 · 在线</div><h4>影子与抽样</h4><p>新版本先并行运行不影响用户；或按比例抽样送人工评审。用于发现离线集覆盖不到的真实分布问题。</p></div>
+<div class="kc"><div class="kk">L3 · 反馈</div><h4>用户信号回流</h4><p>采纳/修改/驳回、追问、显式评分、转人工率——把真实使用中的信号转成新的评测样例，形成闭环。</p></div>
+</div>
+<h5>3. 评分器设计</h5>
+<div class="tw"><table>
+<thead><tr><th style="width:130px">类型</th><th>适用判定</th><th>优点</th><th>必须防的坑</th></tr></thead>
+<tbody>
+<tr><td><b>规则 / 断言</b></td><td>格式、字段、必含引用、禁用词、数值范围</td><td>确定、便宜、快</td><td>只覆盖形式，不覆盖语义</td></tr>
+<tr><td><b>检索指标</b></td><td>命中依据是否包含正确片段</td><td>定位问题在检索还是生成</td><td>依据存在但未被使用，需另测</td></tr>
+<tr><td><b>模型评分</b></td><td>语义相关性、完整性、语气合规</td><td>可扩展到大批量</td><td>偏好长答案与自信语气；需用人工标注校准一致性</td></tr>
+<tr><td><b>人工评审</b></td><td>业务正确性、风险判断、验收争议</td><td>权威、可作最终裁决</td><td>贵、慢、评分者之间不一致，需要标注规范与仲裁机制</td></tr>
+<tr><td><b>成对比较</b></td><td>两个版本哪个更好</td><td>比绝对打分稳定得多</td><td>无法给出绝对质量水位</td></tr>
+</tbody>
+</table></div>
+<h5>4. 失败归因的四个去向</h5>
+<p>每一个坏例都必须被归类，否则改进是随机的。四类归因决定四种修法：</p>
+<div class="grid g4">
+<div class="kc"><div class="kk">归因 A</div><h4>检索失败</h4><p>依据没找到或找错 → 修数据、分块、检索策略、权限过滤</p></div>
+<div class="kc"><div class="kk">归因 B</div><h4>推理失败</h4><p>依据正确但判断错 → 修提示、拆步骤、加校验、换模型</p></div>
+<div class="kc"><div class="kk">归因 C</div><h4>数据失败</h4><p>依据本身就是错的或过期 → 修治理流程，工程改不动</p></div>
+<div class="kc"><div class="kk">归因 D</div><h4>评测失败</h4><p>判分规则不合理，实为误判 → 修评测集与标注规范</p></div>
+</div>
+<p>实践中 C 与 D 的比例远高于多数团队的直觉。把所有坏例都当成"模型不行"，会导向无效的微调与换模型支出。</p>
+<h5>5. 回归门禁与漂移监测</h5>
+<ul>
+<li>模型版本升级、提示修改、检索参数调整、知识库批量更新，四类变更必须触发同一套回归。</li>
+<li>门禁按场景设置：核心场景零容忍退化，长尾场景允许小幅度波动但需记录理由。</li>
+<li>上线后持续监测漂移信号：输入分布变化、检索空结果率上升、转人工率上升、用户修改率上升。漂移往往先于事故出现。</li>
+<li>建立"质量—延迟—成本"三角看板。任何一边的改善都要报告另外两边付出了什么代价。</li>
+</ul>
+<h4>产出物</h4>
+<ul>
+<li>评测集（样例、期望、判定规则、来源、覆盖说明、更新记录）；</li>
+<li>评分器实现与校准报告（模型评分与人工评分的一致性度量）；</li>
+<li>基线报告（首版指标 + 与业务指标的换算关系）；</li>
+<li>回归流水线（触发条件、门禁阈值、失败通知）；</li>
+<li>坏例台账（含归因分类与处理结果，是团队最有价值的资产之一）。</li>
+</ul>
+<div class="co principle">
+<span class="ct">原则</span>
+<p>评测集必须包含困难样例与对抗样例，而不是只用"好回答的题"。一个通过率长期高于九成的评测集，说明它在自我安慰，而不是在守护质量。</p>
+</div>
+<div class="co warn">
+<span class="ct">不要做的事</span>
+<p>不要用公开榜单分数替代自有场景评测；不要在演示数据上评测；不要在没有金标的情况下用模型给自己打分；不要把一次抽样结果当作稳定结论（同一输入换一次运行就可能不同，需报告方差而非单点）。</p>
+</div>
+</article>
+<article id="d8">
+<h3><span class="no">DOMAIN 08</span>上线、验收与交接</h3>
+<p class="deck">目的：让系统进入真实业务并活下来；让交付方可以离开而不造成崩塌。</p>
+<h4>域目标</h4>
+<p>验收签字不是交付的终点，只是责任的转移起点。本域要解决两个真实问题：<b>第一，上线时不造成不可挽回的业务损伤；第二，交付方离场后系统仍能被人维护。</b>第二个问题几乎总是被低估——文档随人走，是驻场类交付最常见的失败形态。</p>
+<h4>核心实践</h4>
+<h5>1. 上线前的六项就绪检查</h5>
+<ul class="ck">
+<li><b>可回滚</b>：存在一条已实际演练过的还原路径，包含数据回退方式与时间预算</li>
+<li><b>可观测</b>：核心链路指标、错误率、延迟、成本四项看板已可用且有人值守</li>
+<li><b>可降级</b>：自动 → 半自动 → 规则 → 人工四级退路全部实测可用</li>
+<li><b>可拦截</b>：高危动作开关、限流、熔断、停用某项能力的手段已就位</li>
+<li><b>可追责</b>：审计留痕覆盖全部写操作，且能在需要时按人、按时间、按对象还原</li>
+<li><b>可交接</b>：另一名工程师按运行手册独立完成过一次部署与回滚演练</li>
+</ul>
+<h5>2. 灰度设计：按风险而不是按比例</h5>
+<p>常见做法是按流量百分比放量，但对业务系统常常不适用。更稳妥的灰度维度是：<b>先只读后写、先低风险对象后高风险对象、先个别岗位后全岗位、先建议模式后执行模式</b>。灰度期间必须显式记录对照组数据，这是后续价值论证唯一干净的证据来源。</p>
+<h5>3. 验收的两类指标</h5>
+<div class="tw"><table>
+<thead><tr><th style="width:150px">类型</th><th>内容</th><th>争议点与预防</th></tr></thead>
+<tbody>
+<tr><td><b>投入指标</b></td><td>接入系统数、覆盖岗位数、知识条目数、响应时间、可用性</td><td>容易全部达标却无实际价值；须与结果指标同签</td></tr>
+<tr><td><b>结果指标</b></td><td>采纳率、周期缩短、差错下降、人工复核量减少</td><td>受组织变量影响；须约定测量方法、周期与异常处理</td></tr>
+</tbody>
+</table></div>
+<p>验收窗口建议不少于两个完整业务周期（含一次峰值或一次特殊情况），短窗口的数据在业务侧不具代表性。合同中最好同时写入"测量方法"而不是只写"目标数值"。</p>
+<h5>4. 交接的四个转移</h5>
+<div class="grid g4">
+<div class="kc"><div class="kk">01</div><h4>运行责任</h4><p>谁看告警、谁处理日常故障、升级路径是什么、响应时限多少，写成值班表而非口头约定。</p></div>
+<div class="kc"><div class="kk">02</div><h4>知识责任</h4><p>语料的更新、废止、纠错由哪个部门哪位角色负责，频率多少，如何审核。</p></div>
+<div class="kc"><div class="kk">03</div><h4>账号与资产</h4><p>凭证、密钥、服务器、域名、第三方订阅的归属与移交记录；交付方持有的临时权限全部注销。</p></div>
+<div class="kc"><div class="kk">04</div><h4>改进责任</h4><p>后续需求由谁评估、谁排期、评测门禁由谁维护，避免交接后无人对质量负责。</p></div>
+</div>
+<h5>5. 文档即产品</h5>
+<p>交接文档的质量决定交付方的自由度。有效的文档结构不是"我们做了什么"，而是"你要怎么用它"：系统边界与不做什么、日常操作五件事、异常处理决策树、常见故障与自查路径、变更与发布流程、回滚步骤、以及一份"什么时候必须找厂商"的清单。判断标准只有一条：<b>按文档操作的人，不需要来问问题。</b></p>
+<div class="co act">
+<span class="ct">现场做法</span>
+<p>交接前安排一次"无交付方参与"的演练：由客户侧工程师按手册完成一次配置变更与一次回滚，交付方只在旁记录卡点。卡点清单就是文档需要补的全部内容，也是最有效的信任建立方式。</p>
+</div>
+</article>
+<article id="d9">
+<h3><span class="no">DOMAIN 09</span>运行期运维与持续迭代</h3>
+<p class="deck">目的：让系统在无人照看的日子里不悄悄烂掉；让每一次改动都可评估、可归因、可撤销。</p>
+<h4>域目标</h4>
+<p>AI 系统有一个传统软件没有的特性：<b>它不会因为你不动它而保持不变</b>。数据在变、用户问法在变、模型版本在变、业务规则在变。上线只是质量曲线的起点，运行期的核心任务是对抗静默退化。</p>
+<h4>核心实践</h4>
+<h5>1. 四类退化与对应监测</h5>
+<div class="tw"><table>
+<thead><tr><th style="width:150px">退化类型</th><th>先兆信号</th><th>监测手段</th><th>常见处置</th></tr></thead>
+<tbody>
+<tr><td><b>知识退化</b></td><td>过期文档被引用；答"上一个版本的规定"</td><td>来源时间分布、废止条目命中率</td><td>下线过期源、建立强制复审周期</td></tr>
+<tr><td><b>分布漂移</b></td><td>检索空结果率上升、追问率上升</td><td>输入主题分布对比、新问题聚类</td><td>补语料、调整分块与检索策略</td></tr>
+<tr><td><b>模型漂移</b></td><td>同一提示在新版本上输出风格或判断变化</td><td>版本固定 + 定期用金标集重跑</td><td>固定版本或走完整回归后升级</td></tr>
+<tr><td><b>使用退化</b></td><td>活跃人数下降、绕过系统走老路</td><td>渗透率、复用率、人工替代路径观察</td><td>流程再嵌入、界面减负、责任重设</td></tr>
+</tbody>
+</table></div>
+<h5>2. 变更管理</h5>
+<ul>
+<li>每一次线上变更（模型、提示、检索参数、知识库、工具定义）都要记录变更内容、动机、预期影响与实测影响。</li>
+<li>变更必须走同一条回归门禁，禁止"只是改了一句话"式的豁免——提示词的一句话改动常常是事故根因。</li>
+<li>高影响变更双人复核，且在低峰期发布；发布后保留观察窗口与快速回退手段。</li>
+<li>维护一份"当前生效配置快照"，任何时候都能回答"线上现在跑的是哪一版"。</li>
+</ul>
+<h5>3. 事故响应</h5>
+<p>AI 系统的事故往往不是宕机，而是<b>错误结论被当作事实采纳</b>。因此应急预案必须包含三件传统系统没有的事：受影响输出的召回与告知方式、基于留痕的影响范围界定、以及在问题澄清前对相关能力做局部停用（而不是整体下线）。复盘输出应当是决策点的追溯，而不是"加强意识"类的行动项。</p>
+<h5>4. 迭代节奏</h5>
+<div class="fig">
+<div class="flow">
+<span class="st">周 · 坏例归类</span><span class="ar">→</span>
+<span class="st">双周 · 评测与优化</span><span class="ar">→</span>
+<span class="st">月 · 版本发布</span><span class="ar">→</span>
+<span class="st hot">季 · 场景再评估</span>
+</div>
+<div class="cap">季度层面必须回答：这个场景还值得继续投入吗，下一个场景是什么</div>
+</div>
+<h4>度量指标</h4>
+<div class="kpi">
+<div><b>渗透率</b><span>目标岗位中每周至少使用一次的人数占比，比满意度诚实得多。</span></div>
+<div><b>干预率</b><span>需要人工修正或驳回的输出比例，反映系统真实可托付程度。</span></div>
+<div><b>缺口闭环时长</b><span>从发现知识/能力缺口到补齐的平均天数，决定退化速度是否被追上。</span></div>
+<div><b>变更失败率</b><span>上线后需要回滚或热修的变更比例，衡量工程纪律。</span></div>
+</div>
+</article>
+<article id="d10">
+<h3><span class="no">DOMAIN 10</span>沉淀与产品反哺</h3>
+<p class="deck">目的：把一次现场的解法变成一类场景的默认能力。这是 FDE 从成本项变成资产项的唯一路径。</p>
+<h4>域目标</h4>
+<p>如果交付结束后只留下一套客户专属系统，那么这门生意的天花板就是人头数。本域要求每一次交付同时产出两类资产：<b>可复用件</b>（连接器、评测集、模板、脚本、文档骨架）与<b>知识件</b>（场景模式、失败教训、行业约束、选型结论）。同时承担反向职责：把现场暴露的产品缺陷与需求缺口，以可执行的格式送回产品线。</p>
+<h4>核心实践</h4>
+<h5>1. 复用判定标准：什么叫"沉淀完成"</h5>
+<div class="tw"><table>
+<thead><tr><th style="width:170px">层级</th><th>状态</th><th>判断依据</th></tr></thead>
+<tbody>
+<tr><td><b>零级</b></td><td>只存在于当事人脑中</td><td>当事人不在，这件事就无法重做</td></tr>
+<tr><td><b>一级</b></td><td>有脚本 / 有文档</td><td>别人能找到，但需要来问才能跑通</td></tr>
+<tr><td><b>二级</b></td><td>可配置复用</td><td>别人改几个参数即可在新环境跑通，无需原作者</td></tr>
+<tr><td><b>三级</b></td><td>成为默认能力</td><td>新项目中它已经是自带项，不再被视为一次开发</td></tr>
+</tbody>
+</table></div>
+<p>健康的团队应把"沉淀层级"作为交付验收的一部分：低于二级的沉淀，视为交付未完成。</p>
+<h5>2. 什么该沉淀，什么不该</h5>
+<ul>
+<li><b>高价值沉淀对象</b>：跨客户稳定的机制（权限模型骨架、评测框架、观测埋点、数据接入适配器、交付文档结构、诊断清单）。</li>
+<li><b>中价值</b>：行业共性知识（该行业的典型流程、常见阻力、合规红线、术语表、验收惯例）。</li>
+<li><b>不应沉淀为通用件</b>：某一客户的特殊偏好、临时绕过某个坏接口的补丁、一次性数据修复脚本——它们只应进入案例库，不应进入主干。</li>
+</ul>
+<h5>3. 反哺机制</h5>
+<div class="grid g3">
+<div class="kc"><div class="kk">通道一</div><h4>缺陷与需求回流</h4><p>用统一模板提交：现场证据、影响范围、临时绕行方式、期望的产品能力。避免只说"客户觉得不好用"。</p></div>
+<div class="kc"><div class="kk">通道二</div><h4>组件与连接器入库</h4><p>设入库门槛：可配置、有文档、有自测、有维护人。无门槛的组件库会在一年内变成垃圾场。</p></div>
+<div class="kc"><div class="kk">通道三</div><h4>方案与打法标准化</h4><p>把某类场景的完整解法写成参考架构与工期模型，让新小组能在不联系原作者的情况下复用。</p></div>
+</div>
+<h5>4. 定制与标准化的裁决规则</h5>
+<p>这是 FDE 与产品团队冲突最多的地方，必须有事先约定。可行的规则是：</p>
+<ul>
+<li><b>配置优先</b>：能用参数与开关解决的，不新增分支代码。</li>
+<li><b>扩展点优先</b>：确需差异时，通过插件、钩子、外部策略文件实现，主干保持单一。</li>
+<li><b>三客户原则</b>：同类需求出现三次以上才进入产品主干，前两次允许作为项目件存在。</li>
+<li><b>成本显式化</b>：每次要求主干让步，必须同时记录未来升级与回归成本，由双方共同签字。</li>
+</ul>
+<h4>产出物</h4>
+<ul>
+<li><b>交付包</b>（部署物 + 配置模板 + 评测集 + 运行手册 + 变更记录，一次收齐）；</li>
+<li><b>组件登记</b>（用途、依赖、维护人、复用次数、成熟度层级）；</li>
+<li><b>场景参考架构</b>（该场景的标准解法、工期模型、常见坑）；</li>
+<li><b>反哺清单</b>（提给产品的需求与缺陷，含状态跟踪）；</li>
+<li><b>复盘纪要</b>（决策点追溯，而不是流程检讨）。</li>
+</ul>
+<div class="co principle">
+<span class="ct">原则</span>
+<p>只有别人用得上的东西才是资产，只有自己用得上的东西是习惯。判断标准很朴素：这份代码或文档，在原作者不参与的情况下，能否在另一个项目里被独立使用。答不上来，就还没沉淀完。</p>
+</div>
+</article>
+<!-- ============ PART IV ============ -->
+<section class="part-band" data-n="IV" id="p4">
+<span class="pnum">Part Four</span>
+<h2>交付生命周期</h2>
+<p>十个知识域在时间轴上的编排方式：六段推进、四道门径、一套可核对的阶段产出矩阵。</p>
+</section>
+<article id="c8">
+<h3><span class="no">CHAPTER 08 · 流程</span>六段生命周期与四道门径</h3>
+<p class="deck">阶段划分的依据不是日历，而是证据：每进入下一阶段，必须已经拿到上一阶段无法伪造的证据。</p>
+<div class="fig">
+<div class="flow compact">
+<span class="st">S1 勘察<br/>1–2 周</span><span class="ar">→</span>
+<span class="st">S2 定标<br/>1–2 周</span><span class="ar">→</span>
+<span class="st hot">G1</span><span class="ar">→</span>
+<span class="st">S3 建造<br/>4–10 周</span><span class="ar">→</span>
+<span class="st hot">G2</span><span class="ar">→</span>
+<span class="st">S4 验证<br/>2–4 周</span><span class="ar">→</span>
+<span class="st hot">G3</span><span class="ar">→</span>
+<span class="st">S5 运行<br/>4–12 周</span><span class="ar">→</span>
+<span class="st hot">G4</span><span class="ar">→</span>
+<span class="st">S6 复制</span>
+</div>
+<div class="cap">典型周期 3–6 个月；S3 与 S4 必须并行推进（评测随建造同步生长）</div>
+</div>
+<h4>S1 · 勘察（Diagnose）</h4>
+<p>对应知识域 D2。目标是把环境从假设变成事实。关键动作：干系人访谈、系统清单、数据抽样核验、权限路径确认、约束分类。常见错误是访谈只做管理层——管理层说的是"应该怎样"，一线说的是"实际怎样"，交付必须在后者上运行。产出环境事实基线与约束台账。</p>
+<h4>S2 · 定标（Frame）</h4>
+<p>对应 D1 与 D3 的前半。目标是选定场景并定下可反驳的价值假设与验收口径。关键动作：三维筛选、范围与排除清单、基线测量、评测集初稿、数据治理方案。这一段最重要的产出不是方案，而是<b>基线数据</b>——错过这个窗口，上线后就再也拿不到干净的对照。</p>
+<h4>S3 · 建造（Build）</h4>
+<p>对应 D4、D5、D6。目标是在真实约束下把骨架立起来。关键动作：接入打通、权限落地、检索与编排实现、观测埋点、并行编写评测集与坏例台账。节奏建议采用"每周一闭环"：每周至少让一个真实用户在真实数据上试用一次，把反馈直接转为改动。<b>连续两周没有真实用户接触，说明已经偏航。</b></p>
+<h4>S4 · 验证（Prove）</h4>
+<p>对应 D7。目标是拿到足以支持上线决策的证据。关键动作：全量回归、红队用例、性能与容量压测、兜底与回滚演练、灰度设计确认。这一段必须产出书面质量结论，含指标值、方差、未覆盖范围与已知风险，而不是"通过"两个字。</p>
+<h4>S5 · 运行（Operate）</h4>
+<p>对应 D8、D9。目标是从"交付方负责"过渡到"客户能自立"。关键动作：灰度放量、对照数据收集、值班与响应机制建立、文档补齐、无交付方参与的演练、知识运营职责移交。</p>
+<h4>S6 · 复制（Replicate）</h4>
+<p>对应 D10。目标是把这一场的成果变成下一场的起点。关键动作：组件入库与登记、参考架构与工期模型编写、需求反哺提交、下一场景选择。这一段通常不被计入合同工时，却决定团队长期毛利——组织若不为此预留时间，交付质量会随规模单调下降。</p>
+<h4>四道门径的裁决原则</h4>
+<div class="co deep">
+<span class="ct">裁决纪律</span>
+<p>门径必须允许"不通过"这个结论存在。如果一个门径从未否决过任何项目，它就不是门径，而是仪式。实践中最该被严格执行的是 <b>G2</b>：它要求用真实数据、真实权限证明最低效果线可达，是唯一能够阻止团队在错误前提下持续追加投入的位置。绝大多数停滞的试点，问题都在于当时应该被 G2 拦下而没有被拦下。</p>
+</div>
+</article>
+<article id="c9">
+<h3><span class="no">CHAPTER 09 · 追溯</span>阶段 × 交付物 × 责任矩阵</h3>
+<p class="deck">可直接作为项目计划模板使用。责任人缩写：<b>F</b>＝FDE，<b>PL</b>＝平台工程，<b>C</b>＝客户方，<b>PM</b>＝交付/项目经理，<b>PD</b>＝产品。</p>
+<div class="tw"><table class="wide">
+<thead><tr><th style="width:78px">阶段</th><th style="width:110px">知识域</th><th>核心交付物</th><th style="width:70px">责任</th><th>完成判据</th></tr></thead>
+<tbody>
+<tr><td><b>S1</b></td><td>D2</td><td>环境事实基线、系统接口清单、数据质量核验结论、约束台账、干系人地图</td><td>F / C</td><td>每条关键结论均可追溯到采集证据；未知项有闭环时间</td></tr>
+<tr><td><b>S2</b></td><td>D1 D3</td><td>场景优先级矩阵、价值假设书、范围与排除清单、基线测量报告、数据治理方案</td><td>F / C / PM</td><td>业务责任人具名签署；基线数据已到手；不做项已确认</td></tr>
+<tr><td><b>S2</b></td><td>D7</td><td>评测集初稿（含期望与判定规则）</td><td>F</td><td>覆盖已知失败模式；客户业务人员参与标注</td></tr>
+<tr><td><b>S3</b></td><td>D3</td><td>接入实现与契约、索引方案、知识管道与元数据规范</td><td>F / PL</td><td>真实环境端到端跑通；增量更新可用</td></tr>
+<tr><td><b>S3</b></td><td>D4</td><td>权限矩阵、高危动作拦截、审计留痕、数据流向图</td><td>F / C</td><td>安全部门书面评审通过；临时权限有回收计划</td></tr>
+<tr><td><b>S3</b></td><td>D5 D6</td><td>方案说明、架构分层、编排与工具契约、上下文装配规范、失败处理矩阵</td><td>F / PL</td><td>备选方案比较记录完整；失败路径逐条实测</td></tr>
+<tr><td><b>S4</b></td><td>D7</td><td>回归流水线、基线报告、红队用例结果、坏例台账</td><td>F</td><td>门禁生效且可重复执行；指标含方差说明</td></tr>
+<tr><td><b>S4</b></td><td>D8</td><td>上线就绪检查单、灰度方案、回滚演练记录</td><td>F / PL / C</td><td>六项就绪全部为真；演练实际执行过</td></tr>
+<tr><td><b>S5</b></td><td>D8 D9</td><td>运行手册、值班与升级机制、质量看板、交接演练记录、验收报告</td><td>F / C / PM</td><td>客户侧独立完成一次部署与回滚；采纳率达标</td></tr>
+<tr><td><b>S6</b></td><td>D10</td><td>交付包、组件登记、场景参考架构、需求反哺清单、复盘纪要</td><td>F / PD</td><td>组件达到二级复用；参考架构可被他人独立使用</td></tr>
+</tbody>
+</table></div>
+<h4>工期模型（量级参考）</h4>
+<p>以下为单场景典型工作量分布，用于投标与资源规划的量级判断，不构成承诺。实际浮动主要来自客户侧的权限申请时长与数据治理复杂度，这两项通常占非工程延误的大半。</p>
+<div class="tw"><table>
+<thead><tr><th style="width:210px">场景复杂度</th><th>特征</th><th>典型人力</th><th>典型周期</th></tr></thead>
+<tbody>
+<tr><td><span class="tag g">单一 · 只读</span></td><td>一个部门、一类文档、无写操作、无复杂集成</td><td>1 人</td><td>6–10 周</td></tr>
+<tr><td><span class="tag y">多源 · 有状态</span></td><td>多个数据源、需身份过滤、有流程嵌入与人审</td><td>2–3 人</td><td>10–16 周</td></tr>
+<tr><td><span class="tag r">跨系统 · 可执行</span></td><td>含写操作、跨部门、审计与合规要求高、私有化部署</td><td>3–5 人</td><td>16–28 周</td></tr>
+<tr><td><span class="tag r">组织级平台</span></td><td>多场景复用底座、集中治理、多租户与统一评测</td><td>平台组 + 多个交付小组</td><td>两个季度以上滚动</td></tr>
+</tbody>
+</table></div>
+<div class="co warn">
+<span class="ct">报价纪律</span>
+<p>估算必须区分<b>工程工时</b>与<b>依赖等待</b>。把客户侧审批、数据准备、接口改造的等待时间折算进自己的报价，是交付方最容易犯的成本错误。正确做法是把它写成客户的责任项与前置条件，并在计划中显式列为等待期。</p>
+</div>
+</article>
+<!-- ============ PART V ============ -->
+<section class="part-band" data-n="V" id="p5">
+<span class="pnum">Part Five</span>
+<h2>组织与商业模式</h2>
+<p>单个 FDE 能做对一件事，一群 FDE 能否做出可复制的生意，取决于编制、接缝与计价方式。这一部分讨论系统而非个人。</p>
+</section>
+<article id="c10">
+<h3><span class="no">CHAPTER 10 · 编制</span>小组形态与协作机制</h3>
+<p class="deck">最常见的失败组织形态是"每个工程师各守一个客户"。它看起来灵活，实际后果是经验无法流动、组件无法沉淀、人被逐个耗尽。</p>
+<h4>10.1 推荐编制：三人小组</h4>
+<div class="grid g3">
+<div class="kc"><div class="kk">角色一</div><h4>场景负责人（L3+）</h4><p>对业务结果负责。做需求发现、方案取舍、客户沟通、验收口径谈判；保有最终技术判断权。</p></div>
+<div class="kc"><div class="kk">角色二</div><h4>实现工程师（L2–L3）</h4><p>对系统可用性负责。做集成、编排、性能与稳定性；把重复动作脚本化。</p></div>
+<div class="kc"><div class="kk">角色三</div><h4>数据与评测（L2–L3）</h4><p>对质量可证负责。做语料治理、评测集、坏例归因、回归门禁；这一角色在小团队常由前两者兼任，但<b>职责必须显式存在</b>。</p></div>
+</div>
+<p>平台能力（推理服务、观测底座、通用连接器、部署工具）不编入小组，由平台团队提供并以内部服务水平约定交付。小组不得私建底座——这是保证跨客户一致性与安全口径的前提。</p>
+<h4>10.2 小组规模与人数配比</h4>
+<div class="tw"><table>
+<thead><tr><th style="width:170px">机制</th><th>建议做法</th><th>原因</th></tr></thead>
+<tbody>
+<tr><td><b>同时段客户数</b></td><td>单人同时负责不超过 1.5 个活跃现场</td><td>现场问题的处理时限要求注意力冗余</td></tr>
+<tr><td><b>沉淀时间保护</b></td><td>每四周保留约一周不排交付，用于组件、文档与复盘</td><td>不预留就会永远被项目吞掉，复用率随之归零</td></tr>
+<tr><td><b>轮换</b></td><td>同一客户连续驻场不超过 6–9 个月，之后交接或换人</td><td>防止个人变成单点，同时把经验带回组织</td></tr>
+<tr><td><b>差旅</b></td><td>差旅强度需要有明确上限与补偿机制</td><td>长期高差旅是这一角色离职的首因，且直接压低现场判断质量</td></tr>
+<tr><td><b>新人配属</b></td><td>每个小组最多带一名 L1</td><td>L1 的成长依赖随场，但超过一名会拖垮小组吞吐</td></tr>
+</tbody>
+</table></div>
+<h4>10.3 三个内部机制</h4>
+<ul>
+<li><b>现场问题例会</b>（每周）：只讲两类内容——上周遇到的、可能发生在别人身上的问题；需要别人给判断的卡点。目的不是汇报进度，而是让个体踩坑快速变成组织知识。</li>
+<li><b>组件评审</b>（每两周）：判断新产出值得入库、值得合并进已有组件、还是只进案例库。有门槛才有复用。</li>
+<li><b>反哺通道</b>（持续）：现场需求以固定模板进产品池，且必须回写状态。如果提交后没有回应，团队很快会停止提交，沉淀链条就此断裂。</li>
+</ul>
+<div class="co principle">
+<span class="ct">原则</span>
+<p>FDE 小组的考核不应只看交付完成率与营收，必须包含两项滞后指标：<b>组件被他组复用次数</b>与<b>同类场景第二次交付的工时下降幅度</b>。缺少这两项，组织会稳定地把 FDE 做成高级外包。</p>
+</div>
+</article>
+<article id="c11">
+<h3><span class="no">CHAPTER 11 · 计价</span>商业模式与定价结构</h3>
+<p class="deck">定价方式决定行为方式。按人天计价会激励拖延与定制，按结果计价会激励复用与收敛，但会放大交付方的风险敞口。</p>
+<h4>11.1 四种结构比较</h4>
+<div class="tw"><table>
+<thead><tr><th style="width:140px">结构</th><th>客户视角</th><th>交付方视角</th><th>适用</th></tr></thead>
+<tbody>
+<tr><td><b>人天 / 工时</b></td><td>简单透明，便于预算；但难以判断值不值</td><td>收入线性、无复用收益激励</td><td>范围高度不确定的探索期</td></tr>
+<tr><td><b>场景打包价</b></td><td>为结果买断，可控</td><td>复用率越高毛利越高，激励沉淀</td><td>已有成熟参考架构的场景</td></tr>
+<tr><td><b>订阅 + 服务费</b></td><td>持续获得演进；门槛较低</td><td>收入可预测；但服务成本需被约束</td><td>需长期运营知识与评测的场景</td></tr>
+<tr><td><b>收益分成 / 对赌</b></td><td>零风险，接受意愿高</td><td>收益上限高但归因极难，回款周期长</td><td>可精确计量且指标单一的降本场景</td></tr>
+</tbody>
+</table></div>
+<h4>11.2 合同必须写清的五件事</h4>
+<ol>
+<li><b>前置条件而非承诺</b>：数据提供、权限申请、接口改造、业务责任人投入的具体时限，逾期顺延机制。</li>
+<li><b>验收口径的测量方法</b>：数据来源、统计窗口、对照组定义、异常处理，而不只是目标数字。</li>
+<li><b>责任边界</b>：模型自身能力局限导致的错误，与工程设计缺陷导致的错误，责任划分不同。</li>
+<li><b>成果归属</b>：客户业务定制归客户，通用组件与方法归交付方——这一条不写清，后续复用会有法律障碍。</li>
+<li><b>退出与交接</b>：交接完成的定义、交付方离场后的支持窗口、临时权限注销确认。</li>
+</ol>
+<h4>11.3 定价的三条经验</h4>
+<div class="co act">
+<span class="ct">经验</span>
+<p><b>一、把基线测量列为独立付费项。</b>没有它，后续所有价值论证都缺乏依据；把它单列，既保护交付方，也让客户对目标产生真实共识。<br/>
+<b>二、警惕"先做一个小试点"式定价。</b>试点范围过小、周期过短的场景，通常无法产生业务价值，只能产生演示价值，最终以"效果不明显"结束，双方都浪费预算。<br/>
+<b>三、为沉淀收费，而不是偷偷做。</b>把"可复用件交付"作为合同条款（含组件文档、评测集、参考架构），既抬升客单价，也让团队有理由投入时间。</p>
+</div>
+</article>
+<article id="c12">
+<h3><span class="no">CHAPTER 12 · 规模化</span>从几个能人到一种能力</h3>
+<p class="deck">FDE 的规模化悖论：这个角色依赖资深个体的判断力，而判断力恰恰是最难批量生产的东西。破解方式不是降低要求，而是把判断中可外显的部分固化为工具与文档。</p>
+<h4>12.1 规模化的四个台阶</h4>
+<div class="grid g4">
+<div class="kc"><div class="kk">台阶一</div><h4>个人英雄</h4><p>少数能人各自扛客户，交付质量取决于分给了谁。上限约十来个客户。</p></div>
+<div class="kc"><div class="kk">台阶二</div><h4>方法统一</h4><p>诊断清单、评测框架、交付包结构统一，质量下限被抬起来。这是本手册存在的意义。</p></div>
+<div class="kc"><div class="kk">台阶三</div><h4>工具承接</h4><p>重复劳动被工具吃掉：自动体检、连接器骨架、评测流水线、报告生成。人力从执行转向判断。</p></div>
+<div class="kc"><div class="kk">台阶四</div><h4>平台外溢</h4><p>沉淀出来的组件与治理模型成为客户自建的底座，交付方角色从建造者转为赋能者与守门人。</p></div>
+</div>
+<h4>12.2 知识管理：四种必须存在的载体</h4>
+<div class="tw"><table>
+<thead><tr><th style="width:150px">载体</th><th>内容</th><th>失败特征</th></tr></thead>
+<tbody>
+<tr><td><b>案例库</b></td><td>按行业与场景归档的完整交付记录：约束、方案、指标结果、踩坑、成本</td><td>只写成功不写失败，新人看了无法避坑</td></tr>
+<tr><td><b>组件库</b></td><td>可复用件，含维护人、依赖、复用次数、成熟度标记</td><td>无入库门槛与无人维护，两年后没人敢用</td></tr>
+<tr><td><b>坏例集</b></td><td>跨项目的失败样例与归因，评测集的重要来源</td><td>只留在项目内部，同类错误反复发生</td></tr>
+<tr><td><b>方法文档</b></td><td>本手册这类：清单、模板、判据、话术</td><td>写完就不再更新，与最新实践脱节</td></tr>
+</tbody>
+</table></div>
+<h4>12.3 招不到人怎么办</h4>
+<p>市场上同时具备工程能力、业务判断与客户沟通经验的人极为稀缺。可行的三条路径：</p>
+<ol>
+<li><b>组合替代个体</b>：用"强工程 + 强业务"的双人配置顶替全能个体，靠机制而非超人。</li>
+<li><b>内部转岗培养</b>：从资深后端、数据工程、实施顾问、行业解决方案中选拔，补最短的那块，而不是从头招。</li>
+<li><b>用工具降低门槛</b>：诊断、评测、接入这三件事一旦工具化，就能让 L2 完成原本需要 L3 的工作，把稀缺的判断力集中在方案与谈判上。</li>
+</ol>
+<div class="co warn">
+<span class="ct">规模化陷阱</span>
+<p>不要用"人效"作为唯一管理指标。当小组被要求百分百填满项目工时时，沉淀时间必然被牺牲，短期报表好看，两年后交付成本不降、复用率归零、资深员工流失。这是一个可预期的、由指标设计造成的失败。</p>
+</div>
+</article>
+<!-- ============ PART VI ============ -->
+<section class="part-band" data-n="VI" id="p6">
+<span class="pnum">Part Six</span>
+<h2>企业痛点诊断</h2>
+<p>一张病症表。按"你能观察到的症状"检索，而不是按你想用的技术检索——这是现场工作唯一可靠的索引方式。</p>
+</section>
+<article id="c13">
+<h3><span class="no">CHAPTER 13 · 病症表</span>二十个高频痛点：症状 / 根因 / 处方</h3>
+<p class="deck">根因列写的是真实成因，不是表面成因；处方列指向本手册对应知识域，便于直接跳转到可执行动作。</p>
+<h4>13.1 立项与价值类</h4>
+<div class="tw"><table>
+<thead><tr><th style="width:210px">症状</th><th>根因</th><th>处方</th><th style="width:74px">域</th></tr></thead>
+<tbody>
+<tr><td>Demo 很惊艳，三个月后没人用</td><td>验证的是技术可行，不是业务可用；未定义谁在什么环节因此少干活</td><td>价值假设改写为含基线与前提的命题；把功能嵌入既有工作流而非另开入口</td><td>D1</td></tr>
+<tr><td>领导换了，项目就停了</td><td>价值只对上可见，未沉淀为可交接的流程改造与责任人</td><td>建立业务侧 Owner 制；把指标写进对方部门考核项</td><td>D1 D8</td></tr>
+<tr><td>说不清 ROI，续费困难</td><td>没有上线前基线，无法构造干净对照</td><td>基线测量作为独立交付项；灰度期保留对照组数据</td><td>D1 D8</td></tr>
+<tr><td>场景越铺越多，每个都做不深</td><td>缺少淘汰机制与优先级裁决；销售驱动立项</td><td>三维筛选 + 定期砍场景；一个做透再复制</td><td>D1</td></tr>
+<tr><td>业务方需求说不清楚</td><td>本就说不清——真实需求只能通过观察与原型逼出来</td><td>先做一周可试用的粗版本收集真实反应，不追求完整需求文档</td><td>D1 D5</td></tr>
+</tbody>
+</table></div>
+<h4>13.2 数据与系统类</h4>
+<div class="tw"><table>
+<thead><tr><th style="width:210px">症状</th><th>根因</th><th>处方</th><th style="width:74px">域</th></tr></thead>
+<tbody>
+<tr><td>答得一本正经，内容却是错的</td><td>模型准确执行了一份错误或过期的数据；冲突未裁决</td><td>唯一权威源制度；元数据带生效期；废止强制下线</td><td>D3</td></tr>
+<tr><td>试点准确率很高，一上线就掉</td><td>评测用的是精选样本，真实分布含大量长尾与脏输入</td><td>金标集必须来自真实历史工单/请求，且含困难样例</td><td>D7</td></tr>
+<tr><td>知识库更新永远滞后</td><td>没有运营责任人与节奏，被当成一次性建设任务</td><td>知识责任矩阵 + 固定复审周期 + 缺口看板</td><td>D3 D9</td></tr>
+<tr><td>接口联调耗掉一半工期</td><td>勘察阶段把"文档里有"当成"能调通"</td><td>开工前完成关键接口实际连通性验证并留证据</td><td>D2</td></tr>
+<tr><td>数据出不去内网，方案无法落地</td><td>合规红线未在方案设计时纳入</td><td>默认本地推理 + 显式出域开关 + 字段级脱敏</td><td>D4</td></tr>
+<tr><td>多部门数据口径冲突，谁都不认</td><td>数据治理问题被当成技术问题处理</td><td>由业务方裁决权威源，工程只负责实现裁决结果</td><td>D3</td></tr>
+</tbody>
+</table></div>
+<h4>13.3 效果与评测类</h4>
+<div class="tw"><table>
+<thead><tr><th style="width:210px">症状</th><th>根因</th><th>处方</th><th style="width:74px">域</th></tr></thead>
+<tbody>
+<tr><td>上线后没人知道答得对不对</td><td>没有在线评测与抽样评审机制</td><td>影子运行 + 周期抽样 + 用户信号回流，异常小时级可见</td><td>D7 D9</td></tr>
+<tr><td>每次改动都要人肉回归</td><td>评测未流水线化</td><td>四类变更强制触发同一套回归并设门禁阈值</td><td>D7</td></tr>
+<tr><td>模型评分虚高</td><td>评分器偏好长答案与自信语气，且未经人工校准</td><td>用成对比较与人工抽样校准一致性，定期重校准</td><td>D7</td></tr>
+<tr><td>坏例子改不完</td><td>未做归因，一律当模型问题处理</td><td>四类归因（检索/推理/数据/评测）分别配不同修法</td><td>D7</td></tr>
+<tr><td>换个模型版本就全线翻车</td><td>版本未固定，无回归保护</td><td>版本显式锁定 + 升级必须走完整回归与灰度</td><td>D6 D9</td></tr>
+</tbody>
+</table></div>
+<h4>13.4 安全与执行类</h4>
+<div class="tw"><table>
+<thead><tr><th style="width:210px">症状</th><th>根因</th><th>处方</th><th style="width:74px">域</th></tr></thead>
+<tbody>
+<tr><td>被一句藏在文档里的话骗去执行了危险操作</td><td>外部内容与系统指令未分离，写权限直连模型</td><td>数据/指令分区 + 高危动作强制人审 + 工具组合白名单</td><td>D4 D6</td></tr>
+<tr><td>重复发送、重复建单、重复扣款</td><td>写操作缺幂等设计与回执确认</td><td>幂等键 + 回执 + 状态不确定时禁止自动重试</td><td>D6</td></tr>
+<tr><td>安全评审最后一周把项目否了</td><td>合规被当作上线前检查而不是设计输入</td><td>权限矩阵与数据流向图在方案阶段就送审</td><td>D2 D4</td></tr>
+<tr><td>出了事无法解释谁怎么弄的</td><td>留痕粒度不足，只有结果没有过程</td><td>记录输入、依据、建议、审批、执行、回执全链条</td><td>D4</td></tr>
+<tr><td>临时权限一直没收回</td><td>无人负责回收，无到期机制</td><td>所有临时授权带过期时间；离场核对清单强制项</td><td>D2 D4 D8</td></tr>
+</tbody>
+</table></div>
+<h4>13.5 组织与人因类</h4>
+<div class="tw"><table>
+<thead><tr><th style="width:210px">症状</th><th>根因</th><th>处方</th><th style="width:74px">域</th></tr></thead>
+<tbody>
+<tr><td>一线员工偷偷绕开系统</td><td>改变动线却没有减少他的总负担，或威胁其位置</td><td>重新设计环节归属；把 AI 输出嵌入原有工单流并设复核节点</td><td>D1 D8</td></tr>
+<tr><td>人在环路沦为橡皮图章</td><td>确认点没有判断价值，只有流程价值</td><td>仅在风险升高、置信不足、数据冲突、状态不明四类处介入</td><td>D4</td></tr>
+<tr><td>交付经验随人离职蒸发</td><td>沉淀停留在个人脚本与个人笔记</td><td>组件二级复用作为验收条件；案例库与坏例集强制更新</td><td>D10</td></tr>
+<tr><td>每个客户都是一套代码</td><td>定制无裁决机制，产品主干被逐条击穿</td><td>配置优先 + 扩展点 + 三客户原则 + 成本显式化</td><td>D10</td></tr>
+<tr><td>交付团队毛利率随规模下降</td><td>买入的是工时不是资产；沟通与差旅成本超线性</td><td>保护沉淀周、工具承接重复劳动、复用率纳入考核</td><td>D10 D12</td></tr>
+</tbody>
+</table></div>
+<div class="co deep">
+<span class="ct">共同规律</span>
+<p>把以上二十条放在一起看，会发现根因高度集中在三个位置：<b>价值没有锚定、数据没有治理、质量没有被度量</b>。几乎没有一条的根因是"模型能力不足"。这也解释了为什么这个岗位需要的是工程与业务复合能力，而不是算法研究能力。</p>
+</div>
+</article>
+<article id="c14">
+<h3><span class="no">CHAPTER 14 · 风险</span>登记册与止损判据</h3>
+<p class="deck">FDE 现场同时面对技术、组织、商业三类风险。登记的目的在于预先约定"出现什么信号就做什么动作"，而不是事后归责。</p>
+<div class="tw"><table>
+<thead><tr><th style="width:150px">风险</th><th>触发信号</th><th style="width:100px">影响</th><th>预设动作</th></tr></thead>
+<tbody>
+<tr><td><b>范围无声膨胀</b></td><td>两周内新增需求条数超过原计划三成</td><td><span class="tag r">高</span></td><td>重排期或削减范围，书面确认；不默默吸收</td></tr>
+<tr><td><b>客户责任人缺位</b></td><td>关键问题平均响应超过三个工作日</td><td><span class="tag r">高</span></td><td>升级到管理层；等待期不计入己方承诺工期</td></tr>
+<tr><td><b>数据不可得</b></td><td>真实样本持续以脱敏样例、旧数据替代</td><td><span class="tag r">高</span></td><td>暂停效果承诺；以最小可用样本重设范围</td></tr>
+<tr><td><b>权限受阻</b></td><td>关键接口在计划窗口内无法打通</td><td><span class="tag y">中</span></td><td>切换备选接入方式并说明质量代价</td></tr>
+<tr><td><b>效果到不了承诺线</b></td><td>连续两轮回归后核心指标无上升趋势</td><td><span class="tag r">高</span></td><td>主动触发 G2 复评：降级方案、缩范围或终止</td></tr>
+<tr><td><b>采纳率不涨</b></td><td>上线四周，周活跃使用者无增长</td><td><span class="tag r">高</span></td><td>停止加功能，回到流程重设计与一线访谈</td></tr>
+<tr><td><b>成本失控</b></td><td>单位请求成本或延迟超过估算值</td><td><span class="tag y">中</span></td><td>缓存、上下文裁剪、模型分级路由、批处理</td></tr>
+<tr><td><b>合规口径变更</b></td><td>监管或内部政策收紧</td><td><span class="tag r">高</span></td><td>能力局部停用优先于整体下线；重做影响评估</td></tr>
+<tr><td><b>关键人单点</b></td><td>某客户只有一名工程师能维护</td><td><span class="tag y">中</span></td><td>强制交接演练；文档补齐；纳入轮换计划</td></tr>
+<tr><td><b>事故与责任</b></td><td>错误建议被执行并造成业务损失</td><td><span class="tag r">高</span></td><td>立即停用相关能力 → 用留痕界定影响 → 告知 → 复盘补护栏</td></tr>
+</tbody>
+</table></div>
+<h4>14.1 止损的四条硬判据</h4>
+<div class="grid g4">
+<div class="kc"><div class="kk">判据一</div><h4>前提被证伪</h4><p>关键数据拿不到、或权威源冲突无法裁决，且客户无解决路径。</p></div>
+<div class="kc"><div class="kk">判据二</div><h4>两轮无改善</h4><p>连续两轮针对性优化后，核心指标无统计意义上的提升。</p></div>
+<div class="kc"><div class="kk">判据三</div><h4>无人承接</h4><p>上线后找不到一位对采纳负责的业务人员。</p></div>
+<div class="kc"><div class="kk">判据四</div><h4>收益不覆盖成本</h4><p>稳态运行成本（含知识运营）长期高于可计量收益。</p></div>
+</div>
+<div class="co warn">
+<span class="ct">最昂贵的一句话</span>
+<p>"再给两周，我们应该就能跑通了。"——在没有新的证据、只是追加时间的情况下说出这句话，通常是项目已经从工程问题变成沉没成本问题的信号。诚实的止损是专业能力的表现，也是这个岗位长期信誉的来源。</p>
+</div>
+</article>
+<!-- ============ PART VII ============ -->
+<section class="part-band" data-n="VII" id="p7">
+<span class="pnum">Part Seven · Frontier</span>
+<h2>前沿专题</h2>
+<p>近一年快速演化、且已经真实影响企业交付决策的五个方向。原则只有一条：只吸收能落到现场的部分。</p>
+</section>
+<article id="c15">
+<h3><span class="no">CHAPTER 15</span>智能体工程化</h3>
+<p class="deck">从"能对话"到"能干活"，中间隔着三件事：可控的执行边界、可验证的任务完成度、可承受的成本曲线。</p>
+<h4>15.1 交付物形态的变化</h4>
+<p>在智能体语境下，FDE 交给客户的东西已经从"一个应用"变成一组可组合的能力件：一个可被复用的<b>工具服务</b>（把某个内部系统的安全能力暴露给模型）、一组<b>子智能体</b>（承担特定岗位职责并持有特定权限）、若干<b>技能包</b>（把某类重复业务动作的标准流程封装成可调用单元）。这三类件的共同特征是：它们不直接面向最终用户，却决定了系统能不能真正完成任务。<b>把可重复的方法整理后回流给产品与工程团队</b>，正是这一角色的固有职责。</p>
+<h4>15.2 任务完成度如何验证</h4>
+<div class="tw"><table>
+<thead><tr><th style="width:170px">层次</th><th>问的问题</th><th>验证方式</th></tr></thead>
+<tbody>
+<tr><td><b>动作层</b></td><td>工具调用是否正确、参数是否合法</td><td>契约测试 + 断言 + 参数校验通过率</td></tr>
+<tr><td><b>轨迹层</b></td><td>步骤序列是否合理、有没有绕圈或越权</td><td>轨迹评审 + 步数与预算上限 + 异常路径统计</td></tr>
+<tr><td><b>结果层</b></td><td>业务状态是否真的被正确改变</td><td>回执比对 + 下游系统真值核对（唯一可信判据）</td></tr>
+<tr><td><b>价值层</b></td><td>这件事是否因此不再需要人做</td><td>人工耗时对照 + 采纳率 + 返工率</td></tr>
+</tbody>
+</table></div>
+<p>多数团队只验证到第二层，因此出现"任务看起来完成了、业务状态其实没变"的事故。结果层的验证必须依赖系统外的真值来源，而不能让模型自己复述自己做过什么。</p>
+<h4>15.3 长任务的三个工程约束</h4>
+<ul>
+<li><b>可中断与可恢复</b>：任务状态必须持久化，进程重启后能从断点继续，而不是从头再来。</li>
+<li><b>预算显式化</b>：每个任务设定步数上限、时间上限、token 上限与费用上限，任一触顶即停止并升级。</li>
+<li><b>检查点前移</b>：在不可逆动作之前设置强制确认，而不是在任务结束后审计。事后审计对已发生的资金或数据变化毫无意义。</li>
+</ul>
+<div class="co principle">
+<span class="ct">判断</span>
+<p>自主性是一种成本，不是一种能力展示。每提高一档自主性，就要同时提高评测覆盖、护栏强度与观测粒度。当这三者跟不上时，正确的做法是把系统退回半自动，而不是祈祷用户少踩坑。</p>
+</div>
+</article>
+<article id="c16">
+<h3><span class="no">CHAPTER 16</span>上下文工程与检索进阶</h3>
+<p class="deck">长上下文的出现没有取代检索，而是改变了检索的职责：从"塞得进去"变成"给得准确、给得便宜、给得可核验"。</p>
+<h4>16.1 两种路线的现实分工</h4>
+<div class="tw"><table>
+<thead><tr><th style="width:150px">路线</th><th>优势</th><th>代价</th><th>适用现场</th></tr></thead>
+<tbody>
+<tr><td><b>检索优先</b></td><td>成本可控、可权限过滤、可溯源、语料规模无上限</td><td>依赖治理质量，跨文档综合判断较弱</td><td>制度问答、工单辅助、合规查询、大规模文档</td></tr>
+<tr><td><b>长上下文优先</b></td><td>不依赖分块与召回，跨章节理解好</td><td>单位成本高、延迟大、缓存策略要求高、易被无关材料干扰</td><td>单份长文档分析、合同审阅、有限集合内的比较</td></tr>
+</tbody>
+</table></div>
+<p>混合做法已是最常见解：先用检索把候选集收窄到几十段可核验材料，再把其中需要综合判断的部分整体放入上下文。<b>决定质量的往往不是用了哪种技术，而是"给模型看什么"这条决策链有没有被评测验证过。</b></p>
+<h4>16.2 检索质量的六个抓手</h4>
+<ol>
+<li><b>查询改写</b>：把口语提问转成结构化检索意图（对象、动作、时间范围、部门）。</li>
+<li><b>混合召回</b>：关键词与向量互补，专有名词、编号、条款号严重依赖前者。</li>
+<li><b>重排序</b>：候选取多、精排取少，比一味调分块尺寸更有效。</li>
+<li><b>元数据过滤</b>：把密级、生效期、部门作为硬过滤条件，而不是提示里的软要求。</li>
+<li><b>结构化索引</b>：对表格、流程、组织关系，用结构化表示替代纯文本切片。</li>
+<li><b>失败可观测</b>：把"检索不到"与"检索到但没用好"分开统计，二者修法治完全不同。</li>
+</ol>
+<h4>16.3 引用与可信度</h4>
+<p>企业场景中的引用不是装饰，而是可核验性的载体，也是安全部门愿意放行的前提之一。设计要点：引用必须指向可打开的具体位置；被引用片段的版本必须与索引版本一致；权限不足的内容即使被检索到也不得出现在输出与提示中。</p>
+<div class="co warn">
+<span class="ct">陷阱</span>
+<p>用"上下文越长越好"作为默认策略。无关材料会稀释注意力、抬高成本、放大注入面，并让输出难以归因。<b>上下文的每一条内容都应该能回答：删掉它，结果会变差吗？</b>如果做过消融实验能回答这个问题，说明这套系统是被工程化过的。</p>
+</div>
+</article>
+<article id="c17">
+<h3><span class="no">CHAPTER 17</span>私有化、信创与离线交付</h3>
+<p class="deck">在企业现场，"能不能部署"经常比"效果好不好"更早决定项目生死。</p>
+<h4>17.1 离线交付的工程要求</h4>
+<ul>
+<li><b>零外网假设</b>：依赖、模型权重、字体、证书全部预置；安装过程不得有任何隐式联网。</li>
+<li><b>校验与可追溯</b>：所有制品带摘要校验与版本清单，客户安全部门需要能回答"这里面是什么"。</li>
+<li><b>资源预估前置</b>：显存、内存、磁盘、并发吞吐在方案阶段给出估算与压测方法，避免到货后无法部署。</li>
+<li><b>升级路径设计</b>：离线环境最容易烂掉的地方是"装了第一版就再也升不动"，因此必须把补丁与增量数据的传输方式作为交付内容。</li>
+<li><b>时间与时区、证书有效期</b>：内网环境时钟不标准、证书到期无人知，是低技术含量但高频的故障源。</li>
+</ul>
+<h4>17.2 异构环境的应对</h4>
+<p>真实客户现场同时存在多种算力与操作系统组合，且往往不是团队熟悉的那一种。工程上的应对不是追求全面兼容，而是：<b>抽象一层推理服务接口，把硬件差异收敛在一个可替换的适配层里</b>；同时准备至少一套"无 GPU 降级路径"（较小模型、量化、或退回检索与规则），保证在最差环境下系统仍能提供部分价值，而不是彻底不可用。</p>
+<div class="co act">
+<span class="ct">现场清单</span>
+<p>私有化项目启动前必须确认的十件事：目标机器型号与系统版本、权限等级（能否装驱动与内核模块）、网络隔离策略与开通流程、外网访问是否永久禁止、可用存储与备份策略、数据库与中间件版本、证书与域名策略、变更与上线审批流程、运维响应人员与联系方式、以及数据能否离场。<b>最后一条经常被忽略，而它决定了能否使用任何外部服务。</b></p>
+</div>
+</article>
+<article id="c18">
+<h3><span class="no">CHAPTER 18</span>组织级治理与集中管控</h3>
+<p class="deck">当场景从一两个变成十几个，问题会从"怎么做出来"变成"怎么保证每一个都不失控"。这是 FDE 团队向平台化演进的必经一步。</p>
+<h4>18.1 必须集中的四件事</h4>
+<div class="grid g4">
+<div class="kc"><div class="kk">01</div><h4>身份与权限</h4><p>统一的角色—资源—动作模型；各场景不自建权限体系，避免口径分裂。</p></div>
+<div class="kc"><div class="kk">02</div><h4>评测与门禁</h4><p>共用一套评测底座与门禁标准，各场景贡献自己的金标集，形成组织级质量水位。</p></div>
+<div class="kc"><div class="kk">03</div><h4>审计与留痕</h4><p>统一的事件格式与存储，使跨场景追溯与合规报告成为可能。</p></div>
+<div class="kc"><div class="kk">04</div><h4>模型与成本</h4><p>统一路由、配额、缓存与账目，避免各部门各自采购导致成本黑盒。</p></div>
+</div>
+<h4>18.2 必须分散的三件事</h4>
+<ul>
+<li><b>语料治理</b>：知识只有业务部门能判断对错与时效，集中做必然失真。</li>
+<li><b>场景设计</b>：流程重设计必须贴着一线做，集中团队做出来的是通用而无人用的东西。</li>
+<li><b>采纳责任</b>：谁受益谁背指标，交付方不能替客户负责使用率。</li>
+</ul>
+<h4>18.3 AI 资产台账</h4>
+<p>规模化之后最先失控的是"我们到底有多少个在跑的东西"。台账至少记录：场景名称、业务 Owner、技术 Owner、依赖模型与版本、依赖数据源与密级、评测集位置与最近一次结果、当前是否有人负责。这张表的价值在事故与审计时体现得最明显——它能让你在十分钟内回答"这个能力是谁上的、有没有评测、能停吗"。</p>
+<div class="co deep">
+<span class="ct">判断</span>
+<p>AI 成熟度不只是技术就绪，更是组织就绪。企业缺的往往不是模型与算力，而是<b>持续的工程能力与责任结构</b>。FDE 在治理层的贡献，是把一次性交付升级为可治理的体系——这也是最高层级 FDE 与初级从业者之间最大的差距。</p>
+</div>
+</article>
+<article id="c19">
+<h3><span class="no">CHAPTER 19</span>成本与性能工程</h3>
+<p class="deck">试点阶段被忽略的成本，会在扩量时以数倍规模出现。成本不是财务问题，是架构问题。</p>
+<h4>19.1 成本结构拆解</h4>
+<div class="tw"><table>
+<thead><tr><th style="width:150px">成分</th><th>可控手段</th><th>常见浪费</th></tr></thead>
+<tbody>
+<tr><td><b>推理</b></td><td>模型分级路由、上下文裁剪、批处理、量化、小模型承接简单任务</td><td>所有请求都走最强模型；把无关历史整段带入</td></tr>
+<tr><td><b>检索</b></td><td>索引策略、缓存热门查询、候选数收敛、重排序而非扩召回</td><td>召回过多片段，把成本转嫁给生成</td></tr>
+<tr><td><b>嵌入与索引</b></td><td>增量更新、变更检测、去重、冷热分层</td><td>每次全量重建，成本随文档数线性上升</td></tr>
+<tr><td><b>存储</b></td><td>留痕分级、日志保留期策略、轨迹抽样</td><td>全量原文长期保留，既贵又有合规风险</td></tr>
+<tr><td><b>人力</b></td><td>评测自动化、告警收敛、文档减少咨询</td><td>没有看板，靠人肉盯与回答"这个怎么用"</td></tr>
+</tbody>
+</table></div>
+<h4>19.2 延迟预算</h4>
+<p>用户可感知的等待时间是采纳率的隐形决定因素。做法是<b>先分配再实现</b>：把一个交互的总延迟预算拆给检索、生成、渲染各环节，超支的环节必须优化或改为异步流式呈现。长任务必须给出可理解的进度反馈，否则用户会重复触发，造成成本与状态双重混乱。</p>
+<h4>19.3 质量—延迟—成本三角</h4>
+<div class="fig">
+<div class="flow">
+<span class="st">质量</span><span class="ar">↔</span>
+<span class="st hot">延迟</span><span class="ar">↔</span>
+<span class="st">成本</span><span class="ar">↔</span>
+<span class="st">质量</span>
+</div>
+<div class="cap">任何单边的改善都必须报告另两边付出的代价；没有例外</div>
+</div>
+<div class="co act">
+<span class="ct">动作建议</span>
+<p>建立按场景的成本核算：单位请求成本、单业务动作成本（例如"每处理一张工单的成本"）。后者才是与客户对话的正确口径，也是决定一个场景能否扩量的关键依据。<b>凡是单动作成本高于该动作人工成本的场景，要么重做设计，要么不要扩。</b></p>
+</div>
+</article>
+<!-- ============ PART VIII ============ -->
+<section class="part-band" data-n="VIII" id="p8">
+<span class="pnum">Part Eight</span>
+<h2>工具箱与模板</h2>
+<p>可直接复制到项目里使用的九件东西。模板的价值不在于格式漂亮，而在于强迫你在开工前回答那些平时会被跳过的问题。</p>
+</section>
+<article id="c20">
+<h3><span class="no">CHAPTER 20 · 模板</span>九件现场即用资产</h3>
+<p class="deck">建议以团队为单位维护这些模板的活版本：每次交付结束，把新踩到的坑变成新的一行。一年后，它们的价值会超过任何一次单独交付。</p>
+<h4>20.1 场景价值假设卡</h4>
+<pre tabindex="0"><span class="c"># 价值假设 · 编号 S-xxxx · 版本 v1</span>
+场景名称：
+业务 Owner（具名 + 部门 + 考核关联）：
+目标岗位与人数：
+被改变的具体环节（动作级描述）：
+基线指标与来源：        <span class="c"># 指标名 / 数值 / 采集方式 / 采集周期</span>
+目标区间（不是单点）：
+前提条件：              <span class="c"># 数据、权限、接口、配合人力，逐项列出</span>
+不做的部分：
+测量方法与争议处理：
+若三个月后未达标，处置方式：</pre>
+<h4>20.2 环境体检清单</h4>
+<pre tabindex="0"><span class="c"># 运行底座</span>
+[ ] 目标机器型号 / 系统版本 / 内核版本        [ ] CPU 核数 / 内存 / 磁盘 / 网络带宽
+[ ] GPU 型号与显存（或确认无 GPU 的降级方案）  [ ] 容器与编排可用性、镜像导入方式
+[ ] 外网可达性（逐条验证，不采信口述）        [ ] 时钟同步与证书有效期
+<span class="c"># 系统接口</span>
+[ ] 待接系统清单 + 对接人 + 接口形态 + 鉴权方式
+[ ] 每个关键接口<b>实际调通一次</b>并保存请求/响应样例
+[ ] 限流规则、配额、可用时段、错误码语义
+[ ] 数据规模量级、更新频率、导出方式
+<span class="c"># 权限与治理</span>
+[ ] 账号申请链路 / 审批人 / 平均耗时
+[ ] 数据分级规则与出域禁令
+[ ] 审计留痕格式要求与存储位置
+[ ] 变更窗口、上线审批流程、回滚责任人
+<span class="c"># 人</span>
+[ ] 目标岗位真实一天（跟岗观察记录，非访谈转述）
+[ ] 现有工具（含非正式 Excel / 群聊 / 纸单）
+[ ] 潜在阻挠者与反对理由</pre>
+<h4>20.3 数据就绪核验表</h4>
+<div class="tw"><table>
+<thead><tr><th style="width:120px">核验项</th><th>方法</th><th>通过标准</th><th style="width:78px">状态</th></tr></thead>
+<tbody>
+<tr><td>规模覆盖</td><td>抽样统计主题分布</td><td>覆盖目标问题类型的主体，长尾有说明</td><td><span class="tag">□</span></td></tr>
+<tr><td>新鲜度</td><td>统计最后更新时间分布</td><td>过期条目占比低于约定阈值且可下线</td><td><span class="tag">□</span></td></tr>
+<tr><td>冲突裁决</td><td>挑同一事实跨源比对</td><td>每个事实有唯一权威源并已标注</td><td><span class="tag">□</span></td></tr>
+<tr><td>元数据完备</td><td>检查必填字段</td><td>来源、版本、生效期、密级、Owner 齐全</td><td><span class="tag">□</span></td></tr>
+<tr><td>敏感分布</td><td>规则扫描 + 人工抽查</td><td>已定位并给出脱敏或屏蔽策略</td><td><span class="tag">□</span></td></tr>
+<tr><td>可获取性</td><td>实际拉取一次全量</td><td>方式、频率、保留期均已约定</td><td><span class="tag">□</span></td></tr>
+</tbody>
+</table></div>
+<h4>20.4 评测集条目结构</h4>
+<pre tabindex="0">{
+  <span class="k">"id"</span>: <span class="s">"ev-0001"</span>,
+  <span class="k">"source"</span>: <span class="s">"real_ticket | synth | redteam | drift"</span>,
+  <span class="k">"scene"</span>: <span class="s">"二线工单-设备故障"</span>,
+  <span class="k">"input"</span>: <span class="s">"真实提问原文（不美化）"</span>,
+  <span class="k">"expected"</span>: {
+    <span class="k">"must_include"</span>: [<span class="s">"关键结论"</span>],
+    <span class="k">"must_cite"</span>: [<span class="s">"doc_id#section"</span>],
+    <span class="k">"forbidden"</span>: [<span class="s">"越权动作"</span>, <span class="s">"泄露字段"</span>],
+    <span class="k">"acceptable_abstain"</span>: <span class="k">true</span>       <span class="c"># 允许拒答吗</span>
+  },
+  <span class="k">"grader"</span>: <span class="s">"rule | retrieval | model | human | pair"</span>,
+  <span class="k">"weight"</span>: <span class="s">"blocking | normal"</span>,   <span class="c"># blocking 类退化禁止发布</span>
+  <span class="k">"owner"</span>: <span class="s">"业务标注人"</span>,
+  <span class="k">"added_from"</span>: <span class="s">"事故 INC-007"</span>      <span class="c"># 每条困难样例都该有出处事件</span>
+}</pre>
+<h4>20.5 坏例归因台账（表头）</h4>
+<div class="tw"><table class="wide">
+<thead><tr><th>发现日期</th><th>场景</th><th>用户输入</th><th>错误输出</th><th>归因</th><th>修复动作</th><th>是否入评测集</th><th>验证结果</th></tr></thead>
+<tbody><tr><td colspan="8" style="color:var(--sub);font-size:13.5px">归因取值限定为四类：检索失败 / 推理失败 / 数据失败 / 评测失败。凡填写"模型能力不足"的条目必须再追问一层：是提示问题、上下文问题、缺依据，还是确实超出模型能力。</td></tr></tbody>
+</table></div>
+<h4>20.6 交付包目录结构</h4>
+<pre tabindex="0">delivery-&lt;客户&gt;-&lt;场景&gt;-&lt;版本&gt;/
+├── 00_README.md            <span class="c"># 这套东西是什么、给谁用、怎么开始</span>
+├── 01_部署/
+│   ├── install.sh          <span class="c"># 离线可执行，失败给出明确原因</span>
+│   ├── values.example.yaml <span class="c"># 所有可变项集中在此</span>
+│   └── 依赖与制品清单.txt   <span class="c"># 含摘要校验</span>
+├── 02_配置/
+│   ├── 权限矩阵.csv
+│   ├── 数据源与语料说明.md
+│   └── 提示与策略/（带版本与生效说明）
+├── 03_评测/
+│   ├── 金标集.jsonl
+│   ├── 运行评测.sh
+│   └── 最近一次基线报告.md
+├── 04_运行手册/
+│   ├── 日常操作五件事.md
+│   ├── 异常处理决策树.md
+│   ├── 回滚步骤.md
+│   └── 什么时候必须找厂商.md
+├── 05_变更记录/
+│   └── CHANGELOG.md        <span class="c"># 每次线上变更：动机 / 内容 / 实测影响</span>
+└── 06_组件回收/
+    └── 可复用件清单.md      <span class="c"># 入库候选与维护人</span></pre>
+<h4>20.7 运行手册骨架</h4>
+<ul class="ck">
+<li><b>系统边界</b>：做什么、不做什么、依赖哪些外部系统及其失效影响</li>
+<li><b>日常操作五件事</b>：每天/每周必须做的事，含责任人</li>
+<li><b>异常处理决策树</b>：现象 → 自查步骤 → 处置动作 → 升级路径（含时限）</li>
+<li><b>回滚步骤</b>：可复制的命令序列 + 预计耗时 + 数据回退说明</li>
+<li><b>知识库运营</b>：新增、修订、废止流程与复审周期</li>
+<li><b>质量巡检</b>：看哪几个指标、多久看一次、什么数值必须上报</li>
+<li><b>停用手段</b>：如何在分钟级关闭某一项高风险能力</li>
+</ul>
+<h4>20.8 复盘模板（决策点式）</h4>
+<pre tabindex="0"><span class="c"># 复盘 · 项目 X · 日期</span>
+## 当时的信息条件
+（写下决策时已知与未知的信息，禁止使用事后信息）
+
+## 关键决策点（逐个）
+决策 1：当时选了什么 / 备选是什么 / 为什么 / 代价是什么 / 现在回看
+决策 2：...
+
+## 哪一步本可更早发现
+（对应到本手册的知识域：D几的检查项缺失了）
+
+## 沉淀结论
+新增到体检清单的项：
+新增到评测集的样例：
+新增到组件库的件（含维护人）：
+提给产品/平台的需求（含编号）：
+
+## 不做的事
+（明确不再重复投入的方向，及原因）</pre>
+<h4>20.9 交接核对单</h4>
+<div class="tw"><table>
+<thead><tr><th style="width:180px">项</th><th>完成标准</th><th style="width:70px">双方签字</th></tr></thead>
+<tbody>
+<tr><td>部署与回滚演练</td><td>客户侧工程师在无交付方参与下独立完成一次</td><td><span class="tag">□</span></td></tr>
+<tr><td>运行手册可用性</td><td>按手册操作者提出的问题数量为 0</td><td><span class="tag">□</span></td></tr>
+<tr><td>评测与门禁</td><td>客户侧已能独立触发一次全量回归</td><td><span class="tag">□</span></td></tr>
+<tr><td>知识运营责任人</td><td>具名到人、周期明确、有复审动作</td><td><span class="tag">□</span></td></tr>
+<tr><td>账号与权限</td><td>交付方临时权限全部注销，凭证移交完成</td><td><span class="tag">□</span></td></tr>
+<tr><td>数据与资产归属</td><td>代码、模型、语料、日志归属书面确认</td><td><span class="tag">□</span></td></tr>
+<tr><td>支持窗口</td><td>离场后支持范围、时限、响应 SLA 已约定</td><td><span class="tag">□</span></td></tr>
+<tr><td>组件回收</td><td>可复用件已提交并登记维护人</td><td><span class="tag">□</span></td></tr>
+</tbody>
+</table></div>
+</article>
+<!-- ============ PART IX ============ -->
+<section class="part-band" data-n="IX" id="p9">
+<span class="pnum">Part Nine</span>
+<h2>成长与评估</h2>
+<p>能力可以被训练，但只能通过承担后果来训练。以下路径的设计原则是：尽早接触真实用户，尽量晚地依赖演示。</p>
+</section>
+<article id="c21">
+<h3><span class="no">CHAPTER 21</span>学习地图与 九十天上手</h3>
+<p class="deck">适用于两个场景：新入职 FDE 的前三个月安排，以及传统工程师向这一角色的转型路线。</p>
+<h4>21.1 三十天节奏</h4>
+<div class="tw"><table>
+<thead><tr><th style="width:120px">阶段</th><th>目标</th><th>必须完成的具体产出</th></tr></thead>
+<tbody>
+<tr><td><b>第 1–2 周</b><br/>建立现场感</td><td>理解一个真实业务如何运转，而不是先读技术文档</td><td>跟岗记录一份（目标岗位的一天，逐动作）；画出该环节的信息流与决策点；完成一次环境体检清单实操</td></tr>
+<tr><td><b>第 3–4 周</b><br/>跑通一条链</td><td>亲手打通"数据—检索—生成—评测"最小闭环</td><td>用真实语料做一次检索问答 demo；建 20 条金标样例并跑出第一份基线；记录 5 个坏例并归因</td></tr>
+<tr><td><b>第 2 个月</b><br/>承担一个子块</td><td>负责一个边界清晰的功能并对使用结果负责</td><td>该功能有真实使用者；完成一次灰度与一次回滚演练；写出运行手册对应章节</td></tr>
+<tr><td><b>第 3 个月</b><br/>独立完成一次闭环</td><td>从需求发现到验收的完整经历（哪怕范围很小）</td><td>一份价值假设卡 + 一次基线测量 + 一轮评测报告 + 一次向客户业务负责人的正式汇报</td></tr>
+</tbody>
+</table></div>
+<h4>21.2 转型者的优势与短板</h4>
+<div class="grid g3">
+<div class="kc"><div class="kk">来自后端 / 平台</div><h4>强工程，弱业务</h4><p>补：跟岗观察、价值量化、评测集设计。最容易犯的错是把"技术上做完了"当成"交付完成"。</p></div>
+<div class="kc"><div class="kk">来自实施 / 运维</div><h4>强现场，弱建模</h4><p>补：检索与编排的动手实现、评测流水线。最容易犯的错是只配置不改代码，遇到效果问题无从下手。</p></div>
+<div class="kc"><div class="kk">来自算法 / 数据</div><h4>强模型，弱系统</h4><p>补：服务化、权限、可观测、交付文档。最容易犯的错是把指标优化当成业务价值，忽视采纳与运营。</p></div>
+</div>
+<h4>21.3 学习内容的取舍原则</h4>
+<ul>
+<li><b>优先学有失效后果的东西</b>：权限模型、回滚、评测、数据治理——它们不学不会出现在简历上，但一定会出现在事故报告里。</li>
+<li><b>谨慎追新框架</b>：框架更替极快，底层问题（检索质量、上下文分配、失败处理、成本）十年不变。</li>
+<li><b>把每个项目都变成一次公开写作</b>：一份可被他人复用的参考架构，比三次内部口头分享更能建立影响力，也是 L3 晋升的实证材料。</li>
+</ul>
+</article>
+<article id="c22">
+<h3><span class="no">CHAPTER 22</span>评估：招聘考察与个人自查</h3>
+<p class="deck">这个岗位无法通过刷题为筛选。有效的考察方式是给一个真实的混乱场景，看候选人如何提问、如何取舍、以及在信息不足时如何决策。</p>
+<h4>22.1 六道考察题</h4>
+<div class="tw"><table>
+<thead><tr><th style="width:210px">考察题</th><th>想看到什么</th><th>危险信号</th></tr></thead>
+<tbody>
+<tr><td><b>给你一个客服部门，两周内判断要不要上 AI，你做什么</b></td><td>先问基线与流程，而不是先讲技术方案；能主动提出跟岗与抽样</td><td>直接开始设计架构；默认"能接上就行"</td></tr>
+<tr><td><b>你的问答系统上线后开始答错，如何定位</b></td><td>会区分检索/推理/数据/评测四类归因，并说明各需要哪些证据</td><td>只会说"改提示词试试"或"换个模型"</td></tr>
+<tr><td><b>客户说准确率要到 95%，你怎么回应</b></td><td>追问口径：什么样本、谁判定、错了会怎样；提出分层与兜底设计</td><td>直接承诺或拒绝，不问定义</td></tr>
+<tr><td><b>讲一次你判断错误的项目</b></td><td>能还原当时的信息条件、备选方案、错在哪、后来改了什么机制</td><td>归因全部指向客户不配合、需求变更等外部因素</td></tr>
+<tr><td><b>如何让一个评测集变可靠</b></td><td>关心来源真实性、覆盖率、困难样例、评分器校准、版本管理</td><td>只关心条数与通过率高低</td></tr>
+<tr><td><b>被要求为单一客户改产品主干</b></td><td>提出配置化/扩展点方案，并说明成本与回流机制</td><td>无条件答应或无条件拒绝，无裁决意识</td></tr>
+</tbody>
+</table></div>
+<h4>22.2 个人自查十问</h4>
+<form class="self-check" id="self-check-form">
+<noscript><p>交互计分需要启用 JavaScript；十项问题与统一评分锚点仍可用于纸面自查。</p></noscript>
+<div class="self-check-intro">
+<p>以最近 12 个月或最近两个有代表性的项目为依据，优先看可核验的交付物、数据和复盘记录，而不是自信程度。选最符合现状的一档；暂时没有证据时按低档记录，作为下一步成长线索。</p>
+<div class="self-check-rubric">
+<strong>统一评分锚点 · 每题 0–3 分</strong>
+<ol>
+<li><b>0</b> · 没有实例或证据</li>
+<li><b>1</b> · 参与或了解，尚未独立负责</li>
+<li><b>2</b> · 独立完成过，有材料可核验</li>
+<li><b>3</b> · 多次稳定完成，有度量或复用机制</li>
+</ol>
+</div>
+</div>
+<p class="self-check-method">十项等权计算参考指数；仅当职责确实不涵盖某项时选择“不适用”，且不计入分数。至少完成 8 项适用评分才显示指数。第 3 项（回归评测）和第 7 项（写操作控制）是关键控制，低分优先提示，不能被总分抵消。分数区间仅用于本工具的复盘提示，不是行业常模、认证或招聘门槛。</p>
+<div class="self-check-list">
+<div class="self-check-item">
+<h5>01 · 业务结果与验收</h5>
+<p class="evidence" id="self-evidence-1">核对业务指标、上线前基线、数据来源与验收人；模型准确率本身不等于业务结果。</p>
+<label for="self-q1">选择最符合的一档</label>
+<select id="self-q1" data-self-check="1" aria-describedby="self-evidence-1">
+<option value="">请选择</option><option value="0">0 · 没有实例或证据</option><option value="1">1 · 参与或了解，尚未独立负责</option><option value="2">2 · 独立完成过，有材料可核验</option><option value="3">3 · 多次稳定完成，有度量或复用机制</option><option value="na">不适用（确实不在职责范围）</option>
+</select>
+</div>
+<div class="self-check-item">
+<h5>02 · 现场诊断与约束</h5>
+<p class="evidence" id="self-evidence-2">核对现场流程、代表性样本、数据权限、系统接口、部署条件及未验证假设。</p>
+<label for="self-q2">选择最符合的一档</label>
+<select id="self-q2" data-self-check="2" aria-describedby="self-evidence-2">
+<option value="">请选择</option><option value="0">0 · 没有实例或证据</option><option value="1">1 · 参与或了解，尚未独立负责</option><option value="2">2 · 独立完成过，有材料可核验</option><option value="3">3 · 多次稳定完成，有度量或复用机制</option><option value="na">不适用（确实不在职责范围）</option>
+</select>
+</div>
+<div class="self-check-item">
+<h5>03 · 评测与回归 <span class="critical-chip">关键控制</span></h5>
+<p class="evidence" id="self-evidence-3">核对版本化样本集、变更触发的回归记录、失败样例及发布门槛。</p>
+<label for="self-q3">选择最符合的一档</label>
+<select id="self-q3" data-self-check="3" aria-describedby="self-evidence-3">
+<option value="">请选择</option><option value="0">0 · 没有实例或证据</option><option value="1">1 · 参与或了解，尚未独立负责</option><option value="2">2 · 独立完成过，有材料可核验</option><option value="3">3 · 多次稳定完成，有度量或复用机制</option><option value="na">不适用（确实不在职责范围）</option>
+</select>
+</div>
+<div class="self-check-item">
+<h5>04 · 失败归因与修复</h5>
+<p class="evidence" id="self-evidence-4">核对真实坏例是否区分检索、推理、数据或评测问题，并能追踪修复结果。</p>
+<label for="self-q4">选择最符合的一档</label>
+<select id="self-q4" data-self-check="4" aria-describedby="self-evidence-4">
+<option value="">请选择</option><option value="0">0 · 没有实例或证据</option><option value="1">1 · 参与或了解，尚未独立负责</option><option value="2">2 · 独立完成过，有材料可核验</option><option value="3">3 · 多次稳定完成，有度量或复用机制</option><option value="na">不适用（确实不在职责范围）</option>
+</select>
+</div>
+<div class="self-check-item">
+<h5>05 · 用户验证与人工兜底</h5>
+<p class="evidence" id="self-evidence-5">核对真实用户任务、例外升级、拒答或转人工路径，以及上线后的使用反馈。</p>
+<label for="self-q5">选择最符合的一档</label>
+<select id="self-q5" data-self-check="5" aria-describedby="self-evidence-5">
+<option value="">请选择</option><option value="0">0 · 没有实例或证据</option><option value="1">1 · 参与或了解，尚未独立负责</option><option value="2">2 · 独立完成过，有材料可核验</option><option value="3">3 · 多次稳定完成，有度量或复用机制</option><option value="na">不适用（确实不在职责范围）</option>
+</select>
+</div>
+<div class="self-check-item">
+<h5>06 · 跨项目复用</h5>
+<p class="evidence" id="self-evidence-6">核对脚本、连接器、评测集或文档是否被其他人/项目实际采用，而非仅归档。</p>
+<label for="self-q6">选择最符合的一档</label>
+<select id="self-q6" data-self-check="6" aria-describedby="self-evidence-6">
+<option value="">请选择</option><option value="0">0 · 没有实例或证据</option><option value="1">1 · 参与或了解，尚未独立负责</option><option value="2">2 · 独立完成过，有材料可核验</option><option value="3">3 · 多次稳定完成，有度量或复用机制</option><option value="na">不适用（确实不在职责范围）</option>
+</select>
+</div>
+<div class="self-check-item">
+<h5>07 · 写操作与权限 <span class="critical-chip">关键控制</span></h5>
+<p class="evidence" id="self-evidence-7">核对写操作清单、最小权限、人工审批、审计记录、停用与回滚责任。</p>
+<label for="self-q7">选择最符合的一档</label>
+<select id="self-q7" data-self-check="7" aria-describedby="self-evidence-7">
+<option value="">请选择</option><option value="0">0 · 没有实例或证据</option><option value="1">1 · 参与或了解，尚未独立负责</option><option value="2">2 · 独立完成过，有材料可核验</option><option value="3">3 · 多次稳定完成，有度量或复用机制</option><option value="na">不适用（确实不在职责范围）</option>
+</select>
+</div>
+<div class="self-check-item">
+<h5>08 · 全链路成本</h5>
+<p class="evidence" id="self-evidence-8">核对每次业务动作的模型、平台、人工复核、维护和异常处置成本。</p>
+<label for="self-q8">选择最符合的一档</label>
+<select id="self-q8" data-self-check="8" aria-describedby="self-evidence-8">
+<option value="">请选择</option><option value="0">0 · 没有实例或证据</option><option value="1">1 · 参与或了解，尚未独立负责</option><option value="2">2 · 独立完成过，有材料可核验</option><option value="3">3 · 多次稳定完成，有度量或复用机制</option><option value="na">不适用（确实不在职责范围）</option>
+</select>
+</div>
+<div class="self-check-item">
+<h5>09 · 需求判断与沟通</h5>
+<p class="evidence" id="self-evidence-9">核对是否能基于风险、证据和替代方案调整范围，并记录客户共识与取舍。</p>
+<label for="self-q9">选择最符合的一档</label>
+<select id="self-q9" data-self-check="9" aria-describedby="self-evidence-9">
+<option value="">请选择</option><option value="0">0 · 没有实例或证据</option><option value="1">1 · 参与或了解，尚未独立负责</option><option value="2">2 · 独立完成过，有材料可核验</option><option value="3">3 · 多次稳定完成，有度量或复用机制</option><option value="na">不适用（确实不在职责范围）</option></select>
+</div>
+<div class="self-check-item">
+<h5>10 · 交接与知识沉淀</h5>
+<p class="evidence" id="self-evidence-10">核对他人能否仅凭运行手册、检查项和已知限制完成使用、排障与交接。</p>
+<label for="self-q10">选择最符合的一档</label>
+<select id="self-q10" data-self-check="10" aria-describedby="self-evidence-10">
+<option value="">请选择</option><option value="0">0 · 没有实例或证据</option><option value="1">1 · 参与或了解，尚未独立负责</option><option value="2">2 · 独立完成过，有材料可核验</option><option value="3">3 · 多次稳定完成，有度量或复用机制</option><option value="na">不适用（确实不在职责范围）</option>
+</select>
+</div>
+</div>
+<div class="self-check-results">
+<div class="self-check-result-card">
+<span>已评题目</span><strong id="self-check-count">0 / 10</strong>
+<progress id="self-check-progress" max="10" value="0" aria-label="自查完成进度"></progress>
+</div>
+<div class="self-check-result-card">
+<span>证据自查指数</span><output id="self-check-score">—</output>
+<small>仅供成长复盘，不是认证或招聘结论</small>
+</div>
+<div class="self-check-status" id="self-check-status" role="status" aria-live="polite" aria-atomic="true">
+完成至少 8 项适用评分后生成参考指数；已回答项目的优先建议会随选择即时更新。
+</div>
+</div>
+<div class="self-check-recommendations">
+<h5>优先行动建议</h5>
+<p id="self-check-recommendation-intro">选择评分后，这里会按薄弱项和关键控制生成下一步建议。</p>
+<ol id="self-check-recommendations-list"></ol>
+</div>
+<div class="self-check-actions">
+<button type="reset">清空并重新评估</button>
+<a href="https://github.com/fdebok/handbook/issues/new?template=assessment-feedback.yml" target="_blank" rel="noopener noreferrer">题目、评分或建议不适合？提交改进反馈</a>
+</div>
+<p class="self-check-privacy">评分仅在当前浏览器页面即时计算，不会发送或保存。请勿在反馈中包含客户名称、个人信息、凭证或其他敏感资料；本工具为自评参考，不是经验证的标准量表。</p>
+</form>
+<section class="badge-showcase" id="fde-badges" aria-labelledby="badge-showcase-title">
+<span class="badge-eyebrow" lang="en">FDEBOK · LEARNING BADGES</span>
+<h4 id="badge-showcase-title">FDEBOK A/P/M 徽章</h4>
+<p class="badge-showcase-intro">面向 FDE 从业者开放申请，分为工程师级、专业级和大师级。各级申请条件分别列示如下。</p>
+<div class="badge-grid">
+<div class="badge-tier">
+<figure><img alt="" aria-hidden="true" decoding="async" height="390" loading="lazy" src="/badge-a.png" width="320"/></figure>
+<div><h5>A · 工程师级</h5><p>FDE 从业者身份 · 推荐 · 理论测评</p></div>
+</div>
+<div class="badge-tier">
+<figure><img alt="" aria-hidden="true" decoding="async" height="390" loading="lazy" src="/badge-p.png" width="320"/></figure>
+<div><h5>P · 专业级</h5><p>FDE 从业者身份 · 推荐 · 理论测评 · 项目交付实践考核 · 同行互评</p></div>
+</div>
+<div class="badge-tier">
+<figure><img alt="" aria-hidden="true" decoding="async" height="390" loading="lazy" src="/badge-m.png" width="320"/></figure>
+<div><h5>M · 大师级</h5><p>FDE 从业者身份 · 推荐 · 理论测评 · 项目交付实践考核 · 同行互评 · 可核验从业经验或项目背书</p></div>
+</div>
+</div>
+<p class="badge-program-note">徽章由 FDEBOK 志愿者团队审核发放，不收取申请或评审费用。申请条件、材料及徽章状态核验，请联系 <a href="mailto:x@fdebok.com?subject=FDEBOK%20Badge%20Inquiry">x@fdebok.com</a>（邮件人工办理）。</p>
+<p class="badge-disclaimer">本徽章记录 FDE 相关学习与实践成果，不属于政府职业资格或行业统一认证，也不代表雇主背书。A/P/M 徽章是 FDEBOK 独立项目，与本手册 L1–L5 能力自查体系不可互换或换算。</p>
+</section>
+<div class="co principle">
+<span class="ct">结语</span>
+<p>这一角色的复利从来不来自工时，而来自组件与方法。一个人如果做了五年 FDE 却没有留下任何被别人复用的东西，那么他做了五年的第一件事；如果他留下了三套被别人默认的解法，那么他真正交付过很多次。<b>这既是本手册的度量方式，也是这个岗位值得做的理由。</b></p>
+</div>
+</article>
+<!-- ============ APPENDIX ============ -->
+<section class="part-band" data-n="A" id="pa">
+<span class="pnum">Appendix</span>
+<h2>附录</h2>
+<p>术语速查、全域检查项汇总与阅读路径建议。</p>
+</section>
+<article id="apa">
+<h3><span class="no">APPENDIX A · 术语</span>中英对照速查</h3>
+<p class="deck">用于团队内部术语统一。正式文档建议固定中文译法，首次出现时附英文原词。</p>
+<div class="tw"><table>
+<thead><tr><th style="width:230px">英文</th><th style="width:150px">中文</th><th>含义要点</th></tr></thead>
+<tbody>
+<tr><td>Forward Deployed Engineer</td><td>前线部署工程师</td><td>端到端拥有问题、在真实约束下建生产系统、反哺产品的复合交付角色</td></tr>
+<tr><td>Forward Deployed Software Engineer</td><td>前线部署软件工程师</td><td>偏应用与集成实现的重工程变体</td></tr>
+<tr><td>End-to-end Ownership</td><td>端到端负责</td><td>从场景识别到使用结果全程承担</td></tr>
+<tr><td>Value Anchor</td><td>价值锚定</td><td>上线前定义可量化的业务指标与基线</td></tr>
+<tr><td>Baseline Measurement</td><td>基线测量</td><td>改造前的真实指标采集，是价值论证唯一干净证据</td></tr>
+<tr><td>Adoption Rate</td><td>采纳率 / 渗透率</td><td>目标用户实际使用的比例，比满意度诚实</td></tr>
+<tr><td>Proof of Concept</td><td>概念验证</td><td>验证可行性；若被当作终点即为项目停滞的常见形态</td></tr>
+<tr><td>Retrieval-Augmented Generation</td><td>检索增强生成</td><td>先取依据再生成；质量上限由检索决定</td></tr>
+<tr><td>Context Engineering</td><td>上下文工程</td><td>决定给模型看什么、按什么顺序、花多少预算</td></tr>
+<tr><td>Chunking Strategy</td><td>分块策略</td><td>切分粒度与语义单元决定召回质量</td></tr>
+<tr><td>Reranking</td><td>重排序</td><td>候选取多、精排取少，常优于调分块</td></tr>
+<tr><td>Hybrid Retrieval</td><td>混合召回</td><td>关键词与向量互补，专名与编号依赖前者</td></tr>
+<tr><td>Groundedness / Citation</td><td>有据性 / 引用</td><td>结论可追溯到具体来源片段</td></tr>
+<tr><td>Abstention</td><td>拒答设计</td><td>证据不足时明确回答"不知道并转人工"</td></tr>
+<tr><td>Hallucination</td><td>幻觉</td><td>更常见的真实成因是数据错误或检索错配</td></tr>
+<tr><td>Golden Set</td><td>金标集</td><td>带期望答案与判定规则的评测样例集合</td></tr>
+<tr><td>Eval Harness</td><td>评测执行框架</td><td>把评测集、评分器、门禁串成流水线</td></tr>
+<tr><td>LLM-as-a-Judge</td><td>模型评分</td><td>可扩展但需用人工抽样校准一致性</td></tr>
+<tr><td>Pairwise Comparison</td><td>成对比较</td><td>比绝对打分更稳定的版本比较方式</td></tr>
+<tr><td>Regression Gate</td><td>回归门禁</td><td>发布前的强制质量闸门，含阻断级用例</td></tr>
+<tr><td>Error Analysis</td><td>错误分析 / 归因</td><td>把坏例分到检索、推理、数据、评测四类</td></tr>
+<tr><td>Data Drift</td><td>数据漂移</td><td>输入分布变化导致表现静默退化</td></tr>
+<tr><td>Agent Orchestration</td><td>智能体编排</td><td>把步骤、工具、校验点组织成可控回路</td></tr>
+<tr><td>Tool Contract</td><td>工具契约</td><td>输入 schema、输出格式、失败语义的明确约定</td></tr>
+<tr><td>Idempotency</td><td>幂等性</td><td>重试不造成重复业务效果，写操作必备</td></tr>
+<tr><td>Human-in-the-loop</td><td>人在环路</td><td>只在风险升高、置信不足、冲突、状态不明处介入</td></tr>
+<tr><td>Least Privilege</td><td>最小权限</td><td>只授予完成任务所需的最小动作集，带时效与回收</td></tr>
+<tr><td>Prompt Injection</td><td>提示注入</td><td>把外部内容当指令执行；需数据与指令分区</td></tr>
+<tr><td>Guardrails</td><td>护栏</td><td>由代码、凭证与网络策略强制，而非提示词约定</td></tr>
+<tr><td>Audit Trail</td><td>审计留痕</td><td>输入、依据、建议、审批、执行、回执的完整链条</td></tr>
+<tr><td>Fallback / Degradation</td><td>降级</td><td>全自动 → 半自动 → 规则 → 人工的可用退路</td></tr>
+<tr><td>Rollback</td><td>回滚</td><td>已演练过的还原路径，含数据回退</td></tr>
+<tr><td>Canary / Staged Rollout</td><td>灰度</td><td>按风险维度放量，而非只按流量比例</td></tr>
+<tr><td>Shadow Mode</td><td>影子运行</td><td>新版本并行执行不影响用户，用于真实分布验证</td></tr>
+<tr><td>Observability</td><td>可观测性</td><td>日志、指标、追踪 + 调用轨迹与检索结果</td></tr>
+<tr><td>Private / On-prem Deployment</td><td>私有化部署</td><td>算力、模型、数据均在客户可控域内</td></tr>
+<tr><td>Data Residency</td><td>数据驻留</td><td>数据不得离开指定地域或网络边界</td></tr>
+<tr><td>Air-gapped Delivery</td><td>离线交付</td><td>零外网假设，制品预置并可增量升级</td></tr>
+<tr><td>Model Routing</td><td>模型路由</td><td>按任务难度分派不同模型以平衡质量与成本</td></tr>
+<tr><td>Inference Cost per Action</td><td>单业务动作成本</td><td>与客户对话的正确成本口径</td></tr>
+<tr><td>Component Reuse</td><td>组件复用</td><td>沉淀成熟度的度量：脚本→可配置→默认自带</td></tr>
+<tr><td>Reference Architecture</td><td>参考架构</td><td>某类场景的标准解法与工期模型</td></tr>
+<tr><td>Runbook</td><td>运行手册</td><td>使他人无需提问即可完成操作与回滚的文档</td></tr>
+<tr><td>Delivery Package</td><td>交付包</td><td>部署物 + 配置 + 评测集 + 手册 + 变更记录</td></tr>
+<tr><td>Knowledge Governance</td><td>知识治理</td><td>权威源、时效、冲突裁决与责任人的持续机制</td></tr>
+<tr><td>Use-case Pool</td><td>场景池</td><td>经价值/可行/可纳三维评分后的候选场景序列</td></tr>
+<tr><td>Stage Gate</td><td>门径评审</td><td>以证据为条件的推进或终止决策点</td></tr>
+<tr><td>Post-incident Review</td><td>事故复盘</td><td>决策点追溯，而非流程检讨与责任分配</td></tr>
+<tr><td>Technology Radar</td><td>技术雷达</td><td>对前沿能力的分级跟踪与试用结论沉淀</td></tr>
+<tr><td>Pod</td><td>交付小组</td><td>场景负责人 + 实现 + 数据评测的最小稳定单元</td></tr>
+<tr><td>Product Feedback Loop</td><td>产品反哺</td><td>现场缺陷与需求以可执行格式回流至路线图</td></tr>
+</tbody>
+</table></div>
+</article>
+<article id="apb">
+<h3><span class="no">APPENDIX B · 汇总</span>全域交付检查与诊断</h3>
+<p class="deck">逐项核对当前项目的交付证据。完成勾选后，页面会汇总各域覆盖情况、未闭环项与关键门槛，并给出优先行动建议；覆盖率不是上线批准或合规认证。</p>
+<div class="checklist-tool">
+<div class="checklist-method">
+<div>
+<h4>怎么使用这份清单</h4>
+<p id="domain-check-instructions">只有在当前项目能指出可复核的材料、测试记录或责任人时，才勾选“已有证据”。没有核验、只有口头判断或仍在处理中，都先保持未勾选；未勾选不等于判定失败，但不能当作已通过。</p>
+</div>
+<div>
+<label class="checklist-save" for="domain-check-save">
+<input id="domain-check-save" type="checkbox"/>
+<span>仅在此设备保存本清单进度（可选，不会上传）</span>
+</label>
+<span class="checklist-save-state" id="domain-check-save-state" role="status" aria-live="polite">默认不保存；刷新页面后勾选状态会清空。</span>
+</div>
+</div>
+<div class="checklist-overview">
+<div class="checklist-stat"><span>已有证据</span><strong id="domain-check-verified">0 / 42</strong></div>
+<div class="checklist-stat"><span>待核验</span><strong id="domain-check-pending">42</strong></div>
+<div class="checklist-stat"><span>关键门槛待处理</span><strong id="domain-check-critical">18</strong></div>
+</div>
+<div class="checklist-progress">
+<progress id="domain-check-progress" max="42" value="0" aria-label="证据覆盖率"></progress>
+<strong id="domain-check-percent">0%</strong>
+</div>
+<p class="checklist-status" id="domain-check-status" role="status" aria-live="polite" aria-atomic="true">开始检查后，这里会区分已验证、待核验与关键门槛；关键项未核实前，不应仅凭总覆盖率推进高风险上线。</p>
+</div>
+<form class="checklist-form" id="domain-check-form">
+<details class="acc" data-check-domain="d1" open="">
+<summary class="check-domain-summary"><span class="check-domain-title">D1 场景与价值</span><span class="check-domain-count" data-domain-count>0 / 5</span></summary>
+<div class="bd"><ul class="ck">
+<li>"过去为什么没被自动化"有明确答案</li>
+<li>存在具名业务 Owner，且考核与目标相关</li>
+<li>价值假设含基线、目标区间、前提条件</li>
+<li>基线数据来源与采集周期已确认</li>
+<li>范围排除项已签署</li>
+</ul></div>
+</details>
+<details class="acc" data-check-domain="d2"><summary class="check-domain-summary"><span class="check-domain-title">D2 现场诊断</span><span class="check-domain-count" data-domain-count>0 / 5</span></summary><div class="bd"><ul class="ck">
+<li>四类勘察对象均已覆盖（底座/系统/治理/人）</li>
+<li>关键接口已实际调通而非"文档有"</li>
+<li>约束已分硬/软/伪三类</li>
+<li>权限申请路径与平均耗时已知</li>
+<li>未知项清单有闭环时间</li>
+</ul></div></details>
+<details class="acc" data-check-domain="d3"><summary class="check-domain-summary"><span class="check-domain-title">D3 数据与知识</span><span class="check-domain-count" data-domain-count>0 / 5</span></summary><div class="bd"><ul class="ck">
+<li>唯一权威源已指定，冲突已裁决</li>
+<li>切片带来源、版本、生效期、密级、Owner</li>
+<li>检索失败与检索空结果分别统计</li>
+<li>废止内容有强制下线流程</li>
+<li>知识运营责任人具名到人</li>
+</ul></div></details>
+<details class="acc" data-check-domain="d4"><summary class="check-domain-summary"><span class="check-domain-title">D4 权限与安全</span><span class="check-domain-count" data-domain-count>0 / 6</span></summary><div class="bd"><ul class="ck">
+<li>建议—决策—执行三层由系统强制分离</li>
+<li>写操作凭证不出现在模型可调用工具中</li>
+<li>金额/次数/影响面三类硬性拦截已配置</li>
+<li>七个攻击面均有红队用例并纳入回归</li>
+<li>留痕可还原任一高影响动作全过程</li>
+<li>临时权限有到期时间与回收核对</li>
+</ul></div></details>
+<details class="acc" data-check-domain="d5-d6"><summary class="check-domain-summary"><span class="check-domain-title">D5–D6 方案与实现</span><span class="check-domain-count" data-domain-count>0 / 6</span></summary><div class="bd"><ul class="ck">
+<li>方案说明含备选比较与已知妥协点</li>
+<li>假设卡列出最危险的三条前提及证伪方式</li>
+<li>验证环境与生产环境无实质性差异</li>
+<li>六类失败路径逐条实测过</li>
+<li>调用轨迹与观测字段已定义并生效</li>
+<li>容量与成本估算有明确假设</li>
+</ul></div></details>
+<details class="acc" data-check-domain="d7"><summary class="check-domain-summary"><span class="check-domain-title">D7 评测</span><span class="check-domain-count" data-domain-count>0 / 5</span></summary><div class="bd"><ul class="ck">
+<li>评测集早于或同步于编码建立</li>
+<li>样例来自真实历史数据，含困难与对抗样例</li>
+<li>模型评分器经过人工一致性校准</li>
+<li>四类变更均触发同一套回归门禁</li>
+<li>基线报告给出区间与方差，不给单点</li>
+</ul></div></details>
+<details class="acc" data-check-domain="d8-d9"><summary class="check-domain-summary"><span class="check-domain-title">D8–D9 上线与运行</span><span class="check-domain-count" data-domain-count>0 / 5</span></summary><div class="bd"><ul class="ck">
+<li>六项就绪检查全部为真且经演练</li>
+<li>灰度按风险维度而非仅按流量比例</li>
+<li>四级降级链实测可用</li>
+<li>他人按手册独立完成过部署与回滚</li>
+<li>四类退化有对应监测信号</li>
+</ul></div></details>
+<details class="acc" data-check-domain="d10"><summary class="check-domain-summary"><span class="check-domain-title">D10 沉淀</span><span class="check-domain-count" data-domain-count>0 / 5</span></summary><div class="bd"><ul class="ck">
+<li>至少一项产出达到二级复用（可配置）</li>
+<li>组件有维护人与依赖说明</li>
+<li>场景参考架构与工期模型已写出</li>
+<li>反哺需求已提交并有跟踪编号</li>
+<li>复盘按决策点而非按流程撰写</li>
+</ul></div></details>
+</form>
+<section class="checklist-recommendations" aria-labelledby="checklist-recommendations-title">
+<h4 id="checklist-recommendations-title">诊断结论与优先行动</h4>
+<p id="checklist-next-steps">勾选证据后，系统会优先列出未闭环最多的领域与对应建议。</p>
+<ol id="checklist-recommendations-list"></ol>
+</section>
+<div class="checklist-actions">
+<button form="domain-check-form" id="domain-check-reset" type="reset">清空全部勾选</button>
+</div>
+</article>
+<article id="apc">
+<h3><span class="no">APPENDIX C · 读法</span>三种使用路径</h3>
+<p class="deck">本手册不要求顺序通读。按你的角色选择路径，效率更高。</p>
+<div class="grid g3">
+<div class="kc"><div class="kk">路径一</div><h4>正在做项目，卡住了</h4><p>直接到<a class="xref" href="#c13">第十三章病症表</a>，按症状定位到对应知识域，再跳读该域的实践与检查项。多数现场问题可以在半小时内找到处方。</p></div>
+<div class="kc"><div class="kk">路径二</div><h4>要搭一支交付团队</h4><p>读<a class="xref" href="#p2">能力模型</a>定标尺，读<a class="xref" href="#c10">编制</a>与<a class="xref" href="#c11">计价</a>定机制，用<a class="xref" href="#c9">阶段交付物矩阵</a>作为流程模板，最后用<a class="xref" href="#c14">风险登记册</a>约定止损规则。</p></div>
+<div class="kc"><div class="kk">路径三</div><h4>个人能力成长</h4><p>按<a class="xref" href="#c7">技能矩阵</a>逐条对照，找出只能举出"看过别人做"的条目；用<a class="xref" href="#c21">九十天路径</a>安排训练顺序；每季度重做一次<a class="xref" href="#c22">自查十问</a>。</p></div>
+</div>
+<h4>使用边界</h4>
+<p>本手册给出的是一套方法论骨架，不是标准认证，也不替代具体行业的监管要求。其中三类内容需要使用者自行校准：<b>工期与人力量级</b>受团队成熟度影响极大；<b>行业合规细节</b>必须替换为当地与所在行业的具体规定；<b>指标阈值</b>应由你自己的基线数据决定，而不是直接采用文中数值区间。</p>
+</article>
+<article id="apd">
+<h3><span class="no">APPENDIX D · 落地配方</span>组织级即用清单与启动配方</h3>
+<p class="deck">单个 FDE 能把一个系统做对，一个组织能把一类能力沉淀下来，靠的是台账、尽调与启动节奏这三件不显眼却决定复利的基础设施。以下三件资产可直接取用。</p>
+<h4>D.1 组织级 AI 资产台账</h4>
+<p>规模化之后最先失控的是「我们到底有多少在跑的东西」。这张台账是回答它的最小载体，事故与审计时价值最大——它能在十分钟内说清一个能力的归属、评测与可否停用。</p>
+<div class="tw"><table><thead><tr><th style="width:170px">字段</th><th>登记要点</th></tr></thead><tbody>
+<tr><td>场景名称</td><td>一句话描述业务动作，而非技术实现</td></tr>
+<tr><td>业务 Owner</td><td>具名到人，考核与本场景指标挂钩</td></tr>
+<tr><td>技术 Owner</td><td>能对线上问题负责的人，不得为空</td></tr>
+<tr><td>依赖模型与版本</td><td>当前线上实际运行的版本，可锁定、可回退</td></tr>
+<tr><td>数据源与密级</td><td>每个数据源标注密级与出域属性</td></tr>
+<tr><td>评测集位置</td><td>金标集路径与最近一次结果与日期</td></tr>
+<tr><td>单业务动作成本</td><td>每完成一次业务动作的全摊成本</td></tr>
+<tr><td>健康状态</td><td>正常 / 退化 / 待退役，含最近巡检日期</td></tr>
+</tbody></table></div>
+<h4>D.2 团队与供应商能力尽调清单</h4>
+<p>采购 FDE 能力或自建团队时，用下面八问代替「有没有案例」的空泛判断。任何一条答不出具体证据，都说明要买的是工时而非资产。</p>
+<ul><li>上一次交付里，有哪些部件被下一次直接复用了？</li><li>能否给出一个自己写、且可脱离原项目运行的评测集？</li><li>出问题当晚，谁能在客户权限内改代码修好？</li><li>你们的写操作默认是建议、待批还是直接执行？</li><li>离场后由谁负责知识运营，多久复审一次？</li><li>能否独立演示一次完整的部署与回滚？</li><li>为单一客户改底层的裁决机制是什么？</li><li>报价里是否区分工程工时与依赖等待？</li></ul>
+<h4>D.3 组织化启动：九十天的三段</h4>
+<div class="tw"><table><thead><tr><th>阶段</th><th>要立的东西</th><th>完成判据</th></tr></thead><tbody>
+<tr><td>第一个月</td><td>一个标杆场景 + 一套统一模板（体检清单、评测集、交付包）</td><td>该场景有具名业务 Owner 与已测基线</td></tr>
+<tr><td>第二个月</td><td>沉淀机制：组件评审、坏例集、现场问题例会</td><td>至少一件产出达到二级复用（他人可配置复用）</td></tr>
+<tr><td>第三个月</td><td>度量：把复用次数与二次交付耗时纳入团队考核</td><td>出现第一个不依赖原团队的复用案例</td></tr>
+</tbody></table></div>
+</article>
+<article id="ape">
+<h3><span class="no">APPENDIX E · 端到端案例</span>采购发票异常核对：从问题到可控上线</h3>
+<p class="deck">用一个只读建议系统演示场景定义、价值测量、评测、灰度与交接。重点不是“让模型自动付款”，而是让业务人员更快发现值得处理的差异。</p>
+<div class="co deep">
+<span class="ct">阅读说明</span>
+<p>本案例中的数量、时间和比例均为演示用假设，不是行业基准或承诺值。真实项目应使用客户授权的数据建立基线，并由财务、业务与安全负责人共同确认风险边界。</p>
+</div>
+<h4>E.1 场景与系统边界</h4>
+<p>某组织每月处理采购发票。工作人员需要对照采购订单、收货记录和供应商信息，识别重复发票、金额或税额差异、供应商信息不一致及缺少凭证等问题。先观察并记录现有流程：哪些字段来自权威系统，哪些例外必须由财务判断，异常最终由谁处理。</p>
+<div class="tw"><table>
+<thead><tr><th>设计项</th><th>本案例的做法</th><th>边界与验证</th></tr></thead>
+<tbody>
+<tr><td><b>业务目标</b></td><td>缩短核对时间，同时不降低重大差异的发现能力。</td><td>对照上线前基线和同期人工抽样；不能只看模型准确率。</td></tr>
+<tr><td><b>输入</b></td><td>发票、采购订单、收货记录及供应商主数据。</td><td>确认来源、权限、保留期限、字段质量和允许的处理地域。</td></tr>
+<tr><td><b>系统职责</b></td><td>提取字段、执行确定性校验、解释差异并给出待核对建议。</td><td>每条建议展示字段来源、匹配依据和不确定项；证据不足时转人工。</td></tr>
+<tr><td><b>人工职责</b></td><td>财务人员确认例外、决定后续处置并记录理由。</td><td>高金额、重复付款风险和主数据变更始终按客户审批制度处理。</td></tr>
+<tr><td><b>明确不做</b></td><td>本案例不自动批准发票、不创建付款、不修改供应商资料。</td><td>任何未来写操作都需单独评估授权、审计、幂等与回滚。</td></tr>
+</tbody></table></div>
+<h4>E.2 建立基线与可证伪的价值假设</h4>
+<p>先从财务系统和人工工时记录取样，确认口径一致。假设某月有 1,200 张发票，抽样观察到 70% 属于可辅助核对的常规记录；在不增加返工的前提下，每张常规记录平均节省 1.5 分钟，则预期节省约 21 人时/月：1,200 × 70% × 1.5 ÷ 60。上线前必须实际测量这些参数，并记录样本区间与例外类型。</p>
+<div class="tw"><table>
+<thead><tr><th>指标</th><th>定义</th><th>数据来源与注意事项</th></tr></thead>
+<tbody>
+<tr><td><b>处理时长</b></td><td>从打开记录到作出核对决定的中位数及分布。</td><td>从现有工作流取数；剔除等待时间或单独报告等待时间。</td></tr>
+<tr><td><b>重大差异漏检率</b></td><td>已标注重大差异中未被系统提示的比例。</td><td>由业务负责人定义“重大”；按差异类型分别报告，不能用总体准确率替代。</td></tr>
+<tr><td><b>建议采纳率</b></td><td>人工接受建议的比例，并区分修改后接受与直接接受。</td><td>低采纳率应触发原因分析，不应诱导员工为了指标而点击接受。</td></tr>
+<tr><td><b>返工与误报</b></td><td>错误匹配、重复核查和建议导致的额外处理量。</td><td>同时观察业务工时和下游更正记录。</td></tr>
+<tr><td><b>单位业务动作成本</b></td><td>模型、平台、人工复核、维护和异常处置的全摊成本。</td><td>统一核算周期与成本口径；注明未计入的成本项。</td></tr>
+</tbody></table></div>
+<p><b>价值计算：</b>月净收益 = 经验证节省的业务成本 + 可归因的损失减少 − 模型、平台、复核与维护成本。回收期只在净收益为正且测量口径稳定时计算；若数据不足，应报告区间和不确定性，而不是给出单点承诺。</p>
+<h4>E.3 数据集、评测与上线门槛</h4>
+<ol>
+<li><b>抽样分层：</b>覆盖常规记录、金额与税额差异、供应商别名、重复票据、缺失凭证、扫描质量差及历史上发生过的高影响错误。</li>
+<li><b>先定标签：</b>由具备业务权限的财务人员制定差异类别、重大程度和“证据不足”的判定规则；争议样本留存裁决记录。</li>
+<li><b>隔离评测集：</b>按时间或业务实体隔离开发集与留出集，避免同一供应商、模板或重复发票泄漏到两边；敏感数据按最小权限处理。</li>
+<li><b>分项报告：</b>报告重大差异召回、误报、字段提取质量、建议采纳、人工处理时长和样本量；对关键子群体单独看结果。</li>
+<li><b>上线门槛：</b>由客户在试点前书面约定各指标的最低线、置信区间要求、人工兜底方式和停止条件。阈值取决于风险承受度，不从本案例照搬。</li>
+</ol>
+<div class="co warn">
+<span class="ct">不能被平均值掩盖的风险</span>
+<p>重大差异样本少时，即使测试集上“零漏检”也不能证明真实世界不会漏检。保留人工审批、覆盖已知困难样本、持续抽查线上结果，并明确发生漏检后的停用与追溯流程。</p>
+</div>
+<h4>E.4 六步交付与阶段证据</h4>
+<div class="tw"><table>
+<thead><tr><th>阶段</th><th>关键动作</th><th>必须留下的证据</th><th>未达标时</th></tr></thead>
+<tbody>
+<tr><td><b>1 · 勘察</b></td><td>跟随财务人员观察真实核对流程，梳理数据、权限和异常处置。</td><td>现状流程图、样本来源、系统边界、具名业务 Owner。</td><td>补充现场观察；拿不到授权数据则暂停建模。</td></tr>
+<tr><td><b>2 · 定标</b></td><td>选择单一业务单元，定义目标、排除项和指标口径。</td><td>基线报告、可证伪假设、重大差异定义和验收人。</td><td>无法建立基线或没有责任人时不进入试点。</td></tr>
+<tr><td><b>3 · 建造</b></td><td>先实现确定性校验，再加入字段提取和有依据的建议。</td><td>来源追溯、权限测试、错误处理、日志脱敏和回滚方案。</td><td>优先修数据映射与流程，不用更复杂的模型掩盖问题。</td></tr>
+<tr><td><b>4 · 验证</b></td><td>对留出集回归，执行困难样本和权限边界测试。</td><td>分项指标、样本量、失败案例、已知限制和业务签字。</td><td>未达到约定门槛则修复、缩小范围或停止。</td></tr>
+<tr><td><b>5 · 运行</b></td><td>先影子运行，再由小范围人员使用只读建议；定期抽查。</td><td>线上对照、人工覆核记录、告警、停用开关和事件联系人。</td><td>漏检上升、来源异常或权限越界时暂停相关能力并调查。</td></tr>
+<tr><td><b>6 · 复制</b></td><td>复盘例外模式，决定哪些规则、连接器和评测样本可复用。</td><td>版本化配置、测试集维护责任、运行手册和复用限制。</td><td>先完成维护交接，不把客户数据或特例直接复制到别处。</td></tr>
+</tbody></table></div>
+<h4>E.5 失败演练与停用条件</h4>
+<div class="tw"><table>
+<thead><tr><th>演练情形</th><th>安全预期</th><th>验证证据</th></tr></thead>
+<tbody>
+<tr><td>供应商名称相似或主数据冲突</td><td>明确标记不确定，不自动合并或改写主数据。</td><td>相似名称样本、人工升级记录及来源字段。</td></tr>
+<tr><td>发票影像模糊或关键字段缺失</td><td>拒绝给出确定性结论，提示补录或人工处理。</td><td>低质量扫描样本的拒答与转人工率。</td></tr>
+<tr><td>重复票据或历史记录未同步</td><td>提示潜在重复并查询权威系统；权威系统不可用时停止判断。</td><td>重复样本、接口超时、恢复后的去重核对。</td></tr>
+<tr><td>用户无权查看某份采购记录</td><td>不在摘要、日志或提示中泄露受限字段。</td><td>不同角色的授权测试和日志抽查。</td></tr>
+<tr><td>模型或上游服务不可用</td><td>回退到现有人工流程，不丢失记录、不重复提交。</td><td>故障注入结果、队列状态和人工操作手册。</td></tr>
+</tbody></table></div>
+<p>试点开始前，明确谁有权暂停系统、如何识别影响范围、如何通知使用者、如何回到原流程，以及恢复上线需要哪些证据。停用条件由风险负责人签字，不能由模型自行判断。</p>
+<h4>E.6 可交接的验收清单</h4>
+<ul>
+<li>业务 Owner 能解释指标口径、样本限制和仍未覆盖的例外。</li>
+<li>财务人员能看到建议依据、拒绝建议并记录原因。</li>
+<li>系统权限经过角色测试，日志不记录不必要的敏感字段。</li>
+<li>测试集、规则、模型版本和发布记录可追溯、可回滚。</li>
+<li>值班与业务联系人、停用步骤、人工替代流程经过演练。</li>
+<li>数据留存、删除和后续评测样本复用均有明确授权与责任人。</li>
+</ul>
+</article>
+<article id="apf">
+<h3><span class="no">APPENDIX F · 参考资料</span>框架、标准与延伸阅读</h3>
+<p class="deck">以下资料用于核对风险管理、安全与可访问性实践。它们不构成对本手册全部观点的背书，也不替代适用法律、监管要求、合同义务或组织内部标准。</p>
+<div class="tw"><table>
+<thead><tr><th>主题</th><th>一手资料</th><th>如何使用</th></tr></thead>
+<tbody>
+<tr><td><b>AI 风险管理</b></td><td><a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener noreferrer">NIST AI Risk Management Framework (AI RMF 1.0)</a></td><td>将 Govern、Map、Measure、Manage 作为风险讨论框架；NIST 说明该框架供自愿使用。</td></tr>
+<tr><td><b>生成式 AI 风险</b></td><td><a href="https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf" target="_blank" rel="noopener noreferrer">NIST AI 600-1: Generative Artificial Intelligence Profile</a></td><td>用于补充生成式 AI 特有风险的识别与管理；结合场景和组织风险评估采用。</td></tr>
+<tr><td><b>LLM 应用安全</b></td><td><a href="https://genai.owasp.org/llm-top-10/" target="_blank" rel="noopener noreferrer">OWASP Top 10 for LLM Applications</a></td><td>将其作为威胁建模和测试用例来源之一；确认所引用版本及项目适用性。</td></tr>
+<tr><td><b>网页可访问性</b></td><td><a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener noreferrer">W3C Web Content Accessibility Guidelines (WCAG) 2.2</a></td><td>检查键盘操作、对比度、可见焦点、语义结构和动态状态反馈。</td></tr>
+</tbody></table></div>
+<p>标准会修订，法律适用范围也因国家、地区、行业与合同而异。正式交付前应核对原始发布机构的现行版本，并由客户相应的安全、法务与合规负责人确认。</p>
+</article>
+<article id="rights">
+<h3><span class="no">APPENDIX G · 版权与共建</span>MIT 开源许可 · 署名与共建</h3>
+<p class="deck">本手册及本仓库原创内容按 MIT License 许可（OSI 批准）。允许使用、复制、修改、发布、分发、再许可及商业销售。复制或分发本作品或其实质部分时，须附带版权声明和许可声明。MIT 不授予 FDEBOK 名称、标识或商标权。</p>
+<div class="co principle">
+<span class="ct">许可摘要</span>
+<p>MIT 许可证允许免费或商业使用、修改、翻译、再发布及销售。分发副本或实质部分时，须保留版权声明和许可声明；为方便读者追溯，建议保留原始来源链接并说明改动，这属于友好建议，不是 MIT 许可证增加的限制。</p>
+</div>
+<p><a href="/LICENSE">查看完整 MIT 许可证文本</a></p>
+<h4>可使用的方式</h4>
+<ul>
+<li>个人学习、教学、培训、咨询交付及其他商业或非商业场景均可使用本手册，也可收费提供相关服务或销售包含本手册内容的产品。</li>
+<li>可复制、修改、翻译、重新编排、制作衍生作品、发布、分发、再许可或销售本手册及其衍生作品；分发副本或实质部分时，须附带版权声明和 MIT 许可声明。</li>
+<li>发布修改版时，建议说明改动并保留原始来源链接；不得暗示修改版获得 FDEBOK 官方认可。</li>
+<li>本项目不对 AI 或自动化工具另设使用限制。复制或分发本手册或其实质部分时，仍须遵守 MIT 许可的声明保留条件及适用法律。</li>
+</ul>
+<h4>署名、许可与商标</h4>
+<ul>
+<li>MIT 许可证要求在副本或实质部分中包含原有版权声明和许可声明；完整文本见仓库中的 LICENSE 文件。</li>
+<li>保留来源链接、标注修改内容及日期，有助于读者区分原版与改编版，但属于建议，并非额外许可条件。</li>
+<li>MIT 许可证不授予 FDEBOK 名称、标志或其他商标权；使用相关标识或声称官方背书，须另行取得许可。</li>
+</ul>
+<h4>欢迎行业共建</h4>
+<p>欢迎各行业读者分享案例、提出勘误与改进建议。请通过 <a href="https://github.com/fdebok/handbook" rel="noopener noreferrer">FDEBOK GitHub 仓库</a>提交讨论或 Pull Request；经维护者审核并合并的内容成为项目正式版本。请仅提交自己创作或已获授权、可以按 MIT 许可证发布的材料。</p>
+<h4>机器可读标记的能力边界</h4>
+<p>页面元数据、结构化署名、复制时附加的许可与来源说明、打印版权行用于提醒许可条件和便于追溯，并非访问控制或防拷贝措施。MIT 许可允许合规范围内的商业使用、修改和再发布；其他适用法律及第三方权利仍应另行遵守。</p>
+</article>
+<section class="feedback-card" id="feedback" aria-labelledby="feedback-title">
+<div class="feedback-heading">
+<span class="feedback-eyebrow" lang="en">FDEBOK · COMMUNITY</span>
+<h3 id="feedback-title">一起让手册更准确、更好用</h3>
+<p>发现内容错误、表达不清、案例缺口，或评测题目不贴合实际？选择合适入口创建 GitHub Issue，帮助维护者快速定位并跟进。请勿提交客户数据、个人信息、密钥或其他敏感内容。</p>
+</div>
+<div class="feedback-options">
+<a class="feedback-option" href="https://github.com/fdebok/handbook/issues/new?template=content-feedback.yml" target="_blank" rel="noopener noreferrer">
+<strong>内容勘误与案例建议</strong>
+<span>报告事实错误、补充一线案例，或提出结构与表达上的改进。</span>
+</a>
+<a class="feedback-option" href="https://github.com/fdebok/handbook/issues/new?template=assessment-feedback.yml" target="_blank" rel="noopener noreferrer">
+<strong>自查评测工具建议</strong>
+<span>反馈题目适配性、评分锚点、诊断结果或可访问性体验。</span>
+</a>
+</div>
+<div class="feedback-meta">
+<div class="feedback-contact">
+<strong>技术交流与社区共建</strong>
+<a class="mail-link" href="mailto:x@fdebok.com?subject=FDEBOK%20Inquiry">x@fdebok.com</a>
+<p>欢迎交流 FDE 一线实践、技术方案与工具经验，也欢迎一起筹划免费的线下分享或技术沙龙，或共建 FDE 同行交流社群。交流与活动以免费、非商业、互助共学为原则。欢迎来信说说你的想法，我们可以从一次轻松的技术交流开始。</p>
+</div>
+<div class="feedback-thanks">
+<strong>共建鸣谢</strong>
+<ul class="contributor-list">
+<li>fdebok</li><li>keepmas</li><li>aipyer</li><li>deepfde</li>
+</ul>
+<p>感谢以上伙伴参与 FDEBOK 共建。名单依据当前项目记录整理；如需补充或更正，欢迎通过 Issue 告知。</p>
+</div>
+</div>
+</section>
+</main>
+</div>
+<footer class="pg">
+<b>FDEBOK</b> · 前线部署工程师知识体系指南<br/>
+  十个知识域 · 六段生命周期 · 五级能力标尺 · 二十个高频痛点 · 九件现场资产
+<p class="rights-short"><img alt="" class="footer-brand-mark" height="24" src="/brand-mark.svg?v=6" width="24"/>© 2026 FDEBOK（fdebok.com） · MIT License · <a href="#rights">许可与共建</a></p>
+<div class="footer-activity">
+<span class="visit-counter" id="page-visit-counter" aria-label="全站访问量加载中"><span>全站访问：</span><strong id="page-visit-count">--</strong><span>次</span></span>
+<span class="footer-activity-note">显示全站累计访问次数，由服务端统计。</span>
+</div>
+</footer>
+<button aria-label="返回顶部" id="top" title="返回顶部" type="button">↑</button>
+<button id="reading-tools-toggle" type="button" aria-controls="reading-panel" aria-expanded="false"
+  aria-label="阅读与显示设置" title="阅读与显示设置">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M7 3.75h10A1.75 1.75 0 0 1 18.75 5.5v15l-6.75-4.25-6.75 4.25v-15A1.75 1.75 0 0 1 7 3.75Z"/>
+</svg><span>阅读设置</span>
+</button>
+<section id="reading-panel" aria-labelledby="reading-panel-title" hidden>
+<div class="reading-panel-head">
+<h2 id="reading-panel-title">阅读与显示设置</h2>
+<button id="reading-panel-close" class="reading-panel-close" type="button" aria-label="关闭阅读面板" title="关闭">×</button>
+</div>
+<p class="reading-panel-note">阅读位置会在本机自动保存，并在下次打开时继续；也可单独保存一个书签。不会上传，清除浏览器站点数据后会重置。</p>
+<fieldset class="theme-picker">
+<legend id="theme-picker-label">页面配色</legend>
+<div class="theme-options">
+<label class="theme-option" data-theme-value="classic">
+<input type="radio" name="color-theme" value="classic"/>
+<span aria-hidden="true" class="theme-swatch"></span><span class="theme-name">典雅蓝金</span>
+</label>
+<label class="theme-option" data-theme-value="forest">
+<input type="radio" name="color-theme" value="forest"/>
+<span aria-hidden="true" class="theme-swatch"></span><span class="theme-name">松柏铜金</span>
+</label>
+<label class="theme-option" data-theme-value="plum">
+<input type="radio" name="color-theme" value="plum"/>
+<span aria-hidden="true" class="theme-swatch"></span><span class="theme-name">墨石紫银</span>
+</label>
+</div>
+<p class="theme-note">选择后立即应用并保存在本机，不会上传。</p>
+<p class="theme-status" id="theme-status" role="status" aria-live="polite"></p>
+</fieldset>
+<div class="reading-panel-actions">
+<button id="reading-bookmark-save" type="button">保存当前位置为书签</button>
+<button id="reading-bookmark-open" type="button" hidden>前往已保存书签</button>
+<button id="reading-bookmark-clear" type="button" hidden>移除书签</button>
+</div>
+<p class="reading-panel-status" id="reading-panel-status" role="status" aria-live="polite" aria-atomic="true">阅读位置将在本机保存；下次打开时自动继续。</p>
+</section>
+<script id="translation-data" type="application/json">{}</script>
+<script src="/site.js?v=1"></script>
+</body>
+</html>

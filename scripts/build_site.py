@@ -8,7 +8,6 @@ import html
 import json
 import re
 import shutil
-import subprocess
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlencode
@@ -24,6 +23,15 @@ EN_DESCRIPTION = (
 )
 EN_IMAGE_URL = "https://www.fdebok.com/share-card-en-v6.png"
 ZH_URL = "https://www.fdebok.com/"
+SHARE_CONTENT_PATH = Path("src/site/data/share-content.json")
+SHARE_CONTENT_PLACEHOLDER = (
+    '<script id="share-content-data" type="application/json">{}</script>'
+)
+TRANSLATIONS_PATH = Path("src/site/data/translations.json")
+TRANSLATION_DATA_PLACEHOLDER = (
+    '<script id="translation-data" type="application/json">{}</script>'
+)
+ZH_PAGE_PATH = Path("src/site/pages/zh/index.html")
 SHARE_PLATFORMS = {
     "zh": ("wechat", "douyin"),
     "en": ("facebook", "linkedin", "x"),
@@ -40,26 +48,29 @@ SHARE_FACTS = {
     "en": ("22 chapters", "Ten knowledge domains", "Six delivery stages", "L1–L5 competency framework", "20 common challenges", "Nine field templates"),
 }
 STATIC_FILES = (
-    f"{INDEXNOW_KEY}.txt",
     "LICENSE",
-    "index.html",
-    "llms.txt",
-    "apple-touch-icon.png",
-    "brand-logo.svg",
-    "brand-mark.svg",
-    "badge-a.png",
-    "badge-m.png",
-    "badge-p.png",
-    "favicon.svg",
-    "og-image.png",
-    "og-image-en.png",
-    "robots.txt",
-    "share-card-en-v6.png",
-    "share-card-zh-v6.png",
-    "sitemap.xml",
-    "share-qr-en.png",
-    "share-qr-zh.png",
 )
+STATIC_ASSETS = {
+    "site.css": Path("src/site/styles/site.css"),
+    "site.js": Path("src/site/scripts/site.js"),
+    f"{INDEXNOW_KEY}.txt": Path(f"src/public/{INDEXNOW_KEY}.txt"),
+    "llms.txt": Path("src/public/llms.txt"),
+    "robots.txt": Path("src/public/robots.txt"),
+    "sitemap.xml": Path("src/public/sitemap.xml"),
+    "apple-touch-icon.png": Path("src/site/assets/apple-touch-icon.png"),
+    "brand-logo.svg": Path("src/site/assets/brand-logo.svg"),
+    "brand-mark.svg": Path("src/site/assets/brand-mark.svg"),
+    "badge-a.png": Path("src/site/assets/badge-a.png"),
+    "badge-m.png": Path("src/site/assets/badge-m.png"),
+    "badge-p.png": Path("src/site/assets/badge-p.png"),
+    "favicon.svg": Path("src/site/assets/favicon.svg"),
+    "og-image.png": Path("src/site/assets/og-image.png"),
+    "og-image-en.png": Path("src/site/assets/og-image-en.png"),
+    "share-card-en-v6.png": Path("src/site/assets/share-card-en-v6.png"),
+    "share-card-zh-v6.png": Path("src/site/assets/share-card-zh-v6.png"),
+    "share-qr-en.png": Path("src/site/assets/share-qr-en.png"),
+    "share-qr-zh.png": Path("src/site/assets/share-qr-zh.png"),
+}
 HAN_CHAR = re.compile(r"[\u3400-\u9fff]")
 VOID_TAGS = {
     "area", "base", "br", "col", "embed", "hr", "img", "input", "link",
@@ -67,79 +78,76 @@ VOID_TAGS = {
 }
 
 
-def load_translations(source: str) -> tuple[dict[str, str], dict[str, str]]:
-    scripts = re.findall(r"<script\b[^>]*>([\s\S]*?)</script>", source, re.IGNORECASE)
-    translation_script = next((item for item in scripts if "var ENG=" in item), None)
-    if translation_script is None:
-        raise RuntimeError("Could not find the ENG translation map in index.html")
-
-    extractor = r"""
-const fs = require('fs');
-const vm = require('vm');
-const source = fs.readFileSync(process.argv[1], 'utf8');
-const scripts = [...source.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)];
-const script = scripts.map(match => match[1]).find(text => text.includes('var ENG='));
-if (!script) throw new Error('ENG map not found');
-const engStart = script.indexOf('var ENG=');
-const attrStart = script.indexOf('var ATTR=', engStart);
-const guidanceStart = script.indexOf('var selfCheckGuidance=', attrStart);
-if (engStart < 0 || attrStart < 0 || guidanceStart < 0) {
-  throw new Error('Translation map boundaries not found');
-}
-const context = {};
-vm.runInNewContext(
-  script.slice(engStart, attrStart) + ';globalThis.__ENG=ENG;',
-  context,
-  {timeout: 2000}
-);
-vm.runInNewContext(
-  script.slice(attrStart, guidanceStart) + ';globalThis.__ATTR=ATTR;',
-  context,
-  {timeout: 2000}
-);
-process.stdout.write(JSON.stringify({eng: context.__ENG, attr: context.__ATTR}));
-"""
+def load_translations(data_path: Path) -> dict[str, dict[str, str]]:
     try:
-        result = subprocess.run(
-            ["node", "-e", extractor, str(ROOT / "index.html")],
-            check=True,
-            capture_output=True,
-            text=True,
-        )
-    except FileNotFoundError as error:
-        raise RuntimeError("Node.js is required to read the existing translation map") from error
-    data = json.loads(result.stdout)
-    return data["eng"], data["attr"]
-
-
-def load_share_content(source: str) -> dict[str, dict[str, dict[str, str]]]:
-    match = re.search(
-        r"<script\b(?=[^>]*\bid=[\"']share-content-data[\"'])[^>]*>"
-        r"([\s\S]*?)</script>",
-        source,
-        re.IGNORECASE,
-    )
-    if match is None:
-        raise RuntimeError("Could not find platform-specific share content in index.html")
-    try:
-        content = json.loads(match.group(1))
+        data = json.loads(data_path.read_text(encoding="utf-8"))
     except json.JSONDecodeError as error:
-        raise RuntimeError("Platform-specific share content is not valid JSON") from error
+        raise RuntimeError(f"Translation data is not valid JSON: {data_path}") from error
+    if not isinstance(data, dict) or set(data) != {"eng", "attr"}:
+        raise RuntimeError(f"Translation data must define exactly 'eng' and 'attr': {data_path}")
+    if any(
+        not isinstance(mapping, dict)
+        or not mapping
+        or not all(isinstance(key, str) and isinstance(value, str) for key, value in mapping.items())
+        for mapping in data.values()
+    ):
+        raise RuntimeError(f"Translation maps must contain non-empty string mappings: {data_path}")
+    return data
 
-    if set(content) != set(SHARE_PLATFORMS):
+
+def load_share_content(content_path: Path) -> dict[str, dict[str, dict[str, str]]]:
+    try:
+        content = json.loads(content_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as error:
+        raise RuntimeError(
+            f"Platform-specific share content is not valid JSON: {content_path}"
+        ) from error
+
+    if not isinstance(content, dict) or set(content) != set(SHARE_PLATFORMS):
         raise RuntimeError("Share content must define exactly the supported Chinese and English platforms")
     required_fields = {
         "kicker", "title", "caption", "story", "audience", "cta", "note", "qrNote"
     }
     for locale, platforms in SHARE_PLATFORMS.items():
-        if set(content[locale]) != set(platforms):
+        locale_content = content[locale]
+        if not isinstance(locale_content, dict) or set(locale_content) != set(platforms):
             raise RuntimeError(f"Unexpected platform list for locale {locale}")
-        for platform, values in content[locale].items():
-            if set(values) != required_fields or not all(
+        for platform, values in locale_content.items():
+            if not isinstance(values, dict) or set(values) != required_fields or not all(
                 isinstance(value, str) and value.strip() for value in values.values()
             ):
                 raise RuntimeError(f"Incomplete or invalid share content for {locale}/{platform}")
     return content
+
+
+def inject_json_data(source: str, element_id: str, placeholder: str, data: object) -> str:
+    if source.count(placeholder) != 1:
+        raise RuntimeError(
+            f"Chinese source page must contain exactly one {element_id} placeholder"
+        )
+    serialized = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
+    serialized = serialized.replace("<", "\\u003c")
+    return source.replace(
+        placeholder,
+        f'<script id="{element_id}" type="application/json">{serialized}</script>',
+        1,
+    )
+
+
+def inject_share_content(
+    source: str, content: dict[str, dict[str, dict[str, str]]]
+) -> str:
+    return inject_json_data(
+        source, "share-content-data", SHARE_CONTENT_PLACEHOLDER, content
+    )
+
+
+def inject_translation_data(
+    source: str, data: dict[str, dict[str, str]]
+) -> str:
+    return inject_json_data(
+        source, "translation-data", TRANSLATION_DATA_PLACEHOLDER, data
+    )
 
 
 def render_share_page(locale: str, platform: str, content: dict[str, str]) -> str:
@@ -517,11 +525,13 @@ class EnglishRenderer(HTMLParser):
 def build(output_dir: Path) -> int:
     if output_dir == ROOT:
         raise ValueError("The output directory must not be the repository root")
-    source_path = ROOT / "index.html"
+    source_path = ROOT / ZH_PAGE_PATH
     source = source_path.read_text(encoding="utf-8")
-    translations, attributes = load_translations(source)
-    share_content = load_share_content(source)
-    renderer = EnglishRenderer(translations, attributes)
+    translation_data = load_translations(ROOT / TRANSLATIONS_PATH)
+    share_content = load_share_content(ROOT / SHARE_CONTENT_PATH)
+    source = inject_share_content(source, share_content)
+    source = inject_translation_data(source, translation_data)
+    renderer = EnglishRenderer(translation_data["eng"], translation_data["attr"])
     renderer.feed(source)
     renderer.close()
 
@@ -540,6 +550,12 @@ def build(output_dir: Path) -> int:
         if not source_file.is_file():
             raise FileNotFoundError(f"Required site asset is missing: {source_file}")
         shutil.copy2(source_file, output_dir / filename)
+    for output_name, source_path in STATIC_ASSETS.items():
+        source_file = ROOT / source_path
+        if not source_file.is_file():
+            raise FileNotFoundError(f"Required site asset is missing: {source_file}")
+        shutil.copy2(source_file, output_dir / output_name)
+    (output_dir / "index.html").write_text(source, encoding="utf-8")
     english_dir = output_dir / "en"
     english_dir.mkdir(parents=True, exist_ok=True)
     (english_dir / "index.html").write_text("".join(renderer.parts), encoding="utf-8")

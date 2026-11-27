@@ -1,0 +1,56 @@
+{
+  "zh": {
+    "wechat": {
+      "kicker": "微信 · 发给朋友",
+      "title": "企业 AI 落地，不止于模型",
+      "caption": "如果你也在做企业 AI 落地，可以看看这份 FDEBOK 手册。它把从场景发现、现场勘察，到方案验证、上线运维和复用沉淀的工作梳理成一套方法。涵盖 22 章、十大知识域、六阶段交付和现场模板，适合 FDE、AI 工程师及交付团队参考。",
+      "story": "从场景发现、现场勘察到方案验证、上线运维与经验复用，按交付过程梳理 FDE 在真实业务中的关键工作。",
+      "audience": "适合 FDE、AI 工程师、交付团队及技术负责人。",
+      "cta": "阅读完整中文手册",
+      "note": "可复制这段配文和链接，再发给微信好友；网页不能保证直接唤起微信。",
+      "qrNote": "电脑端可扫码，在手机上继续阅读中文手册。转发链接会打开这份简短介绍。"
+    },
+    "douyin": {
+      "kicker": "抖音 · 发布配文",
+      "title": "模型演示之后，怎样走到真实交付？",
+      "caption": "AI 项目从 Demo 到上线，要补齐哪些环节？FDEBOK 把场景判断、现场约束、方案验证、质量评测和运行交接串成一条交付路径。共 22 章、十大知识域和现场模板，适合做企业 AI 的朋友参考。",
+      "story": "从业务场景和现场约束出发，经过方案验证、质量评测、上线运行与交接，看看 AI 项目走向真实使用需要哪些工作。",
+      "audience": "给正在推进企业 AI 项目的工程师、产品与交付团队。",
+      "cta": "打开手册，查看交付路径",
+      "note": "可复制这段配文和链接，再粘贴到抖音；网页不能保证直接唤起抖音。",
+      "qrNote": "扫码可阅读中文手册；转发链接会打开这份简短介绍。"
+    }
+  },
+  "en": {
+    "facebook": {
+      "kicker": "FACEBOOK · FOR YOUR FEED",
+      "title": "From AI capability to business outcomes",
+      "caption": "FDEBOK is a practical guide to taking enterprise AI beyond the model demo: finding valuable use cases, working through real-world constraints, validating solutions, and operating them responsibly. Explore 22 chapters, ten knowledge domains, six delivery stages, and field templates.",
+      "story": "Enterprise AI delivery is a team effort across discovery, engineering, evaluation, launch, and operations. FDEBOK organizes that work into a practical body of knowledge for Forward Deployed Engineers and the teams around them.",
+      "audience": "For FDEs, AI engineers, product teams, and enterprise delivery leaders.",
+      "cta": "Explore the full handbook",
+      "note": "Open Facebook's share composer with a platform-specific introduction and preview.",
+      "qrNote": "Scan to continue with the English handbook. The shared link opens this concise FDEBOK introduction."
+    },
+    "linkedin": {
+      "kicker": "LINKEDIN · FOR YOUR NETWORK",
+      "title": "A field guide to enterprise AI delivery",
+      "caption": "FDEBOK is a practical framework for enterprise AI delivery: ten knowledge domains, six delivery stages, an L1–L5 competency model, 20 common challenges, and nine field templates. It focuses on measurable outcomes, real-world constraints, and responsible production operations.",
+      "story": "A structured reference for teams turning enterprise AI capabilities into reliable, measurable business outcomes—from problem discovery through production operations and reuse.",
+      "audience": "For FDEs, engineering managers, AI delivery leads, and product organizations.",
+      "cta": "Read the FDEBOK handbook",
+      "note": "Open LinkedIn's share composer with a professional, platform-specific introduction.",
+      "qrNote": "Scan to open the English handbook on your phone. The shared link opens this concise introduction first."
+    },
+    "x": {
+      "kicker": "X · POST",
+      "title": "The work starts after the model demo",
+      "caption": "FDEBOK maps the work of enterprise AI delivery: discovery, field constraints, validation, launch, and operations. 22 chapters, ten knowledge domains, six delivery stages, and practical field templates for FDEs and AI teams.",
+      "story": "A concise route through the practical work of taking AI from a use case to a system that can be evaluated, launched, and operated.",
+      "audience": "For FDEs and teams building enterprise AI systems.",
+      "cta": "Read the handbook",
+      "note": "Open an X post composer with a concise introduction and the selected-language link.",
+      "qrNote": "Scan for the English handbook; the shared link opens the short FDEBOK introduction."
+    }
+  }
+}

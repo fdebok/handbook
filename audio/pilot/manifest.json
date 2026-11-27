@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "chapterId": "c1",
+  "status": "scripts-draft",
+  "locales": {
+    "zh-CN": {
+      "sourcePage": "/#c1",
+      "script": "../scripts/zh/c01.json"
+    },
+    "en": {
+      "sourcePage": "/en/#c1",
+      "script": "../scripts/en/c01.json"
+    }
+  }
+}

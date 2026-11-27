@@ -8,6 +8,7 @@ import ctypes.util
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+SITE_ASSETS_DIR = ROOT / "src" / "site" / "assets"
 WIDTH = 1200
 HEIGHT = 630
 PANGO_SCALE = 1024
@@ -439,7 +440,7 @@ def draw_badge_crops() -> None:
         cairo.cairo_set_source_surface(context, source, -left, -455)
         cairo.cairo_paint(context)
         status = cairo.cairo_surface_write_to_png(
-            surface, str(ROOT / filename).encode("utf-8")
+            surface, str(SITE_ASSETS_DIR / filename).encode("utf-8")
         )
         cairo.cairo_destroy(context)
         cairo.cairo_surface_destroy(surface)
@@ -451,11 +452,12 @@ def draw_badge_crops() -> None:
 
 
 def main() -> None:
-    draw_chinese_card(ROOT / "share-card-zh-v6.png")
-    draw_card(ROOT / "share-card-en-v6.png", english=True)
-    draw_chinese_card(ROOT / "og-image.png")
-    draw_card(ROOT / "og-image-en.png", english=True)
-    draw_touch_icon(ROOT / "apple-touch-icon.png")
+    SITE_ASSETS_DIR.mkdir(parents=True, exist_ok=True)
+    draw_chinese_card(SITE_ASSETS_DIR / "share-card-zh-v6.png")
+    draw_card(SITE_ASSETS_DIR / "share-card-en-v6.png", english=True)
+    draw_chinese_card(SITE_ASSETS_DIR / "og-image.png")
+    draw_card(SITE_ASSETS_DIR / "og-image-en.png", english=True)
+    draw_touch_icon(SITE_ASSETS_DIR / "apple-touch-icon.png")
     draw_badge_crops()
     print("Rendered v6 brand artwork, A/P/M badge assets, and the 180x180 Apple touch icon.")
 

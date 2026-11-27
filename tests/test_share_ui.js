@@ -2,12 +2,13 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const vm = require("node:vm");
 
-const source = fs.readFileSync("index.html", "utf8");
-const scripts = [...source.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)];
-const mainScript = scripts.map((match) => match[1]).find((script) =>
-  script.includes("function initializeSharing(){"),
-);
-assert.ok(mainScript, "share UI initializer exists");
+const source = fs.readFileSync("src/site/pages/zh/index.html", "utf8");
+const mainScript = fs.readFileSync("src/site/scripts/site.js", "utf8");
+const shareContentSource = fs.readFileSync("src/site/data/share-content.json", "utf8");
+assert.ok(mainScript.includes("function initializeSharing(){"), "share UI initializer exists");
+assert.ok(source.includes('<script src="/site.js?v=1"></script>'));
+assert.ok(source.includes('<script id="share-content-data" type="application/json">{}</script>'));
+assert.ok(source.includes('<script id="translation-data" type="application/json">{}</script>'));
 assert.match(
   mainScript,
   /var shareImageUrl=isEnglish\?'https:\/\/www\.fdebok\.com\/share-card-en-v6\.png':'https:\/\/www\.fdebok\.com\/share-card-zh-v6\.png'/,
@@ -17,9 +18,7 @@ const start = mainScript.indexOf(" function initializeSharing(){");
 const end = mainScript.indexOf("\n window.addEventListener('DOMContentLoaded'", start);
 assert.ok(start >= 0 && end > start, "share UI initializer boundaries exist");
 const initializer = `${mainScript.slice(start, end)};globalThis.initializeSharing=initializeSharing;`;
-const shareContent = JSON.parse(
-  source.match(/<script id="share-content-data" type="application\/json">([\s\S]*?)<\/script>/)[1],
-);
+const shareContent = JSON.parse(shareContentSource);
 const shareIntro = source.match(/<p[^>]*id="share-intro">([^<]+)<\/p>/)[1];
 assert.doesNotMatch(shareIntro, /系统分享/);
 assert.doesNotMatch(shareContent.zh.wechat.note, /系统分享/);

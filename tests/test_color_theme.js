@@ -2,14 +2,15 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const vm = require("node:vm");
 
-const source = fs.readFileSync("index.html", "utf8");
-const scripts = [...source.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)].map(
+const source = fs.readFileSync("src/site/pages/zh/index.html", "utf8");
+const stylesheet = fs.readFileSync("src/site/styles/site.css", "utf8");
+const inlineScripts = [...source.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)].map(
   (match) => match[1],
 );
-const bootstrap = scripts.find((script) => script.includes("root.dataset.themeStorage='unavailable'"));
-const mainScript = scripts.find((script) => script.includes("function initializeColorTheme(){"));
+const bootstrap = inlineScripts.find((script) => script.includes("root.dataset.themeStorage='unavailable'"));
+const mainScript = fs.readFileSync("src/site/scripts/site.js", "utf8");
 assert.ok(bootstrap, "theme preference bootstrap exists");
-assert.ok(mainScript, "theme initializer exists");
+assert.ok(mainScript.includes("function initializeColorTheme(){"), "theme initializer exists");
 
 const start = mainScript.indexOf(" function initializeColorTheme(){");
 const end = mainScript.indexOf("\n function initializeReadingTools(){", start);
@@ -72,9 +73,11 @@ function createHarness({ savedTheme = null, readFails = false, writeFails = fals
   return { context, errors, options, radios, root, status, stored, themeMeta };
 }
 
-assert.ok(source.includes(":root{"));
+assert.ok(source.includes('<link rel="stylesheet" href="/site.css?v=1"/>'));
+assert.ok(source.includes('<script src="/site.js?v=1"></script>'));
+assert.ok(stylesheet.includes(":root{"));
 for (const theme of ["forest", "plum"]) {
-  assert.ok(source.includes(`:root[data-theme="${theme}"]`));
+  assert.ok(stylesheet.includes(`:root[data-theme="${theme}"]`));
 }
 for (const theme of ["classic", "forest", "plum"]) {
   assert.match(source, new RegExp(`value="${theme}"`));
