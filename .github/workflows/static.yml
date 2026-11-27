@@ -52,3 +52,74 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+      - name: Verify published discovery endpoints
+        env:
+          SITE_URL: https://www.fdebok.com
+          INDEXNOW_KEY: e4d857d027c4cf696ae94c8f95b07043
+        run: |
+          set -euo pipefail
+
+          fetch() {
+            curl --fail --show-error --silent \
+              --retry 5 --retry-all-errors --retry-delay 2 --max-time 20 \
+              "${SITE_URL}${1}"
+          }
+
+          robots="$(fetch /robots.txt)"
+          grep -Fq "Sitemap: ${SITE_URL}/sitemap.xml" <<< "$robots"
+
+          sitemap="$(fetch /sitemap.xml)"
+          SITE_URL="$SITE_URL" SITEMAP_XML="$sitemap" python3 - <<'PY'
+          import os
+          import xml.etree.ElementTree as ET
+
+          sitemap_ns = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+          xhtml_ns = "{http://www.w3.org/1999/xhtml}"
+          root = ET.fromstring(os.environ["SITEMAP_XML"])
+          urls = root.findall("sm:url", sitemap_ns)
+          expected = {
+              os.environ["SITE_URL"] + "/",
+              os.environ["SITE_URL"] + "/en/",
+          }
+          locations = {
+              element.findtext("sm:loc", namespaces=sitemap_ns)
+              for element in urls
+          }
+          if locations != expected:
+              raise SystemExit(f"Unexpected sitemap URLs: {locations}")
+          for element in urls:
+              alternates = {
+                  link.attrib["hreflang"]: link.attrib["href"]
+                  for link in element.findall(f"{xhtml_ns}link")
+              }
+              if alternates.get("zh-CN") != os.environ["SITE_URL"] + "/":
+                  raise SystemExit(f"Missing Chinese hreflang alternate: {alternates}")
+              if alternates.get("en") != os.environ["SITE_URL"] + "/en/":
+                  raise SystemExit(f"Missing English hreflang alternate: {alternates}")
+              if alternates.get("x-default") != os.environ["SITE_URL"] + "/en/":
+                  raise SystemExit(f"Missing x-default alternate: {alternates}")
+          PY
+
+          chinese="$(fetch /)"
+          grep -Fq '<html lang="zh-CN"' <<< "$chinese"
+          grep -Fq '<link rel="canonical" href="https://www.fdebok.com/"/>' <<< "$chinese"
+          grep -Fq 'hreflang="x-default" href="https://www.fdebok.com/en/"' <<< "$chinese"
+
+          english="$(fetch /en/)"
+          grep -Fq '<html lang="en"' <<< "$english"
+          grep -Fq '<link rel="canonical" href="https://www.fdebok.com/en/"/>' <<< "$english"
+
+          llms="$(fetch /llms.txt)"
+          grep -Fq 'https://github.com/fdebok/handbook' <<< "$llms"
+          key_file="$(fetch "/${INDEXNOW_KEY}.txt")"
+          test "$(tr -d '\r\n' <<< "$key_file")" = "$INDEXNOW_KEY"
+      - name: Notify IndexNow
+        # A notification failure must not invalidate a successful site deployment.
+        continue-on-error: true
+        run: |
+          curl --fail --show-error --silent \
+            --retry 3 --retry-all-errors --retry-delay 2 --max-time 30 \
+            --request POST \
+            --header 'Content-Type: application/json; charset=utf-8' \
+            --data '{"host":"www.fdebok.com","key":"e4d857d027c4cf696ae94c8f95b07043","keyLocation":"https://www.fdebok.com/e4d857d027c4cf696ae94c8f95b07043.txt","urlList":["https://www.fdebok.com/","https://www.fdebok.com/en/"]}' \
+            https://api.indexnow.org/indexnow

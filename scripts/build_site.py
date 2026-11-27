@@ -15,11 +15,12 @@ from urllib.parse import urlencode
 
 ROOT = Path(__file__).resolve().parents[1]
 EN_URL = "https://www.fdebok.com/en/"
-EN_TITLE = "FDEBOK Handbook: Forward Deployed Engineer Body of Knowledge"
+INDEXNOW_KEY = "e4d857d027c4cf696ae94c8f95b07043"
+EN_TITLE = "FDEBOK: Forward Deployed Engineer Guide & Handbook"
 EN_DESCRIPTION = (
-    "A practical FDE handbook: 22 chapters, ten knowledge domains, a six-stage "
-    "delivery lifecycle, an L1–L5 competency framework, 20 enterprise AI "
-    "challenges, and nine field templates."
+    "The FDEBOK guide explains what a Forward Deployed Engineer (FDE) does, "
+    "the role's skills and career paths, and how to deliver enterprise AI—from "
+    "discovery and engineering through evaluation and operations."
 )
 EN_IMAGE_URL = "https://www.fdebok.com/share-card-en-v3.png"
 ZH_URL = "https://www.fdebok.com/"
@@ -39,6 +40,7 @@ SHARE_FACTS = {
     "en": ("22 chapters", "Ten knowledge domains", "Six delivery stages", "L1–L5 competency framework", "20 common challenges", "Nine field templates"),
 }
 STATIC_FILES = (
+    f"{INDEXNOW_KEY}.txt",
     "LICENSE",
     "index.html",
     "llms.txt",
@@ -178,6 +180,7 @@ def render_share_page(locale: str, platform: str, content: dict[str, str]) -> st
 <meta property="og:site_name" content="FDEBOK"/>
 <meta property="og:url" content="{share_url}"/>
 <meta property="og:locale" content="{'en_US' if is_english else 'zh_CN'}"/>
+<meta property="og:locale:alternate" content="{'zh_CN' if is_english else 'en_US'}"/>
 <meta property="og:title" content="{html.escape(content['title'], quote=True)}"/>
 <meta property="og:description" content="{html.escape(description, quote=True)}"/>
 <meta property="og:image" content="{share_image}"/>
@@ -334,6 +337,8 @@ class EnglishRenderer(HTMLParser):
                 return EN_URL
             if prop == "og:locale":
                 return "en_US"
+            if prop == "og:locale:alternate":
+                return "zh_CN"
             if prop in {"og:image", "og:image:secure_url"} or name == "twitter:image":
                 return EN_IMAGE_URL
             if prop == "og:image:alt" or name == "twitter:image:alt":
@@ -439,7 +444,13 @@ class EnglishRenderer(HTMLParser):
             item_types = item.get("@type", [])
             if isinstance(item_types, str):
                 item_types = [item_types]
-            if "WebPage" in item_types:
+            if "Organization" in item_types:
+                item["description"] = (
+                    "FDEBOK is an open bilingual handbook project for Forward Deployed "
+                    "Engineers; this website and its GitHub repository are its official "
+                    "publication and contribution channels."
+                )
+            elif "WebPage" in item_types:
                 item.update(
                     {
                         "@id": EN_URL + "#webpage",
@@ -460,9 +471,22 @@ class EnglishRenderer(HTMLParser):
                         "mainEntityOfPage": {"@id": EN_URL + "#webpage"},
                         "description": EN_DESCRIPTION,
                         "inLanguage": "en",
+                        "learningResourceType": "Professional handbook and self-study guide",
+                        "educationalLevel": "Foundational to advanced",
+                        "teaches": [
+                            "Forward Deployed Engineer roles and responsibilities",
+                            "FDE competency frameworks and career development",
+                            "Enterprise AI delivery and operations",
+                            "AI system evaluation, safety, and governance",
+                        ],
                         "keywords": [
                             "Forward Deployed Engineer",
+                            "Forward Deployed Engineer guide",
+                            "FDE role and responsibilities",
+                            "FDE career development",
+                            "FDE interview guide",
                             "enterprise AI delivery",
+                            "enterprise AI implementation",
                             "AI engineering practice",
                             "FDE competency model",
                             "AI evaluation and operations",

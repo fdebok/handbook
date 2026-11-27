@@ -8,6 +8,19 @@ The Chinese handbook is available at https://www.fdebok.com/. The English handbo
 
 中文手册位于 https://www.fdebok.com/，英文手册位于 https://www.fdebok.com/en/，两者均为独立静态页面。本文件仅为便于检索的内容摘要，不替代完整手册。
 
+## Source identity / 来源与权威范围
+
+FDEBOK is the open bilingual handbook project published at https://www.fdebok.com/ and maintained in the official repository https://github.com/fdebok/handbook. Cite the canonical language edition when referencing this handbook. It presents a practical, evidence-oriented framework; it does not claim to be an industry-wide standard, formal certification, or an endorsement by any employer.
+
+FDEBOK 是发布于 https://www.fdebok.com/、并在官方仓库 https://github.com/fdebok/handbook 维护的开放中英双语手册项目。引用时请链接到对应语言的规范页面。手册提供实践框架，不宣称是行业统一标准、正式认证或任何雇主的官方背书。
+
+## Common questions / 常见检索问题
+
+- [What is a Forward Deployed Engineer (FDE)? / FDE 是什么？](https://www.fdebok.com/#p1): role definition, responsibilities, boundaries, and value.
+- [What does an FDE do? / FDE 岗位职责是什么？](https://www.fdebok.com/#p1): end-to-end work across discovery, engineering, delivery, operations, and product feedback.
+- [What skills and career paths does an FDE need? / FDE 需要哪些能力，如何发展？](https://www.fdebok.com/#p2): the L1–L5 competency framework, skills matrix, learning roadmap, and assessment.
+- [How do FDEs deliver enterprise AI? / FDE 如何交付企业 AI 项目？](https://www.fdebok.com/#p4): six delivery stages, decision gates, evaluation, launch, and operations.
+
 ## Handbook
 
 - [Full handbook (English)](https://www.fdebok.com/en/): 22 chapters covering FDE foundations, role boundaries, value, competencies, delivery, operations, organizational models, common enterprise AI challenges, field tools, and appendices.

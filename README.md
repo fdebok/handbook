@@ -8,6 +8,8 @@
 
 FDE 不是前端工程师（FE）。FDE 深入客户现场，端到端承担问题理解、方案构建、生产交付和经验沉淀，以真实业务结果检验交付成效。
 
+本手册适合查找“FDE 是什么／是什么岗位”、前线部署工程师岗位职责、FDE 能力模型与职业发展，以及企业 AI 项目交付实践的读者。
+
 [阅读手册源码](https://github.com/fdebok/handbook/blob/main/index.html) · [项目仓库](https://github.com/fdebok/handbook)
 
 ## 手册一览
@@ -60,6 +62,8 @@ FDE 不是前端工程师（FE）。FDE 深入客户现场，端到端承担问�
 
 FDEBOK is a practical body of knowledge for **Forward Deployed Engineers (FDEs)**—engineers who work close to customers, own problems end to end, and turn AI capabilities into production systems with measurable business outcomes.
 
+It also serves readers looking for an FDE guide, Forward Deployed Engineer role and responsibilities, an FDE skills framework or career roadmap, and practical enterprise AI delivery guidance.
+
 The handbook brings together 22 chapters, ten knowledge domains, a six-stage delivery lifecycle with four decision gates, an L1–L5 competency framework, diagnoses and remedies for 20 common challenges, and nine ready-to-use field templates.
 
 It covers the full path from discovering valuable use cases and assessing real-world constraints to engineering, evaluation, launch, operations, and reusable product capabilities.
@@ -71,6 +75,10 @@ It covers the full path from discovering valuable use cases and assessing real-w
 The Chinese source page is `/`; the English edition is published as a separate, pre-rendered page at `/en/`. Platform-specific static introductions are generated at `/share/zh/wechat/`, `/share/zh/douyin/`, `/share/en/facebook/`, `/share/en/linkedin/`, and `/share/en/x/`. These share pages provide platform-specific Open Graph/Twitter preview copy and a clear route to the full handbook; they are marked `noindex` and canonicalize to the relevant language edition to avoid thin duplicate search results. Share pages contain no JavaScript and use a restrictive content-security policy that disallows scripts and embedded objects. The Pages workflow builds `dist/` with `python3 scripts/build_site.py --output-dir dist`, then deploys that directory. The generated pages should not be edited directly: update the translation map and `share-content-data` JSON in `index.html`. A local build requires Python 3 and Node.js. Run the focused tests with `node tests/test_share_ui.js`, `node tests/test_color_theme.js`, and `python3 -m unittest discover -s tests -p 'test_*.py'`.
 
 中文源页面位于 `/`，英文版在发布时预渲染为独立静态页面 `/en/`。另生成微信、抖音、Facebook、LinkedIn、X 五个静态分享介绍页，分别位于 `/share/zh/wechat/`、`/share/zh/douyin/`、`/share/en/facebook/`、`/share/en/linkedin/`、`/share/en/x/`。每页提供平台适配的 Open Graph/Twitter 展示文案及通往完整手册的入口；微型页设置 `noindex` 并 canonical 回对应语言的完整手册，避免薄内容重复收录。微型页不含 JavaScript，并配置限制脚本、嵌入对象等来源的内容安全策略。Pages 工作流运行 `python3 scripts/build_site.py --output-dir dist` 生成并部署。不要直接编辑生成页；如需修订英译或分享文案，请更新 `index.html` 中的 `ENG` 英译表或 `share-content-data` JSON。本地构建需要 Python 3 和 Node.js。可运行 `node tests/test_share_ui.js`、`node tests/test_color_theme.js` 与 `python3 -m unittest discover -s tests -p 'test_*.py'` 执行对应测试。
+
+After deployment, the Pages workflow submits the canonical Chinese and English URLs to [IndexNow](https://www.indexnow.org/documentation); this can accelerate discovery by participating search engines but does not guarantee indexing and does not replace webmaster-console submission. Site owners should verify the domain and submit `/sitemap.xml` in [Google Search Console](https://search.google.com/search-console/), [Bing Webmaster Tools](https://www.bing.com/webmasters/), and [Baidu Search Resource Platform](https://ziyuan.baidu.com/). The public IndexNow verification key is served from the site root.
+
+每次部署后，Pages 工作流会通过 [IndexNow](https://www.indexnow.org/documentation) 提交中英文规范页；参与的搜索引擎可据此更快发现更新，但不保证收录，也不能替代站长平台提交。站点所有者应完成域名验证，并分别在 [Google Search Console](https://search.google.com/search-console/)、[Bing Webmaster Tools](https://www.bing.com/webmasters/) 与 [百度搜索资源平台](https://ziyuan.baidu.com/) 提交 `/sitemap.xml`。IndexNow 验证文件按协议公开放在站点根目录。
 
 The original bridge mark represents FDE work connecting field insight, engineering, and AI delivery. Its balanced seal-like frame brings an Eastern sense of order together with a restrained, geometric Western style; three linked nodes make the AI relationship legible without relying on generic robot imagery. The mark is used in the SVG favicon, Apple touch icon, and separate Chinese/English 1200×630 social preview cards. Brand assets carry a v3 cache key so existing app/browser caches can fetch the redesign. The cards are rendered from `scripts/render_brand_artwork.py` (requires system Cairo and Pango libraries); the SVG files are the scalable logo masters.
 

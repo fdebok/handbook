@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta name="description" content="FDEBOK 前线部署工程师（FDE）知识体系手册：22 章、十大知识域、六阶段交付生命周期、L1–L5 能力框架、20 类企业 AI 落地痛点与 9 份现场模板。"/>
+<meta name="description" content="FDEBOK：免费中英双语 FDE 指南，讲解前线部署工程师（Forward Deployed Engineer）是什么、岗位职责、能力模型与职业发展，覆盖企业 AI 交付、评测运维及现场模板。"/>
 <meta name="robots" content="index,follow,max-image-preview:large"/>
 <meta name="theme-color" content="#142238"/>
 <link rel="icon" href="/favicon.svg?v=3" type="image/svg+xml"/>
@@ -29,14 +29,15 @@
 <link rel="canonical" href="https://www.fdebok.com/"/>
 <link rel="alternate" hreflang="zh-CN" href="https://www.fdebok.com/"/>
 <link rel="alternate" hreflang="en" href="https://www.fdebok.com/en/"/>
-<link rel="alternate" hreflang="x-default" href="https://www.fdebok.com/"/>
+<link rel="alternate" hreflang="x-default" href="https://www.fdebok.com/en/"/>
 <link rel="license" href="https://www.fdebok.com/LICENSE"/>
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="FDEBOK"/>
 <meta property="og:url" content="https://www.fdebok.com/"/>
 <meta property="og:locale" content="zh_CN"/>
-<meta property="og:title" content="FDEBOK｜前线部署工程师知识体系手册"/>
-<meta property="og:description" content="22 章系统梳理 FDE 能力、企业 AI 交付、十大知识域、六阶段生命周期、常见痛点与一线模板。"/>
+<meta property="og:locale:alternate" content="en_US"/>
+<meta property="og:title" content="FDEBOK｜FDE 指南：前线部署工程师知识体系与企业 AI 交付"/>
+<meta property="og:description" content="FDE 是什么？FDEBOK 以 22 章介绍前线部署工程师的职责、能力模型与职业发展，涵盖企业 AI 交付流程、评测运维和现场模板。"/>
 <meta property="og:image" content="https://www.fdebok.com/share-card-zh-v3.png"/>
 <meta property="og:image:secure_url" content="https://www.fdebok.com/share-card-zh-v3.png"/>
 <meta property="og:image:type" content="image/png"/>
@@ -44,11 +45,11 @@
 <meta property="og:image:height" content="630"/>
 <meta property="og:image:alt" content="FDEBOK 前线部署工程师知识体系手册：知识域、交付阶段、能力框架与现场模板"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="FDEBOK｜前线部署工程师知识体系手册"/>
-<meta name="twitter:description" content="22 章系统梳理 FDE 能力、企业 AI 交付、十大知识域、六阶段生命周期、常见痛点与一线模板。"/>
+<meta name="twitter:title" content="FDEBOK｜FDE 指南：前线部署工程师知识体系与企业 AI 交付"/>
+<meta name="twitter:description" content="FDE 是什么？FDEBOK 以 22 章介绍前线部署工程师的职责、能力模型与职业发展，涵盖企业 AI 交付流程、评测运维和现场模板。"/>
 <meta name="twitter:image" content="https://www.fdebok.com/share-card-zh-v3.png"/>
 <meta name="twitter:image:alt" content="FDEBOK 前线部署工程师知识体系手册：知识域、交付阶段、能力框架与现场模板"/>
-<title>FDEBOK｜前线部署工程师知识体系手册 · 企业 AI 交付实践指南</title>
+<title>FDEBOK｜FDE 指南：前线部署工程师知识体系与企业 AI 交付</title>
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
@@ -57,7 +58,15 @@
       "@type":"Organization",
       "@id":"https://www.fdebok.com/#organization",
       "name":"FDEBOK",
-      "url":"https://www.fdebok.com/"
+      "description":"FDEBOK 是开放的中英双语前线部署工程师知识体系项目；本网站与 GitHub 仓库是其官方发布与协作渠道。",
+      "url":"https://www.fdebok.com/",
+      "sameAs":"https://github.com/fdebok/handbook",
+      "logo":{
+        "@type":"ImageObject",
+        "url":"https://www.fdebok.com/apple-touch-icon.png",
+        "width":180,
+        "height":180
+      }
     },
     {
       "@type":"WebSite",
@@ -71,35 +80,74 @@
       "@type":"WebPage",
       "@id":"https://www.fdebok.com/#webpage",
       "url":"https://www.fdebok.com/",
-      "name":"FDEBOK｜前线部署工程师知识体系手册",
-      "description":"FDEBOK 前线部署工程师（FDE）知识体系手册：22 章、十大知识域、六阶段交付生命周期、L1–L5 能力框架、20 类企业 AI 落地痛点与 9 份现场模板。",
-      "inLanguage":["zh-CN","en"],
+      "name":"FDEBOK｜FDE 指南：前线部署工程师知识体系与企业 AI 交付",
+      "description":"FDEBOK：免费中英双语 FDE 指南，讲解前线部署工程师（Forward Deployed Engineer）是什么、岗位职责、能力模型与职业发展，覆盖企业 AI 交付、评测运维及现场模板。",
+      "inLanguage":"zh-CN",
       "isPartOf":{"@id":"https://www.fdebok.com/#website"},
       "mainEntity":{"@id":"https://www.fdebok.com/#handbook"}
     },
     {
-      "@type":"CreativeWork",
+      "@type":["CreativeWork","LearningResource"],
       "@id":"https://www.fdebok.com/#handbook",
       "name":"FDEBOK｜前线部署工程师知识体系手册",
       "alternateName":"Forward Deployed Engineer Body of Knowledge",
       "url":"https://www.fdebok.com/",
       "mainEntityOfPage":{"@id":"https://www.fdebok.com/#webpage"},
-      "description":"A practical, bilingual handbook for Forward Deployed Engineers covering role foundations, competency, ten knowledge domains, enterprise AI delivery, operations, common challenges, and field templates.",
+      "description":"面向前线部署工程师与企业 AI 交付团队的中英双语专业手册，覆盖角色职责、能力发展、项目交付、评测运维及现场工具。",
       "inLanguage":["zh-CN","en"],
       "genre":"Professional handbook",
+      "learningResourceType":"专业知识手册与自学指南",
+      "educationalLevel":"从入门到进阶",
+      "teaches":[
+        "FDE 角色与职责边界",
+        "FDE 能力模型与职业发展",
+        "企业 AI 项目交付与运行",
+        "AI 系统评测、安全与治理"
+      ],
       "keywords":[
+        "FDEBOK",
+        "FDE 指南",
+        "FDE 是什么",
+        "FDE 岗位职责",
+        "FDE 能力模型",
+        "FDE 职业发展",
         "前线部署工程师",
         "Forward Deployed Engineer",
-        "企业 AI 交付",
+        "Forward Deployed Engineer handbook",
+        "企业 AI 项目交付",
         "AI 工程实践",
-        "FDE 能力模型",
         "AI 评测与运维",
-        "enterprise AI delivery"
+        "enterprise AI delivery",
+        "FDE career development"
       ],
       "audience":[
         {"@type":"Audience","audienceType":"FDEs and AI engineers"},
         {"@type":"Audience","audienceType":"Enterprise AI delivery and technology leaders"},
         {"@type":"Audience","audienceType":"Product, solution, and consulting teams"}
+      ],
+      "author":{"@id":"https://www.fdebok.com/#organization"},
+      "publisher":{"@id":"https://www.fdebok.com/#organization"},
+      "citation":[
+        {
+          "@type":"CreativeWork",
+          "name":"NIST AI Risk Management Framework 1.0",
+          "url":"https://www.nist.gov/itl/ai-risk-management-framework"
+        },
+        {
+          "@type":"CreativeWork",
+          "name":"NIST AI 600-1: Generative Artificial Intelligence Profile",
+          "url":"https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+        },
+        {
+          "@type":"CreativeWork",
+          "name":"OWASP Top 10 for LLM Applications",
+          "url":"https://genai.owasp.org/llm-top-10/"
+        },
+        {
+          "@type":"CreativeWork",
+          "name":"W3C Web Content Accessibility Guidelines 2.2",
+          "url":"https://www.w3.org/TR/WCAG22/"
+        }
       ],
       "copyrightHolder":{"@id":"https://www.fdebok.com/#organization"},
       "copyrightYear":2026,
@@ -2604,7 +2652,7 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
 </div>
 <div class="self-check-actions">
 <button type="reset">清空并重新评估</button>
-<a href="https://github.com/fdebok/fdebok/issues/new?template=assessment-feedback.yml" target="_blank" rel="noopener noreferrer">题目、评分或建议不适合？提交改进反馈</a>
+<a href="https://github.com/fdebok/handbook/issues/new?template=assessment-feedback.yml" target="_blank" rel="noopener noreferrer">题目、评分或建议不适合？提交改进反馈</a>
 </div>
 <p class="self-check-privacy">评分仅在当前浏览器页面即时计算，不会发送或保存。请勿在反馈中包含客户名称、个人信息、凭证或其他敏感资料；本工具为自评参考，不是经验证的标准量表。</p>
 </form>
@@ -2924,7 +2972,7 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
 <li>MIT 许可证不授予 FDEBOK 名称、标志或其他商标权；使用相关标识或声称官方背书，须另行取得许可。</li>
 </ul>
 <h4>欢迎行业共建</h4>
-<p>欢迎各行业读者分享案例、提出勘误与改进建议。请通过 <a href="https://github.com/fdebok/fdebok" rel="noopener noreferrer">FDEBOK GitHub 仓库</a>提交讨论或 Pull Request；经维护者审核并合并的内容成为项目正式版本。请仅提交自己创作或已获授权、可以按 MIT 许可证发布的材料。</p>
+<p>欢迎各行业读者分享案例、提出勘误与改进建议。请通过 <a href="https://github.com/fdebok/handbook" rel="noopener noreferrer">FDEBOK GitHub 仓库</a>提交讨论或 Pull Request；经维护者审核并合并的内容成为项目正式版本。请仅提交自己创作或已获授权、可以按 MIT 许可证发布的材料。</p>
 <h4>机器可读标记的能力边界</h4>
 <p>页面元数据、结构化署名、复制时附加的许可与来源说明、打印版权行用于提醒许可条件和便于追溯，并非访问控制或防拷贝措施。MIT 许可允许合规范围内的商业使用、修改和再发布；其他适用法律及第三方权利仍应另行遵守。</p>
 </article>
@@ -2935,11 +2983,11 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
 <p>发现内容错误、表达不清、案例缺口，或评测题目不贴合实际？选择合适入口创建 GitHub Issue，帮助维护者快速定位并跟进。请勿提交客户数据、个人信息、密钥或其他敏感内容。</p>
 </div>
 <div class="feedback-options">
-<a class="feedback-option" href="https://github.com/fdebok/fdebok/issues/new?template=content-feedback.yml" target="_blank" rel="noopener noreferrer">
+<a class="feedback-option" href="https://github.com/fdebok/handbook/issues/new?template=content-feedback.yml" target="_blank" rel="noopener noreferrer">
 <strong>内容勘误与案例建议</strong>
 <span>报告事实错误、补充一线案例，或提出结构与表达上的改进。</span>
 </a>
-<a class="feedback-option" href="https://github.com/fdebok/fdebok/issues/new?template=assessment-feedback.yml" target="_blank" rel="noopener noreferrer">
+<a class="feedback-option" href="https://github.com/fdebok/handbook/issues/new?template=assessment-feedback.yml" target="_blank" rel="noopener noreferrer">
 <strong>自查评测工具建议</strong>
 <span>反馈题目适配性、评分锚点、诊断结果或可访问性体验。</span>
 </a>
@@ -4234,11 +4282,14 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
    var isEnglish=lang==='en';
    document.documentElement.lang=isEnglish?'en':'zh-CN';
    var pageTitle=isEnglish
-     ?'FDEBOK Handbook: Forward Deployed Engineer Body of Knowledge'
-     :'FDEBOK｜前线部署工程师知识体系手册 · 企业 AI 交付实践指南';
+     ?'FDEBOK: Forward Deployed Engineer Guide & Handbook'
+     :'FDEBOK｜FDE 指南：前线部署工程师知识体系与企业 AI 交付';
    var pageDescription=isEnglish
-     ?'A practical FDE handbook: 22 chapters, ten knowledge domains, a six-stage delivery lifecycle, an L1–L5 competency framework, 20 enterprise AI challenges, and nine field templates.'
-     :'FDEBOK 前线部署工程师（FDE）知识体系手册：22 章、十大知识域、六阶段交付生命周期、L1–L5 能力框架、20 类企业 AI 落地痛点与 9 份现场模板。';
+     ?'The FDEBOK guide explains what a Forward Deployed Engineer (FDE) does, the role\'s skills and career paths, and how to deliver enterprise AI—from discovery and engineering through evaluation and operations.'
+     :'FDEBOK：免费中英双语 FDE 指南，讲解前线部署工程师（Forward Deployed Engineer）是什么、岗位职责、能力模型与职业发展，覆盖企业 AI 交付、评测运维及现场模板。';
+   var sharePageDescription=isEnglish
+     ?'A 22-chapter guide to the Forward Deployed Engineer role, skills and career development, with practical enterprise AI delivery, evaluation, operations, and field templates.'
+     :'FDE 是什么？FDEBOK 以 22 章介绍前线部署工程师的职责、能力模型与职业发展，涵盖企业 AI 交付流程、评测运维和现场模板。';
    document.title=pageTitle;
    var description=document.querySelector('meta[name="description"]');
    if(description)description.content=pageDescription;
@@ -4247,6 +4298,7 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
    var twitterTitle=document.querySelector('meta[name="twitter:title"]');
    var twitterDescription=document.querySelector('meta[name="twitter:description"]');
    var openGraphLocale=document.querySelector('meta[property="og:locale"]');
+   var openGraphAlternateLocale=document.querySelector('meta[property="og:locale:alternate"]');
    var canonical=document.querySelector('link[rel="canonical"]');
    var openGraphUrl=document.querySelector('meta[property="og:url"]');
    var openGraphImage=document.querySelector('meta[property="og:image"]');
@@ -4255,10 +4307,11 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
    var canonicalUrl=isEnglish?'https://www.fdebok.com/en/':'https://www.fdebok.com/';
    var shareImageUrl=isEnglish?'https://www.fdebok.com/share-card-en-v3.png':'https://www.fdebok.com/share-card-zh-v3.png';
    if(shareTitle)shareTitle.content=pageTitle;
-   if(shareDescription)shareDescription.content=pageDescription;
+   if(shareDescription)shareDescription.content=sharePageDescription;
    if(twitterTitle)twitterTitle.content=pageTitle;
-   if(twitterDescription)twitterDescription.content=pageDescription;
+   if(twitterDescription)twitterDescription.content=sharePageDescription;
    if(openGraphLocale)openGraphLocale.content=isEnglish?'en_US':'zh_CN';
+   if(openGraphAlternateLocale)openGraphAlternateLocale.content=isEnglish?'zh_CN':'en_US';
    if(canonical)canonical.href=canonicalUrl;
    if(openGraphUrl)openGraphUrl.content=canonicalUrl;
    if(openGraphImage)openGraphImage.content=shareImageUrl;

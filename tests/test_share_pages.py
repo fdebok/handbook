@@ -1,8 +1,11 @@
+import html
 import json
+import re
 import struct
 import sys
 import tempfile
 import unittest
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -34,6 +37,11 @@ class SharePageTests(unittest.TestCase):
                     )
                     self.assertIn(f'<link rel="canonical" href="{canonical}"/>', page)
                     self.assertIn(f'<meta property="og:url" content="{share_url}"/>', page)
+                    alternate_locale = "zh_CN" if locale == "en" else "en_US"
+                    self.assertIn(
+                        f'<meta property="og:locale:alternate" content="{alternate_locale}"/>',
+                        page,
+                    )
                     self.assertIn(
                         f'<meta property="og:description" content="{self.content[locale][platform]["caption"]}"/>',
                         page,
@@ -63,6 +71,68 @@ class SharePageTests(unittest.TestCase):
 
             sitemap = (output / "sitemap.xml").read_text(encoding="utf-8")
             self.assertNotIn("/share/", sitemap)
+            sitemap_root = ET.parse(output / "sitemap.xml").getroot()
+            sitemap_ns = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+            xhtml_ns = "{http://www.w3.org/1999/xhtml}"
+            entries = sitemap_root.findall("sm:url", sitemap_ns)
+            self.assertEqual(len(entries), 2)
+            expected_alternates = {
+                "zh-CN": build_site.ZH_URL,
+                "en": build_site.EN_URL,
+                "x-default": build_site.EN_URL,
+            }
+            for entry in entries:
+                loc = entry.findtext("sm:loc", namespaces=sitemap_ns)
+                self.assertIn(loc, {build_site.ZH_URL, build_site.EN_URL})
+                alternates = {
+                    link.attrib["hreflang"]: link.attrib["href"]
+                    for link in entry.findall(f"{xhtml_ns}link")
+                }
+                self.assertEqual(alternates, expected_alternates)
+
+    def test_indexnow_key_is_published_and_notified_after_deployment(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            output = Path(temporary_directory) / "site"
+            build_site.build(output)
+            key_file = output / f"{build_site.INDEXNOW_KEY}.txt"
+            self.assertEqual(key_file.read_text(encoding="utf-8").strip(), build_site.INDEXNOW_KEY)
+
+        workflow = (ROOT / ".github" / "workflows" / "static.yml").read_text(encoding="utf-8")
+        deploy_step = workflow.index("- name: Deploy to GitHub Pages")
+        verify_step = workflow.index("- name: Verify published discovery endpoints")
+        notify_step = workflow.index("- name: Notify IndexNow")
+        self.assertLess(deploy_step, verify_step)
+        self.assertLess(verify_step, notify_step)
+        self.assertIn("--retry 5 --retry-all-errors", workflow)
+        self.assertIn("Unexpected sitemap URLs", workflow)
+        self.assertIn("hreflang=\"x-default\"", workflow)
+        self.assertIn("https://api.indexnow.org/indexnow", workflow)
+        self.assertIn(f'"key":"{build_site.INDEXNOW_KEY}"', workflow)
+        self.assertIn(f"https://www.fdebok.com/{build_site.INDEXNOW_KEY}.txt", workflow)
+        self.assertIn('"urlList":["https://www.fdebok.com/","https://www.fdebok.com/en/"]', workflow)
+
+    def test_robots_allows_search_and_ai_crawlers(self):
+        robots = (ROOT / "robots.txt").read_text(encoding="utf-8")
+        for user_agent in (
+            "Googlebot",
+            "Googlebot-Image",
+            "bingbot",
+            "Applebot",
+            "Applebot-Extended",
+            "Baiduspider",
+            "OAI-SearchBot",
+            "ChatGPT-User",
+            "GPTBot",
+            "Claude-SearchBot",
+            "Claude-User",
+            "ClaudeBot",
+            "PerplexityBot",
+            "Perplexity-User",
+            "*",
+        ):
+            with self.subTest(user_agent=user_agent):
+                self.assertIn(f"User-agent: {user_agent}\nAllow: /", robots)
+        self.assertIn("Sitemap: https://www.fdebok.com/sitemap.xml", robots)
 
     def test_build_renders_correct_english_titles_and_related_copy(self):
         with tempfile.TemporaryDirectory() as temporary_directory:
@@ -87,6 +157,87 @@ class SharePageTests(unittest.TestCase):
         ):
             with self.subTest(expected=expected):
                 self.assertIn(expected, english)
+
+    def test_primary_pages_have_localized_search_metadata_and_structured_data(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            output = Path(temporary_directory) / "site"
+            build_site.build(output)
+            pages = {
+                "zh": (output / "index.html").read_text(encoding="utf-8"),
+                "en": (output / "en" / "index.html").read_text(encoding="utf-8"),
+            }
+
+        expectations = {
+            "zh": {
+                "language": "zh-CN",
+                "url": build_site.ZH_URL,
+                "title": "FDEBOK｜FDE 指南：前线部署工程师知识体系与企业 AI 交付",
+                "description_phrase": "FDE 是什么",
+                "keyword": "FDE 职业发展",
+                "organization_phrase": "官方发布",
+                "teaches_phrase": "FDE 角色与职责",
+            },
+            "en": {
+                "language": "en",
+                "url": build_site.EN_URL,
+                "title": build_site.EN_TITLE,
+                "description_phrase": "Forward Deployed Engineer (FDE)",
+                "keyword": "FDE career development",
+                "organization_phrase": "official publication",
+                "teaches_phrase": "Forward Deployed Engineer roles",
+            },
+        }
+        for locale, page in pages.items():
+            expected = expectations[locale]
+            with self.subTest(locale=locale):
+                self.assertIn(f'<html lang="{expected["language"]}"', page)
+                self.assertIn(f"<title>{expected['title']}</title>", page)
+                self.assertIn(f'<link rel="canonical" href="{expected["url"]}"/>', page)
+                self.assertIn(
+                    f'hreflang="{"en" if locale == "zh" else "zh-CN"}"',
+                    page,
+                )
+                self.assertIn(expected["description_phrase"], html.unescape(page))
+
+                match = re.search(
+                    r'<script type="application/ld\+json">\s*(.*?)\s*</script>',
+                    page,
+                    re.DOTALL,
+                )
+                self.assertIsNotNone(match)
+                graph = json.loads(match.group(1))["@graph"]
+                organization = next(item for item in graph if item["@type"] == "Organization")
+                webpage = next(item for item in graph if item["@type"] == "WebPage")
+                handbook = next(
+                    item
+                    for item in graph
+                    if "CreativeWork" in (
+                        item["@type"] if isinstance(item["@type"], list) else [item["@type"]]
+                    )
+                )
+                self.assertEqual(organization["sameAs"], "https://github.com/fdebok/handbook")
+                self.assertIn(expected["organization_phrase"], organization["description"])
+                self.assertEqual(handbook["author"], {"@id": organization["@id"]})
+                self.assertEqual(handbook["publisher"], {"@id": organization["@id"]})
+                self.assertIn("LearningResource", handbook["@type"])
+                self.assertEqual(webpage["inLanguage"], expected["language"])
+                self.assertEqual(webpage["url"], expected["url"])
+                self.assertIn(expected["keyword"], handbook["keywords"])
+                self.assertEqual(len(handbook["citation"]), 4)
+                self.assertTrue(handbook["teaches"])
+                self.assertTrue(
+                    any(expected["teaches_phrase"] in item for item in handbook["teaches"])
+                )
+                self.assertIn(
+                    "Professional handbook" if locale == "en" else "专业知识手册",
+                    handbook["learningResourceType"],
+                )
+
+    def test_feedback_and_repository_links_point_to_the_canonical_project(self):
+        source = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertNotIn("github.com/fdebok/fdebok", source)
+        self.assertIn("https://github.com/fdebok/handbook/issues/new?template=content-feedback.yml", source)
+        self.assertIn("https://github.com/fdebok/handbook/issues/new?template=assessment-feedback.yml", source)
 
     def test_build_does_not_render_print_or_pdf_button(self):
         with tempfile.TemporaryDirectory() as temporary_directory:
