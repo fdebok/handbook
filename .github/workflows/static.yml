@@ -46,8 +46,8 @@ jobs:
       - name: Build static site
         run: python3 scripts/build_site.py --output-dir dist
       - name: Upload artifact
-        # This artifact format is verified to work with the Pages deploy action.
-        uses: actions/upload-pages-artifact@v3.0.1
+        # deploy-pages v5 requires upload-artifact v4 or later.
+        uses: actions/upload-pages-artifact@v4.0.0
         with:
           path: 'dist'
       - name: Deploy to GitHub Pages
