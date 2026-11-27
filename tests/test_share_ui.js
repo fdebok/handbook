@@ -10,7 +10,7 @@ const mainScript = scripts.map((match) => match[1]).find((script) =>
 assert.ok(mainScript, "share UI initializer exists");
 assert.match(
   mainScript,
-  /var shareImageUrl=isEnglish\?'https:\/\/www\.fdebok\.com\/share-card-en-v4\.png':'https:\/\/www\.fdebok\.com\/share-card-zh-v4\.png'/,
+  /var shareImageUrl=isEnglish\?'https:\/\/www\.fdebok\.com\/share-card-en-v6\.png':'https:\/\/www\.fdebok\.com\/share-card-zh-v6\.png'/,
 );
 
 const start = mainScript.indexOf(" function initializeSharing(){");
@@ -203,7 +203,7 @@ async function exerciseLocale(
       assert.equal(elements["share-panel"].dataset.mode, "quick");
       assert.equal(elements["share-quick-actions"].hidden, false);
       assert.equal(elements["share-quick-copy"].value,
-        `${nextContent.caption}\n\n${locale === "en" ? "https://www.fdebok.com/en/?share=brand-v4" : "https://www.fdebok.com/?share=brand-v4"}`);
+        `${nextContent.caption}\n\n${locale === "en" ? "https://www.fdebok.com/en/?share=brand-v6" : "https://www.fdebok.com/?share=brand-v6"}`);
       elements["share-quick-copy-button"].handlers.click();
       if (rejectClipboard) {
         await new Promise(setImmediate);
@@ -234,8 +234,8 @@ async function exerciseLocale(
       assert.equal(elements["share-panel"].dataset.mode, "quick");
       assert.deepEqual(Object.keys(shared), ["url"]);
       assert.equal(shared.url, locale === "en"
-        ? "https://www.fdebok.com/en/?share=brand-v4"
-        : "https://www.fdebok.com/?share=brand-v4");
+        ? "https://www.fdebok.com/en/?share=brand-v6"
+        : "https://www.fdebok.com/?share=brand-v6");
       assert.equal(elements["share-status"].textContent, locale === "en"
         ? "Returned to the page. Only the target app can confirm whether it sent the share. If it did not, copy the content and try again."
         : "已返回网页。分享结果由目标 App 确认；如未成功，可复制内容后重试。");

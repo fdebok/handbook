@@ -235,8 +235,8 @@ def draw_logo_mark(context: ctypes.c_void_p, x: int, y: int, size: int) -> None:
     cairo.cairo_new_path(context)
     cairo.cairo_arc(context, 50, 50, 42.6, 0, 6.283185307179586)
     cairo.cairo_clip(context)
-    cairo.cairo_set_line_width(context, 0.7)
-    color(context, "#79bda8", 0.25)
+    cairo.cairo_set_line_width(context, 0.8)
+    color(context, "#79bda8", 0.16)
     for scale_x in (0.34, 0.68):
         cairo.cairo_save(context)
         cairo.cairo_translate(context, 50, 50)
@@ -259,86 +259,58 @@ def draw_logo_mark(context: ctypes.c_void_p, x: int, y: int, size: int) -> None:
     cairo.cairo_stroke(context)
     cairo.cairo_restore(context)
 
+    cairo.cairo_save(context)
+    cairo.cairo_new_path(context)
+    cairo.cairo_arc(context, 50, 50, 42.6, 0, 6.283185307179586)
+    cairo.cairo_clip(context)
+
     letters = (
         (
-            ((17, 31), (17, 50), (17, 69), (35, 31), (31, 50)),
+            ((19, 30), (19, 50), (19, 70), (35, 30), (32, 50)),
             ((0, 1), (1, 2), (0, 3), (1, 4)),
         ),
         (
-            ((42, 31), (42, 50), (42, 69), (54, 31), (62, 50), (54, 69)),
+            ((43, 30), (43, 50), (43, 70), (51, 30), (60, 50), (51, 70)),
             ((0, 1), (1, 2), (0, 3), (3, 4), (4, 5), (5, 2)),
         ),
         (
-            ((68, 31), (68, 50), (68, 69), (85, 31), (80, 50), (85, 69)),
+            ((68, 30), (68, 50), (68, 70), (82, 30), (78, 50), (82, 70)),
             ((0, 1), (1, 2), (0, 3), (1, 4), (2, 5)),
         ),
     )
     letter_colors = ("#624719", "#806025", "#9a742c")
-    dash_pattern = (ctypes.c_double * 2)(2.7, 1.9)
+    dash_pattern = (ctypes.c_double * 2)(3, 1.8)
     cairo.cairo_set_line_cap(context, 1)
     cairo.cairo_set_line_join(context, 1)
     for letter_index, (nodes, links) in enumerate(letters):
         for link_index, (start, end) in enumerate(links):
             cairo.cairo_new_path(context)
-            cairo.cairo_set_dash(context, dash_pattern, 2, (link_index % 3) * 0.55)
+            cairo.cairo_set_dash(context, dash_pattern, 2, 0)
             cairo.cairo_move_to(context, *nodes[start])
             if letter_index == 1 and (start, end) == (3, 4):
-                cairo.cairo_curve_to(context, 61, 38, 63, 44, *nodes[end])
+                cairo.cairo_curve_to(context, 57, 30, 60, 39, *nodes[end])
             elif letter_index == 1 and (start, end) == (4, 5):
-                cairo.cairo_curve_to(context, 63, 56, 61, 62, *nodes[end])
+                cairo.cairo_curve_to(context, 60, 61, 57, 70, *nodes[end])
             else:
                 cairo.cairo_line_to(context, *nodes[end])
-            cairo.cairo_set_line_width(context, 2.5)
-            color(context, "#60461d", 0.14)
-            cairo.cairo_stroke_preserve(context)
-            cairo.cairo_set_line_width(context, 1.5)
-            color(context, letter_colors[letter_index], 0.9)
+            cairo.cairo_set_line_width(context, 2.8)
+            color(context, letter_colors[letter_index])
             cairo.cairo_stroke(context)
             cairo.cairo_set_dash(context, None, 0, 0)
 
-    connector_color = "#b18b42"
-    connectors = ( ((31, 50), (42, 50)), ((62, 50), (68, 50)) )
-    connector_dash = (ctypes.c_double * 2)(1.8, 2.1)
-    for start, end in connectors:
-        cairo.cairo_new_path(context)
-        cairo.cairo_set_line_width(context, 1.15)
-        color(context, connector_color, 0.88)
-        cairo.cairo_move_to(context, *start)
-        cairo.cairo_line_to(context, *end)
-        cairo.cairo_set_dash(context, connector_dash, 2, 0.5)
-        cairo.cairo_stroke(context)
-        cairo.cairo_set_dash(context, None, 0, 0)
-
     for letter_index, (nodes, _) in enumerate(letters):
         for node_index, (node_x, node_y) in enumerate(nodes):
-            if letter_index == 0 and node_index == 0:
-                outline = "#79bda8"
-            elif letter_index == 2 and node_index == 4:
-                outline = "#b18b42"
-            else:
-                outline = letter_colors[letter_index]
-            radius = (
-                2.25
-                if (letter_index, node_index) in ((0, 1), (1, 4), (2, 1))
-                else 1.9
-            )
-            circle(context, node_x + 0.45, node_y + 0.6, radius + 0.35, "#60461d", 0.2)
-            phase = (letter_index + node_index) * 0.18
-            for segment in range(3):
-                start_angle = phase + segment * 2 * 3.141592653589793 / 3
-                cairo.cairo_new_path(context)
-                cairo.cairo_arc(
-                    context,
-                    node_x,
-                    node_y,
-                    radius,
-                    start_angle,
-                    start_angle + 1.4,
-                )
-                cairo.cairo_set_line_width(context, 0.9)
-                color(context, outline, 0.96)
-                cairo.cairo_stroke(context)
-            circle(context, node_x, node_y, 0.55, outline)
+            node_color = "#79bda8" if letter_index == 0 and node_index == 0 else letter_colors[letter_index]
+            radius = 2.5 if (letter_index, node_index) in ((0, 1), (1, 4)) else 2.2
+            circle(context, node_x + 0.5, node_y + 0.7, radius + 0.65, "#60461d", 0.14)
+            circle(context, node_x, node_y, radius, "#fffdf3")
+            cairo.cairo_new_path(context)
+            cairo.cairo_arc(context, node_x, node_y, radius, 0, 6.283185307179586)
+            cairo.cairo_set_line_width(context, 1)
+            color(context, letter_colors[letter_index])
+            cairo.cairo_stroke(context)
+            circle(context, node_x, node_y, 0.8, node_color)
+    cairo.cairo_restore(context)
     cairo.cairo_restore(context)
 
 
@@ -378,7 +350,7 @@ def draw_card(path: Path, english: bool) -> None:
     else:
         text(context, "让企业 AI 从场景", 88, 206, 43, "#f4f6fa", bold=True)
         text(context, "走向稳定交付", 88, 260, 43, "#edc66d", bold=True)
-        text(context, "前线部署工程师知识体系手册 · 面向真实业务与生产现场", 91, 331, 20, "#d1dce9")
+        text(context, "FDE GUIDE  ·  ENTERPRISE AI DELIVERY", 91, 331, 20, "#d1dce9")
         labels = (("22", "章节"), ("10", "知识域"), ("6", "交付阶段"), ("9", "现场模板"))
         footer = "FDEBOK · 开放、双语、可复用的企业 AI 交付实践指南"
 
@@ -410,7 +382,7 @@ def draw_touch_icon(path: Path) -> None:
     cairo.cairo_set_source(context, gradient)
     cairo.cairo_paint(context)
     cairo.cairo_pattern_destroy(gradient)
-    draw_logo_mark(context, 23, 23, 134)
+    draw_logo_mark(context, 18, 18, 144)
     cairo.cairo_surface_write_to_png(surface, str(path).encode("utf-8"))
     cairo.cairo_destroy(context)
     cairo.cairo_surface_destroy(surface)
@@ -426,7 +398,11 @@ def draw_chinese_card(path: Path) -> None:
     gradient = cairo.cairo_pattern_create_linear(0, 0, WIDTH, HEIGHT)
     cairo.cairo_pattern_add_color_stop_rgba(gradient, 0, 0.055, 0.102, 0.173, 1)
     cairo.cairo_pattern_add_color_stop_rgba(gradient, 1, 0.122, 0.247, 0.369, 1)
-    for x, y, width, height in ((80, 60, 74, 74), (885, 187, 190, 190)):
+    for x, y, width, height in (
+        (80, 60, 74, 74),
+        (885, 187, 190, 190),
+        (80, 315, 760, 36),
+    ):
         cairo.cairo_set_source(context, gradient)
         cairo.cairo_rectangle(context, x, y, width, height)
         cairo.cairo_fill(context)
@@ -434,6 +410,7 @@ def draw_chinese_card(path: Path) -> None:
 
     draw_logo_mark(context, 80, 60, 74)
     draw_logo_mark(context, 885, 187, 190)
+    text(context, "FDE GUIDE  ·  ENTERPRISE AI DELIVERY", 91, 331, 20, "#d1dce9")
     cairo.cairo_surface_write_to_png(surface, str(path).encode("utf-8"))
     cairo.cairo_destroy(context)
     cairo.cairo_surface_destroy(surface)
@@ -474,13 +451,13 @@ def draw_badge_crops() -> None:
 
 
 def main() -> None:
-    draw_chinese_card(ROOT / "share-card-zh-v4.png")
-    draw_card(ROOT / "share-card-en-v4.png", english=True)
+    draw_chinese_card(ROOT / "share-card-zh-v6.png")
+    draw_card(ROOT / "share-card-en-v6.png", english=True)
     draw_chinese_card(ROOT / "og-image.png")
     draw_card(ROOT / "og-image-en.png", english=True)
     draw_touch_icon(ROOT / "apple-touch-icon.png")
     draw_badge_crops()
-    print("Rendered v4 brand artwork, A/P/M badge assets, and the 180x180 Apple touch icon.")
+    print("Rendered v6 brand artwork, A/P/M badge assets, and the 180x180 Apple touch icon.")
 
 
 if __name__ == "__main__":

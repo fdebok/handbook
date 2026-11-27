@@ -171,10 +171,17 @@ class SharePageTests(unittest.TestCase):
             "zh": {
                 "language": "zh-CN",
                 "url": build_site.ZH_URL,
-                "title": "FDEBOK｜FDE 指南：前线部署工程师知识体系与企业 AI 交付",
+                "title": "FDEBOK｜前线部署工程师知识体系指南（FDE 指南）",
+                "guide_name": "FDEBOK｜前线部署工程师知识体系指南",
+                "alternate_name": [
+                    "前线部署工程师知识体系手册",
+                    "FDE 手册",
+                    "Forward Deployed Engineer Body of Knowledge",
+                ],
+                "guide_synonym": "前线部署工程师知识体系手册",
                 "description_phrase": "FDE 是什么",
                 "keyword": "FDE 职业发展",
-                "badge_keyword": "FDEBOK A/P/M 学习徽章",
+                "badge_keyword": "FDEBOK A/P/M 徽章",
                 "organization_phrase": "官方发布",
                 "slogan": "三点架成桥，洞察连工程，AI 稳落地，价值步步通",
                 "teaches_phrase": "FDE 角色与职责",
@@ -183,9 +190,16 @@ class SharePageTests(unittest.TestCase):
                 "language": "en",
                 "url": build_site.EN_URL,
                 "title": build_site.EN_TITLE,
+                "guide_name": build_site.EN_TITLE,
+                "alternate_name": [
+                    "前线部署工程师知识体系手册",
+                    "FDE 手册",
+                    "Forward Deployed Engineer Body of Knowledge",
+                ],
+                "guide_synonym": "Forward Deployed Engineer handbook",
                 "description_phrase": "Forward Deployed Engineer (FDE)",
                 "keyword": "FDE career development",
-                "badge_keyword": "FDEBOK A/P/M learning badges",
+                "badge_keyword": "FDEBOK A/P/M badges",
                 "organization_phrase": "official publication",
                 "slogan": "Three points form a bridge: insight meets engineering, AI lands reliably, and value flows through every step.",
                 "teaches_phrase": "Forward Deployed Engineer roles",
@@ -224,10 +238,13 @@ class SharePageTests(unittest.TestCase):
                 self.assertEqual(organization["slogan"], expected["slogan"])
                 self.assertEqual(handbook["author"], {"@id": organization["@id"]})
                 self.assertEqual(handbook["publisher"], {"@id": organization["@id"]})
+                self.assertEqual(handbook["name"], expected["guide_name"])
+                self.assertEqual(handbook["alternateName"], expected["alternate_name"])
                 self.assertIn("LearningResource", handbook["@type"])
                 self.assertEqual(webpage["inLanguage"], expected["language"])
                 self.assertEqual(webpage["url"], expected["url"])
                 self.assertIn(expected["keyword"], handbook["keywords"])
+                self.assertIn(expected["guide_synonym"], handbook["keywords"])
                 self.assertIn(expected["badge_keyword"], handbook["keywords"])
                 self.assertEqual(len(handbook["citation"]), 4)
                 self.assertTrue(handbook["teaches"])
@@ -235,9 +252,23 @@ class SharePageTests(unittest.TestCase):
                     any(expected["teaches_phrase"] in item for item in handbook["teaches"])
                 )
                 self.assertIn(
-                    "Professional handbook" if locale == "en" else "专业知识手册",
+                    "Professional handbook" if locale == "en" else "专业实践指南",
                     handbook["learningResourceType"],
                 )
+
+    def test_discovery_summaries_cover_synonyms_and_distinguish_related_roles(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        llms = (ROOT / "llms.txt").read_text(encoding="utf-8")
+
+        for name, document in (("README", readme), ("llms.txt", llms)):
+            with self.subTest(document=name):
+                self.assertIn("前线部署工程师知识体系指南", document)
+                self.assertIn("前线部署工程师知识体系手册", document)
+                self.assertIn("FDE 手册", document)
+                self.assertIn("Forward Deployed Engineer", document)
+                self.assertIn("Customer Engineer", document)
+        self.assertIn("不应与 FDE 当作完全同义词", readme)
+        self.assertIn("并非在所有组织中都与 FDE 同义", llms)
 
     def test_feedback_and_repository_links_point_to_the_canonical_project(self):
         source = (ROOT / "index.html").read_text(encoding="utf-8")
@@ -289,7 +320,7 @@ class SharePageTests(unittest.TestCase):
                 self.assertNotIn('class="brand-meaning"', page)
                 self.assertIn('<h1><img alt="" class="cover-brand-mark"', page)
                 self.assertIn('gap:.16em', page)
-                self.assertIn('.cover-brand-mark{width:.82em;height:.82em', page)
+                self.assertIn('.cover-brand-mark{width:.96em;height:.96em', page)
                 self.assertIn('font-size:clamp(46px,14vw,68px)', page)
 
     def test_branding_assets_and_locale_share_cards_are_published(self):
@@ -309,8 +340,8 @@ class SharePageTests(unittest.TestCase):
                     "apple-touch-icon.png",
                     "og-image.png",
                     "og-image-en.png",
-                    "share-card-zh-v4.png",
-                    "share-card-en-v4.png",
+                    "share-card-zh-v6.png",
+                    "share-card-en-v6.png",
                 )
             }
 
@@ -328,19 +359,20 @@ class SharePageTests(unittest.TestCase):
         self.assertTrue(logo_root.find(f".//{svg_namespace}symbol[@id='fde-mark']") is not None)
         self.assertTrue(logo_root.find(f".//{svg_namespace}use[@href='#fde-mark']") is not None)
 
-        self.assertIn('href="/favicon.svg?v=4"', chinese)
-        self.assertIn('href="/apple-touch-icon.png?v=4"', chinese)
-        self.assertIn('src="/brand-mark.svg?v=4"', chinese)
-        self.assertIn('src="/brand-logo.svg?v=4"', wechat)
-        self.assertIn(".brand-logo{width:min(190px,48vw)}", wechat)
+        self.assertIn('href="/favicon.svg?v=6"', chinese)
+        self.assertIn('href="/apple-touch-icon.png?v=6"', chinese)
+        self.assertIn('src="/brand-mark.svg?v=6"', chinese)
+        self.assertIn('src="/brand-logo.svg?v=6"', wechat)
+        self.assertIn(".brand-logo{width:min(210px,50vw)}", wechat)
         self.assertIn("neural FDE monogram over a subtle globe grid", assets["brand-mark.svg"].decode())
-        self.assertIn('content="https://www.fdebok.com/share-card-zh-v4.png"', chinese)
-        self.assertIn('content="https://www.fdebok.com/share-card-en-v4.png"', english)
-        self.assertIn('og:image" content="https://www.fdebok.com/share-card-zh-v4.png"', wechat)
-        self.assertIn('og:image" content="https://www.fdebok.com/share-card-en-v4.png"', linkedin)
+        self.assertIn('stroke-width="2.8"', assets["brand-mark.svg"].decode())
+        self.assertIn('content="https://www.fdebok.com/share-card-zh-v6.png"', chinese)
+        self.assertIn('content="https://www.fdebok.com/share-card-en-v6.png"', english)
+        self.assertIn('og:image" content="https://www.fdebok.com/share-card-zh-v6.png"', wechat)
+        self.assertIn('og:image" content="https://www.fdebok.com/share-card-en-v6.png"', linkedin)
         for filename, dimensions in (
-            ("share-card-zh-v4.png", (1200, 630)),
-            ("share-card-en-v4.png", (1200, 630)),
+            ("share-card-zh-v6.png", (1200, 630)),
+            ("share-card-en-v6.png", (1200, 630)),
             ("og-image.png", (1200, 630)),
             ("og-image-en.png", (1200, 630)),
             ("apple-touch-icon.png", (180, 180)),
@@ -366,23 +398,33 @@ class SharePageTests(unittest.TestCase):
             self.assertFalse((output / "assets" / "fdebok-badges-approved-v28-source.png").exists())
 
         self.assertIn('id="fde-badges"', chinese)
+        self.assertIn("FDEBOK A/P/M 徽章", chinese)
+        self.assertIn("A · 工程师级", chinese)
+        self.assertIn("FDE 从业者身份 · 推荐 · 理论测评", chinese)
+        self.assertIn("P · 专业级", chinese)
+        self.assertIn("FDE 从业者身份 · 推荐 · 理论测评 · 项目交付实践考核 · 同行互评", chinese)
+        self.assertIn("M · 大师级", chinese)
+        self.assertIn("FDE 从业者身份 · 推荐 · 理论测评 · 项目交付实践考核 · 同行互评 · 可核验从业经验或项目背书", chinese)
+        self.assertNotIn("A 级条件", chinese)
+        self.assertNotIn("P 级条件", chinese)
         self.assertIn("A/P/M 徽章是 FDEBOK 独立项目，与本手册 L1–L5 能力自查体系不可互换或换算", chinese)
         self.assertIn("政府职业资格或行业统一认证，也不代表雇主背书", chinese)
         self.assertIn("邮件人工办理", chinese)
         self.assertIn('href="mailto:x@fdebok.com?subject=FDEBOK%20Badge%20Inquiry"', chinese)
-        self.assertIn("A/P/M Learning Badges", english)
+        self.assertIn("A/P/M Badges", english)
         self.assertIn("A · Engineer", english)
-        self.assertIn("FDE practitioner · recommendation · knowledge assessment", english)
+        self.assertIn("FDE practitioner status · recommendation · theory assessment", english)
         self.assertIn("P · Professional", english)
-        self.assertIn("practical project-delivery assessment and peer review", english)
+        self.assertIn("FDE practitioner status · recommendation · theory assessment · practical project-delivery assessment · peer review", english)
         self.assertIn("M · Master", english)
+        self.assertIn("FDE practitioner status · recommendation · theory assessment · practical project-delivery assessment · peer review · verifiable professional experience or project endorsement", english)
         self.assertIn("verifiable professional experience or project endorsement", english)
         self.assertIn("badge-status verification", english)
         self.assertIn("handled manually by email", english)
         self.assertIn("not government-issued qualifications or industry-wide certifications", english)
         self.assertIn("separate from the handbook's L1–L5 self-assessment", english)
-        self.assertIn("The FDEBOK volunteer team reviews applications and issues A/P/M", llms)
-        self.assertIn("FDEBOK 志愿者团队面向 FDE 从业者审核并发放", llms)
+        self.assertIn("The FDEBOK volunteer team reviews applications and issues A/P/M badges", llms)
+        self.assertIn("FDEBOK 志愿者团队面向 FDE 从业者免费审核并发放", llms)
         self.assertIn("Do FDEBOK A/P/M badges count as formal FDE certifications?", llms)
 
     def test_build_keeps_english_tables_and_reading_paths_aligned(self):

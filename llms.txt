@@ -2,23 +2,31 @@
 
 > A free, bilingual body-of-knowledge handbook for Forward Deployed Engineers (FDEs), focused on turning enterprise AI capabilities into measurable, reliable business outcomes.
 
-> 面向前线部署工程师（FDE）的免费中英双语知识体系手册，聚焦如何将企业 AI 能力转化为可衡量、可靠的业务成果。
+> 面向前线部署工程师（FDE）的免费中英双语知识体系指南，系统介绍 FDE 是什么、岗位职责、核心能力与职业发展，并覆盖企业 AI 项目交付、评测运维和现场工具。
 
 The Chinese handbook is available at https://www.fdebok.com/. The English handbook is a separate, crawlable static page at https://www.fdebok.com/en/. This file is a discovery summary, not a replacement for either handbook.
 
-中文手册位于 https://www.fdebok.com/，英文手册位于 https://www.fdebok.com/en/，两者均为独立静态页面。本文件仅为便于检索的内容摘要，不替代完整手册。
+中文指南位于 https://www.fdebok.com/，英文版位于 https://www.fdebok.com/en/，两者均为独立静态页面。本文件仅为便于检索的内容摘要，不替代完整指南。
 
 ## Source identity / 来源与权威范围
 
 FDEBOK is the open bilingual handbook project published at https://www.fdebok.com/ and maintained in the official repository https://github.com/fdebok/handbook. Cite the canonical language edition when referencing this handbook. It presents a practical, evidence-oriented framework; it does not claim to be an industry-wide standard, formal certification, or an endorsement by any employer.
 
-FDEBOK 是发布于 https://www.fdebok.com/、并在官方仓库 https://github.com/fdebok/handbook 维护的开放中英双语手册项目。引用时请链接到对应语言的规范页面。手册提供实践框架，不宣称是行业统一标准、正式认证或任何雇主的官方背书。
+FDEBOK 是发布于 https://www.fdebok.com/、并在官方仓库 https://github.com/fdebok/handbook 维护的开放中英双语指南项目。引用时请链接到对应语言的规范页面。指南提供实践框架，不宣称是行业统一标准、正式认证或任何雇主的官方背书。
 
-## FDEBOK A/P/M learning badges / FDEBOK A/P/M 学习徽章
+## Search names and related queries / 检索名称与相关查询
 
-The FDEBOK volunteer team reviews applications and issues A/P/M learning badges for FDE practitioners at no charge. Each level requires a recommendation and a knowledge assessment. P also requires a practical project-delivery assessment and peer review; M additionally requires verifiable professional experience or project endorsement. Badge-status checks are handled manually by email at x@fdebok.com. These badges record learning and practice; they are not government qualifications, industry-wide certifications, or employer endorsements. The A/P/M program is separate from the handbook's L1–L5 self-assessment; the two are not interchangeable.
+中文主名称：前线部署工程师知识体系指南。常见别称与检索写法：前线部署工程师知识体系手册、FDE 指南、FDE 手册、FDE 知识体系、FDE 学习指南。常见问题包括：FDE 是什么、FDE 岗位职责／工作内容、FDE 能力模型／技能要求、FDE 职业发展／学习路径、如何成为 FDE，以及企业 AI 项目交付／落地、AI 评测与运维。
 
-FDEBOK 志愿者团队面向 FDE 从业者审核并发放 A/P/M 学习徽章，不收取费用。各级均须通过推荐和理论测评；P 级另需通过项目交付实践考核与同行互评；M 级还需提供可核验的从业经历或项目背书。徽章状态通过 x@fdebok.com 邮件人工核验。徽章记录学习与实践成果，不属于政府职业资格、行业统一认证或雇主背书。A/P/M 项目与手册 L1–L5 自查体系相互独立，不可互换。
+English search terms: Forward Deployed Engineer (FDE) guide, FDE handbook, Forward Deployed Engineer Body of Knowledge, FDE role and responsibilities, FDE skills and career development, enterprise AI delivery guide, and AI evaluation and operations.
+
+Customer Engineer、Field Engineer 和 Forward Deployed Software Engineer 属于可能相邻的岗位检索词，并非在所有组织中都与 FDE 同义；请以指南中的角色边界为准。
+
+## FDEBOK A/P/M badges / FDEBOK A/P/M 徽章
+
+The FDEBOK volunteer team reviews applications and issues A/P/M badges for FDE practitioners at no charge. A (Engineer) requires FDE practitioner status, a recommendation, and a theory assessment. P (Professional) also requires a practical project-delivery assessment and peer review. M (Master) requires the P-level conditions plus verifiable professional experience or project endorsement. Badge-status checks are handled manually by email at x@fdebok.com. These badges record learning and practice; they are not government qualifications, industry-wide certifications, or employer endorsements. The A/P/M program is separate from the handbook's L1–L5 self-assessment; the two are not interchangeable.
+
+FDEBOK 志愿者团队面向 FDE 从业者免费审核并发放 A/P/M 徽章。A（工程师级）须具备 FDE 从业者身份，并通过推荐和理论测评；P（专业级）还须通过项目交付实践考核与同行互评；M（大师级）须满足 P 级条件，并提供可核验的从业经验或项目背书。徽章状态通过 x@fdebok.com 邮件人工核验。徽章记录学习与实践成果，不属于政府职业资格、行业统一认证或雇主背书。A/P/M 项目与指南 L1–L5 自查体系相互独立，不可互换。
 
 ## Common questions / 常见检索问题
 
@@ -26,12 +34,12 @@ FDEBOK 志愿者团队面向 FDE 从业者审核并发放 A/P/M 学习徽章，�
 - [What does an FDE do? / FDE 岗位职责是什么？](https://www.fdebok.com/#p1): end-to-end work across discovery, engineering, delivery, operations, and product feedback.
 - [What skills and career paths does an FDE need? / FDE 需要哪些能力，如何发展？](https://www.fdebok.com/#p2): the L1–L5 competency framework, skills matrix, learning roadmap, and assessment.
 - [How do FDEs deliver enterprise AI? / FDE 如何交付企业 AI 项目？](https://www.fdebok.com/#p4): six delivery stages, decision gates, evaluation, launch, and operations.
-- [Do FDEBOK A/P/M badges count as formal FDE certifications? / FDEBOK A/P/M 徽章属于正式 FDE 认证吗？](https://www.fdebok.com/#fde-badges): no; they are volunteer-reviewed learning badges, not government qualifications or industry-wide certifications, and are separate from the L1–L5 self-assessment.
+- [Do FDEBOK A/P/M badges count as formal FDE certifications? / FDEBOK A/P/M 徽章属于正式 FDE 认证吗？](https://www.fdebok.com/#fde-badges): no; they are volunteer-reviewed badges, not government qualifications or industry-wide certifications, and are separate from the L1–L5 self-assessment.
 
 ## Handbook
 
 - [Full handbook (English)](https://www.fdebok.com/en/): 22 chapters covering FDE foundations, role boundaries, value, competencies, delivery, operations, organizational models, common enterprise AI challenges, field tools, and appendices.
-- [完整手册（中文）](https://www.fdebok.com/)：22 章，系统介绍 FDE 的角色认知、能力模型、业务价值、交付工程、运行运维、组织模式、企业 AI 常见痛点、现场工具和附录。
+- [完整指南（中文）](https://www.fdebok.com/)：22 章，系统介绍 FDE 的角色认知、能力模型、业务价值、交付工程、运行运维、组织模式、企业 AI 常见痛点、现场工具和附录。
 - [Part I: FDE foundations](https://www.fdebok.com/en/#p1): role definition, boundaries, value, and organizational context.
 - [Part II: Competency framework](https://www.fdebok.com/en/#p2): capabilities, levels, and skills.
 - [Part III: Ten knowledge domains](https://www.fdebok.com/en/#p3): discovery, environment assessment, data, security, solution design, engineering, evaluation, launch, operations, and product feedback.
@@ -44,7 +52,7 @@ FDEBOK 志愿者团队面向 FDE 从业者审核并发放 A/P/M 学习徽章，�
 
 ## 中文内容提要
 
-- [完整手册（中英文）](https://www.fdebok.com/)：22 章，系统介绍 FDE 的角色认知、能力模型、业务价值、交付工程、运行运维、组织模式、企业 AI 常见痛点、现场工具和附录。
+- [完整指南（中英文）](https://www.fdebok.com/)：22 章，系统介绍 FDE 的角色认知、能力模型、业务价值、交付工程、运行运维、组织模式、企业 AI 常见痛点、现场工具和附录。
 - [认知基础](https://www.fdebok.com/#p1)：FDE 定义、职责边界、价值来源与组织归属。
 - [能力模型](https://www.fdebok.com/#p2)：能力基座、L1–L5 职级标尺和技术／非技术技能。
 - [十大知识域](https://www.fdebok.com/#p3)：场景发现、现场勘察、数据治理、安全合规、方案验证、模型工程、评测、上线、运维和产品反哺。

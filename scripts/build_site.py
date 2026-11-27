@@ -18,11 +18,11 @@ EN_URL = "https://www.fdebok.com/en/"
 INDEXNOW_KEY = "e4d857d027c4cf696ae94c8f95b07043"
 EN_TITLE = "FDEBOK: Forward Deployed Engineer Guide & Handbook"
 EN_DESCRIPTION = (
-    "The FDEBOK guide explains what a Forward Deployed Engineer (FDE) does, "
-    "the role's skills and career paths, and how to deliver enterprise AI—from "
-    "discovery and engineering through evaluation and operations."
+    "The FDEBOK guide and handbook explain what a Forward Deployed Engineer (FDE) does, "
+    "the role's responsibilities, skills, and career paths, and how to deliver enterprise "
+    "AI—from discovery and engineering through evaluation and operations."
 )
-EN_IMAGE_URL = "https://www.fdebok.com/share-card-en-v4.png"
+EN_IMAGE_URL = "https://www.fdebok.com/share-card-en-v6.png"
 ZH_URL = "https://www.fdebok.com/"
 SHARE_PLATFORMS = {
     "zh": ("wechat", "douyin"),
@@ -54,8 +54,8 @@ STATIC_FILES = (
     "og-image.png",
     "og-image-en.png",
     "robots.txt",
-    "share-card-en-v4.png",
-    "share-card-zh-v4.png",
+    "share-card-en-v6.png",
+    "share-card-zh-v6.png",
     "sitemap.xml",
     "share-qr-en.png",
     "share-qr-zh.png",
@@ -150,11 +150,11 @@ def render_share_page(locale: str, platform: str, content: dict[str, str]) -> st
     language = "en" if is_english else "zh-CN"
     canonical_url = EN_URL if is_english else ZH_URL
     share_url = f"https://www.fdebok.com/share/{locale}/{platform}/"
-    share_image = EN_IMAGE_URL if is_english else "https://www.fdebok.com/share-card-zh-v4.png"
+    share_image = EN_IMAGE_URL if is_english else "https://www.fdebok.com/share-card-zh-v6.png"
     accent = PLATFORM_ACCENTS[platform]
     page_title = f"{content['title']} | FDEBOK"
     description = content["caption"]
-    facts_title = "What the handbook covers" if is_english else "手册内容速览"
+    facts_title = "What the handbook covers" if is_english else "指南内容速览"
     facts = "\n".join(f"<li>{html.escape(fact)}</li>" for fact in SHARE_FACTS[locale])
     audience_title = "Who it's for" if is_english else "适合阅读的人"
     switch_label = "Read in Chinese" if is_english else "Read in English"
@@ -162,7 +162,7 @@ def render_share_page(locale: str, platform: str, content: dict[str, str]) -> st
     footer_text = (
         "A practical, open handbook for Forward Deployed Engineers and enterprise AI delivery teams."
         if is_english
-        else "面向前线部署工程师与企业 AI 交付团队的开放实践手册。"
+        else "面向前线部署工程师与企业 AI 交付团队的开放实践指南。"
     )
 
     return f"""<!doctype html>
@@ -174,8 +174,8 @@ def render_share_page(locale: str, platform: str, content: dict[str, str]) -> st
 <meta name="robots" content="noindex,follow,max-image-preview:large"/>
 <meta name="theme-color" content="#142238"/>
 <meta name="referrer" content="strict-origin-when-cross-origin"/>
-<link rel="icon" href="/favicon.svg?v=4" type="image/svg+xml"/>
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4" sizes="180x180"/>
+<link rel="icon" href="/favicon.svg?v=6" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=6" sizes="180x180"/>
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; style-src 'unsafe-inline'; script-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"/>
 <link rel="canonical" href="{canonical_url}"/>
 <title>{html.escape(page_title)}</title>
@@ -191,12 +191,12 @@ def render_share_page(locale: str, platform: str, content: dict[str, str]) -> st
 <meta property="og:image:type" content="image/png"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
-<meta property="og:image:alt" content="{'FDEBOK: Forward Deployed Engineer Body of Knowledge' if is_english else 'FDEBOK：前线部署工程师知识体系手册'}"/>
+<meta property="og:image:alt" content="{'FDEBOK: Forward Deployed Engineer Body of Knowledge' if is_english else 'FDEBOK：前线部署工程师知识体系指南'}"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="{html.escape(content['title'], quote=True)}"/>
 <meta name="twitter:description" content="{html.escape(description, quote=True)}"/>
 <meta name="twitter:image" content="{share_image}"/>
-<meta name="twitter:image:alt" content="{'FDEBOK: Forward Deployed Engineer Body of Knowledge' if is_english else 'FDEBOK：前线部署工程师知识体系手册'}"/>
+<meta name="twitter:image:alt" content="{'FDEBOK: Forward Deployed Engineer Body of Knowledge' if is_english else 'FDEBOK：前线部署工程师知识体系指南'}"/>
 <style>
 :root{{color-scheme:light;--ink:#142238;--ink2:#223c5e;--gold:#d2ae58;--paper:#f4f5f2;--text:#26313f;--sub:#596879;--line:#dfe4e7;--accent:{accent};font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif}}
 *{{box-sizing:border-box}}
@@ -205,7 +205,7 @@ a{{color:inherit}}
 .page{{width:min(100% - 32px,960px);margin:0 auto;padding:24px 0 32px}}
 .masthead{{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:8px 2px 22px}}
 .brand{{display:inline-flex;align-items:center;gap:12px;color:var(--ink);font-weight:850;letter-spacing:.04em;text-decoration:none}}
-.brand-logo{{display:block;width:190px;height:auto;flex:none}}
+.brand-logo{{display:block;width:210px;height:auto;flex:none}}
 .masthead-note{{color:var(--sub);font-size:11px;font-weight:750;letter-spacing:.12em;text-align:right;text-transform:uppercase}}
 .card{{position:relative;overflow:hidden;padding:clamp(24px,6vw,58px);border:1px solid rgba(30,53,82,.12);border-radius:22px;background:linear-gradient(145deg,#fff 0%,#fbfcfb 62%,#f2f5f4 100%);box-shadow:0 24px 70px rgba(27,45,68,.10)}}
 .card::before{{position:absolute;inset:0 auto 0 0;width:5px;background:linear-gradient(var(--accent),var(--gold));content:""}}
@@ -226,7 +226,7 @@ h1{{max-width:760px;margin:0;color:var(--ink);font-family:Georgia,"Noto Serif SC
 .switch{{color:var(--ink2);font-size:13px;font-weight:700;text-decoration-thickness:1px;text-underline-offset:4px}}
 .footer{{display:flex;justify-content:space-between;gap:18px;margin-top:20px;padding:0 3px;color:#687687;font-size:12px;line-height:1.6}}
 .footer p{{margin:0}}
-@media(max-width:600px){{.page{{width:min(100% - 22px,960px);padding-top:12px}}.masthead{{padding:7px 3px 15px}}.brand-logo{{width:min(190px,48vw)}}.masthead-note{{max-width:120px;font-size:9px;line-height:1.5}}.card{{border-radius:16px}}.post-copy{{padding:14px}}.actions{{align-items:stretch;flex-direction:column}}.cta{{width:100%}}.switch{{text-align:center}}.footer{{flex-direction:column;gap:4px}}}}
+@media(max-width:600px){{.page{{width:min(100% - 22px,960px);padding-top:12px}}.masthead{{padding:7px 3px 15px}}.brand-logo{{width:min(210px,50vw)}}.masthead-note{{max-width:108px;font-size:9px;line-height:1.5}}.card{{border-radius:16px}}.post-copy{{padding:14px}}.actions{{align-items:stretch;flex-direction:column}}.cta{{width:100%}}.switch{{text-align:center}}.footer{{flex-direction:column;gap:4px}}}}
 @media(prefers-reduced-motion:reduce){{*,*::before,*::after{{scroll-behavior:auto!important;transition:none!important}}}}
 </style>
 </head>
@@ -234,7 +234,7 @@ h1{{max-width:760px;margin:0;color:var(--ink);font-family:Georgia,"Noto Serif SC
 <div class="page">
 <header class="masthead">
 <a class="brand" href="{canonical_url}">
-<img alt="FDEBOK · Forward Deployed Engineer Body of Knowledge" class="brand-logo" height="43" src="/brand-logo.svg?v=4" width="190"/>
+<img alt="FDEBOK · Forward Deployed Engineer Body of Knowledge" class="brand-logo" height="46" src="/brand-logo.svg?v=6" width="210"/>
 </a>
 <span class="masthead-note">Forward Deployed Engineer<br/>Body of Knowledge</span>
 </header>
@@ -473,7 +473,11 @@ class EnglishRenderer(HTMLParser):
                     {
                         "@id": EN_URL + "#handbook",
                         "name": EN_TITLE,
-                        "alternateName": "前线部署工程师知识体系手册",
+                        "alternateName": [
+                            "前线部署工程师知识体系手册",
+                            "FDE 手册",
+                            "Forward Deployed Engineer Body of Knowledge",
+                        ],
                         "url": EN_URL,
                         "mainEntityOfPage": {"@id": EN_URL + "#webpage"},
                         "description": EN_DESCRIPTION,
@@ -489,15 +493,21 @@ class EnglishRenderer(HTMLParser):
                         "keywords": [
                             "Forward Deployed Engineer",
                             "Forward Deployed Engineer guide",
+                            "Forward Deployed Engineer handbook",
                             "FDE role and responsibilities",
+                            "FDE job description",
+                            "FDE skills and competency model",
                             "FDE career development",
+                            "FDE learning path",
                             "FDE interview guide",
                             "enterprise AI delivery",
                             "enterprise AI implementation",
+                            "enterprise AI delivery guide",
                             "AI engineering practice",
                             "FDE competency model",
                             "AI evaluation and operations",
-                            "FDEBOK A/P/M learning badges",
+                            "Forward Deployed Engineer Body of Knowledge",
+                            "FDEBOK A/P/M badges",
                         ],
                     }
                 )
