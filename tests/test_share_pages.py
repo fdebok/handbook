@@ -175,6 +175,7 @@ class SharePageTests(unittest.TestCase):
                 "description_phrase": "FDE 是什么",
                 "keyword": "FDE 职业发展",
                 "organization_phrase": "官方发布",
+                "slogan": "三点架成桥，洞察连工程，AI 稳落地，价值步步通",
                 "teaches_phrase": "FDE 角色与职责",
             },
             "en": {
@@ -184,6 +185,7 @@ class SharePageTests(unittest.TestCase):
                 "description_phrase": "Forward Deployed Engineer (FDE)",
                 "keyword": "FDE career development",
                 "organization_phrase": "official publication",
+                "slogan": "Three points form a bridge: insight meets engineering, AI lands reliably, and value flows through every step.",
                 "teaches_phrase": "Forward Deployed Engineer roles",
             },
         }
@@ -217,6 +219,7 @@ class SharePageTests(unittest.TestCase):
                 )
                 self.assertEqual(organization["sameAs"], "https://github.com/fdebok/handbook")
                 self.assertIn(expected["organization_phrase"], organization["description"])
+                self.assertEqual(organization["slogan"], expected["slogan"])
                 self.assertEqual(handbook["author"], {"@id": organization["@id"]})
                 self.assertEqual(handbook["publisher"], {"@id": organization["@id"]})
                 self.assertIn("LearningResource", handbook["@type"])
@@ -279,11 +282,11 @@ class SharePageTests(unittest.TestCase):
             english = (output / "en" / "index.html").read_text(encoding="utf-8")
 
         self.assertIn(
-            '<p class="brand-meaning">桥连现场洞察、工程实践与 AI 交付；三点寓意协同。</p>',
+            '<p class="brand-meaning">三点架成桥，洞察连工程，AI 稳落地，价值步步通</p>',
             chinese,
         )
         self.assertIn(
-            '<p class="brand-meaning">The bridge links field insight, engineering, and AI delivery; its three nodes signify collaboration.</p>',
+            '<p class="brand-meaning">Three points form a bridge: insight meets engineering, AI lands reliably, and value flows through every step.</p>',
             english,
         )
 

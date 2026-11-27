@@ -445,6 +445,10 @@ class EnglishRenderer(HTMLParser):
             if isinstance(item_types, str):
                 item_types = [item_types]
             if "Organization" in item_types:
+                item["slogan"] = (
+                    "Three points form a bridge: insight meets engineering, AI lands "
+                    "reliably, and value flows through every step."
+                )
                 item["description"] = (
                     "FDEBOK is an open bilingual handbook project for Forward Deployed "
                     "Engineers; this website and its GitHub repository are its official "
