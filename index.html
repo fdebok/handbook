@@ -7,8 +7,8 @@
 <meta name="description" content="FDEBOK：免费中英双语 FDE 指南，讲解前线部署工程师（Forward Deployed Engineer）是什么、岗位职责、能力模型与职业发展，覆盖企业 AI 交付、评测运维及现场模板。"/>
 <meta name="robots" content="index,follow,max-image-preview:large"/>
 <meta name="theme-color" content="#142238"/>
-<link rel="icon" href="/favicon.svg?v=3" type="image/svg+xml"/>
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3" sizes="180x180"/>
+<link rel="icon" href="/favicon.svg?v=4" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4" sizes="180x180"/>
 <script>
 (function(){
   var root=document.documentElement;
@@ -38,8 +38,8 @@
 <meta property="og:locale:alternate" content="en_US"/>
 <meta property="og:title" content="FDEBOK｜FDE 指南：前线部署工程师知识体系与企业 AI 交付"/>
 <meta property="og:description" content="FDE 是什么？FDEBOK 以 22 章介绍前线部署工程师的职责、能力模型与职业发展，涵盖企业 AI 交付流程、评测运维和现场模板。"/>
-<meta property="og:image" content="https://www.fdebok.com/share-card-zh-v3.png"/>
-<meta property="og:image:secure_url" content="https://www.fdebok.com/share-card-zh-v3.png"/>
+<meta property="og:image" content="https://www.fdebok.com/share-card-zh-v4.png"/>
+<meta property="og:image:secure_url" content="https://www.fdebok.com/share-card-zh-v4.png"/>
 <meta property="og:image:type" content="image/png"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
@@ -47,7 +47,7 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="FDEBOK｜FDE 指南：前线部署工程师知识体系与企业 AI 交付"/>
 <meta name="twitter:description" content="FDE 是什么？FDEBOK 以 22 章介绍前线部署工程师的职责、能力模型与职业发展，涵盖企业 AI 交付流程、评测运维和现场模板。"/>
-<meta name="twitter:image" content="https://www.fdebok.com/share-card-zh-v3.png"/>
+<meta name="twitter:image" content="https://www.fdebok.com/share-card-zh-v4.png"/>
 <meta name="twitter:image:alt" content="FDEBOK 前线部署工程师知识体系手册：知识域、交付阶段、能力框架与现场模板"/>
 <title>FDEBOK｜FDE 指南：前线部署工程师知识体系与企业 AI 交付</title>
 <script type="application/ld+json">
@@ -119,7 +119,8 @@
         "AI 工程实践",
         "AI 评测与运维",
         "enterprise AI delivery",
-        "FDE career development"
+        "FDE career development",
+        "FDEBOK A/P/M 学习徽章"
       ],
       "audience":[
         {"@type":"Audience","audienceType":"FDEs and AI engineers"},
@@ -601,6 +602,21 @@ code.i{font-family:var(--mono);font-size:.88em;background:rgba(var(--gold-rgb),.
   background:var(--card);color:var(--ink2);cursor:pointer;font-size:13px;font-weight:700}
 .self-check-actions a{color:var(--ink3);font-size:13px;font-weight:700;text-underline-offset:3px}
 .self-check-privacy{margin:12px 0 0!important;color:var(--sub)!important;font-size:11.5px!important}
+.badge-showcase{margin:28px 0 32px;padding:clamp(18px,2.4vw,28px);border:1px solid var(--line);
+  border-radius:14px;background:linear-gradient(180deg,var(--surface-cool),var(--surface-cool-strong))}
+.badge-eyebrow{display:block;margin-bottom:7px;color:var(--gold-text);font-size:10px;font-weight:800;
+  letter-spacing:.14em}
+.badge-showcase h4{margin:0 0 8px;color:var(--ink);font-family:var(--serif);font-size:21px;line-height:1.4}
+.badge-showcase-intro{max-width:900px;margin:0;color:var(--sub);font-size:13px;line-height:1.75}
+.badge-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-top:18px}
+.badge-tier{min-width:0;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+.badge-tier figure{width:min(100%,240px);margin:0 auto 12px;overflow:hidden;border-radius:9px;background:#f4f5f2}
+.badge-tier img{display:block;width:100%;height:auto;aspect-ratio:320/390;object-fit:contain}
+.badge-tier h5{margin:0 0 5px;color:var(--ink);font-size:14px;line-height:1.5}
+.badge-tier p{margin:0;color:var(--sub);font-size:12.5px;line-height:1.65}
+.badge-program-note{margin:16px 0 0;color:var(--ink2);font-size:12.5px;line-height:1.75}
+.badge-program-note a{color:var(--ink3);font-weight:750;text-underline-offset:3px}
+.badge-disclaimer{margin:9px 0 0;color:var(--sub);font-size:11.5px;line-height:1.7}
 
 /* ---------- 引用块 ---------- */
 blockquote{margin:22px 0;padding:4px 0 4px 24px;border-left:3px solid var(--gold);
@@ -760,6 +776,9 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
   .g2,.g3,.g4,.kpi{grid-template-columns:1fr}
   .self-check-list{grid-template-columns:1fr}
   .self-check-results{grid-template-columns:1fr 1fr}
+  .badge-grid{grid-template-columns:1fr}
+  .badge-tier{display:grid;grid-template-columns:minmax(105px,150px) minmax(0,1fr);align-items:center;gap:14px}
+  .badge-tier figure{width:100%;margin:0}
   .hero-actions a{flex:1 1 170px}
   .hero-actions .share-trigger{flex:1 1 170px}
   .share-panel{padding:14px}
@@ -878,7 +897,7 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
 <span class="kicker" lang="en">FIELD GUIDE  ·  EDITION 1.0  ·  2026</span>
 <div class="cover-layout">
 <div class="cover-copy">
-<h1><img alt="" class="cover-brand-mark" height="62" src="/brand-mark.svg?v=3" width="62"/><span>FDE<em>BOK</em></span></h1>
+<h1><img alt="" class="cover-brand-mark" height="62" src="/brand-mark.svg?v=4" width="62"/><span>FDE<em>BOK</em></span></h1>
 <p class="sub">前线部署工程师知识体系手册<br/>Forward Deployed Engineer Body of Knowledge</p>
 <p class="lede">把 AI 从业务问题带到稳定交付。FDEBOK 汇集前线方法、工程实践与现场工具，覆盖场景发现、方案验证、生产上线和持续运营，帮助团队将业务价值转化为可衡量、可复用的成果。</p>
 <div class="hero-actions">
@@ -2654,6 +2673,27 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
 </div>
 <p class="self-check-privacy">评分仅在当前浏览器页面即时计算，不会发送或保存。请勿在反馈中包含客户名称、个人信息、凭证或其他敏感资料；本工具为自评参考，不是经验证的标准量表。</p>
 </form>
+<section class="badge-showcase" id="fde-badges" aria-labelledby="badge-showcase-title">
+<span class="badge-eyebrow" lang="en">FDEBOK · LEARNING BADGES</span>
+<h4 id="badge-showcase-title">FDEBOK A/P/M 学习徽章</h4>
+<p class="badge-showcase-intro">面向 FDE 从业者开放申请。各级均须通过推荐和理论测评；P 级另须通过项目交付实践考核与同行互评；M 级还须提供可核验的从业经历或项目背书。</p>
+<div class="badge-grid">
+<div class="badge-tier">
+<figure><img alt="" aria-hidden="true" decoding="async" height="390" loading="lazy" src="/badge-a.png" width="320"/></figure>
+<div><h5>A 级 · Engineer（工程师）</h5><p>FDE 从业者 · 推荐 · 理论测评</p></div>
+</div>
+<div class="badge-tier">
+<figure><img alt="" aria-hidden="true" decoding="async" height="390" loading="lazy" src="/badge-p.png" width="320"/></figure>
+<div><h5>P 级 · Professional（专业人士）</h5><p>A 级条件 · 项目交付实践考核 · 同行互评</p></div>
+</div>
+<div class="badge-tier">
+<figure><img alt="" aria-hidden="true" decoding="async" height="390" loading="lazy" src="/badge-m.png" width="320"/></figure>
+<div><h5>M 级 · Master（大师）</h5><p>P 级条件 · 可核验的从业经验或项目背书</p></div>
+</div>
+</div>
+<p class="badge-program-note">徽章由 FDEBOK 志愿者团队审核发放，不收取申请或评审费用。申请条件、材料及徽章状态核验，请联系 <a href="mailto:x@fdebok.com?subject=FDEBOK%20Badge%20Inquiry">x@fdebok.com</a>（邮件人工办理）。</p>
+<p class="badge-disclaimer">本徽章记录 FDE 相关学习与实践成果，不属于政府职业资格或行业统一认证，也不代表雇主背书。A/P/M 徽章是 FDEBOK 独立项目，与本手册 L1–L5 能力自查体系不可互换或换算。</p>
+</section>
 <div class="co principle">
 <span class="ct">结语</span>
 <p>这一角色的复利从来不来自工时，而来自组件与方法。一个人如果做了五年 FDE 却没有留下任何被别人复用的东西，那么他做了五年的第一件事；如果他留下了三套被别人默认的解法，那么他真正交付过很多次。<b>这既是本手册的度量方式，也是这个岗位值得做的理由。</b></p>
@@ -3010,7 +3050,7 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
 <footer class="pg">
 <b>FDEBOK</b> · 前线部署工程师知识体系手册<br/>
   十个知识域 · 六段生命周期 · 五级能力标尺 · 二十个高频痛点 · 九件现场资产
-<p class="rights-short"><img alt="" class="footer-brand-mark" height="24" src="/brand-mark.svg?v=3" width="24"/>© 2026 FDEBOK（fdebok.com） · MIT License · <a href="#rights">许可与共建</a></p>
+<p class="rights-short"><img alt="" class="footer-brand-mark" height="24" src="/brand-mark.svg?v=4" width="24"/>© 2026 FDEBOK（fdebok.com） · MIT License · <a href="#rights">许可与共建</a></p>
 <div class="footer-activity">
 <span class="visit-counter" id="page-visit-counter" aria-label="全站访问量加载中"><span>全站访问：</span><strong id="page-visit-count">--</strong><span>次</span></span>
 <span class="footer-activity-note">显示全站累计访问次数，由服务端统计。</span>
@@ -3573,6 +3613,17 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
    "。":" quarterly."
  });
  Object.assign(ENG,{
+    "FDEBOK A/P/M 学习徽章":"FDEBOK A/P/M Learning Badges",
+    "面向 FDE 从业者开放申请。各级均须通过推荐和理论测评；P 级另须通过项目交付实践考核与同行互评；M 级还须提供可核验的从业经历或项目背书。":"Open to FDE practitioners. Each level requires a recommendation and a knowledge assessment. P also requires a practical project-delivery assessment and peer review; M additionally requires verifiable professional experience or project endorsement.",
+    "A 级 · Engineer（工程师）":"A · Engineer",
+    "FDE 从业者 · 推荐 · 理论测评":"FDE practitioner · recommendation · knowledge assessment",
+    "P 级 · Professional（专业人士）":"P · Professional",
+    "A 级条件 · 项目交付实践考核 · 同行互评":"A-level requirements · practical project-delivery assessment · peer review",
+    "M 级 · Master（大师）":"M · Master",
+    "P 级条件 · 可核验的从业经验或项目背书":"P-level requirements · verifiable professional experience or project endorsement",
+    "徽章由 FDEBOK 志愿者团队审核发放，不收取申请或评审费用。申请条件、材料及徽章状态核验，请联系":"The FDEBOK volunteer team reviews and issues the badges at no charge. For application requirements, materials, or badge-status verification, email",
+    "（邮件人工办理）。":" (handled manually by email).",
+    "本徽章记录 FDE 相关学习与实践成果，不属于政府职业资格或行业统一认证，也不代表雇主背书。A/P/M 徽章是 FDEBOK 独立项目，与本手册 L1–L5 能力自查体系不可互换或换算。":"These badges record FDE-related learning and practice. They are not government-issued qualifications or industry-wide certifications, and do not imply employer endorsement. The FDEBOK A/P/M badge program is separate from the handbook's L1–L5 self-assessment; the two are not interchangeable.",
     "成长与评估":"Growth and assessment",
     "能力可以被训练，但只能通过承担后果来训练。以下路径的设计原则是：尽早接触真实用户，尽量晚地依赖演示。":"Capability can be developed, but only by taking responsibility for outcomes. The paths below follow one principle: work with real users early and rely on demos as little as possible.",
     "学习地图与 九十天上手":"Learning roadmap and getting started in 90 days",
@@ -4303,7 +4354,7 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
    var openGraphSecureImage=document.querySelector('meta[property="og:image:secure_url"]');
    var twitterImage=document.querySelector('meta[name="twitter:image"]');
    var canonicalUrl=isEnglish?'https://www.fdebok.com/en/':'https://www.fdebok.com/';
-   var shareImageUrl=isEnglish?'https://www.fdebok.com/share-card-en-v3.png':'https://www.fdebok.com/share-card-zh-v3.png';
+   var shareImageUrl=isEnglish?'https://www.fdebok.com/share-card-en-v4.png':'https://www.fdebok.com/share-card-zh-v4.png';
    if(shareTitle)shareTitle.content=pageTitle;
    if(shareDescription)shareDescription.content=sharePageDescription;
    if(twitterTitle)twitterTitle.content=pageTitle;
@@ -4383,8 +4434,8 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
    var isEnglish=document.documentElement.lang==='en';
    var locale=isEnglish?'en':'zh';
    var quickShareUrl=isEnglish
-     ?'https://www.fdebok.com/en/?share=brand-v3'
-     :'https://www.fdebok.com/?share=brand-v3';
+     ?'https://www.fdebok.com/en/?share=brand-v4'
+     :'https://www.fdebok.com/?share=brand-v4';
    qr.src=isEnglish?'/share-qr-en.png':'/share-qr-zh.png';
    qr.alt=isEnglish?'QR code for the FDEBOK English handbook':'扫码访问 FDEBOK 中文手册';
    nativeButton.hidden=typeof navigator.share!=='function';

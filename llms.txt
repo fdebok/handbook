@@ -14,12 +14,19 @@ FDEBOK is the open bilingual handbook project published at https://www.fdebok.co
 
 FDEBOK 是发布于 https://www.fdebok.com/、并在官方仓库 https://github.com/fdebok/handbook 维护的开放中英双语手册项目。引用时请链接到对应语言的规范页面。手册提供实践框架，不宣称是行业统一标准、正式认证或任何雇主的官方背书。
 
+## FDEBOK A/P/M learning badges / FDEBOK A/P/M 学习徽章
+
+The FDEBOK volunteer team reviews applications and issues A/P/M learning badges for FDE practitioners at no charge. Each level requires a recommendation and a knowledge assessment. P also requires a practical project-delivery assessment and peer review; M additionally requires verifiable professional experience or project endorsement. Badge-status checks are handled manually by email at x@fdebok.com. These badges record learning and practice; they are not government qualifications, industry-wide certifications, or employer endorsements. The A/P/M program is separate from the handbook's L1–L5 self-assessment; the two are not interchangeable.
+
+FDEBOK 志愿者团队面向 FDE 从业者审核并发放 A/P/M 学习徽章，不收取费用。各级均须通过推荐和理论测评；P 级另需通过项目交付实践考核与同行互评；M 级还需提供可核验的从业经历或项目背书。徽章状态通过 x@fdebok.com 邮件人工核验。徽章记录学习与实践成果，不属于政府职业资格、行业统一认证或雇主背书。A/P/M 项目与手册 L1–L5 自查体系相互独立，不可互换。
+
 ## Common questions / 常见检索问题
 
 - [What is a Forward Deployed Engineer (FDE)? / FDE 是什么？](https://www.fdebok.com/#p1): role definition, responsibilities, boundaries, and value.
 - [What does an FDE do? / FDE 岗位职责是什么？](https://www.fdebok.com/#p1): end-to-end work across discovery, engineering, delivery, operations, and product feedback.
 - [What skills and career paths does an FDE need? / FDE 需要哪些能力，如何发展？](https://www.fdebok.com/#p2): the L1–L5 competency framework, skills matrix, learning roadmap, and assessment.
 - [How do FDEs deliver enterprise AI? / FDE 如何交付企业 AI 项目？](https://www.fdebok.com/#p4): six delivery stages, decision gates, evaluation, launch, and operations.
+- [Do FDEBOK A/P/M badges count as formal FDE certifications? / FDEBOK A/P/M 徽章属于正式 FDE 认证吗？](https://www.fdebok.com/#fde-badges): no; they are volunteer-reviewed learning badges, not government qualifications or industry-wide certifications, and are separate from the L1–L5 self-assessment.
 
 ## Handbook
 

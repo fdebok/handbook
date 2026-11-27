@@ -22,7 +22,7 @@ EN_DESCRIPTION = (
     "the role's skills and career paths, and how to deliver enterprise AI—from "
     "discovery and engineering through evaluation and operations."
 )
-EN_IMAGE_URL = "https://www.fdebok.com/share-card-en-v3.png"
+EN_IMAGE_URL = "https://www.fdebok.com/share-card-en-v4.png"
 ZH_URL = "https://www.fdebok.com/"
 SHARE_PLATFORMS = {
     "zh": ("wechat", "douyin"),
@@ -47,12 +47,15 @@ STATIC_FILES = (
     "apple-touch-icon.png",
     "brand-logo.svg",
     "brand-mark.svg",
+    "badge-a.png",
+    "badge-m.png",
+    "badge-p.png",
     "favicon.svg",
     "og-image.png",
     "og-image-en.png",
     "robots.txt",
-    "share-card-en-v3.png",
-    "share-card-zh-v3.png",
+    "share-card-en-v4.png",
+    "share-card-zh-v4.png",
     "sitemap.xml",
     "share-qr-en.png",
     "share-qr-zh.png",
@@ -147,7 +150,7 @@ def render_share_page(locale: str, platform: str, content: dict[str, str]) -> st
     language = "en" if is_english else "zh-CN"
     canonical_url = EN_URL if is_english else ZH_URL
     share_url = f"https://www.fdebok.com/share/{locale}/{platform}/"
-    share_image = EN_IMAGE_URL if is_english else "https://www.fdebok.com/share-card-zh-v3.png"
+    share_image = EN_IMAGE_URL if is_english else "https://www.fdebok.com/share-card-zh-v4.png"
     accent = PLATFORM_ACCENTS[platform]
     page_title = f"{content['title']} | FDEBOK"
     description = content["caption"]
@@ -171,8 +174,8 @@ def render_share_page(locale: str, platform: str, content: dict[str, str]) -> st
 <meta name="robots" content="noindex,follow,max-image-preview:large"/>
 <meta name="theme-color" content="#142238"/>
 <meta name="referrer" content="strict-origin-when-cross-origin"/>
-<link rel="icon" href="/favicon.svg?v=3" type="image/svg+xml"/>
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3" sizes="180x180"/>
+<link rel="icon" href="/favicon.svg?v=4" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4" sizes="180x180"/>
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; style-src 'unsafe-inline'; script-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"/>
 <link rel="canonical" href="{canonical_url}"/>
 <title>{html.escape(page_title)}</title>
@@ -231,7 +234,7 @@ h1{{max-width:760px;margin:0;color:var(--ink);font-family:Georgia,"Noto Serif SC
 <div class="page">
 <header class="masthead">
 <a class="brand" href="{canonical_url}">
-<img alt="FDEBOK · Forward Deployed Engineer Body of Knowledge" class="brand-logo" height="43" src="/brand-logo.svg?v=3" width="190"/>
+<img alt="FDEBOK · Forward Deployed Engineer Body of Knowledge" class="brand-logo" height="43" src="/brand-logo.svg?v=4" width="190"/>
 </a>
 <span class="masthead-note">Forward Deployed Engineer<br/>Body of Knowledge</span>
 </header>
@@ -494,6 +497,7 @@ class EnglishRenderer(HTMLParser):
                             "AI engineering practice",
                             "FDE competency model",
                             "AI evaluation and operations",
+                            "FDEBOK A/P/M learning badges",
                         ],
                     }
                 )

@@ -27,10 +27,22 @@ gobject = load_library("gobject-2.0")
 
 cairo.cairo_image_surface_create.argtypes = [ctypes.c_int, ctypes.c_int, ctypes.c_int]
 cairo.cairo_image_surface_create.restype = ctypes.c_void_p
+cairo.cairo_image_surface_create_from_png.argtypes = [ctypes.c_char_p]
+cairo.cairo_image_surface_create_from_png.restype = ctypes.c_void_p
+cairo.cairo_surface_status.argtypes = [ctypes.c_void_p]
+cairo.cairo_surface_status.restype = ctypes.c_int
+cairo.cairo_status_to_string.argtypes = [ctypes.c_int]
+cairo.cairo_status_to_string.restype = ctypes.c_char_p
 cairo.cairo_create.argtypes = [ctypes.c_void_p]
 cairo.cairo_create.restype = ctypes.c_void_p
 cairo.cairo_surface_write_to_png.argtypes = [ctypes.c_void_p, ctypes.c_char_p]
 cairo.cairo_surface_write_to_png.restype = ctypes.c_int
+cairo.cairo_set_source_surface.argtypes = [
+    ctypes.c_void_p,
+    ctypes.c_void_p,
+    ctypes.c_double,
+    ctypes.c_double,
+]
 cairo.cairo_surface_destroy.argtypes = [ctypes.c_void_p]
 cairo.cairo_destroy.argtypes = [ctypes.c_void_p]
 cairo.cairo_set_source_rgba.argtypes = [
@@ -40,6 +52,10 @@ cairo.cairo_set_source_rgba.argtypes = [
     ctypes.c_double,
     ctypes.c_double,
 ]
+cairo.cairo_fill_preserve.argtypes = [ctypes.c_void_p]
+cairo.cairo_fill_preserve.restype = None
+cairo.cairo_stroke_preserve.argtypes = [ctypes.c_void_p]
+cairo.cairo_stroke_preserve.restype = None
 cairo.cairo_paint.argtypes = [ctypes.c_void_p]
 cairo.cairo_rectangle.argtypes = [
     ctypes.c_void_p,
@@ -64,12 +80,19 @@ cairo.cairo_curve_to.argtypes = [
 ]
 cairo.cairo_new_path.argtypes = [ctypes.c_void_p]
 cairo.cairo_close_path.argtypes = [ctypes.c_void_p]
+cairo.cairo_clip.argtypes = [ctypes.c_void_p]
 cairo.cairo_save.argtypes = [ctypes.c_void_p]
 cairo.cairo_restore.argtypes = [ctypes.c_void_p]
 cairo.cairo_translate.argtypes = [ctypes.c_void_p, ctypes.c_double, ctypes.c_double]
 cairo.cairo_scale.argtypes = [ctypes.c_void_p, ctypes.c_double, ctypes.c_double]
 cairo.cairo_set_line_cap.argtypes = [ctypes.c_void_p, ctypes.c_int]
 cairo.cairo_set_line_join.argtypes = [ctypes.c_void_p, ctypes.c_int]
+cairo.cairo_set_dash.argtypes = [
+    ctypes.c_void_p,
+    ctypes.POINTER(ctypes.c_double),
+    ctypes.c_int,
+    ctypes.c_double,
+]
 cairo.cairo_arc.argtypes = [
     ctypes.c_void_p,
     ctypes.c_double,
@@ -152,64 +175,170 @@ def text(
     gobject.g_object_unref(layout)
 
 
+def circle(
+    context: ctypes.c_void_p,
+    cx: float,
+    cy: float,
+    radius: float,
+    fill: str,
+    alpha: float = 1.0,
+) -> None:
+    cairo.cairo_new_path(context)
+    cairo.cairo_arc(context, cx, cy, radius, 0, 6.283185307179586)
+    color(context, fill, alpha)
+    cairo.cairo_fill(context)
+
+
+def gradient_circle(
+    context: ctypes.c_void_p,
+    cx: float,
+    cy: float,
+    radius: float,
+    top: str,
+    bottom: str,
+    stroke: str | None = None,
+    width: float = 1.0,
+) -> None:
+    cairo.cairo_new_path(context)
+    cairo.cairo_arc(context, cx, cy, radius, 0, 6.283185307179586)
+    gradient = cairo.cairo_pattern_create_linear(cx, cy - radius, cx, cy + radius)
+    for offset, value in ((0, top), (1, bottom)):
+        red, green, blue = (
+            int(value[index : index + 2], 16) / 255 for index in (1, 3, 5)
+        )
+        cairo.cairo_pattern_add_color_stop_rgba(
+            gradient, offset, red, green, blue, 1
+        )
+    cairo.cairo_set_source(context, gradient)
+    if stroke:
+        cairo.cairo_fill_preserve(context)
+        cairo.cairo_set_line_width(context, width)
+        color(context, stroke)
+        cairo.cairo_stroke(context)
+    else:
+        cairo.cairo_fill(context)
+    cairo.cairo_pattern_destroy(gradient)
+
+
 def draw_logo_mark(context: ctypes.c_void_p, x: int, y: int, size: int) -> None:
-    scale = size / 96
+    scale = size / 100
     cairo.cairo_save(context)
     cairo.cairo_translate(context, x, y)
     cairo.cairo_scale(context, scale, scale)
-    cairo.cairo_new_path(context)
-    cairo.cairo_arc(context, 72, 27, 24, -1.5708, 0)
-    cairo.cairo_arc(context, 72, 72, 24, 0, 1.5708)
-    cairo.cairo_arc(context, 27, 72, 24, 1.5708, 3.1416)
-    cairo.cairo_arc(context, 27, 27, 24, 3.1416, 4.7124)
-    cairo.cairo_close_path(context)
-    color(context, "#14233a")
-    cairo.cairo_fill(context)
 
-    cairo.cairo_set_line_width(context, 1)
-    color(context, "#e9e2d2", 0.08)
+    circle(context, 51, 52, 48, "#705522", 0.16)
+    gradient_circle(context, 50, 50, 48, "#f6e7b5", "#b98a35", "#c59b55", 1.3)
+    gradient_circle(context, 50, 50, 45.7, "#fff3c9", "#d7bd75", "#f7e7b5", 0.7)
+    gradient_circle(context, 50, 50, 43.2, "#ffffff", "#eaf1ec", "#cbd8cf", 0.65)
+
+    cairo.cairo_save(context)
     cairo.cairo_new_path(context)
-    cairo.cairo_arc(context, 68, 28, 16, -1.5708, 0)
-    cairo.cairo_arc(context, 68, 68, 16, 0, 1.5708)
-    cairo.cairo_arc(context, 28, 68, 16, 1.5708, 3.1416)
-    cairo.cairo_arc(context, 28, 28, 16, 3.1416, 4.7124)
-    cairo.cairo_close_path(context)
+    cairo.cairo_arc(context, 50, 50, 42.6, 0, 6.283185307179586)
+    cairo.cairo_clip(context)
+    cairo.cairo_set_line_width(context, 0.7)
+    color(context, "#79bda8", 0.25)
+    for scale_x in (0.34, 0.68):
+        cairo.cairo_save(context)
+        cairo.cairo_translate(context, 50, 50)
+        cairo.cairo_scale(context, scale_x, 1)
+        cairo.cairo_new_path(context)
+        cairo.cairo_arc(context, 0, 0, 41.5, 0, 6.283185307179586)
+        cairo.cairo_restore(context)
+        cairo.cairo_stroke(context)
+    for scale_y in (0.38, 0.7):
+        cairo.cairo_save(context)
+        cairo.cairo_translate(context, 50, 50)
+        cairo.cairo_scale(context, 1, scale_y)
+        cairo.cairo_new_path(context)
+        cairo.cairo_arc(context, 0, 0, 41.5, 0, 6.283185307179586)
+        cairo.cairo_restore(context)
+        cairo.cairo_stroke(context)
+    cairo.cairo_new_path(context)
+    cairo.cairo_move_to(context, 8.5, 50)
+    cairo.cairo_line_to(context, 91.5, 50)
     cairo.cairo_stroke(context)
+    cairo.cairo_restore(context)
 
+    letters = (
+        (
+            ((17, 31), (17, 50), (17, 69), (35, 31), (31, 50)),
+            ((0, 1), (1, 2), (0, 3), (1, 4)),
+        ),
+        (
+            ((42, 31), (42, 50), (42, 69), (54, 31), (62, 50), (54, 69)),
+            ((0, 1), (1, 2), (0, 3), (3, 4), (4, 5), (5, 2)),
+        ),
+        (
+            ((68, 31), (68, 50), (68, 69), (85, 31), (80, 50), (85, 69)),
+            ((0, 1), (1, 2), (0, 3), (1, 4), (2, 5)),
+        ),
+    )
+    letter_colors = ("#624719", "#806025", "#9a742c")
+    dash_pattern = (ctypes.c_double * 2)(2.7, 1.9)
     cairo.cairo_set_line_cap(context, 1)
     cairo.cairo_set_line_join(context, 1)
-    cairo.cairo_set_line_width(context, 8)
-    color(context, "#e9e2d2", 0.12)
-    cairo.cairo_move_to(context, 24, 54)
-    cairo.cairo_curve_to(context, 34, 54, 37, 35, 48, 35)
-    cairo.cairo_curve_to(context, 59, 35, 62, 54, 72, 54)
-    cairo.cairo_stroke(context)
+    for letter_index, (nodes, links) in enumerate(letters):
+        for link_index, (start, end) in enumerate(links):
+            cairo.cairo_new_path(context)
+            cairo.cairo_set_dash(context, dash_pattern, 2, (link_index % 3) * 0.55)
+            cairo.cairo_move_to(context, *nodes[start])
+            if letter_index == 1 and (start, end) == (3, 4):
+                cairo.cairo_curve_to(context, 61, 38, 63, 44, *nodes[end])
+            elif letter_index == 1 and (start, end) == (4, 5):
+                cairo.cairo_curve_to(context, 63, 56, 61, 62, *nodes[end])
+            else:
+                cairo.cairo_line_to(context, *nodes[end])
+            cairo.cairo_set_line_width(context, 2.5)
+            color(context, "#60461d", 0.14)
+            cairo.cairo_stroke_preserve(context)
+            cairo.cairo_set_line_width(context, 1.5)
+            color(context, letter_colors[letter_index], 0.9)
+            cairo.cairo_stroke(context)
+            cairo.cairo_set_dash(context, None, 0, 0)
 
-    cairo.cairo_set_line_width(context, 4.2)
-    color(context, "#f3efe4")
-    cairo.cairo_move_to(context, 24, 54)
-    cairo.cairo_curve_to(context, 34, 54, 37, 35, 48, 35)
-    cairo.cairo_curve_to(context, 59, 35, 62, 54, 72, 54)
-    cairo.cairo_stroke(context)
+    connector_color = "#b18b42"
+    connectors = ( ((31, 50), (42, 50)), ((62, 50), (68, 50)) )
+    connector_dash = (ctypes.c_double * 2)(1.8, 2.1)
+    for start, end in connectors:
+        cairo.cairo_new_path(context)
+        cairo.cairo_set_line_width(context, 1.15)
+        color(context, connector_color, 0.88)
+        cairo.cairo_move_to(context, *start)
+        cairo.cairo_line_to(context, *end)
+        cairo.cairo_set_dash(context, connector_dash, 2, 0.5)
+        cairo.cairo_stroke(context)
+        cairo.cairo_set_dash(context, None, 0, 0)
 
-    cairo.cairo_set_line_width(context, 3.2)
-    color(context, "#c59b55")
-    cairo.cairo_move_to(context, 24, 55)
-    cairo.cairo_line_to(context, 24, 67)
-    cairo.cairo_move_to(context, 72, 55)
-    cairo.cairo_line_to(context, 72, 67)
-    cairo.cairo_move_to(context, 20, 68)
-    cairo.cairo_line_to(context, 76, 68)
-    cairo.cairo_stroke(context)
-
-    for node_x, node_y, radius, fill in (
-        (24, 54, 3.8, "#79c5ae"),
-        (48, 35, 4.8, "#edc773"),
-        (72, 54, 3.8, "#79c5ae"),
-    ):
-        cairo.cairo_arc(context, node_x, node_y, radius, 0, 6.2832)
-        color(context, fill)
-        cairo.cairo_fill(context)
+    for letter_index, (nodes, _) in enumerate(letters):
+        for node_index, (node_x, node_y) in enumerate(nodes):
+            if letter_index == 0 and node_index == 0:
+                outline = "#79bda8"
+            elif letter_index == 2 and node_index == 4:
+                outline = "#b18b42"
+            else:
+                outline = letter_colors[letter_index]
+            radius = (
+                2.25
+                if (letter_index, node_index) in ((0, 1), (1, 4), (2, 1))
+                else 1.9
+            )
+            circle(context, node_x + 0.45, node_y + 0.6, radius + 0.35, "#60461d", 0.2)
+            phase = (letter_index + node_index) * 0.18
+            for segment in range(3):
+                start_angle = phase + segment * 2 * 3.141592653589793 / 3
+                cairo.cairo_new_path(context)
+                cairo.cairo_arc(
+                    context,
+                    node_x,
+                    node_y,
+                    radius,
+                    start_angle,
+                    start_angle + 1.4,
+                )
+                cairo.cairo_set_line_width(context, 0.9)
+                color(context, outline, 0.96)
+                cairo.cairo_stroke(context)
+            circle(context, node_x, node_y, 0.55, outline)
     cairo.cairo_restore(context)
 
 
@@ -287,11 +416,71 @@ def draw_touch_icon(path: Path) -> None:
     cairo.cairo_surface_destroy(surface)
 
 
+def draw_chinese_card(path: Path) -> None:
+    source_path = ROOT / "share-card-zh-v3.png"
+    surface = cairo.cairo_image_surface_create_from_png(str(source_path).encode("utf-8"))
+    if not surface:
+        raise RuntimeError(f"Unable to load the Chinese artwork source: {source_path}")
+    context = cairo.cairo_create(surface)
+
+    gradient = cairo.cairo_pattern_create_linear(0, 0, WIDTH, HEIGHT)
+    cairo.cairo_pattern_add_color_stop_rgba(gradient, 0, 0.055, 0.102, 0.173, 1)
+    cairo.cairo_pattern_add_color_stop_rgba(gradient, 1, 0.122, 0.247, 0.369, 1)
+    for x, y, width, height in ((80, 60, 74, 74), (885, 187, 190, 190)):
+        cairo.cairo_set_source(context, gradient)
+        cairo.cairo_rectangle(context, x, y, width, height)
+        cairo.cairo_fill(context)
+    cairo.cairo_pattern_destroy(gradient)
+
+    draw_logo_mark(context, 80, 60, 74)
+    draw_logo_mark(context, 885, 187, 190)
+    cairo.cairo_surface_write_to_png(surface, str(path).encode("utf-8"))
+    cairo.cairo_destroy(context)
+    cairo.cairo_surface_destroy(surface)
+
+
+def draw_badge_crops() -> None:
+    source_path = ROOT / "assets" / "fdebok-badges-approved-v28-source.png"
+    source = cairo.cairo_image_surface_create_from_png(str(source_path).encode("utf-8"))
+    if not source:
+        raise RuntimeError(f"Unable to load the approved badge artwork: {source_path}")
+    status = cairo.cairo_surface_status(source)
+    if status:
+        message = cairo.cairo_status_to_string(status).decode("utf-8")
+        cairo.cairo_surface_destroy(source)
+        raise RuntimeError(f"Unable to load badge artwork {source_path}: {message}")
+
+    for filename, left in (
+        ("badge-a.png", 230),
+        ("badge-p.png", 700),
+        ("badge-m.png", 1170),
+    ):
+        surface = cairo.cairo_image_surface_create(0, 320, 390)
+        context = cairo.cairo_create(surface)
+        color(context, "#f4f5f2")
+        cairo.cairo_paint(context)
+        cairo.cairo_set_source_surface(context, source, -left, -455)
+        cairo.cairo_paint(context)
+        status = cairo.cairo_surface_write_to_png(
+            surface, str(ROOT / filename).encode("utf-8")
+        )
+        cairo.cairo_destroy(context)
+        cairo.cairo_surface_destroy(surface)
+        if status:
+            message = cairo.cairo_status_to_string(status).decode("utf-8")
+            cairo.cairo_surface_destroy(source)
+            raise RuntimeError(f"Unable to write {filename}: {message}")
+    cairo.cairo_surface_destroy(source)
+
+
 def main() -> None:
-    draw_card(ROOT / "share-card-zh-v3.png", english=False)
-    draw_card(ROOT / "share-card-en-v3.png", english=True)
+    draw_chinese_card(ROOT / "share-card-zh-v4.png")
+    draw_card(ROOT / "share-card-en-v4.png", english=True)
+    draw_chinese_card(ROOT / "og-image.png")
+    draw_card(ROOT / "og-image-en.png", english=True)
     draw_touch_icon(ROOT / "apple-touch-icon.png")
-    print("Rendered zh/en 1200x630 social cards and the 180x180 Apple touch icon.")
+    draw_badge_crops()
+    print("Rendered v4 brand artwork, A/P/M badge assets, and the 180x180 Apple touch icon.")
 
 
 if __name__ == "__main__":

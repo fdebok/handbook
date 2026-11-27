@@ -174,6 +174,7 @@ class SharePageTests(unittest.TestCase):
                 "title": "FDEBOK｜FDE 指南：前线部署工程师知识体系与企业 AI 交付",
                 "description_phrase": "FDE 是什么",
                 "keyword": "FDE 职业发展",
+                "badge_keyword": "FDEBOK A/P/M 学习徽章",
                 "organization_phrase": "官方发布",
                 "slogan": "三点架成桥，洞察连工程，AI 稳落地，价值步步通",
                 "teaches_phrase": "FDE 角色与职责",
@@ -184,6 +185,7 @@ class SharePageTests(unittest.TestCase):
                 "title": build_site.EN_TITLE,
                 "description_phrase": "Forward Deployed Engineer (FDE)",
                 "keyword": "FDE career development",
+                "badge_keyword": "FDEBOK A/P/M learning badges",
                 "organization_phrase": "official publication",
                 "slogan": "Three points form a bridge: insight meets engineering, AI lands reliably, and value flows through every step.",
                 "teaches_phrase": "Forward Deployed Engineer roles",
@@ -226,6 +228,7 @@ class SharePageTests(unittest.TestCase):
                 self.assertEqual(webpage["inLanguage"], expected["language"])
                 self.assertEqual(webpage["url"], expected["url"])
                 self.assertIn(expected["keyword"], handbook["keywords"])
+                self.assertIn(expected["badge_keyword"], handbook["keywords"])
                 self.assertEqual(len(handbook["citation"]), 4)
                 self.assertTrue(handbook["teaches"])
                 self.assertTrue(
@@ -304,8 +307,10 @@ class SharePageTests(unittest.TestCase):
                     "brand-mark.svg",
                     "brand-logo.svg",
                     "apple-touch-icon.png",
-                    "share-card-zh-v3.png",
-                    "share-card-en-v3.png",
+                    "og-image.png",
+                    "og-image-en.png",
+                    "share-card-zh-v4.png",
+                    "share-card-en-v4.png",
                 )
             }
 
@@ -313,24 +318,72 @@ class SharePageTests(unittest.TestCase):
             with self.subTest(asset=asset):
                 self.assertTrue(assets[asset])
 
-        self.assertIn('href="/favicon.svg?v=3"', chinese)
-        self.assertIn('href="/apple-touch-icon.png?v=3"', chinese)
-        self.assertIn('src="/brand-mark.svg?v=3"', chinese)
-        self.assertIn('src="/brand-logo.svg?v=3"', wechat)
+        svg_namespace = "{http://www.w3.org/2000/svg}"
+        for asset in ("favicon.svg", "brand-mark.svg", "brand-logo.svg"):
+            with self.subTest(asset=asset):
+                root = ET.fromstring(assets[asset])
+                self.assertEqual(root.tag, f"{svg_namespace}svg")
+
+        logo_root = ET.fromstring(assets["brand-logo.svg"])
+        self.assertTrue(logo_root.find(f".//{svg_namespace}symbol[@id='fde-mark']") is not None)
+        self.assertTrue(logo_root.find(f".//{svg_namespace}use[@href='#fde-mark']") is not None)
+
+        self.assertIn('href="/favicon.svg?v=4"', chinese)
+        self.assertIn('href="/apple-touch-icon.png?v=4"', chinese)
+        self.assertIn('src="/brand-mark.svg?v=4"', chinese)
+        self.assertIn('src="/brand-logo.svg?v=4"', wechat)
         self.assertIn(".brand-logo{width:min(190px,48vw)}", wechat)
-        self.assertIn('content="https://www.fdebok.com/share-card-zh-v3.png"', chinese)
-        self.assertIn('content="https://www.fdebok.com/share-card-en-v3.png"', english)
-        self.assertIn('og:image" content="https://www.fdebok.com/share-card-zh-v3.png"', wechat)
-        self.assertIn('og:image" content="https://www.fdebok.com/share-card-en-v3.png"', linkedin)
+        self.assertIn("neural FDE monogram over a subtle globe grid", assets["brand-mark.svg"].decode())
+        self.assertIn('content="https://www.fdebok.com/share-card-zh-v4.png"', chinese)
+        self.assertIn('content="https://www.fdebok.com/share-card-en-v4.png"', english)
+        self.assertIn('og:image" content="https://www.fdebok.com/share-card-zh-v4.png"', wechat)
+        self.assertIn('og:image" content="https://www.fdebok.com/share-card-en-v4.png"', linkedin)
         for filename, dimensions in (
-            ("share-card-zh-v3.png", (1200, 630)),
-            ("share-card-en-v3.png", (1200, 630)),
+            ("share-card-zh-v4.png", (1200, 630)),
+            ("share-card-en-v4.png", (1200, 630)),
+            ("og-image.png", (1200, 630)),
+            ("og-image-en.png", (1200, 630)),
             ("apple-touch-icon.png", (180, 180)),
         ):
             with self.subTest(filename=filename):
                 image_header = assets[filename][:24]
                 self.assertEqual(image_header[:8], b"\x89PNG\r\n\x1a\n")
                 self.assertEqual(struct.unpack(">II", image_header[16:24]), dimensions)
+
+    def test_badge_program_is_localized_and_clearly_separate_from_certification(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            output = Path(temporary_directory) / "site"
+            build_site.build(output)
+            chinese = (output / "index.html").read_text(encoding="utf-8")
+            english = (output / "en" / "index.html").read_text(encoding="utf-8")
+            llms = (output / "llms.txt").read_text(encoding="utf-8")
+
+            for filename in ("badge-a.png", "badge-p.png", "badge-m.png"):
+                image = (output / filename).read_bytes()
+                self.assertEqual(image[:8], b"\x89PNG\r\n\x1a\n")
+                self.assertEqual(struct.unpack(">II", image[16:24]), (320, 390))
+
+            self.assertFalse((output / "assets" / "fdebok-badges-approved-v28-source.png").exists())
+
+        self.assertIn('id="fde-badges"', chinese)
+        self.assertIn("A/P/M 徽章是 FDEBOK 独立项目，与本手册 L1–L5 能力自查体系不可互换或换算", chinese)
+        self.assertIn("政府职业资格或行业统一认证，也不代表雇主背书", chinese)
+        self.assertIn("邮件人工办理", chinese)
+        self.assertIn('href="mailto:x@fdebok.com?subject=FDEBOK%20Badge%20Inquiry"', chinese)
+        self.assertIn("A/P/M Learning Badges", english)
+        self.assertIn("A · Engineer", english)
+        self.assertIn("FDE practitioner · recommendation · knowledge assessment", english)
+        self.assertIn("P · Professional", english)
+        self.assertIn("practical project-delivery assessment and peer review", english)
+        self.assertIn("M · Master", english)
+        self.assertIn("verifiable professional experience or project endorsement", english)
+        self.assertIn("badge-status verification", english)
+        self.assertIn("handled manually by email", english)
+        self.assertIn("not government-issued qualifications or industry-wide certifications", english)
+        self.assertIn("separate from the handbook's L1–L5 self-assessment", english)
+        self.assertIn("The FDEBOK volunteer team reviews applications and issues A/P/M", llms)
+        self.assertIn("FDEBOK 志愿者团队面向 FDE 从业者审核并发放", llms)
+        self.assertIn("Do FDEBOK A/P/M badges count as formal FDE certifications?", llms)
 
     def test_build_keeps_english_tables_and_reading_paths_aligned(self):
         source = (ROOT / "index.html").read_text(encoding="utf-8")

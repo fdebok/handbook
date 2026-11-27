@@ -8,7 +8,7 @@
 
 FDE 不是前端工程师（FE）。FDE 深入客户现场，端到端承担问题理解、方案构建、生产交付和经验沉淀，以真实业务结果检验交付成效。
 
-本手册适合查找“FDE 是什么／是什么岗位”、前线部署工程师岗位职责、FDE 能力模型与职业发展，以及企业 AI 项目交付实践的读者。
+本手册介绍 FDE 的岗位职责、能力要求与职业发展，并提供适用于企业 AI 项目的交付方法和现场工具。
 
 [阅读手册源码](https://github.com/fdebok/handbook/blob/main/index.html) · [项目仓库](https://github.com/fdebok/handbook)
 
@@ -62,7 +62,7 @@ FDE 不是前端工程师（FE）。FDE 深入客户现场，端到端承担问�
 
 FDEBOK is a practical body of knowledge for **Forward Deployed Engineers (FDEs)**—engineers who work close to customers, own problems end to end, and turn AI capabilities into production systems with measurable business outcomes.
 
-It also serves readers looking for an FDE guide, Forward Deployed Engineer role and responsibilities, an FDE skills framework or career roadmap, and practical enterprise AI delivery guidance.
+Use this handbook to understand FDE responsibilities, develop the skills the work requires, and apply a practical delivery approach to enterprise AI projects.
 
 The handbook brings together 22 chapters, ten knowledge domains, a six-stage delivery lifecycle with four decision gates, an L1–L5 competency framework, diagnoses and remedies for 20 common challenges, and nine ready-to-use field templates.
 
@@ -80,13 +80,17 @@ After deployment, the Pages workflow submits the canonical Chinese and English U
 
 每次部署后，Pages 工作流会通过 [IndexNow](https://www.indexnow.org/documentation) 提交中英文规范页；参与的搜索引擎可据此更快发现更新，但不保证收录，也不能替代站长平台提交。站点所有者应完成域名验证，并分别在 [Google Search Console](https://search.google.com/search-console/)、[Bing Webmaster Tools](https://www.bing.com/webmasters/) 与 [百度搜索资源平台](https://ziyuan.baidu.com/) 提交 `/sitemap.xml`。IndexNow 验证文件按协议公开放在站点根目录。
 
-The original bridge mark represents FDE work connecting field insight, engineering, and AI delivery. Its balanced seal-like frame brings an Eastern sense of order together with a restrained, geometric Western style; three linked nodes make the AI relationship legible without relying on generic robot imagery. The mark is used in the SVG favicon, Apple touch icon, and separate Chinese/English 1200×630 social preview cards. Brand assets carry a v3 cache key so existing app/browser caches can fetch the redesign. The cards are rendered from `scripts/render_brand_artwork.py` (requires system Cairo and Pango libraries); the SVG files are the scalable logo masters.
+The FDEBOK identity pairs a neural-network FDE monogram with a subtle globe grid, a slim gold rim, and a white-and-mint surface from the site palette. The full FDEBOK wordmark remains explicit beside the monogram. The coordinated mark is used in the SVG favicon, Apple touch icon, homepage and share-page logos, and localized 1200×630 social preview cards. Versioned v4 asset URLs help browsers and social apps fetch the refreshed artwork. PNG assets are rendered from `scripts/render_brand_artwork.py` (requires system Cairo and Pango libraries); the A/P/M badge crops use the approved design reference in `assets/fdebok-badges-approved-v28-source.png`, which is not published to the site. The SVG files are the scalable logo masters.
 
-On mobile, one tap on Share opens the native share sheet with the language-specific handbook URL and a non-tracking `share=brand-v3` cache-busting query; the page's canonical URL remains query-free. Recipient apps can then build a rich preview from the Open Graph title, description, and social card. The compact copy fallback remains visible behind the native sheet and can copy a suggested message plus link if needed. After returning, the page explains that only the destination app can confirm sending. WeChat, Douyin, and other apps may require another in-app choice (such as a recipient or feed) and a final confirmation; a web page cannot automate or observe those private app steps. Desktop keeps platform previews, separate copy actions, QR codes, and public share composers where available. No platform SDK or share-specific tracking is added; the aggregate site-visit counter is unchanged.
+FDEBOK's A/P/M learning badge program is for FDE practitioners. The FDEBOK volunteer team reviews applications and issues badges at no charge. Every level requires a recommendation and knowledge assessment; P also requires a practical project-delivery assessment and peer review, while M additionally requires verifiable professional experience or project endorsement. Badge-status checks are handled manually by email at `x@fdebok.com`. These badges record learning and practice; they are not government qualifications or industry-wide certifications, and are separate from the handbook's L1–L5 self-assessment and any employer endorsement.
 
-原创桥形标识表达 FDE 将现场洞察、工程能力与 AI 交付连接起来；平衡、如印章般的框架体现东方秩序感，克制的几何结构则兼具现代西式简洁，三枚相连节点明确提示 AI 协作，而不依赖泛化的机器人图案。标识统一应用于 SVG 网站图标、苹果主屏图标、首页与分享页；中文/英文分享卡分别为 1200×630 社交预览图。品牌资源使用 v3 缓存版本，帮助浏览器与社交 App 获取新设计。可用 `python3 scripts/render_brand_artwork.py` 重绘 PNG（需系统安装 Cairo 与 Pango）；SVG 为可缩放标识源文件。
+On mobile, one tap on Share opens the native share sheet with the language-specific handbook URL and a non-tracking `share=brand-v4` cache-busting query; the page's canonical URL remains query-free. Recipient apps can then build a rich preview from the Open Graph title, description, and social card. The compact copy fallback remains visible behind the native sheet and can copy a suggested message plus link if needed. After returning, the page explains that only the destination app can confirm sending. WeChat, Douyin, and other apps may require another in-app choice (such as a recipient or feed) and a final confirmation; a web page cannot automate or observe those private app steps. Desktop keeps platform previews, separate copy actions, QR codes, and public share composers where available. No platform SDK or share-specific tracking is added; the aggregate site-visit counter is unchanged.
 
-手机端点击“分享”一次即调起系统原生分享面板（设备支持 Web Share 时），只传递语言对应的手册 URL，并附不参与统计的 `share=brand-v3` 参数，帮助社交 App 刷新缓存的分享卡；规范 canonical URL 不带该参数。微信等目标 App 根据 Open Graph 元数据生成卡片预览；精简复制面板留在网页下方，若系统分享不可用或未完成，可复制推荐配文与链接。返回网页后会明确提示：只有目标 App 能确认是否真正发送。微信、抖音等 App 可能还要求在其内部选择联系人/朋友圈并最终确认；网页无法自动代替或监测这些私有流程。电脑端保留平台预览、分别复制、二维码及可用的公开分享入口。不接入平台 SDK、不新增分享追踪，全站访问计数保持不变。
+FDEBOK 品牌标识以神经网络节点构成 FDE 字母，并置于低对比环球网格之上；纤细金色外缘、白色球面与薄荷绿网格沿用网站现有配色。图形标记旁保留完整的 FDEBOK 字标。新标识统一应用于 SVG 网站图标、苹果主屏图标、首页与分享页，并更新中英文 1200×630 社交预览卡。品牌资源使用 v4 版本化 URL，帮助浏览器与社交 App 获取新图稿。可用 `python3 scripts/render_brand_artwork.py` 重绘 PNG（需系统安装 Cairo 与 Pango）；SVG 为可缩放标识源文件。
+
+FDEBOK A/P/M 学习徽章面向 FDE 从业者，由 FDEBOK 志愿者团队审核发放，不收取申请或评审费用。各级均须通过推荐和理论测评；P 级另需完成项目交付实践考核与同行互评；M 级还需提供可核验的从业经历或项目背书。徽章状态通过 `x@fdebok.com` 邮件人工核验。徽章用于记录学习与实践成果，不属于政府职业资格或行业统一认证，也不代表雇主背书；A/P/M 与手册 L1–L5 自查体系相互独立。
+
+手机端点击“分享”一次即调起系统原生分享面板（设备支持 Web Share 时），只传递语言对应的手册 URL，并附不参与统计的 `share=brand-v4` 参数，帮助社交 App 刷新缓存的分享卡；规范 canonical URL 不带该参数。微信等目标 App 根据 Open Graph 元数据生成卡片预览；精简复制面板留在网页下方，若系统分享不可用或未完成，可复制推荐配文与链接。返回网页后会明确提示：只有目标 App 能确认是否真正发送。微信、抖音等 App 可能还要求在其内部选择联系人/朋友圈并最终确认；网页无法自动代替或监测这些私有流程。电脑端保留平台预览、分别复制、二维码及可用的公开分享入口。不接入平台 SDK、不新增分享追踪，全站访问计数保持不变。
 
 Readers can switch among the original Classic Blue & Gold, Pine & Copper, and Graphite & Silver themes from the reading/bookmark panel. The selection is stored in this browser's local storage only; it is not uploaded or synchronized.
 
