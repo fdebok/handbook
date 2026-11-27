@@ -283,11 +283,9 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 .cover-layout{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(340px,.8fr);
   gap:clamp(32px,5vw,72px);align-items:center;margin-top:28px}
 .cover-copy,.hero-panel{min-width:0}
-.cover h1{display:flex;align-items:center;gap:14px;font-family:var(--serif);font-size:clamp(56px,7vw,92px);line-height:1.02;margin:0 0 14px;
+.cover h1{display:flex;align-items:center;gap:.16em;font-family:var(--serif);font-size:clamp(56px,7vw,92px);line-height:1.02;margin:0 0 14px;
   font-weight:800;letter-spacing:-.5px}
-.cover-brand-mark{width:clamp(42px,7vw,62px);height:auto;flex:none;border-radius:15px}
-.brand-meaning{margin:-5px 0 14px calc(clamp(42px,7vw,62px) + 14px);color:var(--cover-muted);
-  font-size:12px;line-height:1.6;letter-spacing:.02em}
+.cover-brand-mark{width:.82em;height:.82em;flex:none;border-radius:.22em}
 .cover h1 em{font-style:normal;color:var(--gold2)}
 .cover .sub{font-family:var(--serif);font-size:clamp(17px,2.1vw,23px);color:var(--cover-muted);
   margin:0 0 22px;font-weight:400;letter-spacing:.04em;line-height:1.65}
@@ -748,7 +746,7 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
 @media(max-width:660px){
   .cover-in{padding:82px 20px 42px}
   .cover-layout{gap:26px;margin-top:24px}
-  .cover h1{font-size:clamp(52px,15vw,76px)}
+  .cover h1{font-size:clamp(46px,14vw,68px)}
   .cover .sub{font-size:17px}
   .cover .lede{padding-left:14px}
   .hero-panel{padding:18px}
@@ -799,7 +797,7 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
   .cover::before{display:none}
   .kicker{color:#445268;border-color:#aab3bd;background:none}
   .cover h1 em{color:#8a6a1f}
-  .cover .sub,.cover .lede,.brand-meaning{color:#334155}
+  .cover .sub,.cover .lede{color:#334155}
   .cover-layout{grid-template-columns:1fr}
   .hero-panel{background:#fff;border-color:#aab3bd;box-shadow:none;backdrop-filter:none}
   .hero-panel-title,.hero-audience strong,.hero-stat b{color:#26313f}
@@ -881,7 +879,6 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
 <div class="cover-layout">
 <div class="cover-copy">
 <h1><img alt="" class="cover-brand-mark" height="62" src="/brand-mark.svg?v=3" width="62"/><span>FDE<em>BOK</em></span></h1>
-<p class="brand-meaning">三点架成桥，洞察连工程，AI 稳落地，价值步步通</p>
 <p class="sub">前线部署工程师知识体系手册<br/>Forward Deployed Engineer Body of Knowledge</p>
 <p class="lede">把 AI 从业务问题带到稳定交付。FDEBOK 汇集前线方法、工程实践与现场工具，覆盖场景发现、方案验证、生产上线和持续运营，帮助团队将业务价值转化为可衡量、可复用的成果。</p>
 <div class="hero-actions">

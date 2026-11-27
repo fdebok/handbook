@@ -274,21 +274,20 @@ class SharePageTests(unittest.TestCase):
                 self.assertIn('.share-panel[data-mode="quick"] .share-quick-actions{display:flex}', page)
                 self.assertIn("navigator.share", page)
 
-    def test_brand_mark_meaning_is_visible_and_translated(self):
+    def test_brand_slogan_is_metadata_only_and_logo_scales_with_wordmark(self):
         with tempfile.TemporaryDirectory() as temporary_directory:
             output = Path(temporary_directory) / "site"
             build_site.build(output)
             chinese = (output / "index.html").read_text(encoding="utf-8")
             english = (output / "en" / "index.html").read_text(encoding="utf-8")
 
-        self.assertIn(
-            '<p class="brand-meaning">三点架成桥，洞察连工程，AI 稳落地，价值步步通</p>',
-            chinese,
-        )
-        self.assertIn(
-            '<p class="brand-meaning">Three points form a bridge: insight meets engineering, AI lands reliably, and value flows through every step.</p>',
-            english,
-        )
+        for locale, page in (("zh", chinese), ("en", english)):
+            with self.subTest(locale=locale):
+                self.assertNotIn('class="brand-meaning"', page)
+                self.assertIn('<h1><img alt="" class="cover-brand-mark"', page)
+                self.assertIn('gap:.16em', page)
+                self.assertIn('.cover-brand-mark{width:.82em;height:.82em', page)
+                self.assertIn('font-size:clamp(46px,14vw,68px)', page)
 
     def test_branding_assets_and_locale_share_cards_are_published(self):
         with tempfile.TemporaryDirectory() as temporary_directory:
