@@ -125,6 +125,8 @@ class SharePageTests(unittest.TestCase):
         self.assertIn("--retry 5 --retry-all-errors", workflow)
         self.assertIn("Unexpected sitemap URLs", workflow)
         self.assertIn("hreflang=\"x-default\"", workflow)
+        self.assertIn("--user-agent 'Baiduspider'", workflow)
+        self.assertIn("baidu_chinese", workflow)
         self.assertIn("https://api.indexnow.org/indexnow", workflow)
         self.assertIn(f'"key":"{build_site.INDEXNOW_KEY}"', workflow)
         self.assertIn(f"https://www.fdebok.com/{build_site.INDEXNOW_KEY}.txt", workflow)
