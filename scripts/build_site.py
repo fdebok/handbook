@@ -41,7 +41,6 @@ SHARE_FACTS = {
 }
 STATIC_FILES = (
     f"{INDEXNOW_KEY}.txt",
-    ".well-known/security.txt",
     "LICENSE",
     "index.html",
     "llms.txt",
