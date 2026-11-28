@@ -75,6 +75,8 @@ jobs:
 
           robots="$(fetch /robots.txt)"
           grep -Fq "Sitemap: ${SITE_URL}/sitemap.xml" <<< "$robots"
+          baidu_robots="$(sed -n '/^User-agent: Baiduspider$/,/^$/p' <<< "$robots")"
+          grep -Fxq 'Allow: /' <<< "$baidu_robots"
 
           sitemap="$(fetch /sitemap.xml)"
           SITE_URL="$SITE_URL" SITEMAP_XML="$sitemap" python3 - <<'PY'
@@ -112,6 +114,10 @@ jobs:
           grep -Fq '<html lang="zh-CN"' <<< "$chinese"
           grep -Fq '<link rel="canonical" href="https://www.fdebok.com/"/>' <<< "$chinese"
           grep -Fq 'hreflang="x-default" href="https://www.fdebok.com/en/"' <<< "$chinese"
+
+          baidu_chinese="$(curl --fail --show-error --silent --retry 5 --retry-all-errors --retry-delay 2 --max-time 20 --user-agent 'Baiduspider' "${SITE_URL}/")"
+          grep -Fq '<html lang="zh-CN"' <<< "$baidu_chinese"
+          grep -Fq '<link rel="canonical" href="https://www.fdebok.com/"/>' <<< "$baidu_chinese"
 
           english="$(fetch /en/)"
           grep -Fq '<html lang="en"' <<< "$english"
