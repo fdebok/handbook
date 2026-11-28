@@ -68,6 +68,11 @@ jobs:
               "${SITE_URL}${1}"
           }
 
+          apex_status="$(curl --location --output /dev/null --silent --show-error --write-out '%{http_code}' https://fdebok.com/)"
+          test "${apex_status}" = "200"
+          apex_location="$(curl --head --silent --show-error --max-time 20 https://fdebok.com/ | tr -d '\r' | sed -n 's/^location: //Ip' | head -n 1)"
+          test "${apex_location}" = "https://www.fdebok.com/"
+
           robots="$(fetch /robots.txt)"
           grep -Fq "Sitemap: ${SITE_URL}/sitemap.xml" <<< "$robots"
 
