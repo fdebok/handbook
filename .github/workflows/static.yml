@@ -119,6 +119,10 @@ jobs:
 
           llms="$(fetch /llms.txt)"
           grep -Fq 'https://github.com/fdebok/handbook' <<< "$llms"
+          security="$(fetch /.well-known/security.txt)"
+          grep -Fq 'Contact: mailto:x@fdebok.com' <<< "$security"
+          grep -Fq 'Expires: 2027-11-28T00:00:00.000Z' <<< "$security"
+          grep -Fq 'Canonical: https://www.fdebok.com/.well-known/security.txt' <<< "$security"
           key_file="$(fetch "/${INDEXNOW_KEY}.txt")"
           test "$(tr -d '\r\n' <<< "$key_file")" = "$INDEXNOW_KEY"
       - name: Notify IndexNow

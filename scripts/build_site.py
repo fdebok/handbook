@@ -41,6 +41,7 @@ SHARE_FACTS = {
 }
 STATIC_FILES = (
     f"{INDEXNOW_KEY}.txt",
+    ".well-known/security.txt",
     "LICENSE",
     "index.html",
     "llms.txt",
@@ -59,6 +60,7 @@ STATIC_FILES = (
     "sitemap.xml",
     "share-qr-en.png",
     "share-qr-zh.png",
+    "security.txt",
 )
 HAN_CHAR = re.compile(r"[\u3400-\u9fff]")
 VOID_TAGS = {
@@ -551,7 +553,9 @@ def build(output_dir: Path) -> int:
         source_file = ROOT / filename
         if not source_file.is_file():
             raise FileNotFoundError(f"Required site asset is missing: {source_file}")
-        shutil.copy2(source_file, output_dir / filename)
+        destination = output_dir / filename
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source_file, destination)
     english_dir = output_dir / "en"
     english_dir.mkdir(parents=True, exist_ok=True)
     (english_dir / "index.html").write_text("".join(renderer.parts), encoding="utf-8")

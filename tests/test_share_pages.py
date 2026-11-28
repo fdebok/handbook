@@ -20,6 +20,22 @@ class SharePageTests(unittest.TestCase):
         source = (ROOT / "index.html").read_text(encoding="utf-8")
         cls.content = build_site.load_share_content(source)
 
+    def test_security_contact_is_published_in_site_artifacts(self):
+        for relative_path in ("security.txt", ".well-known/security.txt"):
+            security = (ROOT / relative_path).read_text(encoding="utf-8")
+            self.assertIn("Contact: mailto:x@fdebok.com", security)
+            self.assertIn("Expires: 2027-11-28T00:00:00.000Z", security)
+            self.assertIn(
+                "Canonical: https://www.fdebok.com/.well-known/security.txt",
+                security,
+            )
+
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            output = Path(temporary_directory) / "site"
+            build_site.build(output)
+            for relative_path in ("security.txt", ".well-known/security.txt"):
+                self.assertTrue((output / relative_path).is_file())
+
     def test_platform_pages_have_distinct_previews_and_canonical_handbook_urls(self):
         for locale, platforms in build_site.SHARE_PLATFORMS.items():
             canonical = build_site.EN_URL if locale == "en" else build_site.ZH_URL
