@@ -3070,7 +3070,7 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
   十个知识域 · 六段生命周期 · 五级能力标尺 · 二十个高频痛点 · 九件现场资产
 <p class="rights-short"><img alt="" class="footer-brand-mark" height="24" src="/brand-mark.svg?v=6" width="24"/>© 2026 FDEBOK（fdebok.com） · MIT License · <a href="#rights">许可与共建</a></p>
 <div class="footer-activity">
-<span class="visit-counter" id="page-visit-counter" aria-label="全站访问量加载中"><span>全站访问：</span><strong id="page-visit-count">--</strong><span>次</span></span>
+<span class="visit-counter" id="page-visit-counter" aria-label="全站访问量加载中"><span>全站访问量：</span><strong id="page-visit-count">--</strong></span>
 <span class="footer-activity-note">全站累计访问量，由服务端统计。</span>
 </div>
 </footer>
@@ -3491,8 +3491,7 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
    "复盘按决策点而非按流程撰写":"Retrospectives examine decision points, not just process steps.",
    "技术交流与社区共建":"Technical exchange and community building",
    "欢迎交流 FDE 一线实践、技术方案与工具经验，也欢迎一起筹划免费的线下分享或技术沙龙，或共建 FDE 同行交流社群。交流与活动以免费、非商业、互助共学为原则。欢迎来信说说你的想法，我们可以从一次轻松的技术交流开始。":"We welcome conversations about FDE field practice, technical approaches, and tools, as well as ideas for free meetups, tech talks, or a peer-led FDE community. Exchanges and events are free and non-commercial, centered on mutual learning. Drop us a line with an idea—or simply to start an informal conversation.",
-   "全站访问：":"Site visits:",
-   "次":"visits",
+   "全站访问量：":"Cumulative site visits:",
    "全站累计访问量，由服务端统计。":"Cumulative page views across the site, counted by the server.",
    "阅读":"Read",
    "阅读设置":"Reading settings",
@@ -4052,31 +4051,24 @@ footer.pg .rights-short a{color:var(--ink3);text-underline-offset:3px}
    var isEnglish=document.documentElement.lang==='en';
    var status=counter.dataset.status||'loading';
    var label=counter.querySelector('span:first-child');
-   var suffix=counter.querySelector('span:last-child');
    if(status==='preview'){
      count.textContent=isEnglish?'Stats unavailable in this preview':'本地预览暂不可统计';
      if(label)label.hidden=true;
-     if(suffix)suffix.hidden=true;
      counter.setAttribute('aria-label',count.textContent);
      return;
    }
    if(status==='error'){
      count.textContent=isEnglish?'Visit statistics temporarily unavailable':'访问统计暂不可用';
      if(label)label.hidden=true;
-     if(suffix)suffix.hidden=true;
      counter.setAttribute('aria-label',count.textContent);
      return;
    }
    if(label){
      label.hidden=false;
-     label.textContent=isEnglish?'Site visits:':'全站访问：';
-   }
-   if(suffix){
-     suffix.hidden=false;
-     suffix.textContent=isEnglish?'':'次';
+     label.textContent=isEnglish?'Cumulative site visits:':'全站访问量：';
    }
    counter.setAttribute('aria-label',status==='loaded'
-     ?(isEnglish?'Site visits: '+count.textContent:'全站访问：'+count.textContent+' 次')
+     ?(isEnglish?'Cumulative site visits: '+count.textContent:'全站访问量：'+count.textContent)
      :(isEnglish?'Site visit count is loading':'全站访问量加载中'));
  }
  function loadPageVisitCount(){
