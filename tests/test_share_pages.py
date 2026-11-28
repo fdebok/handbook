@@ -84,6 +84,9 @@ class SharePageTests(unittest.TestCase):
             for entry in entries:
                 loc = entry.findtext("sm:loc", namespaces=sitemap_ns)
                 self.assertIn(loc, {build_site.ZH_URL, build_site.EN_URL})
+                self.assertIn(entry.findtext("sm:lastmod", namespaces=sitemap_ns), {"2026-11-28"})
+                self.assertEqual(entry.findtext("sm:changefreq", namespaces=sitemap_ns), "weekly")
+                self.assertIn(entry.findtext("sm:priority", namespaces=sitemap_ns), {"1.0", "0.9"})
                 alternates = {
                     link.attrib["hreflang"]: link.attrib["href"]
                     for link in entry.findall(f"{xhtml_ns}link")
@@ -178,6 +181,11 @@ class SharePageTests(unittest.TestCase):
                 "alternate_name": [
                     "前线部署工程师知识体系手册",
                     "FDE 手册",
+                    "FDE 指南",
+                    "FDE 知识体系",
+                    "FDE 权威指南",
+                    "前线部署工程师指南",
+                    "前线部署工程师手册",
                     "Forward Deployed Engineer Body of Knowledge",
                 ],
                 "guide_synonym": "前线部署工程师知识体系手册",
@@ -196,6 +204,11 @@ class SharePageTests(unittest.TestCase):
                 "alternate_name": [
                     "前线部署工程师知识体系手册",
                     "FDE 手册",
+                    "FDE 指南",
+                    "FDE 知识体系",
+                    "FDE 权威指南",
+                    "前线部署工程师指南",
+                    "前线部署工程师手册",
                     "Forward Deployed Engineer Body of Knowledge",
                 ],
                 "guide_synonym": "Forward Deployed Engineer handbook",
